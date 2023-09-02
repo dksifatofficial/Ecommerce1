@@ -188,27 +188,27 @@ export const AvailableSizes = [
   },
 ];
 
-// export const firebaseConfig = {
-//   apiKey: "API_KEY",
-//   authDomain: "AUTH_DOMAIN",
-//   projectId: "PROJECT_ID",
-//   storageBucket: "STROAGE_BUCKET",
-//   messagingSenderId: "MESSAGING_SENDER_ID",
-//   appId: "APP_ID",
-//   measurementId: "MEASUREMENT_ID",
-// };
-
 export const firebaseConfig = {
-  apiKey: "AIzaSyCZniqS90AE68bgFSd8UA87_Sk_2palHAI",
-  authDomain: "next-js-ecommerce-2023-5d8d1.firebaseapp.com",
-  projectId: "next-js-ecommerce-2023-5d8d1",
-  storageBucket: "next-js-ecommerce-2023-5d8d1.appspot.com",
-  messagingSenderId: "892812333844",
-  appId: "1:892812333844:web:47987282b9b1b321586801",
-  measurementId: "G-62GBBCGCQ4"
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STROAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
 };
 
-export const firebaseStroageURL = 'gs://next-js-ecommerce-2023-5d8d1.appspot.com';
+// export const firebaseConfig = {
+//   apiKey: "AIzaSyCZniqS90AE68bgFSd8UA87_Sk_2palHAI",
+//   authDomain: "next-js-ecommerce-2023-5d8d1.firebaseapp.com",
+//   projectId: "next-js-ecommerce-2023-5d8d1",
+//   storageBucket: "next-js-ecommerce-2023-5d8d1.appspot.com",
+//   messagingSenderId: "892812333844",
+//   appId: "1:892812333844:web:47987282b9b1b321586801",
+//   measurementId: "G-62GBBCGCQ4"
+// };
+
+export const firebaseStroageURL = process.env.NEXT_PUBLIC_FIREBASE_STROAGE_URL;
 
 export const addNewAddressFormControls = [
   {

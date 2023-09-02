@@ -1,79 +1,78 @@
 "use client";
 
-// import ComponentLevelLoader from "@/components/Loader/componentlevel";
-// import { GlobalContext } from "@/context";
-// import { getAllOrdersForAllUsers, updateStatusOfOrder } from "@/services/order";
-// import { useContext, useEffect } from "react";
-// import { PulseLoader } from "react-spinners";
+import ComponentLevelLoader from "@/components/Loader/componentlevel";
+import { GlobalContext } from "@/context";
+import { getAllOrdersForAllUsers, updateStatusOfOrder } from "@/services/order";
+import { useContext, useEffect } from "react";
+import { PulseLoader } from "react-spinners";
 
 export default function AdminView() {
-  // const {
-  //   allOrdersForAllUsers,
-  //   setAllOrdersForAllUsers,
-  //   user,
-  //   pageLevelLoader,
-  //   setPageLevelLoader,
-  //   componentLevelLoader,
-  //   setComponentLevelLoader,
-  // } = useContext(GlobalContext);
+  const {
+    allOrdersForAllUsers,
+    setAllOrdersForAllUsers,
+    user,
+    pageLevelLoader,
+    setPageLevelLoader,
+    componentLevelLoader,
+    setComponentLevelLoader,
+  } = useContext(GlobalContext);
 
-  // async function extractAllOrdersForAllUsers() {
-  //   setPageLevelLoader(true);
-  //   const res = await getAllOrdersForAllUsers();
+  async function extractAllOrdersForAllUsers() {
+    setPageLevelLoader(true);
+    const res = await getAllOrdersForAllUsers();
 
-  //   console.log(res);
+    console.log(res);
 
-  //   if (res.success) {
-  //     setPageLevelLoader(false);
-  //     setAllOrdersForAllUsers(
-  //       res.data && res.data.length
-  //         ? res.data.filter((item) => item.user._id !== user._id)
-  //         : []
-  //     );
-  //   } else {
-  //     setPageLevelLoader(false);
-  //   }
-  // }
+    if (res.success) {
+      setPageLevelLoader(false);
+      setAllOrdersForAllUsers(
+        res.data && res.data.length
+          ? res.data.filter((item) => item.user._id !== user._id)
+          : []
+      );
+    } else {
+      setPageLevelLoader(false);
+    }
+  }
 
-  // useEffect(() => {
-  //   if (user !== null) extractAllOrdersForAllUsers();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [user]);
+  useEffect(() => {
+    if (user !== null) extractAllOrdersForAllUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
-  // console.log(allOrdersForAllUsers);
+  console.log(allOrdersForAllUsers);
 
-  // async function handleUpdateOrderStatus(getItem) {
-  //   setComponentLevelLoader({ loading: true, id: getItem._id });
-  //   const res = await updateStatusOfOrder({
-  //     ...getItem,
-  //     isProcessing: false,
-  //   });
+  async function handleUpdateOrderStatus(getItem) {
+    setComponentLevelLoader({ loading: true, id: getItem._id });
+    const res = await updateStatusOfOrder({
+      ...getItem,
+      isProcessing: false,
+    });
 
-  //   if (res.success) {
-  //     setComponentLevelLoader({ loading: false, id: "" });
-  //     extractAllOrdersForAllUsers();
-  //   } else {
-  //     setComponentLevelLoader({ loading: true, id: "" });
-  //   }
-  // }
+    if (res.success) {
+      setComponentLevelLoader({ loading: false, id: "" });
+      extractAllOrdersForAllUsers();
+    } else {
+      setComponentLevelLoader({ loading: true, id: "" });
+    }
+  }
 
-  // if (pageLevelLoader) {
-  //   return (
-  //     <div className="w-full min-h-screen flex justify-center items-center">
-  //       <PulseLoader
-  //         color={"#000000"}
-  //         loading={pageLevelLoader}
-  //         size={30}
-  //         data-testid="loader"
-  //       />
-  //     </div>
-  //   );
-  // }
+  if (pageLevelLoader) {
+    return (
+      <div className="w-full min-h-screen flex justify-center items-center">
+        <PulseLoader
+          color={"#000000"}
+          loading={pageLevelLoader}
+          size={30}
+          data-testid="loader"
+        />
+      </div>
+    );
+  }
 
   return (
     <section>
-      <div>Admin View</div>
-      {/* <div className="mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div>
           <div className="px-4 py-6 sm:px-8 sm:py-10">
             <div className="flow-root">
@@ -118,7 +117,7 @@ export default function AdminView() {
                       <div className="flex gap-2">
                         {item.orderItems.map((orderItem, index) => (
                           <div key={index} className="shrink-0">
-                            //eslint-disable-next-line @next/next/no-img-element
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               alt="Order Item"
                               className="h-24 w-24 max-w-full rounded-lg object-cover"
@@ -165,7 +164,7 @@ export default function AdminView() {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </section>
   );
 }

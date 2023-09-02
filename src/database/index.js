@@ -6,7 +6,7 @@ const configOptions = {
 };
 
 const connectToDB = async () => {
-  const connectionUrl = 'mongodb+srv://dksifat:123456782023@cluster0.j5selhy.mongodb.net/';
+  const connectionUrl = process.env.NEXT_PUBLIC_MONGODB_SRV;
 
   mongoose
     .connect(connectionUrl, configOptions)
