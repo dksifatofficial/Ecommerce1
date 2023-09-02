@@ -1,4 +1,4 @@
-// //add a new product service
+//add a new product service
 
 import Cookies from "js-cookie";
 

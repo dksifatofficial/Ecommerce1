@@ -24,9 +24,9 @@ export async function POST(req) {
 
     const isAuthUser = await AuthUser();
 
-   console.log(isAuthUser);
+  //  console.log(isAuthUser);
 
-    if (isAuthUser?.role === "admin") {
+    if (isAuthUser?.role === 'admin') {
       const extractData = await req.json();
 
       const {
@@ -70,7 +70,7 @@ export async function POST(req) {
       } else {
         return NextResponse.json({
           success: false,
-          message: "Failed to add product ! Please try again.",
+          message: "Failed to add the product ! Please try again.",
         });
       }
     } else {
@@ -83,7 +83,7 @@ export async function POST(req) {
     console.log(error);
     return NextResponse.json({
       success: false,
-      message: "Failed to add the product ! please try again",
+      message: "Something went wrong ! Please try again later",
     });
   }
 }

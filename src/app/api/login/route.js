@@ -60,15 +60,14 @@ export async function POST(req) {
         name: checkUser.name,
         _id: checkUser._id,
         role: checkUser.role,
-      }
+      },
     };
 
     return NextResponse.json({
-        success: true,
-        message: "Login successfull!",
-        finalData,
-    })
-
+      success: true,
+      message: "Login successfull!",
+      finalData,
+    });
   } catch (e) {
     console.log("Error while new user registration. Please try again");
 

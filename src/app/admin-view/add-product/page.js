@@ -68,7 +68,7 @@ const initialFormData = {
   priceDrop: 0,
 };
 
-const AdminAddNewProduct = () => {
+export default function AdminAddNewProduct() {
   const [formData, setFormData] = useState(initialFormData);
 
   const {
@@ -85,18 +85,6 @@ const AdminAddNewProduct = () => {
   useEffect(() => {
     if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct);
   }, [currentUpdatedProduct]);
-
-  //   useEffect(() => {
-  //     if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct);
-  //   }, [currentUpdatedProduct]);
-
-  //     if (extractImageUrl !== "") {
-  //       setFormData({
-  //         ...formData,
-  //         imageUrl: extractImageUrl,
-  //       });
-  //     }
-  //   }
 
   async function handleImage(event) {
     const extractImageUrl = await helperForUPloadingImageToFirebase(
@@ -207,9 +195,8 @@ const AdminAddNewProduct = () => {
             ) : null
           )}
           <button
-            className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white 
-            font-medium uppercase tracking-wide"
             onClick={handleAddProduct}
+            className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking-wide"
           >
             {componentLevelLoader && componentLevelLoader.loading ? (
               <ComponentLevelLoader
@@ -232,70 +219,4 @@ const AdminAddNewProduct = () => {
       <Notification />
     </div>
   );
-};
-
-export default AdminAddNewProduct;
-
-
-// import InputComponent from "@/components/FormElements/InputComponent";
-// import SelectComponent from "@/components/FormElements/SelectComponent";
-// import TileComponent from "@/components/FormElements/TileComponent";
-// import ComponentLevelLoader from "@/components/Loader/componentlevel";
-// import Notification from "@/components/Notification";
-// import { GlobalContext } from "@/context";
-// import { addNewProduct, updateAProduct } from "@/services/product";
-// import {
-//   AvailableSizes,
-//   adminAddProductformControls,
-//   firebaseConfig,
-//   firebaseStroageURL,
-// } from "@/utils";
-// import { initializeApp } from "firebase/app";
-// import {
-//   getDownloadURL,
-//   getStorage,
-//   ref,
-//   uploadBytesResumable,
-// } from "firebase/storage";
-// import { useRouter } from "next/navigation";
-// import { useContext, useEffect, useState } from "react";
-// import { toast } from "react-toastify";
-// import { resolve } from "styled-jsx/css";
-
-// const app = initializeApp(firebaseConfig);
-// const storage = getStorage(app, firebaseStroageURL);
-
-// export default function AdminAddNewProduct() {
-
-//   const router = useRouter();
-
-//   console.log(formData);
-
-//   return (
-
-//
-//               />
-//             ) : controlItem.componentType === "select" ? (
-//               <SelectComponent
-//
-//                 onChange={(event) => {
-//                   setFormData({
-//                     ...formData,
-//                     [controlItem.id]: event.target.value,
-//                   });
-//                 }}
-//               />
-//             ) : null
-//           )}
-//           <button
-//             onClick={handleAddProduct}
-//             className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking-wide"
-//           >
-
-//           </button>
-//         </div>
-//       </div>
-//
-//     </div>
-//   );
-// }
+}

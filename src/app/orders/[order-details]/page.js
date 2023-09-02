@@ -51,6 +51,7 @@ export default function OrderDetails() {
       </div>
     );
   }
+  console.log(orderDetails)
 
   return (
     <div className="py-14 px-4 md:px-6">
@@ -96,6 +97,7 @@ export default function OrderDetails() {
                     <div
                       className="border-b border-gray-300 md:flex-row flex-col flex
                       justify-between items-start w-full pb-8 space-y-4 md:space-y-0"
+                      key={item._id}
                     >
                       <div className="w-full flex flex-col justify-start items-start space-y-8">
                         <h3 className="text-xl font-semibold leading-6 text-gray-900">
