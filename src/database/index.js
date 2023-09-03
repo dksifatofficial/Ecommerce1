@@ -6,11 +6,12 @@ const configOptions = {
 };
 
 const connectToDB = async () => {
-  const connectionUrl = process.env.NEXT_PUBLIC_MONGODB_SRV;
+  const connectionUrl =
+    "mongodb+srv://dksifat:123456782023@cluster0.j5selhy.mongodb.net";
 
   mongoose
     .connect(connectionUrl, configOptions)
-    .then(() => console.log("Mongodb database connected successfully!"))
+    .then(() => console.log("Ecommerce database connected successfully!"))
     .catch((err) =>
       console.log(`Getting Error from DB connection ${err.message}`)
     );

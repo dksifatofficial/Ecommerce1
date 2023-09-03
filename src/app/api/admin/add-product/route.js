@@ -20,13 +20,13 @@ export const dynamic = "force-dynamic";
 
 export async function POST(req) {
   try {
-    await connectToDB(req);
+    await connectToDB();
 
-    const isAuthUser = await AuthUser();
+    const isAuthUser = await AuthUser(req)
 
-  //  console.log(isAuthUser);
+    console.log(isAuthUser , 'sifat');
 
-    if (isAuthUser?.role === 'admin') {
+    if (isAuthUser?.role === "admin") {
       const extractData = await req.json();
 
       const {
@@ -70,7 +70,7 @@ export async function POST(req) {
       } else {
         return NextResponse.json({
           success: false,
-          message: "Failed to add the product ! Please try again.",
+          message: "Failed to add the product ! please try again",
         });
       }
     } else {

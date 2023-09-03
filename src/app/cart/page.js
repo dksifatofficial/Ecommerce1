@@ -34,8 +34,7 @@ export default function Cart() {
                     ? parseInt(
                         (
                           item.productID.price -
-                          item.productID.price *
-                            (item.productID.priceDrop / 100)
+                          item.productID.price * (item.productID.priceDrop / 100)
                         ).toFixed(2)
                       )
                     : item.productID.price,
@@ -52,7 +51,7 @@ export default function Cart() {
 
   useEffect(() => {
     if (user !== null) extractAllCartItems();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   async function handleDeleteCartItem(getCartItemID) {

@@ -18,13 +18,12 @@ const initialFormData = {
   role: "customer",
 };
 
-const Register = () => {
+export default function Register() {
   const [formData, setFormData] = useState(initialFormData);
   const [isRegistered, setIsRegistered] = useState(false);
-  const { pageLevelLoader, setPageLevelLoader, isAuthUser } =
-    useContext(GlobalContext);
+  const { pageLevelLoader, setPageLevelLoader , isAuthUser } = useContext(GlobalContext);
 
-  const router = useRouter();
+  const router = useRouter()
 
   console.log(formData);
 
@@ -66,7 +65,7 @@ const Register = () => {
 
   useEffect(() => {
     if (isAuthUser) router.push("/");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthUser]);
 
   return (
@@ -82,9 +81,10 @@ const Register = () => {
               </p>
               {isRegistered ? (
                 <button
-                  onClick={() => router.push("/login")}
-                  className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg
-                text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide"
+                  className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg 
+                text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide
+                "
+                onClick={()=>router.push('/login')}
                 >
                   Login
                 </button>
@@ -120,8 +120,9 @@ const Register = () => {
                     ) : null
                   )}
                   <button
-                    className="disabled:opacity-50 inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg
-                    text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide"
+                    className=" disabled:opacity-50 inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg 
+                   text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide
+                   "
                     disabled={!isFormValid()}
                     onClick={handleRegisterOnSubmit}
                   >
@@ -144,6 +145,4 @@ const Register = () => {
       <Notification />
     </div>
   );
-};
-
-export default Register;
+}

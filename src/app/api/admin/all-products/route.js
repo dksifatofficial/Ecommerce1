@@ -3,9 +3,11 @@ import Product from "@/models/product";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
+
 export async function GET(req) {
   try {
     await connectToDB();
+
       const extractAllproducts = await Product.find({});
 
       if (extractAllproducts) {
@@ -17,9 +19,9 @@ export async function GET(req) {
         return NextResponse.json({
           success: false,
           status: 204,
-          message: "No Product Found",
+          message: "No Products found",
         });
-      } 
+      }
   } catch (error) {
     console.log(error);
     return NextResponse.json({

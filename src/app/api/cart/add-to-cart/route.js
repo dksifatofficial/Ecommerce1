@@ -18,20 +18,27 @@ export async function POST(req) {
 
     if (isAuthUser) {
       const data = await req.json();
-      const { productID, userID } = data;
+      const {productID , userID} = data;
+
       const { error } = AddToCart.validate({ userID, productID });
+
       if (error) {
         return NextResponse.json({
           success: false,
           message: error.details[0].message,
         });
       }
-      //       console.log(productID, userID);
+
+      console.log(productID, userID);
+
       const isCurrentCartItemAlreadyExists = await Cart.find({
         productID: productID,
         userID: userID,
       });
-      //       console.log(isCurrentCartItemAlreadyExists);
+
+      console.log(isCurrentCartItemAlreadyExists);
+      
+
       if (isCurrentCartItemAlreadyExists?.length > 0) {
         return NextResponse.json({
           success: false,
@@ -39,8 +46,11 @@ export async function POST(req) {
             "Product is already added in cart! Please add different product",
         });
       }
+
       const saveProductToCart = await Cart.create(data);
+
       console.log(saveProductToCart);
+
       if (saveProductToCart) {
         return NextResponse.json({
           success: true,

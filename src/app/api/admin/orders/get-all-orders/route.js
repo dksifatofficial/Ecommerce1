@@ -11,7 +11,9 @@ export async function GET(req) {
     const isAuthUser = await AuthUser(req);
 
     if (isAuthUser?.role === "admin") {
-      const getAllOrders = await Order.find({}).populate("orderItems.product").populate("user");
+      const getAllOrders = await Order.find({})
+        .populate("orderItems.product")
+        .populate("user");
 
       if (getAllOrders) {
         return NextResponse.json({
@@ -21,7 +23,8 @@ export async function GET(req) {
       } else {
         return NextResponse.json({
           success: false,
-          message: "failed to fetch the orders ! Please try again after some time.",
+          message:
+            "failed to fetch the orders ! Please try again after some time.",
         });
       }
     } else {

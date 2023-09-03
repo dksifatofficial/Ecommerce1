@@ -3,7 +3,6 @@
 import Notification from "@/components/Notification";
 import { GlobalContext } from "@/context";
 import { getAllOrdersForUser } from "@/services/order";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 import { PulseLoader } from "react-spinners";
@@ -41,7 +40,7 @@ export default function Orders() {
 
   useEffect(() => {
     if (user !== null) extractAllOrders();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   console.log(allOrdersForUser);
@@ -81,7 +80,7 @@ export default function Orders() {
                             <p className="mr-3 text-sm font-medium text-gray-900">
                               Total paid amount
                             </p>
-                            <p className="mr-3 text-2xl font-semibold text-gray-900">
+                            <p className="mr-3 text-2xl  font-semibold text-gray-900">
                               ${item.totalPrice}
                             </p>
                           </div>
@@ -89,7 +88,8 @@ export default function Orders() {
                         <div className="flex gap-2">
                           {item.orderItems.map((orderItem, index) => (
                             <div key={index} className="shrink-0">
-                              <Image
+                               {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
                                 alt="Order Item"
                                 className="h-24 w-24 max-w-full rounded-lg object-cover"
                                 src={
@@ -97,8 +97,6 @@ export default function Orders() {
                                   orderItem.product &&
                                   orderItem.product.imageUrl
                                 }
-                                height="400"
-                                width="400"
                               />
                             </div>
                           ))}

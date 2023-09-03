@@ -37,7 +37,7 @@ export default function AdminView() {
 
   useEffect(() => {
     if (user !== null) extractAllOrdersForAllUsers();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   console.log(allOrdersForAllUsers);
@@ -117,7 +117,7 @@ export default function AdminView() {
                       <div className="flex gap-2">
                         {item.orderItems.map((orderItem, index) => (
                           <div key={index} className="shrink-0">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               alt="Order Item"
                               className="h-24 w-24 max-w-full rounded-lg object-cover"

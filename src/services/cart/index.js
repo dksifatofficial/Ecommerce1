@@ -21,15 +21,12 @@ export const addToCart = async (formData) => {
 
 export const getAllCartItems = async (id) => {
   try {
-    const res = await fetch(
-      `https://raiment-gallery-ecommerce.vercel.app/api/cart/all-cart-items?id=${id}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${Cookies.get("token")}`,
-        },
-      }
-    );
+    const res = await fetch(`http://localhost:3000/api/cart/all-cart-items?id=${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    });
 
     const data = await res.json();
 

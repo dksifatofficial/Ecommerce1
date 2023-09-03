@@ -69,11 +69,11 @@ export async function POST(req) {
       finalData,
     });
   } catch (e) {
-    console.log("Error while new user registration. Please try again");
+    console.log("Error while logging In. Please try again");
 
     return NextResponse.json({
       success: false,
-      message: "Error while logging In. Please try again",
+      message: "Something went wrong ! Please try again later",
     });
   }
 }

@@ -2,17 +2,16 @@
 
 import { GlobalContext } from "@/context";
 import { getAllAdminProducts } from "@/services/product";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
-const Home = () => {
+export default function Home() {
   const { isAuthUser } = useContext(GlobalContext);
 
-    const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const router = useRouter();
 
-    async function getListOfProducts() {
+  async function getListOfProducts() {
     const res = await getAllAdminProducts();
 
     if (res.success) {
@@ -25,7 +24,6 @@ const Home = () => {
   }, []);
 
   console.log(products);
-
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -43,18 +41,16 @@ const Home = () => {
             <button
               type="button"
               onClick={() => router.push("/product/listing/all-products")}
-              className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase
-              tracking-wide text-white"
+              className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
             >
               Explore Shop Collection
             </button>
           </div>
           <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
               alt="Explore Shop Collection"
-              width="600"
-              height="300"
             />
           </div>
         </div>
@@ -69,8 +65,7 @@ const Home = () => {
                 </div>
                 <button
                   onClick={() => router.push("/product/listing/all-products")}
-                  className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase
-                  tracking-wide text-white"
+                  className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
                 >
                   Shop ALL
                 </button>
@@ -91,12 +86,11 @@ const Home = () => {
                           key={productItem._id}
                         >
                           <div>
-                            <Image
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
                               src={productItem.imageUrl}
                               alt="Sale Product Item"
                               className="object-cover w-full rounded aspect-square"
-                              width="600"
-                              height="300"
                             />
                           </div>
                           <div className="mt-3">
@@ -124,19 +118,17 @@ const Home = () => {
           <ul className="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-3">
             <li>
               <div className="relative block group">
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src="https://images.unsplash.com/photo-1618898909019-010e4e234c55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
                   className="object-cover w-full aspect-square"
                   alt=""
-                  width="400"
-                  height="400"
                 />
                 <div className="absolute inset-0 flex flex-col items-start justify-end p-6">
                   <h3 className="text-xl font-medium text-white">KIDS</h3>
                   <button
                     onClick={() => router.push("/product/listing/kids")}
-                    className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase
-                    tracking-wide text-white"
+                    className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
                   >
                     Shop Now
                   </button>
@@ -145,19 +137,17 @@ const Home = () => {
             </li>
             <li>
               <div className="relative block group">
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src="https://images.unsplash.com/photo-1624623278313-a930126a11c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
                   className="object-cover w-full aspect-square"
                   alt=""
-                  width="400"
-                  height="400"
                 />
                 <div className="absolute inset-0 flex flex-col items-start justify-end p-6">
                   <h3 className="text-xl font-medium text-white">WOMEN</h3>
                   <button
                     onClick={() => router.push("/product/listing/women")}
-                    className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase
-                    tracking-wide text-white"
+                    className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
                   >
                     Shop Now
                   </button>
@@ -166,19 +156,17 @@ const Home = () => {
             </li>
             <li className="lg:col-span-2 lg:col-start-2 lg:row-span-2 lg:row-start-1">
               <div className="relative block group">
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src="https://images.unsplash.com/photo-1593795899768-947c4929449d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80"
                   className="object-cover w-full aspect-square"
                   alt=""
-                  width="400"
-                  height="400"
                 />
                 <div className="absolute inset-0 flex flex-col items-start justify-end p-6">
                   <h3 className="text-xl font-medium text-white">MEN</h3>
                   <button
                     onClick={() => router.push("/product/listing/men")}
-                    className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase
-                    tracking-wide text-white"
+                    className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
                   >
                     Shop Now
                   </button>
@@ -191,7 +179,3 @@ const Home = () => {
     </main>
   );
 }
-
-
-export default Home;
-  

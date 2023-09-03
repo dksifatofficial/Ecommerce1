@@ -17,8 +17,8 @@ export async function POST(req) {
         payment_method_types: ["card"],
         line_items: res,
         mode: "payment",
-        success_url: "https://raiment-gallery-ecommerce.vercel.app/checkout" + "?status=success",
-        cancel_url: "https://raiment-gallery-ecommerce.vercel.app/checkout" + "?status=cancel",
+        success_url: "http://localhost:3000/checkout" + "?status=success",
+        cancel_url: "http://localhost:3000/checkout" + "?status=cancel",
       });
 
       return NextResponse.json({
@@ -39,5 +39,4 @@ export async function POST(req) {
       message: "Something went wrong ! Please try again",
     });
   }
-  
 }

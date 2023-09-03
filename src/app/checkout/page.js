@@ -28,7 +28,8 @@ export default function Checkout() {
   const router = useRouter();
   const params = useSearchParams();
 
-  const publishableKey = process.env.NEXT_PUBLIC_PUBLISHABLE_KEY;
+  const publishableKey =
+    "pk_test_51NIpU7QeahBh3avq0nlk4QKl6CXWWXW3Ub1N0HZYIIIirIDgkkp1kHDBDjd6ffpbWM8Xs9McaTSUWGQrBPCTvgFD00qJjw0gq8";
   const stripePromise = loadStripe(publishableKey);
 
   console.log(cartItems);
@@ -43,7 +44,7 @@ export default function Checkout() {
 
   useEffect(() => {
     if (user !== null) getAllAddresses();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   useEffect(() => {
@@ -97,7 +98,7 @@ export default function Checkout() {
     }
 
     createFinalOrder();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.get("status"), cartItems]);
 
   function handleSelectedAddress(getAddress) {
@@ -161,7 +162,7 @@ export default function Checkout() {
         router.push("/orders");
       }, [2000]);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderSuccess]);
 
   if (orderSuccess) {
@@ -208,7 +209,7 @@ export default function Checkout() {
                   className="flex flex-col rounded-lg bg-white sm:flex-row"
                   key={item._id}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item && item.productID && item.productID.imageUrl}
                     alt="Cart Item"
