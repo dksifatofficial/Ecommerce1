@@ -208,7 +208,7 @@ export const firebaseConfig = {
 //   measurementId: "G-62GBBCGCQ4"
 // };
 
-export const firebaseStroageURL = process.env.NEXT_PUBLIC_FIREBASE_STROAGE_URL;
+export const firebaseStroageURL = 'gs://next-js-ecommerce-2023-5d8d1.appspot.com';
 
 export const addNewAddressFormControls = [
   {
