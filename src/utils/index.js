@@ -198,15 +198,6 @@ export const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
 };
 
-// export const firebaseConfig = {
-//   apiKey: "AIzaSyCZniqS90AE68bgFSd8UA87_Sk_2palHAI",
-//   authDomain: "next-js-ecommerce-2023-5d8d1.firebaseapp.com",
-//   projectId: "next-js-ecommerce-2023-5d8d1",
-//   storageBucket: "next-js-ecommerce-2023-5d8d1.appspot.com",
-//   messagingSenderId: "892812333844",
-//   appId: "1:892812333844:web:47987282b9b1b321586801",
-//   measurementId: "G-62GBBCGCQ4"
-// };
 
 export const firebaseStroageURL = 'gs://next-js-ecommerce-2023-5d8d1.appspot.com';
 

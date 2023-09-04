@@ -7,7 +7,8 @@ const configOptions = {
 
 const connectToDB = async () => {
   const connectionUrl =
-    "mongodb+srv://dksifat:123456782023@cluster0.j5selhy.mongodb.net";
+  "mongodb+srv://dksifat:123456782023@cluster0.j5selhy.mongodb.net/test?retryWrites=true&w=majority"
+    // "mongodb+srv://dksifat:123456782023@cluster0.j5selhy.mongodb.net";
 
   mongoose
     .connect(connectionUrl, configOptions)
