@@ -2,6 +2,7 @@
 
 import InputComponent from "@/components/FormElements/InputComponent";
 import SelectComponent from "@/components/FormElements/SelectComponent";
+import TagsComponent from "@/components/FormElements/TagsComponent";
 import TileComponent from "@/components/FormElements/TileComponent";
 import ComponentLevelLoader from "@/components/Loader/componentlevel";
 import Notification from "@/components/Notification";
@@ -12,6 +13,7 @@ import {
   adminAddProductformControls,
   firebaseConfig,
   firebaseStroageURL,
+  CategoryTags,
 } from "@/utils";
 import { initializeApp } from "firebase/app";
 import {
@@ -67,6 +69,7 @@ const initialFormData = {
   onSale: "no",
   imageUrl: "",
   priceDrop: 0,
+  categoryTags: "",
 };
 
 export default function AdminAddNewProduct() {
@@ -113,6 +116,23 @@ export default function AdminAddNewProduct() {
     setFormData({
       ...formData,
       sizes: cpySizes,
+    });
+  }
+
+  // Category Tags
+  function handleCategoryTags(getCurrentItem) {
+    let cTags = [...formData.categoryTags];
+    const index = cTags.findIndex((item) => item.id === getCurrentItem.id);
+
+    if (index === -1) {
+      cTags.push(getCurrentItem)
+    } else {
+      cTags = cTags.filter((item) => item.id !== getCurrentItem.id)
+    }
+
+    setFormData({
+      ...formData,
+      categoryTags: cTags,
     });
   }
 
@@ -195,6 +215,17 @@ export default function AdminAddNewProduct() {
               />
             ) : null
           )}
+
+          {/* Category Tags */}
+          <div className="flex gap-2 flex-col">
+            <label>Select Your Category Tags</label>
+            <TagsComponent
+              selected={formData.categoryTags}
+              onClick={handleCategoryTags}
+              data={CategoryTags}
+            />
+          </div>
+
           <button
             onClick={handleAddProduct}
             className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking-wide"

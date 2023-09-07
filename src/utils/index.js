@@ -138,6 +138,10 @@ export const adminAddProductformControls = [
         id: "kids",
         label: "Kids",
       },
+      {
+        id: "all",
+        label: "All",
+      },
     ],
   },
   {
@@ -185,6 +189,112 @@ export const AvailableSizes = [
   {
     id: "l",
     label: "L",
+  },
+  {
+    id: "xl",
+    label: "XL",
+  },
+  {
+    id: "2xl",
+    label: "2XL",
+  },
+];
+export const CategoryTags = [
+  {
+    id: "mart",
+    label: "Mart",
+  },
+  {
+    id: "beautyGlamour",
+    label: "Beauty & Glamour",
+  },
+  {
+    id: "homeMakeover",
+    label: "Home Makeover",
+  },
+  {
+    id: "fashion",
+    label: "Fashion",
+  },
+  {
+    id: "budgetDeals",
+    label: "Budget deals",
+  },
+  {
+    id: "bestPriceGuaranteed",
+    label: "Best Price Guaranteed",
+  },
+  {
+    id: "freeDelivery",
+    label: "Free Delivery",
+  },
+  {
+    id: "everydayLowPrice",
+    label: "Everyday Low Price",
+  },
+  {
+    id: "jersey",
+    label: "Jersey",
+  },
+  {
+    id: "hotChocoleteandNutritionDrinks",
+    label: "Hot Chocolete and Nutrition Drinks",
+  },
+  {
+    id: "screenProtectors",
+    label: "Screen Protectors",
+  },
+  {
+    id: "handWashesandSanitizers",
+    label: "Hand Washes and Sanitizers",
+  },
+  {
+    id: "rice",
+    label: "Rice",
+  },
+  {
+    id: "tShirts",
+    label: "T-Shirts",
+  },
+  {
+    id: "phoneCases",
+    label: "Phone Cases",
+  },
+  {
+    id: "clothsTowels",
+    label: "Cloths & Towels",
+  },
+  {
+    id: "bodySoapsShowerGels",
+    label: "Body Soaps & Shower Gels",
+  },
+  {
+    id: "smartwatches",
+    label: "Smartwatches",
+  },
+  {
+    id: "fashionWallets",
+    label: "Fashion Wallets",
+  },
+  {
+    id: "bras",
+    label: "Bras",
+  },
+  {
+    id: "doorHardwareLocks",
+    label: "Door Hardware & Locks",
+  },
+  {
+    id: "wirelessEarbuds",
+    label: "Wireless Earbuds",
+  },
+  {
+    id: "balloons",
+    label: "Balloons",
+  },
+  {
+    id: "laptopStands",
+    label: "Laptop Stands",
   },
 ];
 
