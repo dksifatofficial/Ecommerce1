@@ -11,6 +11,7 @@ const NewAddressSchema = new mongoose.Schema(
     city: String,
     country: String,
     postalCode: String,
+    mobile: String,
   },
   { timestamps: true }
 );

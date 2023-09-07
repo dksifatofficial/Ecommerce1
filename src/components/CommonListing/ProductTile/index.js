@@ -18,30 +18,50 @@ const ProductTile = ({ item }) => {
         />
       </div>
       {item.onSale === "yes" ? (
-        <div className="absolute top-0 m-2 rounded-full bg-black">
+        <div className="absolute top-0 m-2 rounded-full bg-[#3cca98]">
           <p className="rounded-full p-1 text-[8px] font-bold uppercase tracking-wide text-white sm:py-1 sm:px-3">
             Sale
           </p>
         </div>
-      ) : null}
+      ) : (
+        <div className="absolute top-0 m-2 rounded-full bg-red-700">
+          <p className="rounded-full p-1 text-[8px] font-bold uppercase tracking-wide text-white sm:py-1 sm:px-3">
+            Sold Out
+          </p>
+        </div>
+      )}
       <div className="my-4 mx-auto flex w-10/12 flex-col items-start justify-between">
-        <div className="mb-2 flex">
-          <p
-            className={`mr-3 text-sm font-semibold ${
-              item.onSale === "yes" ? "line-through" : ""
-            }`}
-          >{`$ ${item.price}`}</p>
+       <h3 className="md-2 text-black text-sm font-semibold line-clamp-1">{item.name}</h3>
+        <div className="mb-2 grid mt-2">
+          <div className="w-full">
           {item.onSale === "yes" ? (
-            <p className="mr-3 text-sm font-semibold text-red-700">{`$ ${(
+            <p className="text-base font-semibold text-[#F85606]">{`$ ${(
               item.price -
               item.price * (item.priceDrop / 100)
             ).toFixed(2)}`}</p>
-          ) : null}
+          ) : (
+            <p className="text-base font-semibold text-[#F85606]">
+              {`$ ${item.price}`}
+            </p>
+          )}
+          </div>
+          <div className="w-full flex">
+          <p
+            className={`mr-1 text-sm font-semibold text-gray-400 ${
+              item.onSale === "yes" ? "line-through" : ""
+            }`}
+          >
+            {item.price}
+            {/* {item.priceDrop !== 0 ?
+              item.price
+              : null} */}
+          </p>
           {item.onSale === "yes" ? (
-            <p className="mr-3 text-sm font-semibold">{`-(${item.priceDrop}%) off`}</p>
+            <p className="text-sm text-gray-700 font-semibold">{`-${item.priceDrop}%`}</p>
           ) : null}
+          </div>
         </div>
-        <h3 className="md-2 text-gray-400 text-sm">{item.name}</h3>
+        
       </div>
     </div>
   );

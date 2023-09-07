@@ -11,6 +11,7 @@ const AddNewAddress = Joi.object({
   country: Joi.string().required(),
   postalCode: Joi.string().required(),
   userID: Joi.string().required(),
+  mobile: Joi.string().required(),
 });
 
 export const dynamic = "force-dynamic";
@@ -24,7 +25,7 @@ export async function POST(req) {
     if (isAuthUser) {
       const data = await req.json();
 
-      const { fullName, address, city, country, postalCode, userID } = data;
+      const { fullName, address, city, country, postalCode, userID, mobile } = data;
 
       const { error } = AddNewAddress.validate({
         fullName,
@@ -33,6 +34,7 @@ export async function POST(req) {
         country,
         postalCode,
         userID,
+        mobile,
       });
 
       if (error) {

@@ -1,5 +1,6 @@
 "use client";
 
+import ShutterUpButton from "@/components/Buttons/ShutterUpButton";
 import InputComponent from "@/components/FormElements/InputComponent";
 import ComponentLevelLoader from "@/components/Loader/componentlevel";
 import Notification from "@/components/Notification";
@@ -67,6 +68,7 @@ export default function Account() {
         country: "",
         postalCode: "",
         address: "",
+        mobile: "",
       });
       extractAllAddresses();
       setCurrentEditedAddressId(null);
@@ -81,6 +83,7 @@ export default function Account() {
         country: "",
         postalCode: "",
         address: "",
+        mobile: "",
       });
     }
   }
@@ -93,6 +96,7 @@ export default function Account() {
       country: getCurrentAddress.country,
       postalCode: getCurrentAddress.postalCode,
       address: getCurrentAddress.address,
+      mobile: getCurrentAddress.mobile,
     });
     setCurrentEditedAddressId(getCurrentAddress._id);
   }
@@ -138,9 +142,11 @@ export default function Account() {
               <p>{user?.email}</p>
               <p>{user?.role}</p>
             </div>
-            <button onClick={()=>router.push('/orders')} className="mt-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
+            <ShutterUpButton
+            onClick={()=>router.push('/orders')}
+            className="mt-5 inline-block text-white px-5 py-1 text-xs font-medium uppercase tracking-wide hover:before:bg-white">
               View Your Orders
-            </button>
+            </ShutterUpButton>
             <div className="mt-6">
               <h1 className="font-bold text-lg">Your Addresses :</h1>
               {pageLevelLoader ? (
@@ -160,15 +166,18 @@ export default function Account() {
                         <p>City : {item.city}</p>
                         <p>Country : {item.country}</p>
                         <p>PostalCode : {item.postalCode}</p>
-                        <button
+                        <p>Mobile : {item.mobile}</p>
+                        <ShutterUpButton
                           onClick={() => handleUpdateAddress(item)}
-                          className="mt-5 mr-5 inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+                          className="mt-5 mr-5 inline-block text-white px-5 py-1 text-xs font-medium uppercase tracking-wide
+                          hover:before:bg-[#f85606] hover:text-white"
                         >
                           Update
-                        </button>
-                        <button
+                        </ShutterUpButton>
+                        <ShutterUpButton
                           onClick={() => handleDelete(item._id)}
-                          className="mt-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+                          className="mt-5  inline-block text-white px-5 py-1 text-xs font-medium uppercase tracking-wide 
+                          hover:before:bg-red-600 hover:text-white"
                         >
                           {componentLevelLoader &&
                           componentLevelLoader.loading &&
@@ -184,7 +193,7 @@ export default function Account() {
                           ) : (
                             "Delete"
                           )}
-                        </button>
+                        </ShutterUpButton>
                       </div>
                     ))
                   ) : (
@@ -194,12 +203,12 @@ export default function Account() {
               )}
             </div>
             <div className="mt-4">
-              <button
+              <ShutterUpButton
                 onClick={() => setShowAddressForm(!showAddressForm)}
-                className="mt-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+                className="mt-5  inline-block text-white px-5 py-1 text-xs font-medium uppercase tracking-wide hover:before:bg-white"
               >
                 {showAddressForm ? "Hide Address Form" : "Add New Address"}
-              </button>
+              </ShutterUpButton>
             </div>
             {showAddressForm ? (
               <div className="flex flex-col mt-5 justify-center pt-4 items-center">

@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import ComponentLevelLoader from "../Loader/componentlevel";
+import ShutterUpButton from "../Buttons/ShutterUpButton";
 
 export default function CommonCart({
   cartItems = [],
@@ -113,14 +114,15 @@ export default function CommonCart({
                       : "0"}
                   </p>
                 </div>
-                <div className="mt-5 text-center">
-                  <button
+                <div className="mt-5 text-center flex justify-end">
+                  <ShutterUpButton
                     onClick={() => router.push("/checkout")}
                     disabled={cartItems && cartItems.length === 0}
-                    className="disabled:opacity-50 group inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking-wide"
+                    className="disabled:opacity-50 disabled:hover:before:h-0 group inline-flex items-center justify-center px-8 py-1
+                    text-lg text-white font-medium uppercase tracking-wide before:bg-white rounded-md"
                   >
                     Checkout
-                  </button>
+                  </ShutterUpButton>
                 </div>
               </div>
             </div>

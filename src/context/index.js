@@ -42,6 +42,7 @@ export default function GlobalState({ children }) {
     country: "",
     postalCode: "",
     address: "",
+    mobile: "",
   });
 
   const [checkoutFormData, setCheckoutFormData] = useState(

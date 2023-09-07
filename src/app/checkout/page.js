@@ -1,5 +1,6 @@
 "use client";
 
+import ShutterUpButton from "@/components/Buttons/ShutterUpButton";
 import Notification from "@/components/Notification";
 import { GlobalContext } from "@/context";
 import { fetchAllAddresses } from "@/services/address";
@@ -122,6 +123,7 @@ export default function Checkout() {
         country: getAddress.country,
         postalCode: getAddress.postalCode,
         address: getAddress.address,
+        mobile: getAddress.mobile,
       },
     });
   }
@@ -242,7 +244,7 @@ export default function Checkout() {
                   onClick={() => handleSelectedAddress(item)}
                   key={item._id}
                   className={`border p-6 ${
-                    item._id === selectedAddress ? "border-red-900" : ""
+                    item._id === selectedAddress ? "border-[#3cca98]" : ""
                   }`}
                 >
                   <p>Name : {item.fullName}</p>
@@ -250,23 +252,26 @@ export default function Checkout() {
                   <p>City : {item.city}</p>
                   <p>Country : {item.country}</p>
                   <p>PostalCode : {item.postalCode}</p>
-                  <button className="mt-5 mr-5 inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
+                  <p>Mobile : {item.mobile}</p>
+                  <ShutterUpButton className="mt-5 mr-5 inline-block text-white px-5 py-3 text-xs font-medium 
+                  uppercase tracking-wide before:bg-white">
                     {item._id === selectedAddress
                       ? "Selected Address"
                       : "Select Address"}
-                  </button>
+                  </ShutterUpButton>
                 </div>
               ))
             ) : (
               <p>No addresses added</p>
             )}
           </div>
-          <button
+          <ShutterUpButton
             onClick={() => router.push("/account")}
-            className="mt-5 mr-5 inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+            className="mt-5 mr-5 inline-block text-white px-5 py-3 text-xs font-medium uppercase
+             tracking-wide before:bg-white"
           >
             Add new address
-          </button>
+          </ShutterUpButton>
           <div className="mt-6 border-t border-b py-2">
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-gray-900">Subtotal</p>
@@ -297,16 +302,17 @@ export default function Checkout() {
               </p>
             </div>
             <div className="pb-10">
-              <button
+              <ShutterUpButton
                 disabled={
                   (cartItems && cartItems.length === 0) ||
                   Object.keys(checkoutFormData.shippingAddress).length === 0
                 }
                 onClick={handleCheckout}
-                className="disabled:opacity-50 mt-5 mr-5 w-full  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+                className="disabled:opacity-50 disabled:hover:before:h-0 disabled:hover:text-white mt-5 mr-5 w-full  inline-block text-white px-5 py-3
+                text-xs font-medium uppercase tracking-wide before:bg-white"
               >
                 Checkout
-              </button>
+              </ShutterUpButton>
             </div>
           </div>
         </div>

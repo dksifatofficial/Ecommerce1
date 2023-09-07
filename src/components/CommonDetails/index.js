@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { toast } from "react-toastify";
 import ComponentLevelLoader from "../Loader/componentlevel";
 import Notification from "../Notification";
+import ShutterUpButton from "../Buttons/ShutterUpButton";
 
 export default function CommonDetails({ item }) {
   const {
@@ -86,23 +87,24 @@ export default function CommonDetails({ item }) {
             <div className="mt-10 flex flex-col items-center justify-between space-y-4 botder-t border-b py-4 sm:flex-row sm:space-y-0">
               <div className="flex items-end">
                 <h1
-                  className={`text-3xl font-bold mr-2 ${
+                  className={`text-3xl text-gray-400 font-bold mr-2 ${
                     item.onSale === "yes" ? "line-through" : ""
                   }`}
                 >
                   ${item && item.price}
                 </h1>
                 {item.onSale === "yes" ? (
-                  <h1 className="text-3xl font-bold text-red-700">{`$${(
+                  <h1 className="text-3xl font-bold text-[#F85606]">{`$${(
                     item.price -
                     item.price * (item.priceDrop / 100)
                   ).toFixed(2)}`}</h1>
                 ) : null}
               </div>
-              <button
+              <ShutterUpButton
                 type="button"
                 onClick={() => handleAddToCart(item)}
-                className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium tracking-wide uppercase text-white"
+                className="mt-1.5 inline-block px-5 py-2 text-xs font-medium tracking-wide
+                before:bg-[#F85606] border-none hover:text-white uppercase text-white"
               >
                 {componentLevelLoader && componentLevelLoader.loading ? (
                   <ComponentLevelLoader
@@ -115,7 +117,7 @@ export default function CommonDetails({ item }) {
                 ) : (
                   "Add to Cart"
                 )}
-              </button>
+              </ShutterUpButton>
             </div>
             <ul className="mt-8 space-y-2">
               <li className="flex items-center text-left text-sm font-medium text-gray-600">

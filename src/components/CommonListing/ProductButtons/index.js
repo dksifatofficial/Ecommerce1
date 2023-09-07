@@ -1,5 +1,6 @@
 "use client";
 
+import ShutterUpButton from "@/components/Buttons/ShutterUpButton";
 import ComponentLevelLoader from "@/components/Loader/componentlevel";
 import { GlobalContext } from "@/context";
 import { addToCart } from "@/services/cart";
@@ -64,19 +65,19 @@ const ProductButton = ({ item }) => {
 
   return isAdminView ? (
     <>
-      <button
-        className="mt-1.5 flex w-full justify-center bg-black px-5 py-3 text-xs font-medium
-       uppercase tracking-wide text-white"
+      <ShutterUpButton
+        className="mt-1.5 flex w-full justify-center px-5 py-1 text-xs font-medium
+       uppercase tracking-wide text-white border-none before:bg-[#F85606] hover:text-white"
         onClick={() => {
           setCurrentUpdatedProduct(item);
           router.push("/admin-view/add-product");
         }}
       >
         Update
-      </button>
-      <button
-        className="mt-1.5 flex w-full justify-center bg-black px-5 py-3 text-xs font-medium
-       uppercase tracking-wide text-white"
+      </ShutterUpButton>
+      <ShutterUpButton
+        className="mt-1.5 flex w-full justify-center px-5 py-1 text-xs font-medium
+       uppercase tracking-wide text-white before:bg-red-600 hover:text-white border-none"
         onClick={() => handleDeleteProduct(item)}
       >
         {componentLevelLoader &&
@@ -90,14 +91,15 @@ const ProductButton = ({ item }) => {
         ) : (
           "DELETE"
         )}
-      </button>
+      </ShutterUpButton>
     </>
   ) : (
     <>
-      <button
-        className="mt-1.5 flex w-full justify-center bg-black px-5 py-3 text-xs font-medium 
-       uppercase tracking-wide text-white"
+      <ShutterUpButton
+        className="disabled:before:bg-[#3cca98] mt-1.5 flex w-full justify-center px-5 py-1 text-xs font-medium 
+       uppercase tracking-wide text-white border-none before:bg-[#F85606] hover:text-white"
         onClick={() => handleAddToCart(item)}
+        disabled={item.onSale === "no"}
       >
         {componentLevelLoader &&
         componentLevelLoader.loading &&
@@ -107,70 +109,12 @@ const ProductButton = ({ item }) => {
             color={"#ffffff"}
             loading={componentLevelLoader && componentLevelLoader.loading}
           />
-        ) : (
-          "Add To Cart"
-        )}
-      </button>
+        ) : item.onSale === "no" ?
+          "Sold Out" : "Add To Cart"
+        }
+      </ShutterUpButton>
     </>
   );
 };
 
 export default ProductButton;
-
-// import ComponentLevelLoader from "@/components/Loader/componentlevel";
-// import { GlobalContext } from "@/context";
-// import { addToCart } from "@/services/cart";
-// import { deleteAProduct } from "@/services/product";
-// import { usePathname, useRouter } from "next/navigation";
-// import { useContext } from "react";
-// import { toast } from "react-toastify";
-
-// export default function ProductButton({ item }) {
-//   const pathName = usePathname();
-//   const {
-//     setCurrentUpdatedProduct,
-//     setComponentLevelLoader,
-//     componentLevelLoader,
-//     user,
-//     showCartModal, setShowCartModal
-//   } = useContext(GlobalContext);
-//   const router = useRouter();
-
-//   const isAdminView = pathName.includes("admin-view");
-
-//   return isAdminView ? (
-//     <>
-//       <button
-
-//         className="mt-1.5 flex w-full justify-center bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
-//       >
-//         Update
-//       </button>
-//       <button
-//         onClick={() => handleDeleteProduct(item)}
-//         className="mt-1.5 flex w-full justify-center bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
-//       >
-//         {componentLevelLoader &&
-//         componentLevelLoader.loading &&
-//         item._id === componentLevelLoader.id ? (
-//           <ComponentLevelLoader
-//             text={"Deleting Product"}
-//             color={"#ffffff"}
-//             loading={componentLevelLoader && componentLevelLoader.loading}
-//           />
-//         ) : (
-//           "DELETE"
-//         )}
-//       </button>
-//     </>
-//   ) : (
-//     <>
-//       <button
-//         onClick={() => handleAddToCart(item)}
-//         className="mt-1.5 flex w-full justify-center bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
-//       >
-
-//       </button>
-//     </>
-//   );
-// }

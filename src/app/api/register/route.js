@@ -37,7 +37,7 @@ export async function POST(req) {
     if (isUserAlreadyExists) {
       return NextResponse.json({
         success: false,
-        message: "User is already exists. Please try with different email.",
+        message: "This e-mail is already exists. Please try with different email or Login.",
       });
     } else {
       const hashPassword = await hash(password, 12);

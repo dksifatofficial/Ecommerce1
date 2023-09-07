@@ -7,6 +7,7 @@ import { Fragment, useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import CommonModal from "../CommonModal";
 import ComponentLevelLoader from "../Loader/componentlevel";
+import ShutterUpButton from "../Buttons/ShutterUpButton";
 
 export default function CartModal() {
   const {
@@ -144,27 +145,29 @@ export default function CartModal() {
       }
       buttonComponent={
         <Fragment>
-          <button
+          <ShutterUpButton
             type="button"
             onClick={() => {
               router.push("/cart");
               setShowCartModal(false);
             }}
-            className="mt-1.5 w-full inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+            className="mt-1.5 w-full inline-block text-white px-5 py-1 text-xs font-medium uppercase
+            tracking-wide before:bg-white"
           >
             Go To Cart
-          </button>
-          <button
+          </ShutterUpButton>
+          <ShutterUpButton
             disabled={cartItems && cartItems.length === 0}
             type="button"
             onClick={() => {
               router.push("/checkout");
               setShowCartModal(false);
             }}
-            className="mt-1.5 w-full inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide disabled:opacity-50"
+            className="mt-1.5 w-full inline-block text-white px-5 py-1 text-xs font-medium uppercase
+            tracking-wide disabled:opacity-50 before:bg-white"
           >
             Checkout
-          </button>
+          </ShutterUpButton>
           <div className="mt-6 flex justify-center text-center text-sm text-gray-600">
             <button type="button" className="font-medium text-grey">
               Continue Shopping

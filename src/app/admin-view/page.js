@@ -1,5 +1,6 @@
 "use client";
 
+import ShutterUpButton from "@/components/Buttons/ShutterUpButton";
 import ComponentLevelLoader from "@/components/Loader/componentlevel";
 import { GlobalContext } from "@/context";
 import { getAllOrdersForAllUsers, updateStatusOfOrder } from "@/services/order";
@@ -131,15 +132,12 @@ export default function AdminView() {
                         ))}
                       </div>
                       <div className="flex gap-5">
-                        <button className="disabled:opacity-50 mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
-                          {item.isProcessing
-                            ? "Order is Processing"
-                            : "Order is delivered"}
-                        </button>
-                        <button
+                        <ShutterUpButton
                           onClick={() => handleUpdateOrderStatus(item)}
                           disabled={!item.isProcessing}
-                          className="disabled:opacity-50 mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
+                          className="disabled:opacity-50 disabled:hover:before:h-0 disabled:hover:text-white
+                          mt-5 mr-5 inline-block text-white px-5 py-1 
+                          text-xs font-medium uppercase tracking-wide before:bg-white "
                         >
                           {componentLevelLoader &&
                           componentLevelLoader.loading &&
@@ -155,6 +153,14 @@ export default function AdminView() {
                           ) : (
                             "Update Order Status"
                           )}
+                        </ShutterUpButton>
+                        <button className="disabled:text-green-700 disabled:font-bold mt-5 mr-5 
+                        inline-block text-red-700 px-5 py-1 text-base font-medium uppercase tracking-wide"
+                        disabled={!item.isProcessing}
+                        >
+                          {item.isProcessing
+                            ? "Order is Processing"
+                            : "Order is delivered"}
                         </button>
                       </div>
                     </li>

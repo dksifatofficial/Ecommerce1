@@ -7,6 +7,8 @@ import { usePathname, useRouter } from "next/navigation";
 import { Fragment, useContext, useEffect } from "react";
 import CartModal from "../CartModal";
 import CommonModal from "../CommonModal";
+import ShutterUpButton from "../Buttons/ShutterUpButton";
+import Image from "next/image";
 
 function NavItems({ isModalView = false, isAdminView, router }) {
   return (
@@ -25,7 +27,8 @@ function NavItems({ isModalView = false, isAdminView, router }) {
         {isAdminView
           ? adminNavOptions.map((item) => (
               <li
-                className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0"
+                className="cursor-pointer block py-2 pl-3 pr-4 text-[#3cca98] rounded md:p-0
+                 hover:text-[#268d69]"
                 key={item.id}
                 onClick={() => router.push(item.path)}
               >
@@ -34,7 +37,8 @@ function NavItems({ isModalView = false, isAdminView, router }) {
             ))
           : navOptions.map((item) => (
               <li
-                className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0"
+                className="cursor-pointer block py-2 pl-3 pr-4 text-[#3cca98] rounded md:p-0
+                 hover:text-[#268d69]"
                 key={item.id}
                 onClick={() => router.push(item.path)}
               >
@@ -91,69 +95,74 @@ const Navbar = () => {
             className="flex items-center cursor-pointer"
             onClick={() => router.push("/")}
           >
-            <span className="slef-center text-2xl font-semibold whitespace-nowrap">
+            <Image
+                className=" ml-[-2px] w-[180px] h-auto"
+                src={"https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2FLogo%2FDecorWhims.png?alt=media&token=cbd68fea-1c6c-484e-a523-600bfe9d0c71"}
+                alt="decorwhims_logo"
+                height="400"
+                width="800"
+              />
+            {/* <span className="slef-center text-[#e70146] text-2xl font-bold whitespace-nowrap">
               Raiment Gallery
-            </span>
+            </span> */}
           </div>
           <div className="flex md:order-2 gap-2">
             {!isAdminView && isAuthUser ? (
               <Fragment>
-                <button
-                  className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium 
-                 upprcase tracking-wide text-white"
+                <ShutterUpButton
+                  className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide text-[#3cca98]"
                   onClick={() => router.push("/account")}
                 >
-                  Account
-                </button>
-                <button
-                  className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium 
-                 upprcase tracking-wide text-white"
+                  <p>Account</p>
+                </ShutterUpButton>
+                <ShutterUpButton
+                  className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide text-white"
                   onClick={() => setShowCartModal(true)}
                 >
-                  Cart
-                </button>
+                  <p>Cart</p>
+                </ShutterUpButton>
               </Fragment>
             ) : null}
             {user?.role === "admin" ? (
               isAdminView ? (
-                <button
-                  className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium 
-                upprcase tracking-wide text-white"
+                <ShutterUpButton
+                  className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide text-white"
                   onClick={() => router.push("/")}
                 >
-                  Client View
-                </button>
+                  <p>Client View</p>
+                </ShutterUpButton>
               ) : (
-                <button
-                  className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium 
-                upprcase tracking-wide text-white"
+                <ShutterUpButton
+                  className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide text-white"
                   onClick={() => router.push("/admin-view")}
                 >
-                  Admin View
-                </button>
+                  <p>Admin View</p>
+                </ShutterUpButton>
               )
             ) : null}
             {isAuthUser ? (
-              <button
-                className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium 
-                 upprcase tracking-wide text-white"
+              <ShutterUpButton
+                className="mt-1.5 inline-block bg-black px-5 py-1 before:bg-white
+                 upprcase tracking-wide text-white border-black hover:text-black"
                 onClick={handleLogout}
               >
-                Logout
-              </button>
+                <p>Logout</p>
+              </ShutterUpButton>
             ) : (
-              <button
-                className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium 
-                 upprcase tracking-wide text-white"
+              <ShutterUpButton
+                className="mt-1.5 inline-block bg-black px-5 py-1 before:bg-white
+                 upprcase tracking-wide text-white border-black hover:text-black"
                 onClick={() => router.push("/login")}
               >
-                Login
-              </button>
+                <p>Login</p>
+              </ShutterUpButton>
             )}
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
-              className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden 
+              hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 
+              dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               aria-controls="navbar-sticky"
               aria-expanded="false"
               onClick={() => setShowNavModal(true)}

@@ -237,4 +237,11 @@ export const addNewAddressFormControls = [
     label: "Postal Code",
     componentType: "input",
   },
+  {
+    id: "mobile",
+    type: "tel",
+    placeholder: "01XXX-XXXXXX",
+    label: "Mobile",
+    componentType: "input",
+  },
 ];

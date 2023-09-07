@@ -1,5 +1,6 @@
 "use client";
 
+import ShutterUpButton from "@/components/Buttons/ShutterUpButton";
 import Notification from "@/components/Notification";
 import { GlobalContext } from "@/context";
 import { getAllOrdersForUser } from "@/services/order";
@@ -102,16 +103,20 @@ export default function Orders() {
                           ))}
                         </div>
                         <div className="flex gap-5">
-                          <button className="disabled:opacity-50 mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
+                          <ShutterUpButton
+                            onClick={() => router.push(`/orders/${item._id}`)}
+                            className="mt-5 mr-5  inline-block text-white px-5 py-1 text-xs font-medium 
+                            uppercase tracking-wide before:bg-white"
+                          >
+                            View Order Details
+                          </ShutterUpButton>
+                          <button className="disabled:text-green-700 disabled:font-bold mt-5 mr-5 inline-block text-red-700
+                           px-5 py-1 font-medium text-base uppercase tracking-wide"
+                           disabled={!item.isProcessing}
+                           >
                             {item.isProcessing
                               ? "Order is Processing"
                               : "Order is delivered"}
-                          </button>
-                          <button
-                            onClick={() => router.push(`/orders/${item._id}`)}
-                            className=" mt-5 mr-5  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide"
-                          >
-                            View Order Details
                           </button>
                         </div>
                       </li>
