@@ -21,6 +21,7 @@ export const addNewProduct = async (formData) => {
   }
 };
 
+
 export const getAllAdminProducts = async () => {
   try {
     const res = await fetch("http://localhost:3000/api/admin/all-products", {
@@ -90,6 +91,26 @@ export const productByCategory = async (id) => {
     console.log(e);
   }
 };
+
+export const productByTags = async (id) => {
+  try {
+    const res = await fetch(
+      `http://localhost:3000/api/admin/product-by-tags?id=${id}`,
+      {
+        method: "GET",
+        cache: "no-store",
+      }
+    );
+
+    const data = await res.json();
+
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+
 
 export const productById = async (id) => {
   try {

@@ -2,7 +2,6 @@
 
 import InputComponent from "@/components/FormElements/InputComponent";
 import SelectComponent from "@/components/FormElements/SelectComponent";
-import TagsComponent from "@/components/FormElements/TagsComponent";
 import TileComponent from "@/components/FormElements/TileComponent";
 import ComponentLevelLoader from "@/components/Loader/componentlevel";
 import Notification from "@/components/Notification";
@@ -25,7 +24,6 @@ import {
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { resolve } from "styled-jsx/css";
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app, firebaseStroageURL);
@@ -69,8 +67,10 @@ const initialFormData = {
   onSale: "no",
   imageUrl: "",
   priceDrop: 0,
-  categoryTags: "",
+  tags: [],
+  quantity: 1,
 };
+
 
 export default function AdminAddNewProduct() {
   const [formData, setFormData] = useState(initialFormData);
@@ -121,7 +121,7 @@ export default function AdminAddNewProduct() {
 
   // Category Tags
   function handleCategoryTags(getCurrentItem) {
-    let cTags = [...formData.categoryTags];
+    let cTags = [...formData.tags];
     const index = cTags.findIndex((item) => item.id === getCurrentItem.id);
 
     if (index === -1) {
@@ -132,7 +132,7 @@ export default function AdminAddNewProduct() {
 
     setFormData({
       ...formData,
-      categoryTags: cTags,
+      tags: cTags,
     });
   }
 
@@ -168,7 +168,7 @@ export default function AdminAddNewProduct() {
   console.log(formData);
 
   return (
-    <div className="w-full mt-5 mr-0 mb-0 ml-0 relative">
+    <div className="w-full px-[100px] py-[50px] mr-0 mb-0 ml-0 relative">
       <div className="flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl relative">
         <div className="w-full mt-6 mr-0 mb-0 ml-0 space-y-8">
           <input
@@ -186,6 +186,7 @@ export default function AdminAddNewProduct() {
               data={AvailableSizes}
             />
           </div>
+
           {adminAddProductformControls.map((controlItem) =>
             controlItem.componentType === "input" ? (
               // eslint-disable-next-line react/jsx-key
@@ -206,6 +207,12 @@ export default function AdminAddNewProduct() {
                 label={controlItem.label}
                 options={controlItem.options}
                 value={formData[controlItem.id]}
+                // onChange={(event) => {
+                //   setFormData({
+                //     ...formData,
+                //     [controlItem.id]: Array.from(event.target.selectedOptions, (option) => option.value),
+                //   });
+                // }}
                 onChange={(event) => {
                   setFormData({
                     ...formData,
@@ -219,8 +226,8 @@ export default function AdminAddNewProduct() {
           {/* Category Tags */}
           <div className="flex gap-2 flex-col">
             <label>Select Your Category Tags</label>
-            <TagsComponent
-              selected={formData.categoryTags}
+            <TileComponent
+              selected={formData.tags}
               onClick={handleCategoryTags}
               data={CategoryTags}
             />

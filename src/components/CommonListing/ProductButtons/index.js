@@ -41,27 +41,27 @@ const ProductButton = ({ item }) => {
     }
   }
 
-  async function handleAddToCart(getItem) {
-    setComponentLevelLoader({ loading: true, id: getItem._id });
+  // async function handleAddToCart(getItem) {
+  //   setComponentLevelLoader({ loading: true, id: getItem._id });
 
-    const res = await addToCart({ productID: getItem._id, userID: user._id });
+  //   const res = await addToCart({ productID: getItem._id, userID: user._id });
 
-    if (res.success) {
-      toast.success(res.message, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-      setComponentLevelLoader({ loading: false, id: "" });
-      setShowCartModal(true);
-    } else {
-      toast.error(res.message, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-      setComponentLevelLoader({ loading: false, id: "" });
-      setShowCartModal(true);
-    }
+  //   if (res.success) {
+  //     toast.success(res.message, {
+  //       position: toast.POSITION.TOP_RIGHT,
+  //     });
+  //     setComponentLevelLoader({ loading: false, id: "" });
+  //     setShowCartModal(true);
+  //   } else {
+  //     toast.error(res.message, {
+  //       position: toast.POSITION.TOP_RIGHT,
+  //     });
+  //     setComponentLevelLoader({ loading: false, id: "" });
+  //     setShowCartModal(true);
+  //   }
 
-    console.log(res);
-  }
+  //   console.log(res);
+  // }
 
   return isAdminView ? (
     <>
@@ -93,28 +93,29 @@ const ProductButton = ({ item }) => {
         )}
       </ShutterUpButton>
     </>
-  ) : (
-    <>
-      <ShutterUpButton
-        className="disabled:before:bg-[#3cca98] mt-1.5 flex w-full justify-center px-5 py-1 text-xs font-medium 
-       uppercase tracking-wide text-white border-none before:bg-[#F85606] hover:text-white"
-        onClick={() => handleAddToCart(item)}
-        disabled={item.onSale === "no"}
-      >
-        {componentLevelLoader &&
-        componentLevelLoader.loading &&
-        componentLevelLoader.id === item._id ? (
-          <ComponentLevelLoader
-            text={"Adding to cart"}
-            color={"#ffffff"}
-            loading={componentLevelLoader && componentLevelLoader.loading}
-          />
-        ) : item.onSale === "no" ?
-          "Sold Out" : "Add To Cart"
-        }
-      </ShutterUpButton>
-    </>
-  );
+  ) : null
+  // (
+  //   <>
+  //     <ShutterUpButton
+  //       className="disabled:before:bg-[#3cca98] mt-1.5 flex w-full justify-center px-5 py-1 text-xs font-medium 
+  //      uppercase tracking-wide text-white border-none before:bg-[#F85606] hover:text-white"
+  //       onClick={() => handleAddToCart(item)}
+  //       disabled={item.onSale === "no"}
+  //     >
+  //       {componentLevelLoader &&
+  //       componentLevelLoader.loading &&
+  //       componentLevelLoader.id === item._id ? (
+  //         <ComponentLevelLoader
+  //           text={"Adding to cart"}
+  //           color={"#ffffff"}
+  //           loading={componentLevelLoader && componentLevelLoader.loading}
+  //         />
+  //       ) : item.onSale === "no" ?
+  //         "Sold Out" : "Add To Cart"
+  //       }
+  //     </ShutterUpButton>
+  //   </>
+  // );
 };
 
 export default ProductButton;

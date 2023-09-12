@@ -45,7 +45,7 @@ export default function Checkout() {
 
   useEffect(() => {
     if (user !== null) getAllAddresses();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   useEffect(() => {
@@ -67,12 +67,13 @@ export default function Checkout() {
           user: user?._id,
           shippingAddress: getCheckoutFormData.shippingAddress,
           orderItems: cartItems.map((item) => ({
-            qty: 1,
+            qty: item.productQuantity,
             product: item.productID,
           })),
           paymentMethod: "Stripe",
           totalPrice: cartItems.reduce(
-            (total, item) => item.productID.price + total,
+            (total, item) =>
+              item.productID.price * item.productQuantity + total,
             0
           ),
           isPaid: true,
@@ -99,7 +100,7 @@ export default function Checkout() {
     }
 
     createFinalOrder();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.get("status"), cartItems]);
 
   function handleSelectedAddress(getAddress) {
@@ -140,7 +141,7 @@ export default function Checkout() {
         },
         unit_amount: item.productID.price * 100,
       },
-      quantity: 1,
+      quantity: item.productQuantity,
     }));
 
     const res = await callStripeSession(createLineItems);
@@ -164,7 +165,7 @@ export default function Checkout() {
         router.push("/orders");
       }, [2000]);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orderSuccess]);
 
   if (orderSuccess) {
@@ -211,7 +212,7 @@ export default function Checkout() {
                   className="flex flex-col rounded-lg bg-white sm:flex-row"
                   key={item._id}
                 >
-                   {/* eslint-disable-next-line @next/next/no-img-element */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item && item.productID && item.productID.imageUrl}
                     alt="Cart Item"
@@ -222,7 +223,8 @@ export default function Checkout() {
                       {item && item.productID && item.productID.name}
                     </span>
                     <span className="font-semibold">
-                      {item && item.productID && item.productID.price}
+                      {(item && item.productID && item.productID.price) *
+                        item.productQuantity}
                     </span>
                   </div>
                 </div>
@@ -253,8 +255,10 @@ export default function Checkout() {
                   <p>Country : {item.country}</p>
                   <p>PostalCode : {item.postalCode}</p>
                   <p>Mobile : {item.mobile}</p>
-                  <ShutterUpButton className="mt-5 mr-5 inline-block text-white px-5 py-3 text-xs font-medium 
-                  uppercase tracking-wide before:bg-white">
+                  <ShutterUpButton
+                    className="mt-5 mr-5 inline-block text-white px-5 py-3 text-xs font-medium 
+                  uppercase tracking-wide before:bg-white"
+                  >
                     {item._id === selectedAddress
                       ? "Selected Address"
                       : "Select Address"}

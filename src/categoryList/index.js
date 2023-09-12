@@ -1,7 +1,7 @@
 export const caterogy8 = [
   {
     title: "Mart",
-    path: "/product/listing/all-products",
+    path: "/product/listing/mart ",
     imageUrl:
       "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcategory%2Fcategory_01.png?alt=media&token=6dfc6bef-74c9-4a4f-83e3-97482058a28e",
   },

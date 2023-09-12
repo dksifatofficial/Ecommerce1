@@ -175,7 +175,21 @@ export const adminAddProductformControls = [
     label: "Price Drop",
     componentType: "input",
   },
+  {
+    id: "quantity",
+    type: "",
+    placeholder: "",
+    label: "Quantity",
+    componentType: "select",
+    options: [
+      {
+        id: "1",
+        label: "1",
+      },
+    ],
+  }
 ];
+
 
 export const AvailableSizes = [
   {
@@ -199,6 +213,30 @@ export const AvailableSizes = [
     label: "2XL",
   },
 ];
+
+// export const TagsAll= [
+//   {
+//     id: "alltags",
+//     type: "",
+//     placeholder: "",
+//     label: "All Tags",
+//     componentType: "select", //multiple
+//     options: [
+//       {
+//         id: "mart",
+//         label: "Mart",
+//       },
+//       {
+//         id: "rice",
+//         label: "Rice",
+//       },
+//       {
+//         id: "bras",
+//         label: "Bras",
+//       },
+//     ],
+//   },
+// ]
 export const CategoryTags = [
   {
     id: "mart",

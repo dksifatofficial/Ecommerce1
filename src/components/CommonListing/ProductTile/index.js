@@ -52,9 +52,6 @@ const ProductTile = ({ item }) => {
             }`}
           >
             {item.price}
-            {/* {item.priceDrop !== 0 ?
-              item.price
-              : null} */}
           </p>
           {item.onSale === "yes" ? (
             <p className="text-sm text-gray-700 font-semibold">{`-${item.priceDrop}%`}</p>

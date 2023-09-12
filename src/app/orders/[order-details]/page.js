@@ -17,7 +17,7 @@ export default function OrderDetails() {
   } = useContext(GlobalContext);
 
   const params = useParams();
-  const router = useRouter()
+  const router = useRouter();
 
   async function extractOrderDetails() {
     setPageLevelLoader(true);
@@ -36,7 +36,7 @@ export default function OrderDetails() {
 
   useEffect(() => {
     extractOrderDetails();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (pageLevelLoader) {
@@ -94,9 +94,27 @@ export default function OrderDetails() {
                           {item && item.product && item.product.name}
                         </h3>
                       </div>
-                      <div className="w-full flex justify-between items-start space-x-8">
-                        <h3 className="text-xl font-semibold leading-6 text-gray-900">
-                          ${item && item.product && item.product.price}
+                      <div className="w-full flex justify-between items-start space-x-8 px-4">
+                        <h3 className="text-base font-semibold leading-6 text-gray-900 text-center">
+                          Unit Price $
+                          {(item && item.product && item.product.price).toFixed(
+                            2
+                          )}
+                        </h3>
+                      </div>
+                      <div className="w-full flex justify-between items-start space-x-8 px-4">
+                        <h3 className="text-base font-semibold leading-6 text-gray-900 text-center">
+                          Item Quantity: {item && item.qty}
+                        </h3>
+                      </div>
+                      <div className="w-full flex justify-between items-start space-x-8 ">
+                        <h3 className="text-base font-semibold leading-6 text-gray-900 text-center">
+                          Total Price $
+                          {(
+                            item &&
+                            item.product &&
+                            item.product.price * item.qty
+                          ).toFixed(2)}
                         </h3>
                       </div>
                     </div>
@@ -113,7 +131,7 @@ export default function OrderDetails() {
                 <div className="flex justify-between w-full">
                   <p className="text-base leading-5 text-gray-800">Subtotal</p>
                   <p className="text-base leading-5 text-gray-900">
-                    ${orderDetails && orderDetails.totalPrice}
+                    ${(orderDetails && orderDetails.totalPrice).toFixed(2)}
                   </p>
                 </div>
                 <div className="flex justify-between w-full">
@@ -123,7 +141,7 @@ export default function OrderDetails() {
                 <div className="flex justify-between w-full">
                   <p className="text-base leading-5 text-gray-800">Subtotal</p>
                   <p className="text-base leading-5 text-gray-900">
-                    ${orderDetails && orderDetails.totalPrice}
+                    ${(orderDetails && orderDetails.totalPrice).toFixed(2)}
                   </p>
                 </div>
               </div>
@@ -164,21 +182,18 @@ export default function OrderDetails() {
                   {orderDetails && orderDetails.shippingAddress.postalCode}
                 </p>
                 <p>
-                  Mobile :{" "}
-                  {orderDetails && orderDetails.shippingAddress.mobile}
+                  Mobile : {orderDetails && orderDetails.shippingAddress.mobile}
                 </p>
               </div>
               <ShutterUpButton
-            onClick={() => router.push(`/`)}
-            className="mt-5 mr-5 w-full inline-block text-white px-5 py-3 text-xs font-medium 
+                onClick={() => router.push(`/`)}
+                className="mt-5 mr-5 w-full inline-block text-white px-5 py-3 text-xs font-medium 
             uppercase tracking-wide before:bg-white"
-          >
-            Shop Again
-          </ShutterUpButton>
+              >
+                Shop Again
+              </ShutterUpButton>
             </div>
-            
           </div>
-          
         </div>
       </div>
     </div>

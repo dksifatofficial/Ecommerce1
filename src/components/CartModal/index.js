@@ -99,6 +99,7 @@ export default function CartModal() {
                   />
                 </div>
                 <div className="ml-4 flex flex-1 flex-col">
+
                   <div>
                     <div className="flex justify-between text-base font-medium text-gray-900">
                       <h3>
@@ -109,13 +110,36 @@ export default function CartModal() {
                         </a>
                       </h3>
                     </div>
-                    <p className="mt-1 text-sm text-gray-600">
+                    <div className="mt-1 flex">
+                      <p className="pr-4">Price:</p>
+                    <p className="text-sm text-gray-600">
                       $
                       {cartItem &&
                         cartItem.productID &&
                         cartItem.productID.price}
                     </p>
+                    </div>
+                    <div className="mt-1 flex">
+                      <p className="pr-4">Quantity:</p>
+                    <p className="text-sm text-gray-600">
+                    {cartItem &&
+                        cartItem.productID &&
+                        cartItem.productQuantity}{" "}
+                      piece
+                    </p>
+                    </div>
+                    <div className="mt-1 flex">
+                      <p className="pr-4">Total Price:</p>
+                    <p className="text-sm text-gray-600">
+                      $
+                      {(cartItem &&
+                        cartItem.productID &&
+                        cartItem.productID.price) * (cartItem &&
+                          cartItem.productID && cartItem.productQuantity)}
+                    </p>
+                    </div>
                   </div>
+
                   <div className="flex flex-1 items-end justify-between text-sm">
                     <button
                       type="button"

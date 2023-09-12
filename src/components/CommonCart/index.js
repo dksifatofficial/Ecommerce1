@@ -1,8 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import ComponentLevelLoader from "../Loader/componentlevel";
 import ShutterUpButton from "../Buttons/ShutterUpButton";
+import ComponentLevelLoader from "../Loader/componentlevel";
 
 export default function CommonCart({
   cartItems = [],
@@ -15,14 +15,15 @@ export default function CommonCart({
     <section className="h-screen bg-gray-100">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mt-8 max-w-screen-xl px-4 sm:px-6 lg:px-8">
-          <div className="bg-white shadow">
+          <div className="bg-white rounded-lg">
             <div className="px-4 py-6 sm:px-8 sm:py-10">
               <div className="flow-root">
                 {cartItems && cartItems.length ? (
-                  <ul className="-my-8">
+                  <ul className=" grid gap-4 rounded-lg">
                     {cartItems.map((cartItem) => (
                       <li
-                        className="flex-col flex space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0"
+                        className="flex-col flex space-y-3 py-6 text-left md:flex-row md:space-x-5 md:space-y-0
+                          bg-slate-100 rounded-lg"
                         key={cartItem.id}
                       >
                         <div className="shrink-0">
@@ -34,24 +35,38 @@ export default function CommonCart({
                               cartItem.productID.imageUrl
                             }
                             alt="Product image"
-                            className="h-24 w-25 max-w-full rounded-lg object-cover"
+                            className="h-24 w-25 max-w-full rounded-lg object-cover ml-4"
                           />
                         </div>
-                        <div className="flex flex-1 flex-col justify-between">
-                          <div className="sm:col-gap-5 sm:grid sm:grid-cols-2">
-                            <div className="pr-8 sm:pr-4">
+                        <div className="h-24 flex flex-1 flex-col justify-between justify-items-center">
+                          <div className="h-24 sm:col-gap-5 md:grid md:grid-cols-2">
+                            <div className="pr-8 sm:pr-4 px-4 lg:px-0 flex items-center">
                               <p className="text-base font-semibold text-gray-900">
                                 {cartItem &&
                                   cartItem.productID &&
                                   cartItem.productID.name}
                               </p>
                             </div>
-                            <div className="mt-4 flex gap-3 items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
-                              <p className="shrink-0 w-20 text-base font-semibold text-gray-950 sm:order-1 sm:ml-8 sm:text-right">
-                                $
+                            <div className="flex items-center px-4 mt-4 lg:mt-0 gap-3 lg:justify-end md:justify-start">
+                              {/* sm:mt-0 sm:items-start sm:justify-end */}
+                              <p className="shrink-0 text-base text-gray-950 justify-items-center">
+                                Item Price{" "}
                                 {cartItem &&
                                   cartItem.productID &&
                                   cartItem.productID.price}
+                              </p>
+                              <p className="shrink-0 text-base text-gray-950 sm:order-1 sm:ml-8 sm:text-right">
+                                piecs{" "}
+                                {cartItem &&
+                                  cartItem.productID &&
+                                  cartItem.productQuantity}
+                              </p>
+                              <p className="shrink-0 text-base font-semibold text-gray-950 sm:order-1 sm:ml-8 sm:text-right">
+                                Item Total $
+                                {(cartItem &&
+                                  cartItem.productID &&
+                                  cartItem.productID.price) *
+                                  cartItem.productQuantity}
                               </p>
                               <button
                                 type="button"
@@ -92,7 +107,8 @@ export default function CommonCart({
                     $
                     {cartItems && cartItems.length
                       ? cartItems.reduce(
-                          (total, item) => item.productID.price + total,
+                          (total, item) =>
+                            item.productID.price * item.productQuantity + total,
                           0
                         )
                       : "0"}
@@ -102,28 +118,29 @@ export default function CommonCart({
                   <p className="text-sm text-gray-400">Shipping</p>
                   <p className="text-lg text-black font-semibold">$0</p>
                 </div>
-                <div className="flex items-center justify-between">
-                  <p className="text-sm text-gray-400">Total</p>
-                  <p className="text-lg text-black font-semibold">
-                    $
-                    {cartItems && cartItems.length
-                      ? cartItems.reduce(
-                          (total, item) => item.productID.price + total,
-                          0
-                        )
-                      : "0"}
-                  </p>
-                </div>
-                <div className="mt-5 text-center flex justify-end">
-                  <ShutterUpButton
-                    onClick={() => router.push("/checkout")}
-                    disabled={cartItems && cartItems.length === 0}
-                    className="disabled:opacity-50 disabled:hover:before:h-0 group inline-flex items-center justify-center px-8 py-1
+              </div>
+              <div className="flex items-center justify-between">
+                <p className="text-sm text-gray-400">Total</p>
+                <p className="text-lg text-black font-semibold">
+                  $
+                  {cartItems && cartItems.length
+                    ? cartItems.reduce(
+                        (total, item) =>
+                          item.productID.price * item.productQuantity + total,
+                        0
+                      )
+                    : "0"}
+                </p>
+              </div>
+              <div className="mt-5 text-center flex justify-end">
+                <ShutterUpButton
+                  onClick={() => router.push("/checkout")}
+                  disabled={cartItems && cartItems.length === 0}
+                  className="disabled:opacity-50 disabled:hover:before:h-0 group inline-flex items-center justify-center px-8 py-1
                     text-lg text-white font-medium uppercase tracking-wide before:bg-white rounded-md"
-                  >
-                    Checkout
-                  </ShutterUpButton>
-                </div>
+                >
+                  Checkout
+                </ShutterUpButton>
               </div>
             </div>
           </div>

@@ -22,3 +22,9 @@
 .button2:hover .b2span:after {
   @apply w-[calc(_250px/2_)] h-[calc(_50px/2_)];
 }
+/* .fffv {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+} */

@@ -2,11 +2,11 @@
 
 import { GlobalContext } from "@/context";
 import { addToCart } from "@/services/cart";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { toast } from "react-toastify";
+import ShutterUpButton from "../Buttons/ShutterUpButton";
 import ComponentLevelLoader from "../Loader/componentlevel";
 import Notification from "../Notification";
-import ShutterUpButton from "../Buttons/ShutterUpButton";
 
 export default function CommonDetails({ item }) {
   const {
@@ -16,10 +16,29 @@ export default function CommonDetails({ item }) {
     setShowCartModal,
   } = useContext(GlobalContext);
 
+  const [cnzQuantity, setCnzQuantity] = useState(1);
+  const [newQuantity, setNewQuantity] = useState(cnzQuantity);
+
+  const increaseQuantity = () => {
+    setCnzQuantity(cnzQuantity + 1);
+    setNewQuantity(cnzQuantity + 1);
+  };
+
+  const decreaseQuantity = () => {
+    if (cnzQuantity > 1) {
+      setCnzQuantity(cnzQuantity - 1);
+      setNewQuantity(cnzQuantity - 1);
+    }
+  };
+
   async function handleAddToCart(getItem) {
     setComponentLevelLoader({ loading: true, id: "" });
 
-    const res = await addToCart({ productID: getItem._id, userID: user._id });
+    const res = await addToCart({
+      productID: getItem._id,
+      userID: user._id,
+      productQuantity: newQuantity,
+    });
 
     if (res.success) {
       toast.success(res.message, {
@@ -34,7 +53,11 @@ export default function CommonDetails({ item }) {
       setComponentLevelLoader({ loading: false, id: "" });
       setShowCartModal(true);
     }
+    console.log(res, "DK");
   }
+
+  // const sizesData = item.sizes;
+
 
   return (
     <section className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -84,6 +107,7 @@ export default function CommonDetails({ item }) {
             <h1 className="text-2xl font-bold text-gray-900">
               {item && item.name}
             </h1>
+            <h3>Item code: #{item.code}</h3>
             <div className="mt-10 flex flex-col items-center justify-between space-y-4 botder-t border-b py-4 sm:flex-row sm:space-y-0">
               <div className="flex items-end">
                 <h1
@@ -100,12 +124,82 @@ export default function CommonDetails({ item }) {
                   ).toFixed(2)}`}</h1>
                 ) : null}
               </div>
+
+              <ul className="space-y-2">
+                <li className="flex items-center text-left text-sm font-medium text-gray-600">
+                  {item && item.deliveryInfo}
+                </li>
+                <li className="flex items-center text-left text-sm font-medium text-gray-600">
+                  {"Cancel anytime"}
+                </li>
+              </ul>
+            </div>
+
+            <div className="my-8 flex flex-col items-start gap-8 justify-between">
+              <div className="flex flex-col">
+                <div>
+                  <ul className=" text-base flex gap-2 py-4">
+                  Select Size:
+                    {item.sizes.map((size) => (
+                      // eslint-disable-next-line react/jsx-key
+                      <li className="bg-black text-white px-2">{size.label}</li>
+                    ))}
+                  </ul>
+                </div>
+                                  
+                {/* test */}
+                <div className=" flex flex-row">
+                  <p className=" mr-[40px]">{""}</p>
+                </div>
+                {/* test End*/}
+
+                <div className=" flex flex-row">
+                  <p className=" mr-[40px]">Price:</p>
+                  <p>
+                    {`$${(
+                      item.price -
+                      item.price * (item.priceDrop / 100)
+                    ).toFixed(2)}`}
+                  </p>
+                </div>
+
+                <div className="flex gap-4">
+                  <p className="pr-4">Quantity: </p>
+                  <button className="text-lg" onClick={decreaseQuantity}>
+                    -
+                  </button>
+                  <p>{newQuantity}</p>
+                  <button className="text-lg" onClick={increaseQuantity}>
+                    +
+                  </button>
+                </div>
+
+                <div className="flex gap-4">
+                  <p className="mr-[26px]">Total:</p>
+                  <div>
+                    {`$${
+                      newQuantity > 1
+                        ? (
+                            (item.price - item.price * (item.priceDrop / 100)) *
+                            newQuantity
+                          ).toFixed(2)
+                        : (
+                            item.price -
+                            item.price * (item.priceDrop / 100)
+                          ).toFixed(2)
+                    }`}
+                  </div>
+                </div>
+              </div>
+
               <ShutterUpButton
                 type="button"
                 onClick={() => handleAddToCart(item)}
-                className="mt-1.5 inline-block px-5 py-2 text-xs font-medium tracking-wide
-                before:bg-[#F85606] border-none hover:text-white uppercase text-white"
+                className="inline-block px-5 py-2 text-xs font-medium tracking-wide 
+                before:bg-[#F85606] border-none hover:text-white uppercase text-white
+                 "
               >
+                {/* absolute left-[100%] translate-x-[-100%] top-0 */}
                 {componentLevelLoader && componentLevelLoader.loading ? (
                   <ComponentLevelLoader
                     text={"Adding to Cart"}
@@ -119,14 +213,6 @@ export default function CommonDetails({ item }) {
                 )}
               </ShutterUpButton>
             </div>
-            <ul className="mt-8 space-y-2">
-              <li className="flex items-center text-left text-sm font-medium text-gray-600">
-                {item && item.deliveryInfo}
-              </li>
-              <li className="flex items-center text-left text-sm font-medium text-gray-600">
-                {"Cancel anytime"}
-              </li>
-            </ul>
             <div className="lg:col-span-3">
               <div className="border-b border-gray-400">
                 <nav className="flex gap-4">
