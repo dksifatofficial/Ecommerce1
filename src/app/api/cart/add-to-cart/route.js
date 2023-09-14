@@ -8,6 +8,8 @@ const AddToCart = Joi.object({
   userID: Joi.string().required(),
   productID: Joi.string().required(),
   productQuantity: Joi.number().required(),
+  productCode: Joi.string().required(),
+  requiredSize: Joi.array().required(),
 });
 
 export const dynamic = "force-dynamic";
@@ -19,9 +21,9 @@ export async function POST(req) {
 
     if (isAuthUser) {
       const data = await req.json();
-      const {productID , userID, productQuantity} = data;
+      const {productID , userID, productQuantity, productCode, requiredSize} = data;
 
-      const { error } = AddToCart.validate({ userID, productID, productQuantity });
+      const { error } = AddToCart.validate({ userID, productID, productQuantity, productCode, requiredSize });
 
       if (error) {
         return NextResponse.json({
@@ -30,7 +32,7 @@ export async function POST(req) {
         });
       }
 
-      console.log(productID, userID, productQuantity);
+      console.log(productID, userID, productQuantity, productCode, requiredSize);
 
       const isCurrentCartItemAlreadyExists = await Cart.find({
         productID: productID,

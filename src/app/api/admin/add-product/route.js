@@ -16,6 +16,7 @@ const AddNewProductSchema = Joi.object({
   imageUrl: Joi.string().required(),
   tags: Joi.array().required(),
   quantity: Joi.number().required(),
+  itemCode: Joi.string().required(),
 });
 
 
@@ -44,6 +45,7 @@ export async function POST(req) {
         priceDrop,
         tags,
         quantity,
+        itemCode,
       } = extractData;
 
       const { error } = AddNewProductSchema.validate({
@@ -58,6 +60,7 @@ export async function POST(req) {
         priceDrop,
         tags,
         quantity,
+        itemCode,
       });
 
       if (error) {

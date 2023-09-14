@@ -106,6 +106,13 @@ export const adminAddProductformControls = [
     componentType: "input",
   },
   {
+    id: "itemCode",
+    type: "text",
+    placeholder: "Enter Unique Item Code",
+    label: "Item Code",
+    componentType: "input",
+  },
+  {
     id: "price",
     type: "number",
     placeholder: "Enter price",

@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import ShutterUpButton from "../Buttons/ShutterUpButton";
 import ComponentLevelLoader from "../Loader/componentlevel";
 import Notification from "../Notification";
+import SizeComponent from "../FormElements/SizeComponent";
 
 export default function CommonDetails({ item }) {
   const {
@@ -18,6 +19,7 @@ export default function CommonDetails({ item }) {
 
   const [cnzQuantity, setCnzQuantity] = useState(1);
   const [newQuantity, setNewQuantity] = useState(cnzQuantity);
+  const [selectedSize, setSelectedSize] = useState([]);
 
   const increaseQuantity = () => {
     setCnzQuantity(cnzQuantity + 1);
@@ -38,6 +40,8 @@ export default function CommonDetails({ item }) {
       productID: getItem._id,
       userID: user._id,
       productQuantity: newQuantity,
+      productCode: getItem.itemCode,
+      requiredSize: selectedSize,
     });
 
     if (res.success) {
@@ -56,7 +60,18 @@ export default function CommonDetails({ item }) {
     console.log(res, "DK");
   }
 
-  // const sizesData = item.sizes;
+  function handleTileClick(getCurrentItem) {
+    // Check if the size is already selected
+    const index = selectedSize.findIndex((item) => item.id === getCurrentItem.id);
+
+    if (index === -1) {
+      // If not selected, add it to selectedSizes
+      setSelectedSize([getCurrentItem]);
+    } else {
+      // If already selected, remove it from selectedSizes
+      setSelectedSize([]);
+    }
+  }
 
 
   return (
@@ -107,8 +122,9 @@ export default function CommonDetails({ item }) {
             <h1 className="text-2xl font-bold text-gray-900">
               {item && item.name}
             </h1>
-            <h3>Item code: #{item.code}</h3>
-            <div className="mt-10 flex flex-col items-center justify-between space-y-4 botder-t border-b py-4 sm:flex-row sm:space-y-0">
+            <h3>Item code: #{item.itemCode}</h3>
+            <div className="mt-10 flex flex-col items-center justify-between space-y-4 botder-t border-b py-4
+             sm:flex-row sm:space-y-0">
               <div className="flex items-end">
                 <h1
                   className={`text-3xl text-gray-400 font-bold mr-2 ${
@@ -137,24 +153,18 @@ export default function CommonDetails({ item }) {
 
             <div className="my-8 flex flex-col items-start gap-8 justify-between">
               <div className="flex flex-col">
-                <div>
-                  <ul className=" text-base flex gap-2 py-4">
-                  Select Size:
-                    {item.sizes.map((size) => (
-                      // eslint-disable-next-line react/jsx-key
-                      <li className="bg-black text-white px-2">{size.label}</li>
-                    ))}
-                  </ul>
-                </div>
-                                  
-                {/* test */}
-                <div className=" flex flex-row">
-                  <p className=" mr-[40px]">{""}</p>
-                </div>
-                {/* test End*/}
 
                 <div className=" flex flex-row">
-                  <p className=" mr-[40px]">Price:</p>
+                  <p className="mr-[10px]">Select Size:</p>
+                  <SizeComponent
+                  selected={selectedSize}
+                  data={item.sizes}
+                  onClick={handleTileClick}
+                  />
+                </div>
+
+                <div className="flex flex-row">
+                  <p className="mr-[53px]">Price:</p>
                   <p>
                     {`$${(
                       item.price -
@@ -175,7 +185,7 @@ export default function CommonDetails({ item }) {
                 </div>
 
                 <div className="flex gap-4">
-                  <p className="mr-[26px]">Total:</p>
+                  <p className="mr-[39px]">Total:</p>
                   <div>
                     {`$${
                       newQuantity > 1

@@ -69,6 +69,7 @@ const initialFormData = {
   priceDrop: 0,
   tags: [],
   quantity: 1,
+  itemCode: "",
 };
 
 
@@ -207,12 +208,6 @@ export default function AdminAddNewProduct() {
                 label={controlItem.label}
                 options={controlItem.options}
                 value={formData[controlItem.id]}
-                // onChange={(event) => {
-                //   setFormData({
-                //     ...formData,
-                //     [controlItem.id]: Array.from(event.target.selectedOptions, (option) => option.value),
-                //   });
-                // }}
                 onChange={(event) => {
                   setFormData({
                     ...formData,

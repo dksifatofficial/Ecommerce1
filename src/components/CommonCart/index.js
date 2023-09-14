@@ -40,12 +40,20 @@ export default function CommonCart({
                         </div>
                         <div className="h-24 flex flex-1 flex-col justify-between justify-items-center">
                           <div className="h-24 sm:col-gap-5 md:grid md:grid-cols-2">
-                            <div className="pr-8 sm:pr-4 px-4 lg:px-0 flex items-center">
+                            <div className="pr-8 sm:pr-4 px-4 lg:px-0 flex flex-col items-start justify-center">
                               <p className="text-base font-semibold text-gray-900">
                                 {cartItem &&
                                   cartItem.productID &&
                                   cartItem.productID.name}
                               </p>
+                              <div className="mt-1 flex">
+                                <p className="text-sm pr-2">Item Code:</p>
+                                <p className="text-sm text-gray-600">
+                                  {cartItem &&
+                                    cartItem.productID &&
+                                    cartItem.productCode}
+                                </p>
+                              </div>
                             </div>
                             <div className="flex items-center px-4 mt-4 lg:mt-0 gap-3 lg:justify-end md:justify-start">
                               {/* sm:mt-0 sm:items-start sm:justify-end */}
@@ -55,6 +63,15 @@ export default function CommonCart({
                                   cartItem.productID &&
                                   cartItem.productID.price}
                               </p>
+                              <p className="text-sm">Size:</p>
+                              <ul className="text-sm text-gray-600 flex flex-row gap-2">
+                                {cartItem &&
+                                  cartItem.productID &&
+                                  cartItem.requiredSize.map((size) => (
+                                    // eslint-disable-next-line react/jsx-key
+                                    <li className="">{size.label}</li>
+                                  ))}
+                              </ul>
                               <p className="shrink-0 text-base text-gray-950 sm:order-1 sm:ml-8 sm:text-right">
                                 piecs{" "}
                                 {cartItem &&

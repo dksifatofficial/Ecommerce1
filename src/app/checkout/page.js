@@ -69,6 +69,8 @@ export default function Checkout() {
           orderItems: cartItems.map((item) => ({
             qty: item.productQuantity,
             product: item.productID,
+            itemCode: item.productCode,
+            reqSizes: item.requiredSize.map((size)=> size.label),
           })),
           paymentMethod: "Stripe",
           totalPrice: cartItems.reduce(
@@ -102,6 +104,10 @@ export default function Checkout() {
     createFinalOrder();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.get("status"), cartItems]);
+
+  
+
+
 
   function handleSelectedAddress(getAddress) {
     if (getAddress._id === selectedAddress) {
@@ -218,14 +224,41 @@ export default function Checkout() {
                     alt="Cart Item"
                     className="m-2 h-24 w-28 rounded-md border object-cover object-center"
                   />
-                  <div className="flex w-full flex-col px-4 py-4">
-                    <span className="font-bold">
-                      {item && item.productID && item.productID.name}
-                    </span>
-                    <span className="font-semibold">
-                      {(item && item.productID && item.productID.price) *
-                        item.productQuantity}
-                    </span>
+                  <div className="flex w-full flex-col px-4 py-0">
+                    <div className="font-bold flex flex-row">
+                      <p>{item && item.productID && item.productID.name}</p>
+                    </div>
+                    <div className="font-medium text-sm flex flex-row pb-2">
+                      <p>#</p>
+                      <p>{item && item.productID && item.productCode}</p>
+                    </div>
+                    <div className="font-medium text-sm flex flex-row">
+                      <p className="mr-[22px]">Unit Price:</p>
+                      <p>${item && item.productID && item.productID.price}</p>
+                    </div>
+                    <div className="font-medium text-sm flex flex-row">
+                      <p className="mr-[31px]">Size:</p>
+                      <ul className="text-sm text-gray-600 flex flex-row gap-2">
+                        {item &&
+                          item.productID &&
+                          item.requiredSize.map((size) =>(
+                            // eslint-disable-next-line react/jsx-key
+                            <li className="">{size.label}</li>
+                          ))}
+                      </ul>
+                    </div>
+                    <div className="font-medium text-sm flex flex-row">
+                      <p className="mr-[31px]">Quantity:</p>
+                      <p>{item && item.productID && item.productQuantity}P</p>
+                    </div>
+                    <div className="font-medium text-sm flex flex-row">
+                      <p className="mr-[16px]">Total Price:</p>
+                      <p>
+                        $
+                        {(item && item.productID && item.productID.price) *
+                          item.productQuantity}
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))
@@ -283,7 +316,8 @@ export default function Checkout() {
                 $
                 {cartItems && cartItems.length
                   ? cartItems.reduce(
-                      (total, item) => item.productID.price + total,
+                      (total, item) =>
+                        (item.productID.price + total).toFixed(2),
                       0
                     )
                   : "0"}
@@ -299,7 +333,12 @@ export default function Checkout() {
                 $
                 {cartItems && cartItems.length
                   ? cartItems.reduce(
-                      (total, item) => item.productID.price + total,
+                      (total, item) =>
+                        (
+                          (item && item.productID && item.productID.price) *
+                            item.productQuantity +
+                          total
+                        ).toFixed(2),
                       0
                     )
                   : "0"}

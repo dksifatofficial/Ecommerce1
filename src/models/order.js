@@ -16,6 +16,8 @@ const OrderSchema = new mongoose.Schema(
           type: mongoose.Schema.Types.ObjectId,
           ref: "Products",
         },
+        itemCode: { type: String, required: true },
+        reqSizes: { type: Array, required: true }
       },
     ],
     shippingAddress: {

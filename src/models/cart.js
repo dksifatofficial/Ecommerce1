@@ -15,11 +15,19 @@ const CartSchema = new mongoose.Schema(
         required: true,
         ref: 'Quantity'
     },
+    productCode: {
+      type: String,
+      required: true,
+      ref: 'Item Code'
+    },
+    requiredSize: {
+      type: Array,
+      required: true,
+      ref: 'Required Size'
+    },
   },
   { timestamps: true }
 );
 
 const Cart = mongoose.models.Cart || mongoose.model("Cart", CartSchema);
 export default Cart;
-
-// default: 1,

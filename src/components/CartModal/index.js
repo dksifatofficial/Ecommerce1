@@ -5,9 +5,9 @@ import { deleteFromCart, getAllCartItems } from "@/services/cart";
 import { useRouter } from "next/navigation";
 import { Fragment, useContext, useEffect } from "react";
 import { toast } from "react-toastify";
+import ShutterUpButton from "../Buttons/ShutterUpButton";
 import CommonModal from "../CommonModal";
 import ComponentLevelLoader from "../Loader/componentlevel";
-import ShutterUpButton from "../Buttons/ShutterUpButton";
 
 export default function CartModal() {
   const {
@@ -99,7 +99,6 @@ export default function CartModal() {
                   />
                 </div>
                 <div className="ml-4 flex flex-1 flex-col">
-
                   <div>
                     <div className="flex justify-between text-base font-medium text-gray-900">
                       <h3>
@@ -111,39 +110,58 @@ export default function CartModal() {
                       </h3>
                     </div>
                     <div className="mt-1 flex">
-                      <p className="pr-4">Price:</p>
-                    <p className="text-sm text-gray-600">
-                      $
-                      {cartItem &&
-                        cartItem.productID &&
-                        cartItem.productID.price}
-                    </p>
+                      <p className="text-sm pr-4">Item Code:</p>
+                      <p className="text-sm text-gray-600">
+                        {cartItem && cartItem.productID && cartItem.productCode}
+                      </p>
                     </div>
                     <div className="mt-1 flex">
-                      <p className="pr-4">Quantity:</p>
-                    <p className="text-sm text-gray-600">
-                    {cartItem &&
-                        cartItem.productID &&
-                        cartItem.productQuantity}{" "}
-                      piece
-                    </p>
+                      <p className="text-sm pr-[52px]">Price:</p>
+                      <p className="text-sm text-gray-600">
+                        $
+                        {cartItem &&
+                          cartItem.productID &&
+                          cartItem.productID.price}
+                      </p>
                     </div>
                     <div className="mt-1 flex">
-                      <p className="pr-4">Total Price:</p>
-                    <p className="text-sm text-gray-600">
-                      $
-                      {(cartItem &&
-                        cartItem.productID &&
-                        cartItem.productID.price) * (cartItem &&
-                          cartItem.productID && cartItem.productQuantity)}
-                    </p>
+                      <p className="text-sm pr-[57px]">Size:</p>
+                      <ul className="text-sm text-gray-600 flex flex-row gap-2">
+                        {cartItem &&
+                          cartItem.productID &&
+                          cartItem.requiredSize.map((size) =>(
+                            // eslint-disable-next-line react/jsx-key
+                            <li className="">{size.label}</li>
+                          ))}
+                      </ul>
+                    </div>
+                    <div className="mt-1 flex">
+                      <p className="text-sm pr-[29px]">Quantity:</p>
+                      <p className="text-sm text-gray-600">
+                        {cartItem &&
+                          cartItem.productID &&
+                          cartItem.productQuantity}{" "}
+                        piece
+                      </p>
+                    </div>
+                    <div className="mt-1 flex">
+                      <p className="text-sm pr-[14px]">Total Price:</p>
+                      <p className="text-sm text-gray-600">
+                        $
+                        {(cartItem &&
+                          cartItem.productID &&
+                          cartItem.productID.price) *
+                          (cartItem &&
+                            cartItem.productID &&
+                            cartItem.productQuantity)}
+                      </p>
                     </div>
                   </div>
 
                   <div className="flex flex-1 items-end justify-between text-sm">
                     <button
                       type="button"
-                      className="font-medium text-yellow-600 sm:order-2"
+                      className="font-medium text-yellow-600 sm:order-2 mt-2"
                       onClick={() => handleDeleteCartItem(cartItem._id)}
                     >
                       {componentLevelLoader &&
