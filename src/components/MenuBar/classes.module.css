@@ -1,0 +1,108 @@
+.mcdMenu li {
+  @apply relative flex flex-row p-2 text-[#686766] cursor-pointer px-5 text-xs uppercase font-semibold;
+}
+.mcdMenu li:hover {
+  @apply text-[#e67e22] bg-[rgba(212,214,214,0.38)];
+}
+.mcdMenu li i {
+  @apply text-base mr-2.5 mt-[-1px];
+}
+.arrow1 {
+  @apply text-2xl hidden;
+}
+.mcdMenu li:hover .arrow1 {
+  @apply block;
+}
+.mcdMenu li ul li:hover .arrow2 {
+  @apply block;
+}
+.mcdMenu li ul li ul li:hover .arrow3 {
+  @apply block;
+}
+
+.mcdMenu li:hover > ul {
+  @apply block opacity-100 visible left-[253px];
+}
+.mcdMenu li ul li:hover ul {
+  @apply block opacity-100 visible left-[305px];
+}
+.mcdMenu li ul li a {
+  @apply text-left h-auto p-2.5;
+}
+.mcdMenu li ul li ul {
+  @apply border-0 left-[250px] top-0;
+}
+.mcdMenu li ul li:hover > ul {
+  @apply left-[205px] top-0;
+}
+
+/* .mcdMenu li a.active {
+  @apply relative text-[#e67e22] shadow-[0_0_5px_#DDD] -mx-1 my-0 border-x-4 
+    border-x-[#e67e22] border-0 border-solid;
+}
+.mcdMenu li a.active:before {
+  @apply content-[""] absolute border-l-[5px] border-l-[#e67e22] border-y-[5px] 
+    border-y-transparent border-solid left-0 top-[42%];
+}
+.mcdMenu li a.active:after {
+  @apply content-[""] absolute border-r-[5px] border-r-[#e67e22] border-y-[5px] 
+  border-y-transparent border-solid right-0 top-[42%];
+} */
+
+
+
+@media only screen and (min-width: 960px) and (max-width: 1199px) {
+  .mcdMenu {
+    margin-left: 10px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  .mcdMenu {
+    width: 200px;
+  }
+  .mcdMenu li a {
+    height: 30px;
+  }
+  .mcdMenu li a i {
+    font-size: 22px;
+  }
+  .mcdMenu li a strong {
+    font-size: 12px;
+  }
+  .mcdMenu li a small {
+    font-size: 10px;
+  }
+  .mcdMenu li a.search input {
+    width: 120px;
+    font-size: 12px;
+  }
+  .mcdMenu li a.search buton {
+    padding: 8px 10px 9px 10px;
+  }
+  .mcdMenu li > ul {
+    min-width: 180px;
+  }
+  .mcdMenu li:hover > ul {
+    min-width: 180px;
+    left: 200px;
+  }
+  .mcdMenu li ul li > ul,
+  .mcdMenu li ul li ul li > ul {
+    min-width: 150px;
+  }
+  .mcdMenu li ul li:hover > ul {
+    left: 180px;
+    min-width: 150px;
+  }
+  .mcdMenu li ul li ul li:hover > ul {
+    left: 150px;
+    min-width: 150px;
+  }
+  .mcdMenu li ul a {
+    font-size: 12px;
+  }
+  .mcdMenu li ul a i {
+    font-size: 14px;
+  }
+}

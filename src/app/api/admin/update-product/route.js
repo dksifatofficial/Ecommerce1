@@ -24,7 +24,7 @@ export async function PUT(req) {
         onSale,
         priceDrop,
         imageUrl,
-        categoryTags,
+        tags,
         quantity,
         itemCode,
       } = extractData;
@@ -43,7 +43,7 @@ export async function PUT(req) {
           onSale,
           priceDrop,
           imageUrl,
-          categoryTags,
+          tags,
           quantity,
           itemCode,
         },

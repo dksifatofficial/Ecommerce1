@@ -4,6 +4,7 @@ import ShutterUpButton from "@/components/Buttons/ShutterUpButton";
 import Category1 from "@/components/Category/Category1";
 import CategoryFull from "@/components/Category/CategoryFull";
 import Footer from "@/components/Footer/Footer";
+import MenuBar from "@/components/MenuBar";
 import { GlobalContext } from "@/context";
 import { getAllAdminProducts } from "@/services/product";
 import Image from "next/image";
@@ -42,6 +43,9 @@ export default function Home() {
           height="800"
           width="1600"
         />
+        <div className="absolute">
+          <MenuBar />
+        </div>
 
         <div className=" absolute top-20 right-12 w-[600px]">
           <div className="mr-auto place-self-center lg:col-span-7">

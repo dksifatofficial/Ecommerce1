@@ -110,6 +110,26 @@ export const productByTags = async (id) => {
   }
 };
 
+export const productByLowPrice = async (id) => {
+  try {
+    const res = await fetch(
+      `http://localhost:3000/api/admin/product-by-low-price?id=${id}`,
+      {
+        method: "GET",
+        cache: "no-store",
+      }
+    );
+
+    const data = await res.json();
+
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+
+
 
 
 export const productById = async (id) => {

@@ -221,29 +221,6 @@ export const AvailableSizes = [
   },
 ];
 
-// export const TagsAll= [
-//   {
-//     id: "alltags",
-//     type: "",
-//     placeholder: "",
-//     label: "All Tags",
-//     componentType: "select", //multiple
-//     options: [
-//       {
-//         id: "mart",
-//         label: "Mart",
-//       },
-//       {
-//         id: "rice",
-//         label: "Rice",
-//       },
-//       {
-//         id: "bras",
-//         label: "Bras",
-//       },
-//     ],
-//   },
-// ]
 export const CategoryTags = [
   {
     id: "mart",

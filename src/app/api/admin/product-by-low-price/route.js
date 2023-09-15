@@ -8,13 +8,15 @@ export async function GET(req) {
   try {
     await connectToDB();
     const { searchParams } = new URL(req.url);
-    const id = searchParams.get("id");
-    const getData = await Product.find({ tags: { $elemMatch: { id } } });
+    // const id = searchParams.get("id");
+    const getData = await Product.find({});
 
-    if (getData) {
+    const filteredData = getData.filter((product) => product.price < 100);
+
+    if (filteredData.length > 0) {
       return NextResponse.json({
         success: true,
-        data: getData,
+        data: filteredData,
       });
     } else {
       return NextResponse.json({

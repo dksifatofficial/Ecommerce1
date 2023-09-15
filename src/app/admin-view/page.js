@@ -108,15 +108,7 @@ export default function AdminView() {
                                   }
                                 />
                                 <div>
-                                  <div className="flex flex-row">
-                                    <p className="text-sm font-medium">
-                                      Item Code:
-                                    </p>
-                                    <p className="text-sm ml-5 text-black font-bold">
-                                      #
-                                    </p>
-                                  </div>
-                                  <div className="flex flex-row">
+                                <div className="flex flex-row">
                                     <p className="text-sm font-medium">
                                       Item Name:
                                     </p>
@@ -124,6 +116,14 @@ export default function AdminView() {
                                       {orderItem &&
                                         orderItem.product &&
                                         orderItem.product.name}
+                                    </p>
+                                  </div>
+                                  <div className="flex flex-row">
+                                    <p className="text-sm font-medium">
+                                      Item Code:
+                                    </p>
+                                    <p className="text-sm ml-5 text-black font-bold">
+                                      #{orderItem && orderItem.itemCode}
                                     </p>
                                   </div>
                                   <div className="flex flex-row">
@@ -139,7 +139,7 @@ export default function AdminView() {
                                   <div className="flex flex-row">
                                     <p className="text-sm font-medium">Sizes:</p>
                                     <p className="text-sm ml-[53px] text-black font-semibold">
-                                      #
+                                      {orderItem && orderItem.reqSizes}
                                     </p>
                                   </div>
                                 </div>
