@@ -20,14 +20,11 @@
   @apply block;
 }
 
-.mcdMenu li:hover > ul {
+.mcdMenu li:hover ul {
   @apply block opacity-100 visible left-[253px];
 }
 .mcdMenu li ul li:hover ul {
   @apply block opacity-100 visible left-[305px];
-}
-.mcdMenu li ul li a {
-  @apply text-left h-auto p-2.5;
 }
 .mcdMenu li ul li ul {
   @apply border-0 left-[250px] top-0;

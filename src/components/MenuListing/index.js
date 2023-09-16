@@ -2,15 +2,16 @@
 
 // import Image from "next/image";
 // import { useRouter } from "next/navigation";
-// // import { useEffect } from "react";
+// import { useEffect } from "react";
 
 // export default function MenuListing({ data }) {
 //   const router = useRouter();
 
-// //   useEffect(() => {
-// //     router.refresh();
-// //     // eslint-disable-next-line react-hooks/exhaustive-deps
-// //   }, []);
+//   useEffect(() => {
+//     router.refresh();
+//   // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, []);
+
 //   return (
 //     <section className=" gap-4 flex flex-wrap">
 //       {data && data.length

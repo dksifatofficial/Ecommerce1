@@ -11,7 +11,7 @@ export async function GET(req) {
     // const id = searchParams.get("id");
     const getData = await Product.find({});
 
-    const filteredData = getData.filter((product) => product.price < 100);
+    const filteredData = getData.filter((product) => product.price < 101);
 
     if (filteredData.length > 0) {
       return NextResponse.json({

@@ -3,6 +3,7 @@
 import ShutterUpButton from "@/components/Buttons/ShutterUpButton";
 import Category1 from "@/components/Category/Category1";
 import CategoryFull from "@/components/Category/CategoryFull";
+import ImageSlider from "@/components/CoverImageSlider";
 import Footer from "@/components/Footer/Footer";
 import MenuBar from "@/components/MenuBar";
 import { GlobalContext } from "@/context";
@@ -10,6 +11,45 @@ import { getAllAdminProducts } from "@/services/product";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
+
+const images = [
+  {
+    src: 'https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcc1.jpg-1694800235238-3y1ye4f9it?alt=media&token=4760c043-e97d-40da-a89c-5978d9bb1ef4',
+    alt: 'Image 1',
+    header: 'Image 1 Header',
+    description: 'Description for Image 1',
+    link: '/product/listing/jersey',
+  },
+  {
+    src: 'https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcc2.jpg-1694800271890-yepu392ygp?alt=media&token=6a4edcac-13af-40c6-b732-034cab8bc21b',
+    alt: 'Image 2',
+    header: 'Image 2 Header',
+    description: 'Description for Image 2',
+    link: '/product/listing/jersey',
+  },
+  {
+    src: 'https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcc3.jpg-1694800299474-1b1em2qp2b?alt=media&token=8f942274-6781-4a86-87d6-ee06adaa4a66',
+    alt: 'Image 3',
+    header: 'Image 3 Header',
+    description: 'Description for Image 3',
+    link: '/product/listing/jersey',
+  },
+  {
+    src: 'https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcc4.jpg-1694800330850-lfapplltyc?alt=media&token=2e0eb356-9163-45be-a9cd-2471d06cc079',
+    alt: 'Image 4',
+    header: 'Image 4 Header',
+    description: 'Description for Image 4',
+    link: '/product/listing/jersey',
+  },
+  {
+    src: 'https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcc5.jpg-1694800356107-91bseavbag?alt=media&token=c1595050-90ef-4d7a-996e-5ed10f4db577',
+    alt: 'Image 5',
+    header: 'Image 5 Header',
+    description: 'Description for Image 5',
+    link: '/product/listing/jersey',
+  },
+
+];
 
 export default function Home() {
   const { isAuthUser } = useContext(GlobalContext);
@@ -70,6 +110,12 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* image slider section */}
+      <div className=" mt-20">
+        <ImageSlider images={images} />
+      </div>
+      {/* end image slider section */}
 
       <section className="flex min-h-screen flex-col items-center justify-between px-24">
         {/* Category1 Section */}
