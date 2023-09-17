@@ -15,18 +15,27 @@ export const initialCheckoutFormData = {
   isProcessing: true,
 };
 
-const protectedRoutes = ["cart", "checkout", "account", "orders", "admin-view", "premium-service"];
+const protectedRoutes = [
+  "cart",
+  "checkout",
+  "account",
+  "orders",
+  "admin-view",
+  "premium-service",
+];
 
 const protectedAdminRoutes = [
   "/admin-view",
-  "/admin-view/add-product",
-  "/admin-view/all-products",
+  "/admin-view/add-items",
+  "/admin-view/all-items",
 ];
 
 const protectedPremiumRoutes = [
   "/premium-service",
-  "/premium-service/product",
-]
+  "/premium-service/premium-item",
+  "/premium-service/premium-item/listing",
+  "/premium-service/premium-item/listing/all-items",
+];
 
 export default function GlobalState({ children }) {
   const [showNavModal, setShowNavModal] = useState(false);
@@ -72,7 +81,7 @@ export default function GlobalState({ children }) {
       setIsAuthUser(false);
       setUser({}); //unauthenticated user
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Cookies]);
 
   useEffect(() => {
@@ -85,7 +94,7 @@ export default function GlobalState({ children }) {
       protectedRoutes.includes(pathName) > -1
     )
       router.push("/login");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, pathName]);
 
   useEffect(() => {
@@ -97,7 +106,7 @@ export default function GlobalState({ children }) {
       protectedAdminRoutes.indexOf(pathName) > -1
     )
       router.push("/unauthorized-page");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, pathName]);
 
   useEffect(() => {
@@ -105,12 +114,12 @@ export default function GlobalState({ children }) {
       user !== null &&
       user &&
       Object.keys(user).length > 0 &&
-      user?.role !== "primium" &&
+      user?.role !== "premium" &&
       user?.role !== "admin" &&
       protectedPremiumRoutes.indexOf(pathName) > -1
     )
       router.push("/error-404");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, pathName]);
 
   return (

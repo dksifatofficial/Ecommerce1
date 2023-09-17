@@ -70,7 +70,7 @@ const PremiumProductButton = ({ item }) => {
        uppercase tracking-wide text-white border-none before:bg-[#F85606] hover:text-white"
         onClick={() => {
           setCurrentUpdatedProduct(item);
-          router.push("/admin-view/add-product");
+          router.push("/admin-view/items");
         }}
       >
         Update

@@ -7,7 +7,7 @@ const PremiumProductTile = ({ item }) => {
   const router = useRouter();
   
   return (
-    <div onClick={() => router.push(`/premium-service/product/${item._id}`)}>
+    <div onClick={() => router.push(`/premium-service/premium-item/${item._id}`)}>
       <div className="overflow-hideen aspect-w-1 aspect-h-1 h-52">
         <Image
           className="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"

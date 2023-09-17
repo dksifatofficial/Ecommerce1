@@ -70,7 +70,7 @@ const Navbar = () => {
 
   useEffect(() => {
     if (
-      pathName !== "/admin-view/add-product" &&
+      pathName !== "/admin-view/add-items" &&
       currentUpdatedProduct !== null
     )
       setCurrentUpdatedProduct(null);
@@ -113,7 +113,7 @@ const Navbar = () => {
               <ShutterUpButton
                 className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide 
                 hover:text-red-700 bg-red-600 border-red-600"
-                onClick={() => router.push("/premium-service/product/listing/all-products")}
+                onClick={() => router.push("/premium-service/premium-item/listing/all-items")}
               >
                 <p>Premium Service</p>
               </ShutterUpButton>
@@ -125,7 +125,7 @@ const Navbar = () => {
                 <ShutterUpButton
                   className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide 
                   hover:text-red-700 bg-red-600 border-red-600"
-                  onClick={() => router.push("/premium-service/product/listing/all-products")}
+                  onClick={() => router.push("/premium-service/premium-item/listing/all-items")}
                 >
                   <p>Premium Service</p>
                 </ShutterUpButton>

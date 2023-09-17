@@ -155,7 +155,7 @@ export default function AdminAddNewProduct() {
       setFormData(initialFormData);
       setCurrentUpdatedProduct(null)
       setTimeout(() => {
-        router.push("/admin-view/all-products");
+        router.push("/admin-view/all-items");
       }, 1000);
     } else {
       toast.error(res.message, {
