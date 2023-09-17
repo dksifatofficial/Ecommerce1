@@ -15,13 +15,18 @@ export const initialCheckoutFormData = {
   isProcessing: true,
 };
 
-const protectedRoutes = ["cart", "checkout", "account", "orders", "admin-view"];
+const protectedRoutes = ["cart", "checkout", "account", "orders", "admin-view", "premium-service"];
 
 const protectedAdminRoutes = [
   "/admin-view",
   "/admin-view/add-product",
   "/admin-view/all-products",
 ];
+
+const protectedPremiumRoutes = [
+  "/premium-service",
+  "/premium-service/product",
+]
 
 export default function GlobalState({ children }) {
   const [showNavModal, setShowNavModal] = useState(false);
@@ -92,6 +97,19 @@ export default function GlobalState({ children }) {
       protectedAdminRoutes.indexOf(pathName) > -1
     )
       router.push("/unauthorized-page");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, pathName]);
+
+  useEffect(() => {
+    if (
+      user !== null &&
+      user &&
+      Object.keys(user).length > 0 &&
+      user?.role !== "primium" &&
+      user?.role !== "admin" &&
+      protectedPremiumRoutes.indexOf(pathName) > -1
+    )
+      router.push("/error-404");
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, pathName]);
 

@@ -149,6 +149,10 @@ export const adminAddProductformControls = [
         id: "all",
         label: "All",
       },
+      {
+        id: "premium",
+        label: "Premium",
+      },
     ],
   },
   {
@@ -317,6 +321,10 @@ export const CategoryTags = [
   {
     id: "laptopStands",
     label: "Laptop Stands",
+  },
+  {
+    id: "premium",
+    label: "Premium Item",
   },
 ];
 

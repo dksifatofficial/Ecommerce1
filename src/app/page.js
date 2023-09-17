@@ -27,6 +27,7 @@ const images = [
     description: 'Description for Image 2',
     link: '/product/listing/jersey',
   },
+  
   {
     src: 'https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcc3.jpg-1694800299474-1b1em2qp2b?alt=media&token=8f942274-6781-4a86-87d6-ee06adaa4a66',
     alt: 'Image 3',

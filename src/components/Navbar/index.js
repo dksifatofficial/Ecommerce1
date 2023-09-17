@@ -107,6 +107,31 @@ const Navbar = () => {
             </span> */}
           </div>
           <div className="flex md:order-2 gap-2">
+            
+            {user?.role === "admin" ? (
+              <Fragment>
+              <ShutterUpButton
+                className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide 
+                hover:text-red-700 bg-red-600 border-red-600"
+                onClick={() => router.push("/premium-service/product/listing/all-products")}
+              >
+                <p>Premium Service</p>
+              </ShutterUpButton>
+            </Fragment>
+            ) : null}
+
+          {!isAdminView && user?.role === "primium" ? (
+              <Fragment>
+                <ShutterUpButton
+                  className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide 
+                  hover:text-red-700 bg-red-600 border-red-600"
+                  onClick={() => router.push("/premium-service/product/listing/all-products")}
+                >
+                  <p>Premium Service</p>
+                </ShutterUpButton>
+              </Fragment>
+            ) : null}
+
             {!isAdminView && isAuthUser ? (
               <Fragment>
                 <ShutterUpButton
@@ -123,6 +148,7 @@ const Navbar = () => {
                 </ShutterUpButton>
               </Fragment>
             ) : null}
+
             {user?.role === "admin" ? (
               isAdminView ? (
                 <ShutterUpButton
@@ -140,6 +166,7 @@ const Navbar = () => {
                 </ShutterUpButton>
               )
             ) : null}
+            
             {isAuthUser ? (
               <ShutterUpButton
                 className="mt-1.5 inline-block bg-black px-5 py-1 before:bg-white
