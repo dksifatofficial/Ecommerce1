@@ -143,10 +143,6 @@ export const productByLowPrice = async (id) => {
   }
 };
 
-
-
-
-
 export const productById = async (id) => {
   try {
     const res = await fetch(
@@ -164,3 +160,81 @@ export const productById = async (id) => {
     console.log(e);
   }
 };
+
+export const getProductById = async (productId) => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/products/${productId}`, {
+      method: "GET",
+      cache: "no-store",
+    });
+
+    const data = await res.json();
+
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+
+export const rateProduct = async ({ productId, userId, rating }) => {
+  try {
+    const response = await fetch('http://localhost:3000/api/rateProduct', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ productId, userId, rating }),
+    });
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error('Error rating product:', error);
+    throw error; // You can handle errors in your components
+  }
+};
+
+// export const createProductReview = async (req, res, next) => {
+//   const { rating, comment, productId } = req.body;
+
+//   const review = {
+//     user: req?.user?._id,
+//     rating: Number(rating),
+//     comment,
+//   };
+
+//   let product = await Product.findById(productId);
+
+//   if (!product) {
+//     return next(new ErrorHandler("Product not found.", 404));
+//   }
+
+//   const isReviewed = product?.reviews?.find(
+//     (r) => r.user.toString() === req.user._id.toString()
+//   );
+
+//   if (isReviewed) {
+//     product?.reviews.forEach((review) => {
+//       if (review.user.toString() === req.user._id.toString()) {
+//         review.comment = comment;
+//         review.rating = rating;
+//       }
+//     });
+//   } else {
+//     product?.reviews.push(review);
+//   }
+
+//   product.ratings =
+//     product?.reviews?.reduce((acc, item) => item.rating + acc, 0) /
+//     product.reviews.length;
+
+//   await product?.save();
+
+//   res.status(200).json({
+//     success: true,
+//   });
+// };
+
+

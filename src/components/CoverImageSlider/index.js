@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -22,22 +23,12 @@ const ImageSlider = ({ images }) => {
   }, [hovered]);
 
   const goToNextImage = () => {
-  setTransitionDelay(true);
-  setTimeout(() => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    setTransitionDelay(false);
-  }, 50);
-};
-
-  // const goToNextImage = () => {
-  //   setTransitionDelay(true);
-  //   setTimeout(() => {
-  //     setCurrentImageIndex((prevIndex) =>
-  //       prevIndex === images.length - 1 ? 0 : prevIndex + 1
-  //     );
-  //     setTransitionDelay(false);
-  //   }, 50);
-  // };
+    setTransitionDelay(true);
+    setTimeout(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+      setTransitionDelay(false);
+    }, 50);
+  };
 
   const goToPreviousImage = () => {
     setTransitionDelay(true);
@@ -48,7 +39,6 @@ const ImageSlider = ({ images }) => {
       setTransitionDelay(false);
     }, 50);
   };
-
 
   const handleMouseEnter = () => {
     setHovered(true);
@@ -70,7 +60,7 @@ const ImageSlider = ({ images }) => {
 
   const sliderStyles = {
     transform: `translateX(${translateX}%)`,
-    transition: transitionDelay ? 'transform 0.5s ease' : 'transform 0.5s ease',
+    transition: transitionDelay ? "transform 0.5s ease" : "transform 0.5s ease",
   };
 
   return (
@@ -96,15 +86,50 @@ const ImageSlider = ({ images }) => {
               src={image.src}
               alt={image.alt}
             />
-            <div className="absolute z-[1] text-white bg-[rgba(0,0,0,0.5)] p-[10px]">
-              <h2 className="text-2xl m-0">{image.header}</h2>
-              <p className="text-base m-0">{image.description}</p>
+            <div className="absolute z-[1] p-[10px] top-0 left-0 w-full h-full">
+              <div className="max-w-screen-xl mx-auto px-4 xl:px-0 py-10 flex flex-col gap-y-2 
+                justify-center h-full ml-8">
+                <motion.h2
+                  initial={{ y: 30, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-5xl font-bold text-white"
+                >
+                  {image.header}
+                </motion.h2>
+                <motion.p
+                  initial={{ y: 40, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.6 }}
+                  className="text-base m-0 text-slate-100"
+                >
+                  Sed ut perspiciatis unde omnis iste <br /> natus error sit
+                  voluptatem
+                </motion.p>
+                <motion.div
+                  initial={{ y: 50, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.7 }}
+                  className="flex gap-x-4 mt-2"
+                >
+                  <button className="py-3 px-6 rounded-full bg-slate-200 hover:bg-white duration-200 
+                  text-sm uppercase font-semibold">
+                    Find out more
+                  </button>
+                  <button className="py-3 px-6 rounded-full bg-slate-200 hover:bg-white duration-200 
+                  text-sm uppercase font-semibold">
+                    Shop Now
+                  </button>
+                </motion.div>
+              </div>
             </div>
           </Link>
         ))}
       </div>
-      <div className="flex justify-between w-full px-5 py-0 absolute top-0 transform 
-      opacity-0 hover:opacity-[1] transition-opacity duration-300 ease-in-out">
+      <div
+        className="flex justify-between w-full px-5 py-0 absolute top-0 transform 
+      opacity-0 hover:opacity-[1] transition-opacity duration-300 ease-in-out"
+      >
         <button
           className="text-white text-2xl cursor-pointer pr-[50px] pl-4 py-[160px] border-[none] absolute left-0 bg-transparent"
           onClick={goToPreviousImage}
@@ -124,7 +149,7 @@ const ImageSlider = ({ images }) => {
             key={index}
             className={`w-2.5 h-2.5 bg-white cursor-pointer transition-[background-color] duration-[0.3s] 
             ease-[ease] rounded-[50%] border-2 border-solid border-[rgba(0,0,0,0.5)] ${
-              currentImageIndex === index ?  "bg-[#8b8a8a]" : ""
+              currentImageIndex === index ? "bg-[#8b8a8a]" : ""
             }`}
             onClick={() => handleDotClick(index)}
           ></button>

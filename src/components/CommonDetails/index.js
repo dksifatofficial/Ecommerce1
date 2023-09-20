@@ -3,12 +3,15 @@
 import Error404 from "@/app/error-404/page";
 import { GlobalContext } from "@/context";
 import { addToCart } from "@/services/cart";
-import { useContext, useState } from "react";
+import { productById, rateProduct } from "@/services/product";
+import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ShutterUpButton from "../Buttons/ShutterUpButton";
 import SizeComponent from "../FormElements/SizeComponent";
 import ComponentLevelLoader from "../Loader/componentlevel";
 import Notification from "../Notification";
+import Star from "../Star";
+import Link from "next/link";
 
 export default function CommonDetails({ item }) {
   const {
@@ -21,6 +24,57 @@ export default function CommonDetails({ item }) {
   const [cnzQuantity, setCnzQuantity] = useState(1);
   const [newQuantity, setNewQuantity] = useState(cnzQuantity);
   const [selectedSize, setSelectedSize] = useState([]);
+  const [userRating, setUserRating] = useState(0);
+  const [productData, setProductData] = useState(null); // Initialize as null
+
+  useEffect(() => {
+    if (item && item._id) {
+      // Fetch the product details by ID
+      async function fetchProductDetails() {
+        try {
+          const response = await productById(item._id);
+          if (response.success) {
+            // Set the product data in state
+            
+            setProductData(response.data);
+          } else {
+            console.error("Failed to fetch product details:", response.message);
+          }
+        } catch (error) {
+          console.error("Error fetching product details:", error);
+        }
+      }
+
+      fetchProductDetails();
+    }
+  }, [item]);
+
+  function handleStarClick(rating) {
+    // Update the userRating state immediately to reflect the user's selection
+    setUserRating(rating);
+  
+    // Send the rating data to the server to save it in MongoDB
+    async function saveRatingToServer() {
+      try {
+        const response = await rateProduct({
+          productId: item._id, // Pass the product ID
+          userId: user._id, // Pass the user ID
+          rating: rating,
+        });
+  
+        if (response.success) {
+          // Rating saved successfully
+          // You may want to update other UI elements or show a success message here
+        } else {
+          // Handle errors from the server, if any
+          console.error('Failed to save rating:', response.message);
+        }
+      } catch (error) {
+        console.error('Error saving rating:', error);
+      }
+    }
+    saveRatingToServer();
+  }
 
   const increaseQuantity = () => {
     setCnzQuantity(cnzQuantity + 1);
@@ -129,22 +183,41 @@ export default function CommonDetails({ item }) {
                 <h3>Item code: #{item.itemCode}</h3>
                 <div
                   className="mt-10 flex flex-col items-center justify-between space-y-4 botder-t border-b py-4
-             sm:flex-row sm:space-y-0"
+                   sm:flex-row sm:space-y-0"
                 >
-                  <div className="flex items-end">
-                    <h1
-                      className={`text-3xl text-gray-400 font-bold mr-2 ${
-                        item.onSale === "yes" ? "line-through" : ""
-                      }`}
-                    >
-                      ${item && item.price}
-                    </h1>
-                    {item.onSale === "yes" ? (
-                      <h1 className="text-3xl font-bold text-[#F85606]">{`$${(
-                        item.price -
-                        item.price * (item.priceDrop / 100)
-                      ).toFixed(2)}`}</h1>
-                    ) : null}
+                  <div className="flex flex-col">
+                    <div className="flex items-end">
+                      <h1
+                        className={`text-3xl text-gray-400 font-bold mr-2 ${
+                          item.onSale === "yes" ? "line-through" : ""
+                        }`}
+                      >
+                        ${item && item.price}
+                      </h1>
+                      {item.onSale === "yes" ? (
+                        <h1 className="text-3xl font-bold text-[#F85606]">{`$${(
+                          item.price -
+                          item.price * (item.priceDrop / 100)
+                        ).toFixed(2)}`}</h1>
+                      ) : null}
+                    </div>
+                    <div>
+                      <Star
+                        stars={userRating}
+                        reviews={item.reviewsCount}
+                        onStarClick={handleStarClick}
+                      />
+                    </div>
+
+                    {/* Test for star rating */}
+                    <div className="border border-red-500">
+                      <p>Give a review</p>
+                      <div>
+                        
+                      </div>
+                    </div>
+                    {/* End Test for star rating */}
+
                   </div>
 
                   <ul className="space-y-2">
