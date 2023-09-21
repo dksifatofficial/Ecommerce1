@@ -70,6 +70,7 @@ const initialFormData = {
   tags: [],
   quantity: 1,
   itemCode: "",
+  starRatings: [],
 };
 
 

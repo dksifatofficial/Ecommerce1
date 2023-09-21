@@ -72,6 +72,26 @@ export const updateAProduct = async (formData) => {
   }
 };
 
+export const updateAReview = async (formData) => {
+  try {
+    const res = await fetch("/api/admin/update-review", {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+      cache: "no-store",
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export const deleteAProduct = async (id) => {
   try {
     const res = await fetch(`/api/admin/delete-product?id=${id}`, {

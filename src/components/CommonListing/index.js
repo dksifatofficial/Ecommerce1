@@ -18,14 +18,14 @@ const CommonListing = ({ data }) => {
 
   return (
     <section className="bg-slate-100 py-12 sm:py-16">
-      <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-4 lg:mt-16">
+      <div className="mx-auto  px-4 sm:px-6">
+        <div className="mt-10 gap-4 flex flex-wrap justify-center">
           {data && data.length
             ? data.filter((item) => item.category !== "premium")
             .map((item) => (
                 <article
                   className="relative flex flex-col overflow-hidden bg-white
-                   cursor-pointer hover:shadow-[0_4px_5px_0.5px_rgba(0,0,0,0.2)]"
+                   cursor-pointer w-[190px] hover:shadow-[0_4px_5px_0.5px_rgba(0,0,0,0.2)]"
                   key={item._id}
                 >
                   <ProductTile item={item} />

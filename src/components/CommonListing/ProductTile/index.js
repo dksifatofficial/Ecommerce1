@@ -2,10 +2,23 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { IoIosStar } from "react-icons/io";
 
 const ProductTile = ({ item }) => {
   const router = useRouter();
-  
+
+  const starArray = Array.from(
+    { length: 5 },
+    (
+      _,
+      index //item?.rating
+    ) => (
+      <span key={index} className="text-orange-400 text-xs">
+        <IoIosStar />
+      </span>
+    )
+  );
+
   return (
     <div onClick={() => router.push(`/product/${item._id}`)}>
       <div className="overflow-hideen aspect-w-1 aspect-h-1 h-52">
@@ -30,35 +43,45 @@ const ProductTile = ({ item }) => {
           </p>
         </div>
       )}
-      <div className="my-4 mx-auto flex w-10/12 flex-col items-start justify-between">
-       <h3 className="md-2 text-black text-sm font-semibold line-clamp-1">{item.name}</h3>
-        <div className="mb-2 grid mt-2">
-          <div className="w-full">
-          {item.onSale === "yes" ? (
-            <p className="text-base font-semibold text-[#F85606]">{`$ ${(
-              item.price -
-              item.price * (item.priceDrop / 100)
-            ).toFixed(2)}`}</p>
-          ) : (
-            <p className="text-base font-semibold text-[#F85606]">
-              {`$ ${item.price}`}
-            </p>
-          )}
+      <div className="my-2 flex w-full px-3 flex-col items-start justify-between">
+        <h3 className="mt-2 text-gray-800 text-sm font-semibold line-clamp-2">
+          {item.name}
+        </h3>
+        <div className="mt-2 w-full flex justify-between">
+          <div className="grid">
+            <div className="w-full">
+              {item.onSale === "yes" ? (
+                <p className="text-base font-semibold text-[#F85606]">{`$ ${(
+                  item.price -
+                  item.price * (item.priceDrop / 100)
+                ).toFixed(2)}`}</p>
+              ) : (
+                <p className="text-base font-semibold text-[#F85606]">
+                  {`$ ${item.price}`}
+                </p>
+              )}
+            </div>
+            <div className="w-full flex">
+              <p
+                className={`mr-1 text-sm font-semibold text-gray-400 ${
+                  item.onSale === "yes" ? "line-through" : ""
+                }`}
+              >
+                {item.price}
+              </p>
+              {item.onSale === "yes" ? (
+                <p className="text-sm text-gray-700 font-semibold">{`-${item.priceDrop}%`}</p>
+              ) : null}
+            </div>
           </div>
-          <div className="w-full flex">
-          <p
-            className={`mr-1 text-sm font-semibold text-gray-400 ${
-              item.onSale === "yes" ? "line-through" : ""
-            }`}
-          >
-            {item.price}
-          </p>
-          {item.onSale === "yes" ? (
-            <p className="text-sm text-gray-700 font-semibold">{`-${item.priceDrop}%`}</p>
-          ) : null}
+          {/* star rating */}
+          <div className=" flex flex-col items-end justify-end pb-[2px]">
+            <div className="flex items-center gap-x-1">{starArray}</div>
+            <div>
+              <p className="text-xs text-gray-700 font-semibold">(56) review</p>
+            </div>
           </div>
         </div>
-        
       </div>
     </div>
   );

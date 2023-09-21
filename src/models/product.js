@@ -1,17 +1,20 @@
 import mongoose from "mongoose";
 
-const ratingSchema = new mongoose.Schema(
-  {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
-    rating: {
-      type: Number,
-    },
-  },
-  { _id: false }
-);
+// const ratingSchema = new mongoose.Schema(
+//   {
+//     whoGiveRev: {
+//       type: mongoose.Schema.Types.ObjectId,
+//       ref: "reviewUserID", // Reference to the user who gave the rating
+//     },
+//     starRating: {
+//       type: Number,
+//     },
+//     textReview: {
+//       type: String,
+//     },
+//   },
+//   { _id: false } // Don't auto-generate _id for individual ratings
+// );
 
 const ProductSchema = new mongoose.Schema(
   {
@@ -27,11 +30,6 @@ const ProductSchema = new mongoose.Schema(
     tags: Array,
     quantity: Number,
     itemCode: String,
-    starRatings: [ratingSchema],
-    reviewsCount: {
-      type: Number,
-      default: 0,
-    },
   },
   { timestamps: true }
 );
@@ -40,3 +38,8 @@ const Product =
   mongoose.models.Products || mongoose.model("Products", ProductSchema);
 
 export default Product;
+
+// reviewsCount: {
+//   type: Number,
+//   default: 0,
+// },

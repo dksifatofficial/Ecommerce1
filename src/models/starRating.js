@@ -1,24 +1,25 @@
 import mongoose from "mongoose";
-
-// const ratingSchema = new mongoose.Schema(
-//   {
-//     user: {
-//       type: mongoose.Schema.Types.ObjectId,
-//       ref: "User",
-//     },
-//     rating: {
-//       type: Number,
-//     },
-//   },
-//   { _id: false }
-// );
+import Product from "./product";
+import User from "./user";
 
 const StarRatingSchema = new mongoose.Schema(
   {
-    starRatingNumber: Number,
-    reviewImageUrl: String,
-    writtenReview: String,
-    selectDescriptions: String,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    rateProduct: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Products",
+      required: true,
+    },
+    starRatings: [
+      {
+        starRating: { type: String, required: true },
+        textReview: { type: String, required: true },
+      },
+    ],
   },
   { timestamps: true }
 );

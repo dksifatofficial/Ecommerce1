@@ -3,15 +3,14 @@
 import Error404 from "@/app/error-404/page";
 import { GlobalContext } from "@/context";
 import { addToCart } from "@/services/cart";
-import { productById, rateProduct } from "@/services/product";
+import { productById } from "@/services/product";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ShutterUpButton from "../Buttons/ShutterUpButton";
 import SizeComponent from "../FormElements/SizeComponent";
 import ComponentLevelLoader from "../Loader/componentlevel";
 import Notification from "../Notification";
-import Star from "../Star";
-import Link from "next/link";
+import Rating from "../TestRating/Rating";
 
 export default function CommonDetails({ item }) {
   const {
@@ -24,9 +23,10 @@ export default function CommonDetails({ item }) {
   const [cnzQuantity, setCnzQuantity] = useState(1);
   const [newQuantity, setNewQuantity] = useState(cnzQuantity);
   const [selectedSize, setSelectedSize] = useState([]);
-  const [userRating, setUserRating] = useState(0);
-  const [productData, setProductData] = useState(null); // Initialize as null
-
+  const [productData, setProductData] = useState([]);
+  const [rating, setRating] = useState(0);
+  
+// fetching Product Details
   useEffect(() => {
     if (item && item._id) {
       // Fetch the product details by ID
@@ -35,7 +35,7 @@ export default function CommonDetails({ item }) {
           const response = await productById(item._id);
           if (response.success) {
             // Set the product data in state
-            
+
             setProductData(response.data);
           } else {
             console.error("Failed to fetch product details:", response.message);
@@ -49,33 +49,7 @@ export default function CommonDetails({ item }) {
     }
   }, [item]);
 
-  function handleStarClick(rating) {
-    // Update the userRating state immediately to reflect the user's selection
-    setUserRating(rating);
-  
-    // Send the rating data to the server to save it in MongoDB
-    async function saveRatingToServer() {
-      try {
-        const response = await rateProduct({
-          productId: item._id, // Pass the product ID
-          userId: user._id, // Pass the user ID
-          rating: rating,
-        });
-  
-        if (response.success) {
-          // Rating saved successfully
-          // You may want to update other UI elements or show a success message here
-        } else {
-          // Handle errors from the server, if any
-          console.error('Failed to save rating:', response.message);
-        }
-      } catch (error) {
-        console.error('Error saving rating:', error);
-      }
-    }
-    saveRatingToServer();
-  }
-
+  // increase or decrease item quantity
   const increaseQuantity = () => {
     setCnzQuantity(cnzQuantity + 1);
     setNewQuantity(cnzQuantity + 1);
@@ -88,6 +62,7 @@ export default function CommonDetails({ item }) {
     }
   };
 
+  // Add To Cart
   async function handleAddToCart(getItem) {
     setComponentLevelLoader({ loading: true, id: "" });
 
@@ -115,20 +90,19 @@ export default function CommonDetails({ item }) {
     console.log(res, "DK");
   }
 
+  // select Size for order
   function handleTileClick(getCurrentItem) {
-    // Check if the size is already selected
     const index = selectedSize.findIndex(
       (item) => item.id === getCurrentItem.id
     );
-
     if (index === -1) {
-      // If not selected, add it to selectedSizes
       setSelectedSize([getCurrentItem]);
     } else {
-      // If already selected, remove it from selectedSizes
       setSelectedSize([]);
     }
   }
+
+
 
   return (
     <div className="w-full">
@@ -201,23 +175,31 @@ export default function CommonDetails({ item }) {
                         ).toFixed(2)}`}</h1>
                       ) : null}
                     </div>
-                    <div>
-                      <Star
+
+                    {/* Test for star rating */}
+
+                    <div className="flex gap-[0.2rem] items-center justify-start">
+                      {/* <Star
                         stars={userRating}
                         reviews={item.reviewsCount}
                         onStarClick={handleStarClick}
+                      /> */}
+                      <Rating
+                        className="mt-[-4px]"
+                        rating={rating}
+                        onRating={(rate) => setRating(rate)}
                       />
+                      <p className="ml-1 text-xs text-gray-600">({rating})</p>
+                      <p className="ml-1 text-xs text-gray-600">105 reviews</p>
                     </div>
 
-                    {/* Test for star rating */}
-                    <div className="border border-red-500">
+                    {/* <div className="border border-red-500">
                       <p>Give a review</p>
                       <div>
                         
                       </div>
-                    </div>
+                    </div> */}
                     {/* End Test for star rating */}
-
                   </div>
 
                   <ul className="space-y-2">

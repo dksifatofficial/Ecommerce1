@@ -17,8 +17,14 @@ const AddNewProductSchema = Joi.object({
   tags: Joi.array().required(),
   quantity: Joi.number().required(),
   itemCode: Joi.string().required(),
+  starRatings: Joi.array().items(
+    Joi.object({
+      whoGiveRev: Joi.string(),
+      starRating: Joi.number(),
+      textReview: Joi.string(),
+    })
+  ),
 });
-
 
 export const dynamic = "force-dynamic";
 
@@ -26,9 +32,9 @@ export async function POST(req) {
   try {
     await connectToDB();
 
-    const isAuthUser = await AuthUser(req)
+    const isAuthUser = await AuthUser(req);
 
-    console.log(isAuthUser , 'sifat');
+    console.log(isAuthUser, "sifat");
 
     if (isAuthUser?.role === "admin") {
       const extractData = await req.json();
@@ -46,6 +52,7 @@ export async function POST(req) {
         tags,
         quantity,
         itemCode,
+        starRatings,
       } = extractData;
 
       const { error } = AddNewProductSchema.validate({
@@ -61,6 +68,7 @@ export async function POST(req) {
         tags,
         quantity,
         itemCode,
+        starRatings,
       });
 
       if (error) {

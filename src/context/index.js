@@ -47,6 +47,7 @@ export default function GlobalState({ children }) {
   const [isAuthUser, setIsAuthUser] = useState(null);
   const [user, setUser] = useState(null);
   const [currentUpdatedProduct, setCurrentUpdatedProduct] = useState(null);
+  const [currentUpdatedReview, setCurrentUpdatedReview] = useState(null);
   const [showCartModal, setShowCartModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [addresses, setAddresses] = useState([]);
@@ -153,6 +154,8 @@ export default function GlobalState({ children }) {
         setOrderDetails,
         allOrdersForAllUsers,
         setAllOrdersForAllUsers,
+        currentUpdatedReview,
+        setCurrentUpdatedReview,
       }}
     >
       {children}
