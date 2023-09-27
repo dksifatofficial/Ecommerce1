@@ -6,7 +6,6 @@ import CategoryFull from "@/components/Category/CategoryFull";
 import ImageSlider from "@/components/CoverImageSlider";
 import Footer from "@/components/Footer/Footer";
 import MenuBar from "@/components/MenuBar";
-import Banner from "@/components/TestSlider/Banner";
 import { GlobalContext } from "@/context";
 import { getAllAdminProducts } from "@/services/product";
 import Image from "next/image";

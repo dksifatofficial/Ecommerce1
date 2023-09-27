@@ -198,9 +198,32 @@ export const adminAddProductformControls = [
         label: "1",
       },
     ],
-  }
+  },
 ];
 
+// export const reviewsForm = [
+//   {
+//     id: "revUser",
+//     type: "text",
+//     placeholder: "User",
+//     label: "revUser",
+//     componentType: "input",
+//   },
+//   {
+//     id: "textReview",
+//     type: "text",
+//     placeholder: "Give a review",
+//     label: "Review",
+//     componentType: "input",
+//   },
+//   {
+//     id: "starRating",
+//     type: "number",
+//     placeholder: "5",
+//     label: "Star Review",
+//     componentType: "input",
+//   },
+// ]
 
 export const AvailableSizes = [
   {

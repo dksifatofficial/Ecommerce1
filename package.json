@@ -11,6 +11,8 @@
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
+    "@searchkit/client": "^3.0.0",
     "@stripe/stripe-js": "^2.1.0",
     "autoprefixer": "10.4.15",
     "bcryptjs": "^2.4.3",
@@ -22,6 +24,7 @@
     "joi": "^17.9.2",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.1",
+    "lodash.debounce": "^4.0.8",
     "mongoose": "^7.4.3",
     "next": "13.4.19",
     "next-share": "^0.25.0",
@@ -39,6 +42,7 @@
     "reactstrap": "^9.2.0",
     "slick-carousel": "^1.8.1",
     "stripe": "^13.2.0",
-    "tailwindcss": "3.3.3"
+    "tailwindcss": "3.3.3",
+    "use-debounce": "^9.0.4"
   }
 }

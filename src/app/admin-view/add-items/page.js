@@ -9,10 +9,10 @@ import { GlobalContext } from "@/context";
 import { addNewProduct, updateAProduct } from "@/services/product";
 import {
   AvailableSizes,
+  CategoryTags,
   adminAddProductformControls,
   firebaseConfig,
   firebaseStroageURL,
-  CategoryTags,
 } from "@/utils";
 import { initializeApp } from "firebase/app";
 import {
@@ -73,7 +73,6 @@ const initialFormData = {
   starRatings: [],
 };
 
-
 export default function AdminAddNewProduct() {
   const [formData, setFormData] = useState(initialFormData);
 
@@ -82,9 +81,50 @@ export default function AdminAddNewProduct() {
     setComponentLevelLoader,
     currentUpdatedProduct,
     setCurrentUpdatedProduct,
+    user,
   } = useContext(GlobalContext);
 
-  console.log(currentUpdatedProduct);
+  const [currentRevUser, setCurrentRevUser] = useState(user?._id);
+
+  useEffect(() => {
+    setCurrentRevUser(user?._id);
+  }, [user?._id]);
+
+  const handleInputChange = (event) => {
+    const newRevUser = user?._id;
+    const updatedStarRatings = [...formData.starRatings];
+  
+    // Check if the current revUser value is different
+    const existingIndex = updatedStarRatings.findIndex((item) => item.revUser === currentRevUser);
+
+    const newStarRating = parseFloat(event.target.value); // Convert the input value to a number
+  
+    if (!isNaN(newStarRating)) { // Check if the conversion was successful
+      if (existingIndex !== -1) {
+      // If the revUser value is the same, edit the previous entry
+      updatedStarRatings[existingIndex].starRating = newStarRating;
+    } else {
+      // If the revUser value is different, add a new entry
+      updatedStarRatings.push({
+        starRating: newStarRating,
+        revUser: newRevUser,
+      });
+    }
+  
+    setFormData({
+      ...formData,
+      starRatings: updatedStarRatings,
+    });
+  
+   // Update the currentRevUser state with the new value
+   setCurrentRevUser(newRevUser);
+  } else {
+    // Handle the case where the input value is not a valid number
+    // You can show an error message or take other appropriate action here
+  }
+};
+
+  console.log(currentUpdatedProduct, "currentUpdatedProduct");
 
   const router = useRouter();
 
@@ -127,9 +167,9 @@ export default function AdminAddNewProduct() {
     const index = cTags.findIndex((item) => item.id === getCurrentItem.id);
 
     if (index === -1) {
-      cTags.push(getCurrentItem)
+      cTags.push(getCurrentItem);
     } else {
-      cTags = cTags.filter((item) => item.id !== getCurrentItem.id)
+      cTags = cTags.filter((item) => item.id !== getCurrentItem.id);
     }
 
     setFormData({
@@ -154,7 +194,7 @@ export default function AdminAddNewProduct() {
       });
 
       setFormData(initialFormData);
-      setCurrentUpdatedProduct(null)
+      setCurrentUpdatedProduct(null);
       setTimeout(() => {
         router.push("/admin-view/all-items");
       }, 1000);
@@ -187,6 +227,59 @@ export default function AdminAddNewProduct() {
               onClick={handleTileClick}
               data={AvailableSizes}
             />
+          </div>
+
+          <div>
+            <InputComponent
+              type="number"
+              placeholder="5"
+              label="Star"
+              value={formData.starRatings.starRating}
+              controlItem="starRating"
+              onChange={handleInputChange}
+            />
+
+            {/* <InputComponent
+              type="number"
+              placeholder="5"
+              label="Star"
+              value={formData.starRatings.starRating}
+              controlItem="starRating"
+              onChange={(event) => {
+                const updatedStarRatings = [
+                  ...formData.starRatings,
+                  {
+                    starRating: event.target.value,
+                    revUser: user?._id || "",
+                  },
+                ];
+
+                setFormData({
+                  ...formData,
+                  starRatings: updatedStarRatings,
+                });
+              }}
+            /> */}
+
+            {/* <InputComponent
+              type="text"
+              placeholder="It's a Awesome Product"
+              label="Write a Review"
+              value={formData.starRatings.textReview}
+              controlItem="textReview"
+              onChange={(event) => {
+                const updatedStarRatings = [...formData.starRatings];
+                updatedStarRatings[0] = {
+                  ...updatedStarRatings[0],
+                  textReview: event.target.value,
+                };
+
+                setFormData({
+                  ...formData,
+                  starRatings: updatedStarRatings,
+                });
+              }}
+            /> */}
           </div>
 
           {adminAddProductformControls.map((controlItem) =>
@@ -235,7 +328,11 @@ export default function AdminAddNewProduct() {
           >
             {componentLevelLoader && componentLevelLoader.loading ? (
               <ComponentLevelLoader
-                text={currentUpdatedProduct !== null ? 'Updating Product' : "Adding Product"}
+                text={
+                  currentUpdatedProduct !== null
+                    ? "Updating Product"
+                    : "Adding Product"
+                }
                 color={"#ffffff"}
                 loading={componentLevelLoader && componentLevelLoader.loading}
               />

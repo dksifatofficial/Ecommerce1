@@ -3,30 +3,39 @@
 import Error404 from "@/app/error-404/page";
 import { GlobalContext } from "@/context";
 import { addToCart } from "@/services/cart";
-import { productById } from "@/services/product";
+import { productById, updateStarRatings } from "@/services/product";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ShutterUpButton from "../Buttons/ShutterUpButton";
+import InputComponent from "../FormElements/InputComponent";
 import SizeComponent from "../FormElements/SizeComponent";
 import ComponentLevelLoader from "../Loader/componentlevel";
 import Notification from "../Notification";
-import Rating from "../TestRating/Rating";
+import Star from "../Star";
+
+const initialFormData = {
+  starRatings: [],
+};
 
 export default function CommonDetails({ item }) {
+  const [formData, setFormData] = useState(initialFormData);
   const {
     setComponentLevelLoader,
     componentLevelLoader,
     user,
     setShowCartModal,
+    currentUpdatedProduct,
+    setCurrentUpdatedProduct,
   } = useContext(GlobalContext);
 
   const [cnzQuantity, setCnzQuantity] = useState(1);
   const [newQuantity, setNewQuantity] = useState(cnzQuantity);
   const [selectedSize, setSelectedSize] = useState([]);
   const [productData, setProductData] = useState([]);
-  const [rating, setRating] = useState(0);
-  
-// fetching Product Details
+  const [rating, setRating] = useState(4);
+  const [currentRevUser, setCurrentRevUser] = useState(user?._id);
+
+  // fetching Product Details
   useEffect(() => {
     if (item && item._id) {
       // Fetch the product details by ID
@@ -35,7 +44,6 @@ export default function CommonDetails({ item }) {
           const response = await productById(item._id);
           if (response.success) {
             // Set the product data in state
-
             setProductData(response.data);
           } else {
             console.error("Failed to fetch product details:", response.message);
@@ -87,7 +95,7 @@ export default function CommonDetails({ item }) {
       setComponentLevelLoader({ loading: false, id: "" });
       setShowCartModal(true);
     }
-    console.log(res, "DK");
+    console.log(res);
   }
 
   // select Size for order
@@ -102,7 +110,95 @@ export default function CommonDetails({ item }) {
     }
   }
 
+  // review
+  useEffect(() => {
+    setCurrentRevUser(user?._id);
+  }, [user?._id]);
 
+  const handleInputChange = (event) => {
+    const newRevUser = user?._id;
+    const updatedStarRatings = [...formData.starRatings];
+
+    // Check if the current revUser value is different
+    const existingIndex = updatedStarRatings.findIndex(
+      (item) => item.revUser === currentRevUser
+    );
+
+    const newStarRating = parseFloat(event.target.value); // Convert the input value to a number
+
+    if (!isNaN(newStarRating)) {
+      if (newStarRating <= 5) {
+        // Check if the conversion was successful
+        if (existingIndex !== -1) {
+          // If the revUser value is the same, edit the previous entry
+          updatedStarRatings[existingIndex].starRating = newStarRating;
+        } else {
+          // If the revUser value is different, add a new entry
+          updatedStarRatings.push({
+            starRating: newStarRating,
+            revUser: newRevUser,
+          });
+        }
+
+        setFormData({
+          ...formData,
+          starRatings: updatedStarRatings,
+        });
+
+        // Update the currentRevUser state with the new value
+        setCurrentRevUser(newRevUser);
+      } else {
+        // Handle the case where the input value is above 5 (e.g., show an error message)
+        toast.error("Rating must be 5 or below", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        console.log("Rating must be 5 or below.");
+      }
+    } else {
+      // Handle the case where the input value is not a valid number
+      // You can show an error message or take other appropriate action here
+    }
+  };
+
+  console.log(currentUpdatedProduct);
+
+  useEffect(() => {
+    if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct);
+  }, [currentUpdatedProduct]);
+
+  async function handleAddProduct() {
+    const res =
+      currentUpdatedProduct !== null ? await updateStarRatings(formData) : null;
+
+    console.log(res);
+
+    if (res.success) {
+      toast.success(res.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+
+      setFormData(initialFormData);
+      setCurrentUpdatedProduct(null);
+    } else {
+      toast.error(res.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+
+      setFormData(initialFormData);
+    }
+  }
+
+  console.log(formData, "sifu");
+
+  const calculateAverageRating = () => {
+    let sum = 0;
+    for (const rating of item.starRatings) {
+      sum += rating.starRating;
+    }
+    return (sum / item.starRatings.length).toFixed(1);
+  };
+
+  const averageRating = calculateAverageRating();
 
   return (
     <div className="w-full">
@@ -179,27 +275,24 @@ export default function CommonDetails({ item }) {
                     {/* Test for star rating */}
 
                     <div className="flex gap-[0.2rem] items-center justify-start">
-                      {/* <Star
-                        stars={userRating}
-                        reviews={item.reviewsCount}
-                        onStarClick={handleStarClick}
-                      /> */}
-                      <Rating
+                      <Star
+                        stars={averageRating}
+                        reviews={item.starRatings.length}
+                        averageRating={averageRating}
+                        // onStarClick={handleStarClick}
+                      />
+                      <p className="m-0 ml-1 text-xs text-gray-600">
+                        ({averageRating})
+                      </p>
+                      <p className="m-0 ml-1 text-xs text-gray-600">
+                        {item.starRatings.length} reviews
+                      </p>
+                      {/* <Rating
                         className="mt-[-4px]"
                         rating={rating}
                         onRating={(rate) => setRating(rate)}
-                      />
-                      <p className="ml-1 text-xs text-gray-600">({rating})</p>
-                      <p className="ml-1 text-xs text-gray-600">105 reviews</p>
+                      /> */}
                     </div>
-
-                    {/* <div className="border border-red-500">
-                      <p>Give a review</p>
-                      <div>
-                        
-                      </div>
-                    </div> */}
-                    {/* End Test for star rating */}
                   </div>
 
                   <ul className="space-y-2">
@@ -284,6 +377,23 @@ export default function CommonDetails({ item }) {
                     )}
                   </ShutterUpButton>
                 </div>
+                <button
+                  onClick={() => {
+                    setCurrentUpdatedProduct(item);
+                  }}
+                >
+                  give a review
+                </button>
+                <div className="mt-4"></div>
+                <InputComponent
+                  type="number"
+                  placeholder="5"
+                  label="Star"
+                  value={formData.starRatings.starRating}
+                  controlItem="starRating"
+                  onChange={handleInputChange}
+                />
+                <button onClick={handleAddProduct}>Done</button>
                 <div className="lg:col-span-3">
                   <div className="border-b border-gray-400">
                     <nav className="flex gap-4">

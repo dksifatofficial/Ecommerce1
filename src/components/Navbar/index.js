@@ -1,14 +1,16 @@
 "use client";
 
 import { GlobalContext } from "@/context";
+import { getAllAdminProducts, productByCategory } from "@/services/product";
 import { adminNavOptions, navOptions } from "@/utils";
 import Cookies from "js-cookie";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment, useContext, useEffect, useMemo, useState } from "react";
+import ShutterUpButton from "../Buttons/ShutterUpButton";
 import CartModal from "../CartModal";
 import CommonModal from "../CommonModal";
-import ShutterUpButton from "../Buttons/ShutterUpButton";
-import Image from "next/image";
+import Search from "../SearchBar/Search";
 
 function NavItems({ isModalView = false, isAdminView, router }) {
   return (
@@ -20,7 +22,7 @@ function NavItems({ isModalView = false, isAdminView, router }) {
     >
       <ul
         className={`flex flex-col p-4 md:p-0 mt-4 font-medium  rounded-lg 
-         md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-white
+         md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-white mr-1 ml-1
          ${isModalView ? "border-none" : "border border-gray-100"}
          `}
       >
@@ -51,7 +53,23 @@ function NavItems({ isModalView = false, isAdminView, router }) {
 }
 
 const Navbar = () => {
+  
   const { showNavModal, setShowNavModal } = useContext(GlobalContext);
+  
+  const [allProducts, setAllProducts] = useState([]);
+
+  async function getListOfProducts() {
+    const res = await getAllAdminProducts();
+
+    if (res) {
+      setAllProducts(res.data);
+    }
+  }
+
+  useEffect(() => {
+    getListOfProducts();
+  }, []);
+
   const {
     user,
     isAuthUser,
@@ -66,13 +84,11 @@ const Navbar = () => {
   const pathName = usePathname();
   const router = useRouter();
 
+
   console.log(currentUpdatedProduct);
 
   useEffect(() => {
-    if (
-      pathName !== "/admin-view/add-items" &&
-      currentUpdatedProduct !== null
-    )
+    if (pathName !== "/admin-view/add-items" && currentUpdatedProduct !== null)
       setCurrentUpdatedProduct(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathName]);
@@ -87,6 +103,27 @@ const Navbar = () => {
 
   const isAdminView = pathName.includes("admin-view");
 
+  // search
+
+  const [results, setResults] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    const { target } = e;
+    if (!target.value.trim()) return setResults([]);
+  
+    const filteredValue = allProducts.filter((product) => {
+      const productName = product.name.toLowerCase();
+      const searchTerm = value.toLowerCase();
+      const isMatch = productName.includes(searchTerm);
+      console.log(`Product: ${productName}, Search Term: ${searchTerm}, Match: ${isMatch}`);
+      return isMatch;
+    })
+    setResults(filteredValue);
+  };
+  
+
   return (
     <>
       <nav className="bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200">
@@ -95,37 +132,43 @@ const Navbar = () => {
             className="flex items-center cursor-pointer"
             onClick={() => router.push("/")}
           >
-            <Image
-                className=" ml-[-2px] w-[180px] h-auto"
-                src={"https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2FLogo%2FDecorWhims.png?alt=media&token=cbd68fea-1c6c-484e-a523-600bfe9d0c71"}
-                alt="decorwhims_logo"
-                height="400"
-                width="800"
-              />
-            {/* <span className="slef-center text-[#e70146] text-2xl font-bold whitespace-nowrap">
-              Raiment Gallery
-            </span> */}
+            {/* <Image
+              className=" ml-[-2px] w-[180px] h-auto"
+              src={
+                "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2FLogo%2FDecorWhims.png?alt=media&token=cbd68fea-1c6c-484e-a523-600bfe9d0c71"
+              }
+              alt="decorwhims_logo"
+              height="400"
+              width="800"
+            /> */}
           </div>
           <div className="flex md:order-2 gap-2">
-            
             {user?.role === "admin" ? (
               <Fragment>
-              <ShutterUpButton
-                className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide 
+                <ShutterUpButton
+                  className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide 
                 hover:text-red-700 bg-red-600 border-red-600"
-                onClick={() => router.push("/premium-service/premium-item/listing/all-items")}
-              >
-                <p>Premium Service</p>
-              </ShutterUpButton>
-            </Fragment>
+                  onClick={() =>
+                    router.push(
+                      "/premium-service/premium-item/listing/all-items"
+                    )
+                  }
+                >
+                  <p>Premium Service</p>
+                </ShutterUpButton>
+              </Fragment>
             ) : null}
 
-          {!isAdminView && user?.role === "primium" ? (
+            {!isAdminView && user?.role === "primium" ? (
               <Fragment>
                 <ShutterUpButton
                   className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide 
                   hover:text-red-700 bg-red-600 border-red-600"
-                  onClick={() => router.push("/premium-service/premium-item/listing/all-items")}
+                  onClick={() =>
+                    router.push(
+                      "/premium-service/premium-item/listing/all-items"
+                    )
+                  }
                 >
                   <p>Premium Service</p>
                 </ShutterUpButton>
@@ -166,7 +209,7 @@ const Navbar = () => {
                 </ShutterUpButton>
               )
             ) : null}
-            
+
             {isAuthUser ? (
               <ShutterUpButton
                 className="mt-1.5 inline-block bg-black px-5 py-1 before:bg-white
@@ -209,6 +252,32 @@ const Navbar = () => {
                 ></path>
               </svg>
             </button>
+          </div>
+          <div>
+            <Search
+            allProducts={allProducts}
+              results={results}
+              value={selectedProduct ? selectedProduct.name : ""}
+              renderItem={(item) => (
+                <div className="flex flex-row align-middle border">
+                  <Image
+                    className="h-8 w-8"
+                    src={item.imageUrl}
+                    alt="img"
+                    height="100"
+                    width="100"
+                  />
+                  <p className="ml-2 text-xs border flex self-center">{item.name}</p>
+                </div>
+              )}
+              onChange={(e, filteredResults) => {
+                setResults(filteredResults);
+                handleChange(e); // You may need to pass other arguments if necessary
+              }}
+              // onChange={handleChange}
+              onSelect={(item) => setSelectedProduct(item)}
+              router={router}
+            />
           </div>
           <NavItems router={router} isAdminView={isAdminView} />
         </div>

@@ -11,22 +11,10 @@ export async function PUT(req) {
 
     const isAuthUser = await AuthUser(req);
 
-    if (isAuthUser?.role === "admin") {
-      const extractData = await req.json();
+    if (isAuthUser) {
+      const extractData  = await req.json();
       const {
         _id,
-        name,
-        price,
-        description,
-        category,
-        sizes,
-        deliveryInfo,
-        onSale,
-        priceDrop,
-        imageUrl,
-        tags,
-        quantity,
-        itemCode,
         starRatings,
       } = extractData;
 
@@ -35,18 +23,6 @@ export async function PUT(req) {
           _id: _id,
         },
         {
-          name,
-          price,
-          description,
-          category,
-          sizes,
-          deliveryInfo,
-          onSale,
-          priceDrop,
-          imageUrl,
-          tags,
-          quantity,
-          itemCode,
           starRatings,
         },
         { new: true }
@@ -55,12 +31,12 @@ export async function PUT(req) {
       if (updatedProduct) {
         return NextResponse.json({
           success: true,
-          message: "Review updated successfully",
+          message: "Star ratings updated successfully",
         });
       } else {
         return NextResponse.json({
           success: false,
-          message: "Failed to update the Review ! Please try again later",
+          message: "Failed to update star ratings",
         });
       }
     } else {
@@ -77,3 +53,5 @@ export async function PUT(req) {
     });
   }
 }
+
+      //await Product.findByIdAndUpdate

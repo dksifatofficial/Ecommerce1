@@ -1,23 +1,20 @@
 "use client";
 
+import Star from "@/components/Star";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { IoIosStar } from "react-icons/io";
 
 const ProductTile = ({ item }) => {
   const router = useRouter();
 
-  const starArray = Array.from(
-    { length: 5 },
-    (
-      _,
-      index //item?.rating
-    ) => (
-      <span key={index} className="text-orange-400 text-xs">
-        <IoIosStar />
-      </span>
-    )
-  );
+  const calculateAverageRating = () => {
+    let sum = 0;
+    for (const rating of item.starRatings) {
+      sum += rating.starRating;
+    }
+    return (sum / item.starRatings.length).toFixed(1);
+  };
+  const averageRating = calculateAverageRating();
 
   return (
     <div onClick={() => router.push(`/product/${item._id}`)}>
@@ -76,9 +73,20 @@ const ProductTile = ({ item }) => {
           </div>
           {/* star rating */}
           <div className=" flex flex-col items-end justify-end pb-[2px]">
-            <div className="flex items-center gap-x-1">{starArray}</div>
-            <div>
-              <p className="text-xs text-gray-700 font-semibold">(56) review</p>
+            <div className="flex items-center gap-x-1 flex-col">
+              <Star
+                stars={averageRating}
+                reviews={item.starRatings.length}
+                averageRating={averageRating}
+              />
+              <div className=" flex flex-row">
+                <p className="m-0 ml-1 text-xs text-gray-600">
+                  ({averageRating > 0 ? averageRating : 0})
+                </p>
+                <p className="m-0 ml-1 text-xs text-gray-600">
+                  {item.starRatings.length} reviews
+                </p>
+              </div>
             </div>
           </div>
         </div>

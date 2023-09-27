@@ -57,7 +57,7 @@ export default function PremiumDetails({ item }) {
       setComponentLevelLoader({ loading: false, id: "" });
       setShowCartModal(true);
     }
-    console.log(res, "DK");
+    console.log(res);
   }
 
   function handleTileClick(getCurrentItem) {

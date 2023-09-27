@@ -21,7 +21,6 @@ export const addNewProduct = async (formData) => {
   }
 };
 
-
 export const getAllAdminProducts = async () => {
   try {
     const res = await fetch("http://localhost:3000/api/admin/all-products", {
@@ -71,6 +70,29 @@ export const updateAProduct = async (formData) => {
     console.log(e);
   }
 };
+
+export const updateStarRatings = async (formData) => {
+  try {
+    const response = await fetch("/api/update-review", {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// body: JSON.stringify({
+//   starRatings: formData,
+// }),
 
 export const updateAReview = async (formData) => {
   try {
@@ -196,13 +218,12 @@ export const getProductById = async (productId) => {
   }
 };
 
-
 export const rateProduct = async ({ productId, userId, rating }) => {
   try {
-    const response = await fetch('http://localhost:3000/api/rateProduct', {
-      method: 'POST',
+    const response = await fetch("http://localhost:3000/api/rateProduct", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ productId, userId, rating }),
     });
@@ -211,7 +232,7 @@ export const rateProduct = async ({ productId, userId, rating }) => {
 
     return data;
   } catch (error) {
-    console.error('Error rating product:', error);
+    console.error("Error rating product:", error);
     throw error; // You can handle errors in your components
   }
 };
@@ -256,5 +277,3 @@ export const rateProduct = async ({ productId, userId, rating }) => {
 //     success: true,
 //   });
 // };
-
-

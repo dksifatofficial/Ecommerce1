@@ -17,13 +17,7 @@ const AddNewProductSchema = Joi.object({
   tags: Joi.array().required(),
   quantity: Joi.number().required(),
   itemCode: Joi.string().required(),
-  starRatings: Joi.array().items(
-    Joi.object({
-      whoGiveRev: Joi.string(),
-      starRating: Joi.number(),
-      textReview: Joi.string(),
-    })
-  ),
+  starRatings: Joi.array(),
 });
 
 export const dynamic = "force-dynamic";
@@ -34,7 +28,7 @@ export async function POST(req) {
 
     const isAuthUser = await AuthUser(req);
 
-    console.log(isAuthUser, "sifat");
+    console.log(isAuthUser, "add-product.route");
 
     if (isAuthUser?.role === "admin") {
       const extractData = await req.json();
