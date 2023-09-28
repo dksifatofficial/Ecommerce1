@@ -13,7 +13,7 @@ const AddNewProductSchema = Joi.object({
   deliveryInfo: Joi.string().required(),
   onSale: Joi.string().required(),
   priceDrop: Joi.number().required(),
-  imageUrl: Joi.string().required(),
+  imageUrl: Joi.array().required(),
   tags: Joi.array().required(),
   quantity: Joi.number().required(),
   itemCode: Joi.string().required(),

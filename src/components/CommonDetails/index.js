@@ -34,6 +34,7 @@ export default function CommonDetails({ item }) {
   const [productData, setProductData] = useState([]);
   const [rating, setRating] = useState(4);
   const [currentRevUser, setCurrentRevUser] = useState(user?._id);
+  const [selectedImage, setSelectedImage] = useState(item.imageUrl[0]);
 
   // fetching Product Details
   useEffect(() => {
@@ -212,36 +213,84 @@ export default function CommonDetails({ item }) {
                     <div className="max-w-xl overflow-hidden rounded-lg">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={item.imageUrl}
+                        src={selectedImage}
                         className="h-full w-full max-w-full object-cover"
-                        alt="Product Details"
+                        alt="Product Image"
                       />
                     </div>
                   </div>
                   <div className="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
                     <div className="flex flex-row items-start lg:flex-col">
-                      <button
-                        type="button"
-                        className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={item.imageUrl}
-                          className="h-full w-full object-cover"
-                          alt="Product Details"
-                        />
-                      </button>
-                      <button
-                        type="button"
-                        className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
-                      >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={item.imageUrl}
-                          className="h-full w-full object-cover"
-                          alt="Product Details"
-                        />
-                      </button>
+                    {item && item.imageUrl && item.imageUrl.length ? (
+                        <button
+                          type="button"
+                          className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
+                          onClick={() => setSelectedImage(item.imageUrl[0])}
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={item.imageUrl[0]}
+                            className="h-full w-full object-cover"
+                            alt="Product Details"
+                          />
+                        </button>
+                      ) : null}
+                      {item && item.imageUrl && item.imageUrl.length > 1 ? (
+                        <button
+                          type="button"
+                          className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
+                          onClick={() => setSelectedImage(item.imageUrl[1])}
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={item.imageUrl[1]}
+                            className="h-full w-full object-cover"
+                            alt="Product Details"
+                          />
+                        </button>
+                      ) : null}
+                      {item && item.imageUrl && item.imageUrl.length > 2 ? (
+                        <button
+                          type="button"
+                          className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
+                          onClick={() => setSelectedImage(item.imageUrl[2])}
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={item.imageUrl[2]}
+                            className="h-full w-full object-cover"
+                            alt="Product Details"
+                          />
+                        </button>
+                      ) : null}
+                      {item && item.imageUrl && item.imageUrl.length > 3 ? (
+                        <button
+                          type="button"
+                          className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
+                          onClick={() => setSelectedImage(item.imageUrl[3])}
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={item.imageUrl[3]}
+                            className="h-full w-full object-cover"
+                            alt="Product Details"
+                          />
+                        </button>
+                      ) : null}
+                      {item && item.imageUrl && item.imageUrl.length > 4 ? (
+                        <button
+                          type="button"
+                          className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
+                          onClick={() => setSelectedImage(item.imageUrl[4])}
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={item.imageUrl[4]}
+                            className="h-full w-full object-cover"
+                            alt="Product Details"
+                          />
+                        </button>
+                      ) : null}
                     </div>
                   </div>
                 </div>

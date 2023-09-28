@@ -21,7 +21,7 @@ const ProductTile = ({ item }) => {
       <div className="overflow-hideen aspect-w-1 aspect-h-1 h-52">
         <Image
           className="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"
-          src={item.imageUrl}
+          src={item.imageUrl[0]}
           alt="product Image"
           width="400"
           height="400"
@@ -29,13 +29,17 @@ const ProductTile = ({ item }) => {
       </div>
       {item.onSale === "yes" ? (
         <div className="absolute top-0 m-2 rounded-full bg-[#3cca98]">
-          <p className="rounded-full p-1 text-[8px] font-bold uppercase tracking-wide text-white sm:py-1 sm:px-3">
-            Sale
-          </p>
+          <div className="rounded-full p-0 text-[12px] font-bold uppercase tracking-wide text-white sm:py-0 sm:px-3">
+            {item && item.priceDrop > 1 ? (
+              <p>-{item.priceDrop}%</p>
+            ) : (
+              <p>Sale</p>
+            )}
+          </div>
         </div>
       ) : (
         <div className="absolute top-0 m-2 rounded-full bg-red-700">
-          <p className="rounded-full p-1 text-[8px] font-bold uppercase tracking-wide text-white sm:py-1 sm:px-3">
+          <p className="rounded-full p-0 text-[12px] font-bold uppercase tracking-wide text-white sm:py-0 sm:px-3">
             Sold Out
           </p>
         </div>

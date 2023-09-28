@@ -11,7 +11,7 @@ const ProductSchema = new mongoose.Schema(
     deliveryInfo: String,
     onSale: String,
     priceDrop: Number,
-    imageUrl: String,
+    imageUrl: Array,
     tags: Array,
     quantity: Number,
     itemCode: String,

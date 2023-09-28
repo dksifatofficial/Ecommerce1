@@ -65,7 +65,7 @@ const initialFormData = {
   sizes: [],
   deliveryInfo: "",
   onSale: "no",
-  imageUrl: "",
+  imageUrl: [],
   priceDrop: 0,
   tags: [],
   quantity: 1,
@@ -93,36 +93,39 @@ export default function AdminAddNewProduct() {
   const handleInputChange = (event) => {
     const newRevUser = user?._id;
     const updatedStarRatings = [...formData.starRatings];
-  
+
     // Check if the current revUser value is different
-    const existingIndex = updatedStarRatings.findIndex((item) => item.revUser === currentRevUser);
+    const existingIndex = updatedStarRatings.findIndex(
+      (item) => item.revUser === currentRevUser
+    );
 
     const newStarRating = parseFloat(event.target.value); // Convert the input value to a number
-  
-    if (!isNaN(newStarRating)) { // Check if the conversion was successful
+
+    if (!isNaN(newStarRating)) {
+      // Check if the conversion was successful
       if (existingIndex !== -1) {
-      // If the revUser value is the same, edit the previous entry
-      updatedStarRatings[existingIndex].starRating = newStarRating;
-    } else {
-      // If the revUser value is different, add a new entry
-      updatedStarRatings.push({
-        starRating: newStarRating,
-        revUser: newRevUser,
+        // If the revUser value is the same, edit the previous entry
+        updatedStarRatings[existingIndex].starRating = newStarRating;
+      } else {
+        // If the revUser value is different, add a new entry
+        updatedStarRatings.push({
+          starRating: newStarRating,
+          revUser: newRevUser,
+        });
+      }
+
+      setFormData({
+        ...formData,
+        starRatings: updatedStarRatings,
       });
+
+      // Update the currentRevUser state with the new value
+      setCurrentRevUser(newRevUser);
+    } else {
+      // Handle the case where the input value is not a valid number
+      // You can show an error message or take other appropriate action here
     }
-  
-    setFormData({
-      ...formData,
-      starRatings: updatedStarRatings,
-    });
-  
-   // Update the currentRevUser state with the new value
-   setCurrentRevUser(newRevUser);
-  } else {
-    // Handle the case where the input value is not a valid number
-    // You can show an error message or take other appropriate action here
-  }
-};
+  };
 
   console.log(currentUpdatedProduct, "currentUpdatedProduct");
 
@@ -132,18 +135,46 @@ export default function AdminAddNewProduct() {
     if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct);
   }, [currentUpdatedProduct]);
 
+  // Image section
   async function handleImage(event) {
-    const extractImageUrl = await helperForUPloadingImageToFirebase(
-      event.target.files[0]
-    );
+    const newImages = [...formData.imageUrl];
 
-    if (extractImageUrl !== "") {
-      setFormData({
-        ...formData,
-        imageUrl: extractImageUrl,
-      });
+    for (const file of event.target.files) {
+      const extractImageUrl = await helperForUPloadingImageToFirebase(file);
+
+      if (extractImageUrl !== "") {
+        newImages.push(extractImageUrl);
+      }
     }
+
+    setFormData({
+      ...formData,
+      imageUrl: newImages,
+    });
   }
+
+  function handleRemoveImage(index) {
+    const newImages = [...formData.imageUrl];
+    newImages.splice(index, 1);
+    setFormData({
+      ...formData,
+      imageUrl: newImages,
+    });
+  }
+  
+
+  // async function handleImage(event) {
+  //   const extractImageUrl = await helperForUPloadingImageToFirebase(
+  //     event.target.files[0]
+  //   );
+
+  //   if (extractImageUrl !== "") {
+  //     setFormData({
+  //       ...formData,
+  //       imageUrl: extractImageUrl,
+  //     });
+  //   }
+  // }
 
   function handleTileClick(getCurrentItem) {
     let cpySizes = [...formData.sizes];
@@ -218,7 +249,26 @@ export default function AdminAddNewProduct() {
             max="1000000"
             type="file"
             onChange={handleImage}
+            multiple
           />
+          <div className="flex flex-wrap gap-2">
+            {formData.imageUrl.map((imageUrl, index) => (
+              <div key={index} className="relative">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={imageUrl}
+                  alt={`Product Image ${index}`}
+                  className="max-w-[200px] max-h-[200px] object-contain"
+                />
+                <button
+                  onClick={() => handleRemoveImage(index)}
+                  className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-full cursor-pointer"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
 
           <div className="flex gap-2 flex-col">
             <label>Available sizes</label>
@@ -230,37 +280,6 @@ export default function AdminAddNewProduct() {
           </div>
 
           <div>
-            <InputComponent
-              type="number"
-              placeholder="5"
-              label="Star"
-              value={formData.starRatings.starRating}
-              controlItem="starRating"
-              onChange={handleInputChange}
-            />
-
-            {/* <InputComponent
-              type="number"
-              placeholder="5"
-              label="Star"
-              value={formData.starRatings.starRating}
-              controlItem="starRating"
-              onChange={(event) => {
-                const updatedStarRatings = [
-                  ...formData.starRatings,
-                  {
-                    starRating: event.target.value,
-                    revUser: user?._id || "",
-                  },
-                ];
-
-                setFormData({
-                  ...formData,
-                  starRatings: updatedStarRatings,
-                });
-              }}
-            /> */}
-
             {/* <InputComponent
               type="text"
               placeholder="It's a Awesome Product"
@@ -311,6 +330,15 @@ export default function AdminAddNewProduct() {
               />
             ) : null
           )}
+
+          <InputComponent
+            type="number"
+            placeholder="5"
+            label="Star"
+            value={formData.starRatings.starRating}
+            controlItem="starRating"
+            onChange={handleInputChange}
+          />
 
           {/* Category Tags */}
           <div className="flex gap-2 flex-col">

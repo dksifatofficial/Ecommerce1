@@ -4,13 +4,6 @@ export default function SizeComponent({ data, selected = [], onClick }) {
         {data.map((dataItem) => (
           <label
             onClick={() => onClick(dataItem)}
-            // className={`cursor-pointer rounded-lg ${
-            //   selected &&
-            //   selected.length &&
-            //   selected.map((item) => item.id).indexOf(dataItem.id) !== -1
-            //     ? ""
-            //     : ""
-            // }`}
             key={dataItem.id}
           >
             <span
