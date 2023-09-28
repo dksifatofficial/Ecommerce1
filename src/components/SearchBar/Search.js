@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import styles from './style.module.css'
 
 function Search({
   results = [],
@@ -109,7 +110,7 @@ function Search({
           value={defaultValue}
           onChange={handleChange}
           type="text"
-          className="w-[300px] px-5 py-0 text-lg rounded-full border border-gray-200 focus:border-gray-700 
+          className="w-[400px] px-5 py-0 text-lg rounded-full border border-gray-200 focus:border-gray-700 
            outline-none transition"
           placeholder="Search products..."
         />
@@ -117,8 +118,8 @@ function Search({
         {/* Search Results Container */}
         {showResults && (
           <div
-            className="absolute mt-1 w-full p-2 bg-white shadow-lg rounded-bl rounded-br 
-           max-h-[500px] overflow-y-auto"
+            className={`absolute mt-1 w-full p-2 bg-white shadow-lg rounded-bl rounded-br 
+           max-h-[500px] overflow-y-auto ${styles.style4}`}
           >
             {results && results.length
               ? results

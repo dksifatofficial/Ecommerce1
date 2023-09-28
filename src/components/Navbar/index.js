@@ -1,12 +1,13 @@
 "use client";
 
 import { GlobalContext } from "@/context";
-import { getAllAdminProducts, productByCategory } from "@/services/product";
+import { getAllAdminProducts } from "@/services/product";
 import { adminNavOptions, navOptions } from "@/utils";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { Fragment, useContext, useEffect, useMemo, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
+import { IoIosHome } from "react-icons/io";
 import ShutterUpButton from "../Buttons/ShutterUpButton";
 import CartModal from "../CartModal";
 import CommonModal from "../CommonModal";
@@ -37,25 +38,26 @@ function NavItems({ isModalView = false, isAdminView, router }) {
                 {item.label}
               </li>
             ))
-          : navOptions.map((item) => (
-              <li
-                className="cursor-pointer block py-2 pl-3 pr-4 text-[#3cca98] rounded md:p-0
-                 hover:text-[#268d69]"
-                key={item.id}
-                onClick={() => router.push(item.path)}
-              >
-                {item.label}
-              </li>
-            ))}
+          : null
+          // navOptions.map((item) => (
+          //     <li
+          //       className="cursor-pointer block py-2 pl-3 pr-4 text-[#3cca98] rounded md:p-0
+          //        hover:text-[#268d69]"
+          //       key={item.id}
+          //       onClick={() => router.push(item.path)}
+          //     >
+          //       {item.label}
+          //     </li>
+          //   ))
+            }
       </ul>
     </div>
   );
 }
 
 const Navbar = () => {
-  
   const { showNavModal, setShowNavModal } = useContext(GlobalContext);
-  
+
   const [allProducts, setAllProducts] = useState([]);
 
   async function getListOfProducts() {
@@ -84,7 +86,6 @@ const Navbar = () => {
   const pathName = usePathname();
   const router = useRouter();
 
-
   console.log(currentUpdatedProduct);
 
   useEffect(() => {
@@ -112,26 +113,30 @@ const Navbar = () => {
     const { value } = e.target;
     const { target } = e;
     if (!target.value.trim()) return setResults([]);
-  
+
     const filteredValue = allProducts.filter((product) => {
       const productName = product.name.toLowerCase();
       const searchTerm = value.toLowerCase();
       const isMatch = productName.includes(searchTerm);
-      console.log(`Product: ${productName}, Search Term: ${searchTerm}, Match: ${isMatch}`);
+      console.log(
+        `Product: ${productName}, Search Term: ${searchTerm}, Match: ${isMatch}`
+      );
       return isMatch;
-    })
+    });
     setResults(filteredValue);
   };
-  
 
   return (
     <>
       <nav className="bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-3">
           <div
             className="flex items-center cursor-pointer"
             onClick={() => router.push("/")}
           >
+            <i className="text-2xl text-[#3cca98]">
+              <IoIosHome />
+            </i>
             {/* <Image
               className=" ml-[-2px] w-[180px] h-auto"
               src={
@@ -255,11 +260,11 @@ const Navbar = () => {
           </div>
           <div>
             <Search
-            allProducts={allProducts}
+              allProducts={allProducts}
               results={results}
               value={selectedProduct ? selectedProduct.name : ""}
               renderItem={(item) => (
-                <div className="flex flex-row align-middle border">
+                <div className="flex flex-row align-middle">
                   <Image
                     className="h-8 w-8"
                     src={item.imageUrl}
@@ -267,7 +272,7 @@ const Navbar = () => {
                     height="100"
                     width="100"
                   />
-                  <p className="ml-2 text-xs border flex self-center">{item.name}</p>
+                  <p className="ml-2 text-xs flex self-center">{item.name}</p>
                 </div>
               )}
               onChange={(e, filteredResults) => {
