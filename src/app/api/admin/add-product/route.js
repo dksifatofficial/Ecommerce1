@@ -18,6 +18,7 @@ const AddNewProductSchema = Joi.object({
   quantity: Joi.number().required(),
   itemCode: Joi.string().required(),
   starRatings: Joi.array(),
+  colors: Joi.array(),
 });
 
 export const dynamic = "force-dynamic";
@@ -47,6 +48,7 @@ export async function POST(req) {
         quantity,
         itemCode,
         starRatings,
+        colors,
       } = extractData;
 
       const { error } = AddNewProductSchema.validate({
@@ -63,6 +65,7 @@ export async function POST(req) {
         quantity,
         itemCode,
         starRatings,
+        colors,
       });
 
       if (error) {

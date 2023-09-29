@@ -31,8 +31,8 @@ export default function CommonDetails({ item }) {
   const [cnzQuantity, setCnzQuantity] = useState(1);
   const [newQuantity, setNewQuantity] = useState(cnzQuantity);
   const [selectedSize, setSelectedSize] = useState([]);
+  const [selectedColor, setSelectedColor] = useState([]);
   const [productData, setProductData] = useState([]);
-  const [rating, setRating] = useState(4);
   const [currentRevUser, setCurrentRevUser] = useState(user?._id);
   const [selectedImage, setSelectedImage] = useState(item.imageUrl[0]);
 
@@ -81,6 +81,7 @@ export default function CommonDetails({ item }) {
       productQuantity: newQuantity,
       productCode: getItem.itemCode,
       requiredSize: selectedSize,
+      requiredColor: selectedColor,
     });
 
     if (res.success) {
@@ -97,6 +98,18 @@ export default function CommonDetails({ item }) {
       setShowCartModal(true);
     }
     console.log(res);
+  }
+
+  // select color for order
+  function handleColorClick(getCurrentItem) {
+    const index = selectedColor.findIndex(
+      (item) => item.id === getCurrentItem.id
+    );
+    if (index === -1) {
+      setSelectedColor([getCurrentItem]);
+    } else {
+      setSelectedColor([]);
+    }
   }
 
   // select Size for order
@@ -221,7 +234,7 @@ export default function CommonDetails({ item }) {
                   </div>
                   <div className="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
                     <div className="flex flex-row items-start lg:flex-col">
-                    {item && item.imageUrl && item.imageUrl.length ? (
+                      {item && item.imageUrl && item.imageUrl.length ? (
                         <button
                           type="button"
                           className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
@@ -356,6 +369,15 @@ export default function CommonDetails({ item }) {
 
                 <div className="my-8 flex flex-col items-start gap-8 justify-between">
                   <div className="flex flex-col">
+                    <div className=" flex flex-row">
+                      <p className="mr-[10px]">Select Color:</p>
+                      <SizeComponent
+                        selected={selectedColor}
+                        data={item.colors}
+                        onClick={handleColorClick}
+                      />
+                    </div>
+
                     <div className=" flex flex-row">
                       <p className="mr-[10px]">Select Size:</p>
                       <SizeComponent

@@ -71,6 +71,7 @@ export default function Checkout() {
             product: item.productID,
             itemCode: item.productCode,
             reqSizes: item.requiredSize.map((size)=> size.label),
+            reqColor: item.requiredColor.map((color)=> color.label),
           })),
           paymentMethod: "Stripe",
           totalPrice: cartItems.reduce(
@@ -142,7 +143,7 @@ export default function Checkout() {
       price_data: {
         currency: "usd",
         product_data: {
-          images: [item.productID.imageUrl],
+          images: [item.productID.imageUrl[0]],
           name: item.productID.name,
         },
         unit_amount: item.productID.price * 100,
@@ -220,7 +221,7 @@ export default function Checkout() {
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={item && item.productID && item.productID.imageUrl}
+                    src={item && item.productID && item.productID.imageUrl[0]}
                     alt="Cart Item"
                     className="m-2 h-24 w-28 rounded-md border object-cover object-center"
                   />
@@ -235,6 +236,17 @@ export default function Checkout() {
                     <div className="font-medium text-sm flex flex-row">
                       <p className="mr-[22px]">Unit Price:</p>
                       <p>${item && item.productID && item.productID.price}</p>
+                    </div>
+                    <div className="font-medium text-sm flex flex-row">
+                      <p className="mr-[31px]">Color:</p>
+                      <ul className="text-sm text-gray-600 flex flex-row gap-2">
+                        {item &&
+                          item.productID &&
+                          item.requiredColor.map((color) =>(
+                            // eslint-disable-next-line react/jsx-key
+                            <li className="">{color.label}</li>
+                          ))}
+                      </ul>
                     </div>
                     <div className="font-medium text-sm flex flex-row">
                       <p className="mr-[31px]">Size:</p>

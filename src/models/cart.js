@@ -25,6 +25,11 @@ const CartSchema = new mongoose.Schema(
       required: true,
       ref: 'Required Size'
     },
+    requiredColor: {
+      type: Array,
+      required: true,
+      ref: 'Required Color'
+    }
   },
   { timestamps: true }
 );

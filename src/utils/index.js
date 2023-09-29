@@ -68,10 +68,10 @@ export const registrationFormControls = [
     label: "Role",
     componentType: "select",
     options: [
-      {
-        id: "admin",
-        label: "Admin",
-      },
+      // {
+      //   id: "admin",
+      //   label: "Admin",
+      // },
       {
         id: "customer",
         label: "customer",
@@ -245,6 +245,29 @@ export const AvailableSizes = [
   {
     id: "2xl",
     label: "2XL",
+  },
+];
+
+export const AvailableColors = [
+  {
+    id: "black",
+    label: "Black",
+  },
+  {
+    id: "white",
+    label: "White",
+  },
+  {
+    id: "red",
+    label: "Red",
+  },
+  {
+    id: "pink",
+    label: "Pink",
+  },
+  {
+    id: "blue",
+    label: "Blue",
   },
 ];
 

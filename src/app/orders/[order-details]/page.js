@@ -85,7 +85,7 @@ export default function OrderDetails() {
                     >
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={item && item.product && item.product.imageUrl}
+                        src={item && item.product && item.product.imageUrl[0]}
                         className="w-full"
                         alt=""
                       />
@@ -108,7 +108,13 @@ export default function OrderDetails() {
                         <p>Unit Price:</p>
                         <p className="ml-[17px] text-base font-semibold text-gray-900">
                           $
-                          {item && item.product && item.product.price}
+                          {item && item.product && item.product.price - item.product.priceDrop}
+                        </p>
+                      </div>
+                      <div className="w-full flex items-start">
+                        <p>Color:</p>
+                        <p className="ml-[59px] text-base font-semibold text-gray-900">
+                          {item && item.reqColor}
                         </p>
                       </div>
                       <div className="w-full flex items-start">
@@ -128,9 +134,9 @@ export default function OrderDetails() {
                         <p className="ml-[10px] text-base font-semibold text-gray-900">
                           $
                           {(
-                            item &&
+                            (item &&
                             item.product &&
-                            item.product.price * item.qty
+                            item.product.price - item.product.priceDrop) * item.qty
                           ).toFixed(2)}
                         </p>
                       </div>
@@ -150,7 +156,7 @@ export default function OrderDetails() {
                 <div className="flex justify-between w-full">
                   <p className="text-base leading-5 text-gray-800">Subtotal</p>
                   <p className="text-base leading-5 text-gray-900">
-                    ${(orderDetails && orderDetails.totalPrice).toFixed(2)}
+                    ${(orderDetails && orderDetails.totalPrice)}
                   </p>
                 </div>
                 <div className="flex justify-between w-full">
@@ -160,7 +166,7 @@ export default function OrderDetails() {
                 <div className="flex justify-between w-full">
                   <p className="text-base leading-5 text-gray-800">Total</p>
                   <p className="text-base leading-5 text-gray-900">
-                    ${(orderDetails && orderDetails.totalPrice).toFixed(2)}
+                    ${(orderDetails && orderDetails.totalPrice)}
                   </p>
                 </div>
               </div>

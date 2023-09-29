@@ -104,7 +104,7 @@ export default function AdminView() {
                                   src={
                                     orderItem &&
                                     orderItem.product &&
-                                    orderItem.product.imageUrl
+                                    orderItem.product.imageUrl[0]
                                   }
                                 />
                                 <div>
@@ -134,6 +134,12 @@ export default function AdminView() {
                                       {orderItem &&
                                         orderItem.product &&
                                         orderItem.qty}
+                                    </p>
+                                  </div>
+                                  <div className="flex flex-row">
+                                    <p className="text-sm font-medium">Color:</p>
+                                    <p className="text-sm ml-[53px] text-black font-semibold">
+                                      {orderItem && orderItem.reqColor}
                                     </p>
                                   </div>
                                   <div className="flex flex-row">
@@ -171,8 +177,8 @@ export default function AdminView() {
                               )}
                             </ShutterUpButton>
                             <button
-                              className="disabled:text-green-700 disabled:font-bold mt-5 mr-5 
-                        inline-block text-red-700 px-5 py-1 text-base font-medium uppercase tracking-wide"
+                              className="disabled:text-green-700 disabled:font-bold mt-5 mr-5 cursor-text
+                                inline-block text-red-700 px-5 py-1 text-base font-medium uppercase tracking-wide"
                               disabled={!item.isProcessing}
                             >
                               {item.isProcessing

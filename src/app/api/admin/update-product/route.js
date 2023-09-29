@@ -28,6 +28,7 @@ export async function PUT(req) {
         quantity,
         itemCode,
         starRatings,
+        colors,
       } = extractData;
 
       const updatedProduct = await Product.findOneAndUpdate(
@@ -48,6 +49,7 @@ export async function PUT(req) {
           quantity,
           itemCode,
           starRatings,
+          colors,
         },
         { new: true }
       );

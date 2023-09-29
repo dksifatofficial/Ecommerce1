@@ -92,7 +92,7 @@ export default function CartModal() {
                     src={
                       cartItem &&
                       cartItem.productID &&
-                      cartItem.productID.imageUrl
+                      cartItem.productID.imageUrl[0]
                     }
                     alt="Cart Item"
                     className="h-full w-full object-cover object-center"
@@ -123,6 +123,17 @@ export default function CartModal() {
                           cartItem.productID &&
                           cartItem.productID.price}
                       </p>
+                    </div>
+                    <div className="mt-1 flex">
+                      <p className="text-sm pr-[57px]">Color:</p>
+                      <ul className="text-sm text-gray-600 flex flex-row gap-2">
+                        {cartItem &&
+                          cartItem.productID &&
+                          cartItem.requiredColor.map((color) =>(
+                            // eslint-disable-next-line react/jsx-key
+                            <li className="">{color.label}</li>
+                          ))}
+                      </ul>
                     </div>
                     <div className="mt-1 flex">
                       <p className="text-sm pr-[57px]">Size:</p>

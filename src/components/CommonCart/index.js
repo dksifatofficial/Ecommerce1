@@ -32,7 +32,7 @@ export default function CommonCart({
                             src={
                               cartItem &&
                               cartItem.productID &&
-                              cartItem.productID.imageUrl
+                              cartItem.productID.imageUrl[0]
                             }
                             alt="Product image"
                             className="h-24 w-25 max-w-full rounded-lg object-cover ml-4"
@@ -63,6 +63,15 @@ export default function CommonCart({
                                   cartItem.productID &&
                                   cartItem.productID.price}
                               </p>
+                              <p className="text-sm">Color:</p>
+                              <ul className="text-sm text-gray-600 flex flex-row gap-2">
+                                {cartItem &&
+                                  cartItem.productID &&
+                                  cartItem.requiredColor.map((color) => (
+                                    // eslint-disable-next-line react/jsx-key
+                                    <li className="">{color.label}</li>
+                                  ))}
+                              </ul>
                               <p className="text-sm">Size:</p>
                               <ul className="text-sm text-gray-600 flex flex-row gap-2">
                                 {cartItem &&

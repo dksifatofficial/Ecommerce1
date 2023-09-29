@@ -157,7 +157,7 @@ export default function Home() {
                           <div>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                              src={productItem.imageUrl}
+                              src={productItem.imageUrl[0]}
                               alt="Sale Product Item"
                               className="object-cover w-full  aspect-square"
                             />
@@ -274,7 +274,7 @@ export default function Home() {
                         <div>
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
-                            src={productItem.imageUrl}
+                            src={productItem.imageUrl[0]}
                             alt="Sale Product Item"
                             className="object-cover w-full aspect-square"
                           />

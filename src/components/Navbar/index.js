@@ -1,17 +1,26 @@
 "use client";
 
 import { GlobalContext } from "@/context";
+import Logo from "@/picture/logo.png";
 import { getAllAdminProducts } from "@/services/product";
-import { adminNavOptions, navOptions } from "@/utils";
+import { adminNavOptions } from "@/utils";
 import Cookies from "js-cookie";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Fragment, useContext, useEffect, useState } from "react";
-import { IoIosHome } from "react-icons/io";
-import ShutterUpButton from "../Buttons/ShutterUpButton";
+import {
+  IoIosBriefcase,
+  IoIosCart,
+  IoIosContact,
+  IoIosHeart,
+  IoIosLogOut,
+  IoIosStar,
+} from "react-icons/io";
 import CartModal from "../CartModal";
 import CommonModal from "../CommonModal";
 import Search from "../SearchBar/Search";
+import styles from "./styles.module.css";
 
 function NavItems({ isModalView = false, isAdminView, router }) {
   return (
@@ -27,18 +36,19 @@ function NavItems({ isModalView = false, isAdminView, router }) {
          ${isModalView ? "border-none" : "border border-gray-100"}
          `}
       >
-        {isAdminView
-          ? adminNavOptions.map((item) => (
-              <li
-                className="cursor-pointer block py-2 pl-3 pr-4 text-[#3cca98] rounded md:p-0
+        {
+          isAdminView
+            ? adminNavOptions.map((item) => (
+                <li
+                  className="cursor-pointer block py-2 pl-3 pr-4 text-[#3cca98] rounded md:p-0
                  hover:text-[#268d69]"
-                key={item.id}
-                onClick={() => router.push(item.path)}
-              >
-                {item.label}
-              </li>
-            ))
-          : null
+                  key={item.id}
+                  onClick={() => router.push(item.path)}
+                >
+                  {item.label}
+                </li>
+              ))
+            : null
           // navOptions.map((item) => (
           //     <li
           //       className="cursor-pointer block py-2 pl-3 pr-4 text-[#3cca98] rounded md:p-0
@@ -49,7 +59,7 @@ function NavItems({ isModalView = false, isAdminView, router }) {
           //       {item.label}
           //     </li>
           //   ))
-            }
+        }
       </ul>
     </div>
   );
@@ -128,110 +138,195 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200">
+      <nav className="bg-[#f85606] fixed w-full z-20 top-0 left-0">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-3">
           <div
             className="flex items-center cursor-pointer"
             onClick={() => router.push("/")}
           >
-            <i className="text-2xl text-[#3cca98]">
+            {/* <i className="text-2xl text-[#3cca98]">
               <IoIosHome />
-            </i>
-            {/* <Image
-              className=" ml-[-2px] w-[180px] h-auto"
-              src={
-                "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2FLogo%2FDecorWhims.png?alt=media&token=cbd68fea-1c6c-484e-a523-600bfe9d0c71"
-              }
+            </i> */}
+            <Image
+              className=" ml-[-2px] w-[100px] h-auto"
+              src={Logo}
+              // src={
+              //   "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2FLogo%2FDecorWhims.png?alt=media&token=cbd68fea-1c6c-484e-a523-600bfe9d0c71"
+              // }
               alt="decorwhims_logo"
               height="400"
               width="800"
-            /> */}
+            />
           </div>
           <div className="flex md:order-2 gap-2">
             {user?.role === "admin" ? (
               <Fragment>
-                <ShutterUpButton
-                  className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide 
-                hover:text-red-700 bg-red-600 border-red-600"
+                <button
+                  className="p-0 m-0"
                   onClick={() =>
                     router.push(
                       "/premium-service/premium-item/listing/all-items"
                     )
                   }
                 >
-                  <p>Premium Service</p>
-                </ShutterUpButton>
+                  <p
+                    className="rounded-lg text-sm text-white font-semibold px-3 py-1 m-0 
+                    hover:text-[#f8f3f3da]"
+                  >
+                    Premium
+                  </p>
+                </button>
               </Fragment>
             ) : null}
 
             {!isAdminView && user?.role === "primium" ? (
               <Fragment>
-                <ShutterUpButton
-                  className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide 
-                  hover:text-red-700 bg-red-600 border-red-600"
+                <button
+                  className="p-0 m-0"
                   onClick={() =>
                     router.push(
                       "/premium-service/premium-item/listing/all-items"
                     )
                   }
                 >
-                  <p>Premium Service</p>
-                </ShutterUpButton>
+                  <p
+                    className="rounded-lg text-white text-sm font-semibold px-3 py-1 m-0 
+                    hover:text-[#f8f3f3da]"
+                  >
+                    Premium
+                  </p>
+                </button>
               </Fragment>
             ) : null}
 
-            {!isAdminView && isAuthUser ? (
-              <Fragment>
-                <ShutterUpButton
-                  className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide text-[#3cca98]"
-                  onClick={() => router.push("/account")}
-                >
-                  <p>Account</p>
-                </ShutterUpButton>
-                <ShutterUpButton
-                  className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide text-white"
-                  onClick={() => setShowCartModal(true)}
-                >
-                  <p>Cart</p>
-                </ShutterUpButton>
-              </Fragment>
-            ) : null}
-
+            {/* Admin View or Client View */}
             {user?.role === "admin" ? (
               isAdminView ? (
-                <ShutterUpButton
-                  className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide text-white"
-                  onClick={() => router.push("/")}
-                >
-                  <p>Client View</p>
-                </ShutterUpButton>
+                <button className="p-0 m-0" onClick={() => router.push("/")}>
+                  <p className="rounded-lg text-sm font-semibold px-3 py-1 m-0 text-white hover:text-[#f8f3f3da]">
+                    Client View
+                  </p>
+                </button>
               ) : (
-                <ShutterUpButton
-                  className="mt-1.5 inline-block px-5 py-1 before:bg-white upprcase tracking-wide text-white"
+                <button
+                  className="p-0 m-0"
                   onClick={() => router.push("/admin-view")}
                 >
-                  <p>Admin View</p>
-                </ShutterUpButton>
+                  <p className="rounded-lg text-sm font-semibold px-3 py-1 m-0 text-white hover:text-[#f8f3f3da]">
+                    Admin View
+                  </p>
+                </button>
               )
             ) : null}
 
+            {/* Login  or Account */}
             {isAuthUser ? (
-              <ShutterUpButton
-                className="mt-1.5 inline-block bg-black px-5 py-1 before:bg-white
-                 upprcase tracking-wide text-white border-black hover:text-black"
-                onClick={handleLogout}
+              <div
+                className={`flex items-center cursor-pointer relative flex-row mr-1 hover:bg-[#3d3c3c1e]
+                px-4 py-1 rounded-lg ${styles.dropdown}`}
               >
-                <p>Logout</p>
-              </ShutterUpButton>
+                <i
+                  className={`text-2xl text-white rounded-[100%] ring-2 hover:ring-2 ring-white
+                   ${styles.dropbtn}`}
+                >
+                  <IoIosContact />
+                </i>
+                <div className="flex flex-col ml-2 text-white">
+                  <p className="text-xs">Hello, {user?.name}</p>
+                  <p className="text-xs">Orders & Account</p>
+                </div>
+                <div className={styles.dropdownContent}>
+                  <div className="bg-[#f9f9f9] rounded-[10px] py-2 px-4 shadow-[0px_8px_16px_0px_rgba(0,0,0,0.2)]">
+                    <button
+                      className=" flex flex-row float-none text-xs text-[#35316d] font-semibold no-underline
+                          text-left px-1 py-1 rounded-[10px] align-middle items-center hover:text-[#f3b064]"
+                      onClick={() => router.push("/account")}
+                    >
+                      <i className="flex align-middle items-center pr-2 text-2xl">
+                        <IoIosContact />
+                      </i>
+                      <p>Manage My Account</p>
+                    </button>
+                    <button
+                      className=" flex flex-row float-none text-xs text-[#35316d] font-semibold no-underline
+                          text-left px-1 py-1 rounded-[10px] align-middle items-center hover:text-[#f3b064]"
+                      onClick={() => router.push("/orders")}
+                    >
+                      <i className="flex align-middle items-center pr-2 text-2xl">
+                        <IoIosBriefcase />
+                      </i>
+                      <p>My Orders</p>
+                    </button>
+                    <Link
+                      className=" flex flex-row float-none text-xs text-[#35316d] font-semibold no-underline
+                          text-left px-1 py-1 rounded-[10px] align-middle items-center hover:text-[#f3b064]"
+                      href="/"
+                    >
+                      <i className="flex align-middle items-center pr-2 text-2xl">
+                        <IoIosHeart />
+                      </i>
+                      <p className="">My Wishlist</p>
+                    </Link>
+                    <Link
+                      className=" flex flex-row float-none text-xs text-[#35316d] font-semibold no-underline
+                          text-left px-1 py-1 rounded-[10px] align-middle items-center hover:text-[#f3b064]"
+                      href="/"
+                    >
+                      <i className="flex align-middle items-center pr-2 text-2xl">
+                        <IoIosStar />
+                      </i>
+                      <p>My Reviews</p>
+                    </Link>
+                    <Link
+                      className=" flex flex-row float-none text-xs text-[#35316d] font-semibold no-underline
+                          text-left px-1 py-1 rounded-[10px] align-middle items-center hover:text-[#f3b064]"
+                      onClick={handleLogout}
+                      href="/"
+                    >
+                      <i className="flex align-middle items-center pr-2 text-2xl">
+                        <IoIosLogOut />
+                      </i>
+                      <p>Logout</p>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             ) : (
-              <ShutterUpButton
-                className="mt-1.5 inline-block bg-black px-5 py-1 before:bg-white
-                 upprcase tracking-wide text-white border-black hover:text-black"
-                onClick={() => router.push("/login")}
-              >
-                <p>Login</p>
-              </ShutterUpButton>
+              <button className="p-0 m-0" onClick={() => router.push("/login")}>
+                <p className="rounded-lg text-sm font-semibold px-3 py-1 m-0 text-white hover:text-[#f8f3f3da]">
+                  Login
+                </p>
+              </button>
             )}
+
+            {/* Cart */}
+            {!isAdminView && isAuthUser ? (
+              <div
+                className="flex items-center cursor-pointer"
+                onClick={() => setShowCartModal(true)}
+              >
+                <i
+                  className="text-2xl text-white hover:bg-[#3d3c3c1e]
+                px-4 py-2 rounded-lg mr-8"
+                >
+                  <IoIosCart />
+                </i>
+              </div>
+            ) : null}
+
+            {/* Logout  or Sign Up */}
+            {!isAuthUser ? (
+              <button
+                className="p-0 m-0"
+                onClick={() => router.push("/register")}
+              >
+                <p className="rounded-lg text-sm font-semibold px-3 py-1 m-0 text-white hover:text-[#f8f3f3da]">
+                  Sign Up
+                </p>
+              </button>
+            ) : null}
+
+            {/* Menu for small device */}
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
@@ -267,7 +362,7 @@ const Navbar = () => {
                 <div className="flex flex-row align-middle">
                   <Image
                     className="h-8 w-8"
-                    src={item.imageUrl}
+                    src={item.imageUrl[0]}
                     alt="img"
                     height="100"
                     width="100"

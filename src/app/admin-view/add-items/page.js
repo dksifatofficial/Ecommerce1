@@ -8,6 +8,7 @@ import Notification from "@/components/Notification";
 import { GlobalContext } from "@/context";
 import { addNewProduct, updateAProduct } from "@/services/product";
 import {
+  AvailableColors,
   AvailableSizes,
   CategoryTags,
   adminAddProductformControls,
@@ -71,6 +72,7 @@ const initialFormData = {
   quantity: 1,
   itemCode: "",
   starRatings: [],
+  colors: [],
 };
 
 export default function AdminAddNewProduct() {
@@ -176,6 +178,8 @@ export default function AdminAddNewProduct() {
   //   }
   // }
 
+
+  // for sizes
   function handleTileClick(getCurrentItem) {
     let cpySizes = [...formData.sizes];
     const index = cpySizes.findIndex((item) => item.id === getCurrentItem.id);
@@ -189,6 +193,23 @@ export default function AdminAddNewProduct() {
     setFormData({
       ...formData,
       sizes: cpySizes,
+    });
+  }
+
+  // for colors
+  function handleColorsTileClick(getCurrentItem) {
+    let cpyColors = [...formData.colors];
+    const index = cpyColors.findIndex((item) => item.id === getCurrentItem.id);
+
+    if (index === -1) {
+      cpyColors.push(getCurrentItem);
+    } else {
+      cpyColors = cpyColors.filter((item) => item.id !== getCurrentItem.id);
+    }
+
+    setFormData({
+      ...formData,
+      colors: cpyColors,
     });
   }
 
@@ -276,6 +297,15 @@ export default function AdminAddNewProduct() {
               selected={formData.sizes}
               onClick={handleTileClick}
               data={AvailableSizes}
+            />
+          </div>
+
+          <div className="flex gap-2 flex-col">
+            <label>Available Colors</label>
+            <TileComponent
+              selected={formData.colors}
+              onClick={handleColorsTileClick}
+              data={AvailableColors}
             />
           </div>
 

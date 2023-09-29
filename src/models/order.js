@@ -17,7 +17,8 @@ const OrderSchema = new mongoose.Schema(
           ref: "Products",
         },
         itemCode: { type: String, required: true },
-        reqSizes: { type: Array, required: true }
+        reqSizes: { type: Array, required: true },
+        reqColor: { type: Array, required: true }
       },
     ],
     shippingAddress: {

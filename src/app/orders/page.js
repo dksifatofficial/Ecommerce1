@@ -96,7 +96,7 @@ export default function Orders() {
                                 src={
                                   orderItem &&
                                   orderItem.product &&
-                                  orderItem.product.imageUrl
+                                  orderItem.product.imageUrl[0]
                                 }
                               />
                             </div>

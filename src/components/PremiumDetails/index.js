@@ -20,6 +20,7 @@ export default function PremiumDetails({ item }) {
   const [cnzQuantity, setCnzQuantity] = useState(1);
   const [newQuantity, setNewQuantity] = useState(cnzQuantity);
   const [selectedSize, setSelectedSize] = useState([]);
+  const [selectedColor, setSelectedColor] = useState([]);
 
   const increaseQuantity = () => {
     setCnzQuantity(cnzQuantity + 1);
@@ -42,6 +43,7 @@ export default function PremiumDetails({ item }) {
       productQuantity: newQuantity,
       productCode: getItem.itemCode,
       requiredSize: selectedSize,
+      requiredColor: selectedColor,
     });
 
     if (res.success) {
@@ -59,6 +61,18 @@ export default function PremiumDetails({ item }) {
     }
     console.log(res);
   }
+
+    // select color for order
+    function handleColorClick(getCurrentItem) {
+      const index = selectedColor.findIndex(
+        (item) => item.id === getCurrentItem.id
+      );
+      if (index === -1) {
+        setSelectedColor([getCurrentItem]);
+      } else {
+        setSelectedColor([]);
+      }
+    }
 
   function handleTileClick(getCurrentItem) {
     // Check if the size is already selected
@@ -84,7 +98,7 @@ export default function PremiumDetails({ item }) {
                 <div className="max-w-xl overflow-hidden rounded-lg">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={item.imageUrl}
+                    src={item.imageUrl[0]}
                     className="h-full w-full max-w-full object-cover"
                     alt="Product Details"
                   />
@@ -98,7 +112,7 @@ export default function PremiumDetails({ item }) {
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={item.imageUrl}
+                      src={item.imageUrl[0]}
                       className="h-full w-full object-cover"
                       alt="Product Details"
                     />
@@ -109,7 +123,7 @@ export default function PremiumDetails({ item }) {
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={item.imageUrl}
+                      src={item.imageUrl[0]}
                       className="h-full w-full object-cover"
                       alt="Product Details"
                     />
@@ -153,6 +167,15 @@ export default function PremiumDetails({ item }) {
 
             <div className="my-8 flex flex-col items-start gap-8 justify-between">
               <div className="flex flex-col">
+
+              <div className=" flex flex-row">
+                      <p className="mr-[10px]">Select Color:</p>
+                      <SizeComponent
+                        selected={selectedColor}
+                        data={item.colors}
+                        onClick={handleColorClick}
+                      />
+                    </div>
 
                 <div className=" flex flex-row">
                   <p className="mr-[10px]">Select Size:</p>

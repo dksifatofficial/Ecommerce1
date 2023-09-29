@@ -110,15 +110,15 @@ function Search({
           value={defaultValue}
           onChange={handleChange}
           type="text"
-          className="w-[400px] px-5 py-0 text-lg rounded-full border border-gray-200 focus:border-gray-700 
+          className="w-[500px] px-5 py-0 text-sm h-8 rounded-lg focus:border-gray-700 
            outline-none transition"
-          placeholder="Search products..."
+          placeholder="Search in Daraz..."
         />
 
         {/* Search Results Container */}
         {showResults && (
           <div
-            className={`absolute mt-1 w-full p-2 bg-white shadow-lg rounded-bl rounded-br 
+            className={`absolute mt-1 w-full p-2 bg-white shadow-lg rounded 
            max-h-[500px] overflow-y-auto ${styles.style4}`}
           >
             {results && results.length
