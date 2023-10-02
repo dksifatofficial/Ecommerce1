@@ -1,14 +1,11 @@
 .mcdMenu li {
-  @apply relative flex flex-row p-2 text-[#686766] cursor-pointer px-5 text-xs uppercase font-semibold;
+  @apply  flex flex-row p-2 text-[#686766] cursor-pointer px-5 text-xs uppercase font-semibold;
 }
 .mcdMenu li:hover {
   @apply text-[#e67e22] bg-[rgba(212,214,214,0.38)];
 }
 .mcdMenu li i {
   @apply text-base mr-2.5 mt-[-1px];
-}
-.arrow1 {
-  @apply text-2xl hidden;
 }
 .mcdMenu li:hover .arrow1 {
   @apply block;

@@ -8,10 +8,10 @@ const Category1 = () => {
   const router = useRouter();
 
   return (
-    <div className="w-full mt-8 grid justify-center items-center">
-      <h2 className="px-3 w-full font-semibold text-gray-600 text-center py-6 text-xl">
+    <div className="w-full grid justify-center items-center">
+      {/* <h2 className="px-3 w-full font-semibold text-gray-600 text-center py-6 text-xl">
           Top Sell
-        </h2>
+        </h2> */}
       <div className="bg-white pt-2 px-6 flex flex-wrap items-center rounded-lg">
         <ul className="flex flex-wrap justify-center items-center gap-8">
           {caterogy8.map((list, index) => {

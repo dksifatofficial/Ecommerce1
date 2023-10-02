@@ -29,12 +29,12 @@ export const navOptions = [
 export const adminNavOptions = [
   {
     id: "adminListing",
-    label: "Manage All Products",
+    label: "Manage Products",
     path: "/admin-view/all-items",
   },
   {
     id: "adminNewProduct",
-    label: "Add New Product",
+    label: "Add Product",
     path: "/admin-view/add-items",
   },
 ];
@@ -246,28 +246,46 @@ export const AvailableSizes = [
     id: "2xl",
     label: "2XL",
   },
+  {
+    id: "3xl",
+    label: "3XL",
+  },
 ];
 
-export const AvailableColors = [
-  {
-    id: "black",
-    label: "Black",
-  },
+export const ColorsWhite = [
   {
     id: "white",
     label: "White",
   },
+];
+export const ColorsBlue = [
+  {
+    id: "blue",
+    label: "Blue",
+  },
+];
+export const ColorsYellow = [
+  {
+    id: "yellow",
+    label: "Yellow",
+  },
+];
+export const ColorsBlack = [
+  {
+    id: "black",
+    label: "Black",
+  },
+];
+export const ColorsRed = [
   {
     id: "red",
     label: "Red",
   },
+];
+export const ColorsPink = [
   {
     id: "pink",
     label: "Pink",
-  },
-  {
-    id: "blue",
-    label: "Blue",
   },
 ];
 

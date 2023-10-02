@@ -1,55 +1,85 @@
 "use client";
 
-import ShutterUpButton from "@/components/Buttons/ShutterUpButton";
+import BestExperience from "@/components/BestExperience";
+import Button3 from "@/components/Buttons/Button3";
 import Category1 from "@/components/Category/Category1";
 import CategoryFull from "@/components/Category/CategoryFull";
+import ProductTile from "@/components/CommonListing/ProductTile";
 import ImageSlider from "@/components/CoverImageSlider";
-import Footer from "@/components/Footer/Footer";
 import MenuBar from "@/components/MenuBar";
 import { GlobalContext } from "@/context";
 import { getAllAdminProducts } from "@/services/product";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
 const images = [
   {
-    src: 'https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcc1.jpg-1694800235238-3y1ye4f9it?alt=media&token=4760c043-e97d-40da-a89c-5978d9bb1ef4',
-    alt: 'Image 1',
-    header: 'Image 1 Header',
-    description: 'Description for Image 1',
-    link: '/product/listing/jersey',
+    src: "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Faa%20(9).jpg-1696059825340-6lnrnqocmk?alt=media&token=2e537a0e-6d8b-4756-a403-117a967f9fe5",
+    alt: "Image 1",
+    header: "Image 1 Header",
+    description: "Description for Image 1",
+    link: "/product/listing/jersey",
   },
   {
-    src: 'https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcc2.jpg-1694800271890-yepu392ygp?alt=media&token=6a4edcac-13af-40c6-b732-034cab8bc21b',
-    alt: 'Image 2',
-    header: 'Image 2 Header',
-    description: 'Description for Image 2',
-    link: '/product/listing/jersey',
-  },
-  
-  {
-    src: 'https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcc3.jpg-1694800299474-1b1em2qp2b?alt=media&token=8f942274-6781-4a86-87d6-ee06adaa4a66',
-    alt: 'Image 3',
-    header: 'Image 3 Header',
-    description: 'Description for Image 3',
-    link: '/product/listing/jersey',
-  },
-  {
-    src: 'https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcc4.jpg-1694800330850-lfapplltyc?alt=media&token=2e0eb356-9163-45be-a9cd-2471d06cc079',
-    alt: 'Image 4',
-    header: 'Image 4 Header',
-    description: 'Description for Image 4',
-    link: '/product/listing/jersey',
-  },
-  {
-    src: 'https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcc5.jpg-1694800356107-91bseavbag?alt=media&token=c1595050-90ef-4d7a-996e-5ed10f4db577',
-    alt: 'Image 5',
-    header: 'Image 5 Header',
-    description: 'Description for Image 5',
-    link: '/product/listing/jersey',
+    src: "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Faa%20(8).jpg-1696059828992-lnfvqa6iyc?alt=media&token=b55cc7c5-82b3-4c61-b964-bfc941adf0a7",
+    alt: "Image 2",
+    header: "Image 2 Header",
+    description: "Description for Image 2",
+    link: "/product/listing/jersey",
   },
 
+  {
+    src: "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Faa%20(7).jpg-1696059831780-fqtwo15hof?alt=media&token=e9c04410-774e-4481-b99e-c0f6a4676dc0",
+    alt: "Image 3",
+    header: "Image 3 Header",
+    description: "Description for Image 3",
+    link: "/product/listing/jersey",
+  },
+  {
+    src: "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Faa%20(6).jpg-1696059834409-6zxrly2yjp?alt=media&token=01663c2c-6044-43e8-9474-664993b7e588",
+    alt: "Image 4",
+    header: "Image 4 Header",
+    description: "Description for Image 4",
+    link: "/product/listing/jersey",
+  },
+  {
+    src: "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Faa%20(5).jpg-1696059837364-6ij1vjo60f?alt=media&token=3111d16e-dfdd-4c3b-a4cf-026782a837ba",
+    alt: "Image 5",
+    header: "Image 5 Header",
+    description: "Description for Image 5",
+    link: "/product/listing/jersey",
+  },
+  {
+    src: "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Faa%20(4).jpg-1696059839872-neslzdjqhn?alt=media&token=fdf72bee-f2d2-46f5-8af9-322dd8638cbd",
+    alt: "Image 2",
+    header: "Image 2 Header",
+    description: "Description for Image 2",
+    link: "/product/listing/jersey",
+  },
+
+  {
+    src: "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Faa%20(3).jpg-1696059842160-m8hsxwxtdf?alt=media&token=5e2bf78f-25fd-4ece-87fe-3738dca5d7e4",
+    alt: "Image 3",
+    header: "Image 3 Header",
+    description: "Description for Image 3",
+    link: "/product/listing/jersey",
+  },
+  {
+    src: "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Faa%20(2).jpg-1696059844777-pmyb8z9s0h?alt=media&token=bc7982e2-54bf-4b2a-86cc-7d9898914e69",
+    alt: "Image 4",
+    header: "Image 4 Header",
+    description: "Description for Image 4",
+    link: "/product/listing/jersey",
+  },
+  {
+    src: "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Faa%20(1).jpg-1696059847267-qn3egey83r?alt=media&token=4baf19b3-b54b-4e66-8f33-cb6ce87289d8",
+    alt: "Image 5",
+    header: "Image 5 Header",
+    description: "Description for Image 5",
+    link: "/product/listing/jersey",
+  },
 ];
 
 export default function Home() {
@@ -74,8 +104,8 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-slate-100">
-      <div className="h-[750px] w-full relative grid justify-center">
-        <Image
+      <div className="w-full relative flex flex-row justify-center gap-6 mt-6">
+        {/* <Image
           className="absolute w-[100%] top-[-100px] hidden md:block"
           src={
             "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcover%2Fcover2.jpg?alt=media&token=99c2ec90-908e-4381-91f0-842ee0d7893c"
@@ -83,12 +113,18 @@ export default function Home() {
           alt="cover"
           height="800"
           width="1600"
-        />
-        <div className="absolute">
+        /> */}
+        <div className="">
           <MenuBar />
         </div>
 
-        <div className=" absolute top-20 right-12 w-[600px]">
+        {/* image slider section */}
+        <div className="">
+          <ImageSlider images={images} />
+        </div>
+        {/* end image slider section */}
+
+        {/* <div className=" absolute top-20 right-12 w-[600px]">
           <div className="mr-auto place-self-center lg:col-span-7">
             <h1
               className="max-w-2xl mb-8 text-[#e70146b2] text-4xl font-extrabold tracking-wide
@@ -109,68 +145,69 @@ export default function Home() {
               </ShutterUpButton>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
-      {/* image slider section */}
-      <div className=" mt-20">
-        <ImageSlider images={images} />
+      <div>
+        <BestExperience />
       </div>
-      {/* end image slider section */}
 
       <section className="flex min-h-screen flex-col items-center justify-between px-24">
         {/* Category1 Section */}
         <Category1 />
 
         {/* Summer Sale Collection Section */}
-        <div className="max-w-screen-xl  py-8 mx-auto sm:py-12 ">
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-stretch">
-            <div className="grid p-6 bg-[#3cca9828] place-content-center sm:p-8">
-              <div className="max-w-md mx-auto text-center lg:text-left">
+        <div className="max-w-screen-xl py-8 mx-auto sm:py-12 ">
+          <div className="grid grid-cols-1 gap-2 lg:grid-cols-3 lg:items-stretch">
+            <div className="relative grid p-6 place-content-center sm:p-8">
+              <div className="absolute h-full overflow-hidden">
+                <Image
+                  className="h-full object-cover opacity-50"
+                  src="https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fwinter.png-1696167224788-077hha4q12?alt=media&token=e8058295-79e5-4dc0-a263-91cbae9a9f97"
+                  alt="Winter"
+                  height="1200"
+                  width="600"
+                />
+              </div>
+              <div className="max-w-md mx-auto text-center z-10 lg:text-left">
                 <div>
-                  <h2 className="text-4xl pb-4 font-bold text-blue-900">
-                    Summer Sale Collection
-                  </h2>
+                  <motion.h2
+                    className="text-5xl pb-4 font-bold text-transparent bg-clip-text inline-block
+                    bg-[linear-gradient(to_bottom_right,#0d9488,#f85606)]"
+                    initial={{ x: -50, opacity: 0 }}
+                    whileInView={{ x: 0, opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    Winter Sale Collection
+                  </motion.h2>
                 </div>
-                <ShutterUpButton
-                  onClick={() => router.push("/product/listing/all-products")}
-                  className="mt-1.5 inline-block px-5 py-3 text-xs font-medium uppercase tracking-wide text-white before:bg-white"
+                <motion.div
+                  initial={{ x: -70, opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.8 }}
                 >
-                  Shop ALL
-                </ShutterUpButton>
+                  <Button3
+                    onClick={() => router.push("/product/listing/all-products")}
+                    className=""
+                  >
+                    Shop ALL
+                  </Button3>
+                </motion.div>
               </div>
             </div>
             <div className="lg:col-span-2">
-              <ul className="grid grid-cols-3 gap-4">
+              <ul className="grid grid-cols-4 gap-2">
                 {products && products.length
                   ? products
-                      .filter((item) => item.onSale === "yes")
-                      .splice(0, 6)
-                      .map((productItem) => (
+                      .filter((item) => item.category === "all")
+                      .splice(0, 8)
+                      .map((item) => (
                         <li
-                          onClick={() =>
-                            router.push(`/product/${productItem._id}`)
-                          }
-                          className="cursor-pointer bg-white"
-                          key={productItem._id}
+                          className="relative flex flex-col overflow-hidden bg-white
+                        cursor-pointer w-[190px] hover:shadow-[0_4px_5px_0.5px_rgba(0,0,0,0.2)]"
+                          key={item._id}
                         >
-                          <div>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={productItem.imageUrl[0]}
-                              alt="Sale Product Item"
-                              className="object-cover w-full  aspect-square"
-                            />
-                          </div>
-                          <div className="mt-3 p-2">
-                            <h3 className="font-medium text-gray-900 line-clamp-1">
-                              {productItem.name}
-                            </h3>
-                            <p className="mt-1 text-sm text-gray-800">
-                              ${productItem.price}{" "}
-                              <span className="text-red-700">{`(-${productItem.priceDrop}%) Off`}</span>
-                            </p>
-                          </div>
+                          <ProductTile item={item} />
                         </li>
                       ))
                   : null}
@@ -184,7 +221,7 @@ export default function Home() {
 
         {/* category by person Section */}
 
-        <div className="max-w-screen-xl py-8 mx-auto sm:px-6 sm:py-12 ">
+        {/* <div className="max-w-screen-xl py-8 mx-auto sm:px-6 sm:py-12 ">
           <div className="text-center">
             <h2 className="text-xl uppercase font-bold text-gray-600">
               category by person
@@ -192,9 +229,9 @@ export default function Home() {
           </div>
           <ul className="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-3">
             <li>
-              <div className="relative block group">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              <div className="relative block group"> */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* <img
                   src="https://images.unsplash.com/photo-1618898909019-010e4e234c55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
                   className="object-cover w-full aspect-square"
                   alt=""
@@ -211,9 +248,9 @@ export default function Home() {
               </div>
             </li>
             <li>
-              <div className="relative block group">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              <div className="relative block group"> */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* <img
                   src="https://images.unsplash.com/photo-1624623278313-a930126a11c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
                   className="object-cover w-full aspect-square"
                   alt=""
@@ -230,9 +267,9 @@ export default function Home() {
               </div>
             </li>
             <li className="lg:col-span-2 lg:col-start-2 lg:row-span-2 lg:row-start-1">
-              <div className="relative block group">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+              <div className="relative block group"> */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        {/* <img
                   src="https://images.unsplash.com/photo-1593795899768-947c4929449d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80"
                   className="object-cover w-full aspect-square"
                   alt=""
@@ -249,7 +286,7 @@ export default function Home() {
               </div>
             </li>
           </ul>
-        </div>
+        </div> */}
 
         {/* Just For You Section */}
 
@@ -261,58 +298,29 @@ export default function Home() {
             <ul className="grid grid-cols-6 gap-4">
               {products && products.length
                 ? products
-                    .filter((item) => item.onSale === "yes")
-                    .splice(0, 18)
-                    .map((productItem) => (
+                    .filter((item) => item.category !== "premium")
+                    .splice(2, 24)
+                    .map((item) => (
                       <li
-                        onClick={() =>
-                          router.push(`/product/${productItem._id}`)
-                        }
-                        className="cursor-pointer bg-white hover:shadow-[0_5px_6px_0.2px_rgba(0,0,0,0.1)]"
-                        key={productItem._id}
+                        className="relative flex flex-col overflow-hidden bg-white
+                        cursor-pointer w-[190px] hover:shadow-[0_4px_5px_0.5px_rgba(0,0,0,0.2)]"
+                        key={item._id}
                       >
-                        <div>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={productItem.imageUrl[0]}
-                            alt="Sale Product Item"
-                            className="object-cover w-full aspect-square"
-                          />
-                        </div>
-                        <div className="mt-2 p-2">
-                          <h3 className="font-medium text-sm text-gray-900 line-clamp-1">
-                            {productItem.name}
-                          </h3>
-                          {productItem.onSale === "yes" ? (
-                            <p className="text-base mt-2 font-semibold text-[#F85606]">{`$ ${(
-                              productItem.price -
-                              productItem.price * (productItem.priceDrop / 100)
-                            ).toFixed(2)}`}</p>
-                          ) : (
-                            <p className="text-base mt-2 font-semibold text-[#F85606]">
-                              {`$ ${productItem.price}`}
-                            </p>
-                          )}
-                          <p className="mt-1 text-xs text-gray-800">
-                           {`(-${productItem.priceDrop}%) Off`}
-                          </p>
-                        </div>
+                        <ProductTile item={item} />
                       </li>
                     ))
                 : null}
             </ul>
           </div>
           <div className="w-full relative flex justify-center my-8">
-              <ShutterUpButton
-                className=" before:bg-slate-100 py-1 px-10 rounded-lg"
-                onClick={() => router.push("/product/listing/all-products")}
-              >
-                <p className="text-xl font-bold">See More</p>
-              </ShutterUpButton>
-            </div>
+            <Button3
+              onClick={() => router.push("/product/listing/all-products")}
+            >
+              <p className="text-xl font-bold">See More</p>
+            </Button3>
+          </div>
         </div>
       </section>
-      <Footer />
     </main>
   );
 }

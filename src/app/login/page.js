@@ -7,9 +7,12 @@ import { GlobalContext } from "@/context";
 import { login } from "@/services/login";
 import { loginFormControls } from "@/utils";
 import Cookies from "js-cookie";
+// import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+// import { signIn } from 'next-auth/react'
+// import { useSession } from "next-auth/react";
 
 const initialFormdata = {
   email: "",
@@ -18,6 +21,7 @@ const initialFormdata = {
 
 export default function Login() {
   const [formData, setFormData] = useState(initialFormdata);
+  // const { status } = useSession();
   const {
     isAuthUser,
     setIsAuthUser,
@@ -40,6 +44,16 @@ export default function Login() {
       ? true
       : false;
   }
+
+//  function GoogleLogIn() {
+//     if (status === "authenticated") {
+//       setIsAuthUser(true);
+//     }
+//   }
+//   useEffect(() => {
+//     GoogleLogIn();
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, []);
 
   async function handleLogin() {
     setComponentLevelLoader({ loading: true, id: "" });
@@ -78,6 +92,15 @@ export default function Login() {
       <div className="flex flex-col items-center justify-between pt-0 pr-10 pb-0 pl-10 mt-8 mr-auto xl:px-5 lg:flex-row">
         <div className="flex flex-col justify-center items-center w-full pr-10 pl-10 lg:flex-row">
           <div className="w-full mt-10 mr-0 mb-0 ml-0 relative max-w-2xl lg:mt-0 lg:w-5/12">
+
+            {/* <button
+            className="mb-8 bg-white flex items-center gap-4 shadow-lg overflow-hidden rounded-lg pl-3"
+            onClick={() => signIn('google')}
+            >
+              <Image src="/google.png" alt="" height={30} width={30} /> 
+              <span className=" bg-blue-500 text-white px-4 py-3">Sign in with Google</span>
+            </button> */}
+
             <div className="flex flex-col items-center justify-start pt-10 pr-10 pb-10 pl-10 bg-white shadow-2xl rounded-xl relative z-10">
               <p className="w-full text-4xl font-medium text-center font-serif">
                 Login

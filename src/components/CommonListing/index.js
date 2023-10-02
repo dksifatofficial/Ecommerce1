@@ -18,7 +18,7 @@ const CommonListing = ({ data }) => {
 
   return (
     <section className="bg-slate-100 py-12 sm:py-16">
-      <div className="mx-auto  px-4 sm:px-6">
+      <div className="mx-auto px-4 sm:px-6">
         <div className="mt-10 gap-4 flex flex-wrap justify-center">
           {data && data.length
             ? data.filter((item) => item.category !== "premium")

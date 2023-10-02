@@ -1,3 +1,22 @@
+export const menuBarGenderOptions = [
+  {
+    title: "Men",
+    path: "/product/listing/men",
+  },
+  {
+    title: "Women",
+    path: "/product/listing/women",
+  },
+  {
+    title: "Kid's",
+    path: "/product/listing/kids",
+  },
+  {
+    title: "All",
+    path: "/product/listing/all-products",
+  },
+];
+
 export const menuBarFashionOptions = [
   {
     title: "T-shart",

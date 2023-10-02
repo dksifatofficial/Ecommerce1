@@ -30,18 +30,13 @@ function NavItems({ isModalView = false, isAdminView, router }) {
       }`}
       id="nav-items"
     >
-      <ul
-        className={`flex flex-col p-4 md:p-0 mt-4 font-medium  rounded-lg 
-         md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-white mr-1 ml-1
-         ${isModalView ? "border-none" : "border border-gray-100"}
-         `}
-      >
+      <ul className="flex flex-row md:p-0 font-medium rounded-lg mr-1 ml-1">
         {
           isAdminView
             ? adminNavOptions.map((item) => (
                 <li
-                  className="cursor-pointer block py-2 pl-3 pr-4 text-[#3cca98] rounded md:p-0
-                 hover:text-[#268d69]"
+                  className="rounded-lg text-sm text-white font-semibold px-3 py-1 m-0 
+                  hover:text-[#f8f3f3da] cursor-pointer"
                   key={item.id}
                   onClick={() => router.push(item.path)}
                 >
@@ -49,7 +44,7 @@ function NavItems({ isModalView = false, isAdminView, router }) {
                 </li>
               ))
             : null
-          // navOptions.map((item) => (
+          // (navOptions.map((item) => (
           //     <li
           //       className="cursor-pointer block py-2 pl-3 pr-4 text-[#3cca98] rounded md:p-0
           //        hover:text-[#268d69]"
@@ -58,7 +53,7 @@ function NavItems({ isModalView = false, isAdminView, router }) {
           //     >
           //       {item.label}
           //     </li>
-          //   ))
+          //   )))
         }
       </ul>
     </div>
@@ -67,7 +62,6 @@ function NavItems({ isModalView = false, isAdminView, router }) {
 
 const Navbar = () => {
   const { showNavModal, setShowNavModal } = useContext(GlobalContext);
-
   const [allProducts, setAllProducts] = useState([]);
 
   async function getListOfProducts() {

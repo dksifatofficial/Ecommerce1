@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -65,7 +65,7 @@ const ImageSlider = ({ images }) => {
 
   return (
     <div
-      className="w-[800px] h-[350px] relative overflow-hidden"
+      className="w-[900px] h-[320px] relative overflow-hidden rounded-lg"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -75,7 +75,7 @@ const ImageSlider = ({ images }) => {
       >
         {[...images, images[0]].map((image, index) => (
           <Link
-            className="relative flex-[0_0_100%] w-full flex justify-center items-center transition-transform 
+            className="relative h-[320px] flex-[0_0_100%] w-full flex justify-center items-center transition-transform 
             duration-[1s] ease-[ease] overflow-hidden"
             key={index}
             href={image.link}
@@ -89,15 +89,15 @@ const ImageSlider = ({ images }) => {
             <div className="absolute z-[1] p-[10px] top-0 left-0 w-full h-full">
               <div className="max-w-screen-xl mx-auto px-4 xl:px-0 py-10 flex flex-col gap-y-2 
                 justify-center h-full ml-8">
-                <motion.h2
+                {/* <motion.h2
                   initial={{ y: 30, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.5 }}
                   className="text-5xl font-bold text-white"
                 >
                   {image.header}
-                </motion.h2>
-                <motion.p
+                </motion.h2> */}
+                {/* <motion.p
                   initial={{ y: 40, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.6 }}
@@ -105,8 +105,8 @@ const ImageSlider = ({ images }) => {
                 >
                   Sed ut perspiciatis unde omnis iste <br /> natus error sit
                   voluptatem
-                </motion.p>
-                <motion.div
+                </motion.p> */}
+                {/* <motion.div
                   initial={{ y: 50, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.7 }}
@@ -120,7 +120,7 @@ const ImageSlider = ({ images }) => {
                   text-sm uppercase font-semibold">
                     Shop Now
                   </button>
-                </motion.div>
+                </motion.div> */}
               </div>
             </div>
           </Link>
@@ -128,16 +128,18 @@ const ImageSlider = ({ images }) => {
       </div>
       <div
         className="flex justify-between w-full px-5 py-0 absolute top-0 transform 
-      opacity-0 hover:opacity-[1] transition-opacity duration-300 ease-in-out"
+      opacity-1 hover:opacity-[1] transition-opacity duration-300 ease-in-out h-[320px]"
       >
         <button
-          className="text-white text-2xl cursor-pointer pr-[50px] pl-4 py-[160px] border-[none] absolute left-0 bg-transparent"
+          className="text-white text-2xl cursor-pointer px-1 py-3 bg-[#969595a2]
+           absolute left-0 top-2/4 -translate-y-2/4 "
           onClick={goToPreviousImage}
         >
           &lt;
         </button>
         <button
-          className="text-white text-2xl cursor-pointer pl-[50px] pr-4 py-[160px] border-[none] absolute right-0 bg-transparent"
+          className="text-white text-2xl cursor-pointer px-1 py-3 bg-[#969595a2]
+           absolute right-0 top-2/4 -translate-y-2/4"
           onClick={goToNextImage}
         >
           &gt;

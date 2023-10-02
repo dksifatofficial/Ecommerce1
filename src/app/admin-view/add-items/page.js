@@ -1,5 +1,7 @@
 "use client";
 
+import Button3 from "@/components/Buttons/Button3";
+import ColorTileComponent from "@/components/FormElements/ColorTileComponent";
 import InputComponent from "@/components/FormElements/InputComponent";
 import SelectComponent from "@/components/FormElements/SelectComponent";
 import TileComponent from "@/components/FormElements/TileComponent";
@@ -8,9 +10,14 @@ import Notification from "@/components/Notification";
 import { GlobalContext } from "@/context";
 import { addNewProduct, updateAProduct } from "@/services/product";
 import {
-  AvailableColors,
   AvailableSizes,
   CategoryTags,
+  ColorsBlack,
+  ColorsBlue,
+  ColorsPink,
+  ColorsRed,
+  ColorsWhite,
+  ColorsYellow,
   adminAddProductformControls,
   firebaseConfig,
   firebaseStroageURL,
@@ -163,7 +170,6 @@ export default function AdminAddNewProduct() {
       imageUrl: newImages,
     });
   }
-  
 
   // async function handleImage(event) {
   //   const extractImageUrl = await helperForUPloadingImageToFirebase(
@@ -177,7 +183,6 @@ export default function AdminAddNewProduct() {
   //     });
   //   }
   // }
-
 
   // for sizes
   function handleTileClick(getCurrentItem) {
@@ -262,53 +267,111 @@ export default function AdminAddNewProduct() {
   console.log(formData);
 
   return (
-    <div className="w-full px-[100px] py-[50px] mr-0 mb-0 ml-0 relative">
-      <div className="flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl relative">
+    <div className="w-full px-12 py-12 mr-0 mb-0 ml-0 relative">
+      <div className="flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl relative
+       bg-[linear-gradient(to_bottom_right,#0d9488,#95a7a5,#f85606)]">
         <div className="w-full mt-6 mr-0 mb-0 ml-0 space-y-8">
-          <input
-            accept="image/*"
-            max="1000000"
-            type="file"
-            onChange={handleImage}
-            multiple
-          />
-          <div className="flex flex-wrap gap-2">
-            {formData.imageUrl.map((imageUrl, index) => (
-              <div key={index} className="relative">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={imageUrl}
-                  alt={`Product Image ${index}`}
-                  className="max-w-[200px] max-h-[200px] object-contain"
+          {/* Product Images */}
+          <div className="space-y-8 border p-8 rounded-xl bg-white">
+            <div className=" flex flex-col">
+              <label className="pb-2 text-lg font-semibold">
+                Product Images <span className="text-red-600">*</span>
+              </label>
+              <input
+                accept="image/*"
+                max="1000000"
+                type="file"
+                onChange={handleImage}
+                multiple
+              />
+              <p className="pt-2 text-xs text-gray-500">
+                Upload between 3 to 5 images
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {formData.imageUrl.map((imageUrl, index) => (
+                <div key={index} className="relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={imageUrl}
+                    alt={`Product Image ${index}`}
+                    className="max-w-[200px] max-h-[200px] object-contain"
+                  />
+                  <button
+                    onClick={() => handleRemoveImage(index)}
+                    className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-full cursor-pointer"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Available Sizes */}
+          <div className="border p-8 rounded-xl bg-white">
+            <label className="pb-2 text-lg font-semibold">
+              Available Sizes <span className="text-red-600">*</span>
+            </label>
+            <div className="flex gap-2 flex-col">
+              <p className="pt-2 text-xs text-gray-500">Select sizes</p>
+              <TileComponent
+                selected={formData.sizes}
+                onClick={handleTileClick}
+                data={AvailableSizes}
+              />
+            </div>
+          </div>
+
+          {/* Available Colors */}
+          <div className="border p-8 rounded-xl bg-white">
+            <label className="pb-2 text-lg font-semibold">
+              Available Colors <span className="text-red-600">*</span>
+            </label>
+            <div className="flex gap-2 flex-col">
+              <p className="pt-2 text-xs text-gray-500">Available Colors</p>
+              <div className=" flex flex-wrap gap-2">
+                <ColorTileComponent
+                  className="bg-pink-500 text-white"
+                  selected={formData.colors}
+                  onClick={handleColorsTileClick}
+                  data={ColorsPink}
                 />
-                <button
-                  onClick={() => handleRemoveImage(index)}
-                  className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-full cursor-pointer"
-                >
-                  Remove
-                </button>
+                <ColorTileComponent
+                  className="bg-red-600 text-white"
+                  selected={formData.colors}
+                  onClick={handleColorsTileClick}
+                  data={ColorsRed}
+                />
+                <ColorTileComponent
+                  className="bg-black text-white"
+                  selected={formData.colors}
+                  onClick={handleColorsTileClick}
+                  data={ColorsBlack}
+                />
+                <ColorTileComponent
+                  className="bg-white"
+                  selected={formData.colors}
+                  onClick={handleColorsTileClick}
+                  data={ColorsWhite}
+                />
+                <ColorTileComponent
+                  className="bg-blue-500 text-white"
+                  selected={formData.colors}
+                  onClick={handleColorsTileClick}
+                  data={ColorsBlue}
+                />
+                <ColorTileComponent
+                  className="bg-yellow-500"
+                  selected={formData.colors}
+                  onClick={handleColorsTileClick}
+                  data={ColorsYellow}
+                />
               </div>
-            ))}
+            </div>
           </div>
 
-          <div className="flex gap-2 flex-col">
-            <label>Available sizes</label>
-            <TileComponent
-              selected={formData.sizes}
-              onClick={handleTileClick}
-              data={AvailableSizes}
-            />
-          </div>
-
-          <div className="flex gap-2 flex-col">
-            <label>Available Colors</label>
-            <TileComponent
-              selected={formData.colors}
-              onClick={handleColorsTileClick}
-              data={AvailableColors}
-            />
-          </div>
-
+          {/* text review */}
           <div>
             {/* <InputComponent
               type="text"
@@ -331,75 +394,97 @@ export default function AdminAddNewProduct() {
             /> */}
           </div>
 
-          {adminAddProductformControls.map((controlItem) =>
-            controlItem.componentType === "input" ? (
-              // eslint-disable-next-line react/jsx-key
-              <InputComponent
-                type={controlItem.type}
-                placeholder={controlItem.placeholder}
-                label={controlItem.label}
-                value={formData[controlItem.id]}
-                onChange={(event) => {
-                  setFormData({
-                    ...formData,
-                    [controlItem.id]: event.target.value,
-                  });
-                }}
-              />
-            ) : controlItem.componentType === "select" ? (
-              <SelectComponent
-                label={controlItem.label}
-                options={controlItem.options}
-                value={formData[controlItem.id]}
-                onChange={(event) => {
-                  setFormData({
-                    ...formData,
-                    [controlItem.id]: event.target.value,
-                  });
-                }}
-              />
-            ) : null
-          )}
-
-          <InputComponent
-            type="number"
-            placeholder="5"
-            label="Star"
-            value={formData.starRatings.starRating}
-            controlItem="starRating"
-            onChange={handleInputChange}
-          />
-
-          {/* Category Tags */}
-          <div className="flex gap-2 flex-col">
-            <label>Select Your Category Tags</label>
-            <TileComponent
-              selected={formData.tags}
-              onClick={handleCategoryTags}
-              data={CategoryTags}
-            />
+          {/* Product Information */}
+          <div className="space-y-8 border p-8 rounded-xl bg-white">
+            <p className="pb-2 text-lg font-semibold">
+              Product Information <span className="text-red-600">*</span>
+            </p>
+            {adminAddProductformControls.map((controlItem) =>
+              controlItem.componentType === "input" ? (
+                // eslint-disable-next-line react/jsx-key
+                <InputComponent
+                  type={controlItem.type}
+                  placeholder={controlItem.placeholder}
+                  label={controlItem.label}
+                  value={formData[controlItem.id]}
+                  onChange={(event) => {
+                    setFormData({
+                      ...formData,
+                      [controlItem.id]: event.target.value,
+                    });
+                  }}
+                />
+              ) : controlItem.componentType === "select" ? (
+                <SelectComponent
+                  label={controlItem.label}
+                  options={controlItem.options}
+                  value={formData[controlItem.id]}
+                  onChange={(event) => {
+                    setFormData({
+                      ...formData,
+                      [controlItem.id]: event.target.value,
+                    });
+                  }}
+                />
+              ) : null
+            )}
           </div>
 
-          <button
-            onClick={handleAddProduct}
-            className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking-wide"
-          >
-            {componentLevelLoader && componentLevelLoader.loading ? (
-              <ComponentLevelLoader
-                text={
-                  currentUpdatedProduct !== null
-                    ? "Updating Product"
-                    : "Adding Product"
-                }
-                color={"#ffffff"}
-                loading={componentLevelLoader && componentLevelLoader.loading}
+          {/* Review */}
+          <div className="border p-8 rounded-xl bg-white">
+            <label className="pb-2 text-lg font-semibold">Review</label>
+            <div className="flex gap-2 flex-col">
+              <p className="py-2 text-xs text-gray-500">
+                Give a number between 1 & 5
+              </p>
+              <InputComponent
+                type="number"
+                placeholder="5"
+                label="Star"
+                value={formData.starRatings.starRating}
+                controlItem="starRating"
+                onChange={handleInputChange}
               />
-            ) : currentUpdatedProduct !== null ? (
-              "Update Product"
-            ) : (
-              "Add Product"
-            )}
-          </button>
+            </div>
+          </div>
+
+          {/* Category Tags */}
+          <div className="border p-8 rounded-xl bg-white">
+            <label className="pb-2 text-lg font-semibold">
+              Category Tags <span className="text-red-600">*</span>
+            </label>
+            <div className="flex gap-2 flex-col">
+              <p className="pt-2 text-xs text-gray-500">
+                Select Your Category Tags
+              </p>
+              <TileComponent
+                selected={formData.tags}
+                onClick={handleCategoryTags}
+                data={CategoryTags}
+              />
+            </div>
+          </div>
+
+          {/* Button */}
+          <div className="border p-8 rounded-xl flex justify-center bg-white">
+            <Button3 className="w-[250px]" onClick={handleAddProduct}>
+              {componentLevelLoader && componentLevelLoader.loading ? (
+                <ComponentLevelLoader
+                  text={
+                    currentUpdatedProduct !== null
+                      ? "Updating Product"
+                      : "Adding Product"
+                  }
+                  color={"#ffffff"}
+                  loading={componentLevelLoader && componentLevelLoader.loading}
+                />
+              ) : currentUpdatedProduct !== null ? (
+                "Update Product"
+              ) : (
+                "Add Product"
+              )}
+            </Button3>
+          </div>
         </div>
       </div>
       <Notification />
