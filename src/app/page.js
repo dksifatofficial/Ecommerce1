@@ -11,6 +11,7 @@ import { GlobalContext } from "@/context";
 import { getAllAdminProducts } from "@/services/product";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 
@@ -299,7 +300,8 @@ export default function Home() {
               {products && products.length
                 ? products
                     .filter((item) => item.category !== "premium")
-                    .splice(2, 24)
+                    .reverse()
+                    .splice(0, 24)
                     .map((item) => (
                       <li
                         className="relative flex flex-col overflow-hidden bg-white
@@ -313,11 +315,9 @@ export default function Home() {
             </ul>
           </div>
           <div className="w-full relative flex justify-center my-8">
-            <Button3
-              onClick={() => router.push("/product/listing/all-products")}
-            >
-              <p className="text-xl font-bold">See More</p>
-            </Button3>
+            <Link href="/product/listing/all-products">
+              <p className="text-lg font-bold text-gray-600 hover:text-gray-400">See More...</p>
+            </Link>
           </div>
         </div>
       </section>

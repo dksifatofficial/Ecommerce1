@@ -19,6 +19,10 @@ const AddNewProductSchema = Joi.object({
   itemCode: Joi.string().required(),
   starRatings: Joi.array(),
   colors: Joi.array(),
+  details: Joi.string().required(),
+  material: Joi.string().required(),
+  brand: Joi.string().required(),
+  whatsInTheBox: Joi.string().required(),
 });
 
 export const dynamic = "force-dynamic";
@@ -49,6 +53,10 @@ export async function POST(req) {
         itemCode,
         starRatings,
         colors,
+        details,
+        material,
+        brand,
+        whatsInTheBox,
       } = extractData;
 
       const { error } = AddNewProductSchema.validate({
@@ -66,6 +74,10 @@ export async function POST(req) {
         itemCode,
         starRatings,
         colors,
+        details,
+        material,
+        brand,
+        whatsInTheBox,
       });
 
       if (error) {

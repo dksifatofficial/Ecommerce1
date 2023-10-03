@@ -3,13 +3,14 @@
 import { GlobalContext } from "@/context";
 import Logo from "@/picture/logo.png";
 import { getAllAdminProducts } from "@/services/product";
-import { adminNavOptions } from "@/utils";
+import { adminNavOptions, navOptions } from "@/utils";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Fragment, useContext, useEffect, useState } from "react";
 import {
+  IoIosArrowDown,
   IoIosBriefcase,
   IoIosCart,
   IoIosContact,
@@ -19,42 +20,40 @@ import {
 } from "react-icons/io";
 import CartModal from "../CartModal";
 import CommonModal from "../CommonModal";
+import MenuBar from "../MenuBar";
 import Search from "../SearchBar/Search";
 import styles from "./styles.module.css";
 
 function NavItems({ isModalView = false, isAdminView, router }) {
   return (
     <div
-      className={`items-center justify-between w-full md:flex md:w-auto ${
+      className={`items-center justify-between w-full ${
         isModalView ? "" : "hidden"
       }`}
       id="nav-items"
     >
-      <ul className="flex flex-row md:p-0 font-medium rounded-lg mr-1 ml-1">
-        {
-          isAdminView
-            ? adminNavOptions.map((item) => (
-                <li
-                  className="rounded-lg text-sm text-white font-semibold px-3 py-1 m-0 
+      <ul className="flex flex-row font-medium rounded-lg">
+        {isAdminView
+          ? adminNavOptions.map((item) => (
+              <li
+                className="rounded-lg text-sm text-[#3cca98] font-semibold px-3 py-1 m-0 
                   hover:text-[#f8f3f3da] cursor-pointer"
-                  key={item.id}
-                  onClick={() => router.push(item.path)}
-                >
-                  {item.label}
-                </li>
-              ))
-            : null
-          // (navOptions.map((item) => (
-          //     <li
-          //       className="cursor-pointer block py-2 pl-3 pr-4 text-[#3cca98] rounded md:p-0
-          //        hover:text-[#268d69]"
-          //       key={item.id}
-          //       onClick={() => router.push(item.path)}
-          //     >
-          //       {item.label}
-          //     </li>
-          //   )))
-        }
+                key={item.id}
+                onClick={() => router.push(item.path)}
+              >
+                {item.label}
+              </li>
+            ))
+          : navOptions.map((item) => (
+              <li
+                className="cursor-pointer block py-2 pl-3 pr-4 text-[#3cca98] rounded md:p-0
+                 hover:text-[#268d69]"
+                key={item.id}
+                onClick={() => router.push(item.path)}
+              >
+                {item.label}
+              </li>
+            ))}
       </ul>
     </div>
   );
@@ -63,6 +62,24 @@ function NavItems({ isModalView = false, isAdminView, router }) {
 const Navbar = () => {
   const { showNavModal, setShowNavModal } = useContext(GlobalContext);
   const [allProducts, setAllProducts] = useState([]);
+  const [showCategories, setShowCategories] = useState(false);
+
+  const handleScroll = () => {
+    // Check the scroll position
+    if (window.scrollY >= 500) {
+      setShowCategories(true);
+    } else {
+      setShowCategories(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      // Remove the event listener when the component unmounts
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   async function getListOfProducts() {
     const res = await getAllAdminProducts();
@@ -133,7 +150,8 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-[#f85606] fixed w-full z-20 top-0 left-0">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-3">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-3 relative">
+          {/* logo */}
           <div
             className="flex items-center cursor-pointer"
             onClick={() => router.push("/")}
@@ -152,7 +170,76 @@ const Navbar = () => {
               width="800"
             />
           </div>
-          <div className="flex md:order-2 gap-2">
+
+          {/* Hidden Categories menu */}
+          {showCategories ? (
+            <div
+              className={`absolute left-[100px] flex items-center cursor-pointer flex-row mr-1 
+            text-white hover:text-[#f8f3f3da] rounded-lg ${styles.dropdown}`}
+            >
+              <p className="text-sm font-semibold pl-3 pr-1 py-1 m-0 ">
+                Categories
+              </p>
+              <i className={`text-lg pr-2 ${styles.dropbtn}`}>
+                <IoIosArrowDown />
+              </i>
+              <div className={styles.dropdownContent}>
+                <MenuBar />
+              </div>
+            </div>
+          ) : null}
+
+          {/* Search Box */}
+          <div className="absolute left-[220px] ">
+            <Search
+              allProducts={allProducts}
+              results={results}
+              value={selectedProduct ? selectedProduct.name : ""}
+              renderItem={(item) => (
+                <div className="flex flex-row align-middle">
+                  <Image
+                    className="h-8 w-8"
+                    src={item.imageUrl[0]}
+                    alt="img"
+                    height="100"
+                    width="100"
+                  />
+                  <p className="ml-2 text-xs flex self-center">{item.name}</p>
+                </div>
+              )}
+              onChange={(e, filteredResults) => {
+                setResults(filteredResults);
+                handleChange(e); // You may need to pass other arguments if necessary
+              }}
+              // onChange={handleChange}
+              onSelect={(item) => setSelectedProduct(item)}
+              router={router}
+            />
+          </div>
+
+          {/* Admin Product Control */}
+
+          {/* Button */}
+          <div className="flex md:order-2 gap-0">
+            {user?.role === "admin" ? (
+              isAdminView ? (
+                adminNavOptions.map((item) => (
+                  <button
+                    className="p-0 m-0"
+                    key={item.id}
+                    onClick={() => router.push(item.path)}
+                  >
+                    <p
+                    className="rounded-lg text-sm text-white font-semibold px-3 py-1 m-0 
+                    hover:text-[#f8f3f3da]"
+                  >
+                    {item.label}
+                  </p> 
+                  </button>
+                ))
+              ) : null
+            ) : null}
+
             {user?.role === "admin" ? (
               <Fragment>
                 <button
@@ -346,32 +433,6 @@ const Navbar = () => {
                 ></path>
               </svg>
             </button>
-          </div>
-          <div>
-            <Search
-              allProducts={allProducts}
-              results={results}
-              value={selectedProduct ? selectedProduct.name : ""}
-              renderItem={(item) => (
-                <div className="flex flex-row align-middle">
-                  <Image
-                    className="h-8 w-8"
-                    src={item.imageUrl[0]}
-                    alt="img"
-                    height="100"
-                    width="100"
-                  />
-                  <p className="ml-2 text-xs flex self-center">{item.name}</p>
-                </div>
-              )}
-              onChange={(e, filteredResults) => {
-                setResults(filteredResults);
-                handleChange(e); // You may need to pass other arguments if necessary
-              }}
-              // onChange={handleChange}
-              onSelect={(item) => setSelectedProduct(item)}
-              router={router}
-            />
           </div>
           <NavItems router={router} isAdminView={isAdminView} />
         </div>

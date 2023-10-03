@@ -4,9 +4,11 @@ import Error404 from "@/app/error-404/page";
 import { GlobalContext } from "@/context";
 import { addToCart } from "@/services/cart";
 import { productById, updateStarRatings } from "@/services/product";
+import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { toast } from "react-toastify";
-import ShutterUpButton from "../Buttons/ShutterUpButton";
+import Button3 from "../Buttons/Button3";
 import InputComponent from "../FormElements/InputComponent";
 import SizeComponent from "../FormElements/SizeComponent";
 import ComponentLevelLoader from "../Loader/componentlevel";
@@ -35,6 +37,11 @@ export default function CommonDetails({ item }) {
   const [productData, setProductData] = useState([]);
   const [currentRevUser, setCurrentRevUser] = useState(user?._id);
   const [selectedImage, setSelectedImage] = useState(item.imageUrl[0]);
+  const [activeButton, setActiveButton] = useState("Description");
+
+  const handleButtonClick = (buttonId) => {
+    setActiveButton(buttonId);
+  };
 
   // fetching Product Details
   useEffect(() => {
@@ -215,15 +222,21 @@ export default function CommonDetails({ item }) {
   const averageRating = calculateAverageRating();
 
   return (
-    <div className="w-full">
+    <div className="w-full bg-[#eff0f5]">
+      <Helmet>
+        <title>{item ? item.name : ""}</title>
+        <meta name="description" content="" />
+      </Helmet>
       {item && item.category !== "premium" ? (
-        <section className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-          <div className="container mx-auto px-4">
-            <div className="lg:col-gap-12 xl:col-gap-16 mt-8 grid grid-cols-1 gap-12 lg:mt-12 lg:grid-cols-5 lg:gap-16">
-              <div className="lg:col-span-3 lg:row-end-1">
-                <div className="lg:flex lg:items-start">
-                  <div className="lg:order-2 lg:ml-5">
-                    <div className="max-w-xl overflow-hidden rounded-lg">
+        <section className="mx-auto max-w-screen-xl ">
+          <div className="container mx-auto py-12">
+            {/* Main section */}
+            <div className="flex flex-wrap rounded-lg mb-4 bg-white">
+              {/* picture section */}
+              <div className="col-span-3 py-5 w-[30%] row-end-1">
+                <div className="flex flex-col w-full items-start px-5">
+                  <div className="order-1 pb-4 border-b w-full flex justify-center">
+                    <div className="max-w-xl h-[350px] w-full overflow-hidden rounded-lg">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={selectedImage}
@@ -232,12 +245,13 @@ export default function CommonDetails({ item }) {
                       />
                     </div>
                   </div>
-                  <div className="mt-2 w-full lg:order-1 lg:w-32 lg:flex-shrink-0">
-                    <div className="flex flex-row items-start lg:flex-col">
+                  <div className="mt-2 w-full order-2 flex-shrink-0">
+                    <div className="flex flex-wrap justify-center">
                       {item && item.imageUrl && item.imageUrl.length ? (
                         <button
                           type="button"
-                          className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
+                          className="flex-0 aspect-square mb-3 h-16 w-16 overflow-hidden rounded-lg 
+                          border-2 border-gray-100 text-center"
                           onClick={() => setSelectedImage(item.imageUrl[0])}
                         >
                           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -251,7 +265,7 @@ export default function CommonDetails({ item }) {
                       {item && item.imageUrl && item.imageUrl.length > 1 ? (
                         <button
                           type="button"
-                          className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
+                          className="flex-0 aspect-square mb-3 h-16 w-16 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
                           onClick={() => setSelectedImage(item.imageUrl[1])}
                         >
                           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -265,7 +279,7 @@ export default function CommonDetails({ item }) {
                       {item && item.imageUrl && item.imageUrl.length > 2 ? (
                         <button
                           type="button"
-                          className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
+                          className="flex-0 aspect-square mb-3 h-16 w-16 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
                           onClick={() => setSelectedImage(item.imageUrl[2])}
                         >
                           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -279,7 +293,7 @@ export default function CommonDetails({ item }) {
                       {item && item.imageUrl && item.imageUrl.length > 3 ? (
                         <button
                           type="button"
-                          className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
+                          className="flex-0 aspect-square mb-3 h-16 w-16 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
                           onClick={() => setSelectedImage(item.imageUrl[3])}
                         >
                           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -293,7 +307,7 @@ export default function CommonDetails({ item }) {
                       {item && item.imageUrl && item.imageUrl.length > 4 ? (
                         <button
                           type="button"
-                          className="flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
+                          className="flex-0 aspect-square mb-3 h-16 w-16 overflow-hidden rounded-lg border-2 border-gray-100 text-center"
                           onClick={() => setSelectedImage(item.imageUrl[4])}
                         >
                           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -308,69 +322,75 @@ export default function CommonDetails({ item }) {
                   </div>
                 </div>
               </div>
-              <div className="lg:col-span-2 lg:row-span-2 lg:row-end-2">
-                <h1 className="text-2xl font-bold text-gray-900">
-                  {item && item.name}
-                </h1>
-                <h3>Item code: #{item.itemCode}</h3>
+
+              {/* product section */}
+              {/* header section */}
+              <div className="w-[45%] pr-5 py-5">
+                <div className="border-b pb-6">
+                  <h1 className="text-xl font-semibold text-gray-600">
+                    {item && item.name}
+                  </h1>
+                  <p className="text-xs text-gray-400">
+                    Item code: #{item.itemCode}
+                  </p>
+                  {/*star rating */}
+                  <div className="py-1 flex gap-[0.2rem] items-center justify-start">
+                    <Star
+                      stars={averageRating}
+                      reviews={item.starRatings.length}
+                      averageRating={averageRating}
+                      // onStarClick={handleStarClick}
+                    />
+                    <p className="m-0 ml-1 text-xs text-gray-600">
+                      ({averageRating})
+                    </p>
+                    <p className="m-0 ml-1 text-xs text-gray-600">
+                      {item.starRatings.length} reviews
+                    </p>
+                  </div>
+                  <p className="text-xs text-gray-500">
+                    Brand:{" "}
+                    <span className="text-teal-500">
+                      {item.brand}
+                    </span>{" "}
+                    |{" "}
+                    <Link className="text-teal-500 hover:underline" href="/">
+                      More from No Brand
+                    </Link>
+                  </p>
+                </div>
+
+                {/* Price section */}
                 <div
-                  className="mt-10 flex flex-col items-center justify-between space-y-4 botder-t border-b py-4
+                  className="flex flex-col items-center justify-between space-y-4 botder-t border-b py-4
                    sm:flex-row sm:space-y-0"
                 >
                   <div className="flex flex-col">
                     <div className="flex items-end">
-                      <h1
-                        className={`text-3xl text-gray-400 font-bold mr-2 ${
-                          item.onSale === "yes" ? "line-through" : ""
-                        }`}
-                      >
-                        ${item && item.price}
-                      </h1>
                       {item.onSale === "yes" ? (
                         <h1 className="text-3xl font-bold text-[#F85606]">{`$${(
                           item.price -
                           item.price * (item.priceDrop / 100)
                         ).toFixed(2)}`}</h1>
                       ) : null}
-                    </div>
-
-                    {/* Test for star rating */}
-
-                    <div className="flex gap-[0.2rem] items-center justify-start">
-                      <Star
-                        stars={averageRating}
-                        reviews={item.starRatings.length}
-                        averageRating={averageRating}
-                        // onStarClick={handleStarClick}
-                      />
-                      <p className="m-0 ml-1 text-xs text-gray-600">
-                        ({averageRating})
-                      </p>
-                      <p className="m-0 ml-1 text-xs text-gray-600">
-                        {item.starRatings.length} reviews
-                      </p>
-                      {/* <Rating
-                        className="mt-[-4px]"
-                        rating={rating}
-                        onRating={(rate) => setRating(rate)}
-                      /> */}
+                      <h1
+                        className={`text-3xl text-gray-400 font-bold ml-4 ${
+                          item.onSale === "yes" ? "line-through" : ""
+                        }`}
+                      >
+                        ${item && item.price}
+                      </h1>
                     </div>
                   </div>
-
-                  <ul className="space-y-2">
-                    <li className="flex items-center text-left text-sm font-medium text-gray-600">
-                      {item && item.deliveryInfo}
-                    </li>
-                    <li className="flex items-center text-left text-sm font-medium text-gray-600">
-                      {"Cancel anytime"}
-                    </li>
-                  </ul>
                 </div>
 
-                <div className="my-8 flex flex-col items-start gap-8 justify-between">
-                  <div className="flex flex-col">
-                    <div className=" flex flex-row">
-                      <p className="mr-[10px]">Select Color:</p>
+                {/* Order section */}
+                <div className="mt-8 flex flex-col items-start gap-8 justify-between">
+                  <div className="flex flex-col gap-4">
+                    <div className="flex flex-row">
+                      <p className="text-ms text-gray-400 mr-[10px]">
+                        Color Family:
+                      </p>
                       <SizeComponent
                         selected={selectedColor}
                         data={item.colors}
@@ -378,8 +398,10 @@ export default function CommonDetails({ item }) {
                       />
                     </div>
 
-                    <div className=" flex flex-row">
-                      <p className="mr-[10px]">Select Size:</p>
+                    <div className="flex flex-row">
+                      <p className="text-ms text-gray-400 mr-[20px]">
+                        Select Size:
+                      </p>
                       <SizeComponent
                         selected={selectedSize}
                         data={item.sizes}
@@ -387,30 +409,28 @@ export default function CommonDetails({ item }) {
                       />
                     </div>
 
-                    <div className="flex flex-row">
-                      <p className="mr-[53px]">Price:</p>
-                      <p>
-                        {`$${(
-                          item.price -
-                          item.price * (item.priceDrop / 100)
-                        ).toFixed(2)}`}
-                      </p>
-                    </div>
-
                     <div className="flex gap-4">
-                      <p className="pr-4">Quantity: </p>
-                      <button className="text-lg" onClick={decreaseQuantity}>
+                      <p className="text-ms text-gray-400 pr-[22px]">
+                        Quantity:{" "}
+                      </p>
+                      <button
+                        className="text-lg px-3 text-gray-700 bg-gray-200"
+                        onClick={decreaseQuantity}
+                      >
                         -
                       </button>
-                      <p>{newQuantity}</p>
-                      <button className="text-lg" onClick={increaseQuantity}>
+                      <p className="text-lg text-gray-700">{newQuantity}</p>
+                      <button
+                        className="text-lg px-3 text-gray-700 bg-gray-200"
+                        onClick={increaseQuantity}
+                      >
                         +
                       </button>
                     </div>
 
                     <div className="flex gap-4">
-                      <p className="mr-[39px]">Total:</p>
-                      <div>
+                      <p className="text-ms text-gray-400 mr-[49px]">Total:</p>
+                      <p className="text-ms text-gray-700">
                         {`$${
                           newQuantity > 1
                             ? (
@@ -423,64 +443,198 @@ export default function CommonDetails({ item }) {
                                 item.price * (item.priceDrop / 100)
                               ).toFixed(2)
                         }`}
-                      </div>
+                      </p>
                     </div>
                   </div>
 
-                  <ShutterUpButton
-                    type="button"
-                    onClick={() => handleAddToCart(item)}
-                    className="inline-block px-5 py-2 text-xs font-medium tracking-wide 
-                before:bg-[#F85606] border-none hover:text-white uppercase text-white
-                 "
-                  >
-                    {/* absolute left-[100%] translate-x-[-100%] top-0 */}
-                    {componentLevelLoader && componentLevelLoader.loading ? (
-                      <ComponentLevelLoader
-                        text={"Adding to Cart"}
-                        color={"#ffffff"}
-                        loading={
-                          componentLevelLoader && componentLevelLoader.loading
-                        }
-                      />
-                    ) : (
-                      "Add to Cart"
-                    )}
-                  </ShutterUpButton>
-                </div>
-                <button
-                  onClick={() => {
-                    setCurrentUpdatedProduct(item);
-                  }}
-                >
-                  give a review
-                </button>
-                <div className="mt-4"></div>
-                <InputComponent
-                  type="number"
-                  placeholder="5"
-                  label="Star"
-                  value={formData.starRatings.starRating}
-                  controlItem="starRating"
-                  onChange={handleInputChange}
-                />
-                <button onClick={handleAddProduct}>Done</button>
-                <div className="lg:col-span-3">
-                  <div className="border-b border-gray-400">
-                    <nav className="flex gap-4">
-                      <a
-                        href="#"
-                        className="border-b-2 border-gray-900 py-4 text-sm font-medium text-gray-900"
-                      >
-                        Description
-                      </a>
-                    </nav>
+                  {/* Button section */}
+                  <div className="w-full flex justify-center">
+                    <Button3
+                      type="button"
+                      onClick={() => handleAddToCart(item)}
+                      className="px-20 py-2 border-none uppercase"
+                    >
+                      {/* absolute left-[100%] translate-x-[-100%] top-0 */}
+                      {componentLevelLoader && componentLevelLoader.loading ? (
+                        <ComponentLevelLoader
+                          text={"Adding to Cart"}
+                          color={"#ffffff"}
+                          loading={
+                            componentLevelLoader && componentLevelLoader.loading
+                          }
+                        />
+                      ) : (
+                        "Add to Cart"
+                      )}
+                    </Button3>
                   </div>
-                  <div className="mt-8 flow-root sm:mt-12">
-                    {item && item.description}
+                </div>
+                {/* End Order section */}
+              </div>
+
+              {/* delivery/warenty section */}
+              <div className="w-[25%] bg-slate-50 flex flex-col">
+                <div className="flex flex-col">
+                  <div className="px-5 py-4 border-b">
+                    <p className="text-xs text-gray-500">Delivery info:</p>
+                  </div>
+
+                  <div className="flex flex-row py-4 px-5 justify-between">
+                    <div className="flex flex-col">
+                      <p className="text-base font-semibold text-gray-800">
+                        Standard Delivery
+                      </p>
+                      <p className="text-xs text-gray-500">3 - 7 day(0)</p>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-800">
+                        <span className="text-2xl font-bold">৳</span>
+                        {item && item.deliveryInfo}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="border-b px-5 py-4">
+                    <p className="text-gray-800 text-base">
+                      Cash on Delivery Available
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col">
+                  <div className="px-5 py-4 border-b">
+                    <p className="text-xs text-gray-500">Service info:</p>
+                  </div>
+
+                  <div className="flex flex-row py-4 px-5 justify-between">
+                    <div className="flex flex-col">
+                      <p className="text-base text-gray-800">7 Day Return</p>
+                      <p className="text-xs text-gray-500">
+                        Change of mind not applicable
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        <span className=" text-teal-500">
+                          Terms & Conditions
+                        </span>{" "}
+                        apply
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="border-b px-5 py-4">
+                    <p className="text-gray-800 text-base">
+                      Warranty not available
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col">
+                  <div className="px-5 py-4 border-b">
+                    <p className="text-xs text-gray-500">Sold by:</p>
+                  </div>
+
+                  <div className="flex flex-row py-4 px-5 justify-between">
+                    <div className="flex flex-col">
+                      <p className="text-base text-gray-800">Store Name</p>
+                      <p className="text-xs text-gray-500">
+                        Lorem ipsum dolor sit amet
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
+            {/* End main section */}
+
+            {/* Product More details & Review section */}
+            <div className="bg-white rounded-lg mt-8 py-8 px-12">
+              <div className="py-4 px-4">
+                <p className=" text-xl font-semibold text-gray-700">
+                  Product Description & Reviews:
+                </p>
+              </div>
+
+              <div className=" px-4">
+                <div className="border-b border-gray-400">
+                  <nav className="flex gap-4">
+                    <button
+                      onClick={() => handleButtonClick("Description")}
+                      className={`border-gray-900 py-4 text-sm font-medium text-gray-900 ${
+                        activeButton === "Description" ? "border-b-2" : ""
+                      }`}
+                    >
+                      Description
+                    </button>
+                    <button
+                      onClick={() => {
+                        setCurrentUpdatedProduct(item);
+                        handleButtonClick("Reviews");
+                      }}
+                      className={`border-gray-900 py-4 text-sm font-medium text-gray-900 ${
+                        activeButton === "Reviews" ? "border-b-2" : ""
+                      }`}
+                    >
+                      Review&apos;s
+                    </button>
+                  </nav>
+                </div>
+              </div>
+
+              {/* Description div */}
+              {activeButton === "Description" && (
+                <div className="px-4">
+                  <div className="py-4">
+                    <p className=" bg-slate-100 px-4 py-2 text-base font-semibold text-gray-700">
+                      Product details of {item && item.name}:
+                    </p>
+                  </div>
+
+                  <div className="px-4">{item && item.description}</div>
+
+                  <div className="py-4">
+                    <p className=" bg-slate-100 px-4 py-2 text-base font-semibold text-gray-700">
+                      Specifications of {item && item.name}:
+                    </p>
+                  </div>
+
+                  <div className="pb-4 px-4">{item && item.details}</div>
+
+                  <div className="py-4 px-4">
+                    <p className="text-gray-500">
+                      Material: <span className="text-gray-700">{item && item.material}</span>
+                    </p>
+                  </div>
+
+                  <div className="py-4 px-4">
+                    <p className="text-gray-500">
+                      What&apos;s in the box: <span className="text-gray-700">{item && item.whatsInTheBox}</span>
+                    </p>
+                  </div>
+
+                </div>
+              )}
+
+              {/* Review div */}
+              {activeButton === "Reviews" && (
+                <div className="mt-8 px-12">
+                  <div className="mt-4 w-[200px]">
+                    <InputComponent
+                      type="number"
+                      placeholder="5"
+                      label="Give a Rating"
+                      value={formData.starRatings.starRating}
+                      controlItem="starRating"
+                      onChange={handleInputChange}
+                    />
+                    <button
+                      className="bg-teal-500 rounded-lg px-6 py-2 mb-8 mt-4 text-white text-sm font-semibold"
+                      onClick={handleAddProduct}
+                    >
+                      Done
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <Notification />

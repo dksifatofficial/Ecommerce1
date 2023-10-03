@@ -110,7 +110,7 @@ function Search({
           value={defaultValue}
           onChange={handleChange}
           type="text"
-          className="w-[500px] px-5 py-0 text-sm h-8 rounded-lg focus:border-gray-700 
+          className="w-[450px] px-5 py-0 text-sm h-8 rounded-lg focus:border-gray-700 
            outline-none transition"
           placeholder="Search in Daraz..."
         />

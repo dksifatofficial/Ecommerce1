@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import ShutterUpButton from "../Buttons/ShutterUpButton";
 import CommonModal from "../CommonModal";
 import ComponentLevelLoader from "../Loader/componentlevel";
+import Button3 from "../Buttons/Button3";
 
 export default function CartModal() {
   const {
@@ -198,18 +199,18 @@ export default function CartModal() {
       }
       buttonComponent={
         <Fragment>
-          <ShutterUpButton
+          <Button3
             type="button"
             onClick={() => {
               router.push("/cart");
               setShowCartModal(false);
             }}
             className="mt-1.5 w-full inline-block text-white px-5 py-1 text-xs font-medium uppercase
-            tracking-wide before:bg-white"
+            tracking-wide"
           >
             Go To Cart
-          </ShutterUpButton>
-          <ShutterUpButton
+          </Button3>
+          <Button3
             disabled={cartItems && cartItems.length === 0}
             type="button"
             onClick={() => {
@@ -217,10 +218,10 @@ export default function CartModal() {
               setShowCartModal(false);
             }}
             className="mt-1.5 w-full inline-block text-white px-5 py-1 text-xs font-medium uppercase
-            tracking-wide disabled:opacity-50 before:bg-white"
+            tracking-wide disabled:opacity-50"
           >
             Checkout
-          </ShutterUpButton>
+          </Button3>
           <div className="mt-6 flex justify-center text-center text-sm text-gray-600">
             <button type="button" className="font-medium text-grey">
               Continue Shopping

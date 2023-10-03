@@ -12,7 +12,7 @@ export default function SizeComponent({ data, selected = [], onClick }) {
                 selected.length &&
                 selected.map((item) => item.id).indexOf(dataItem.id) !== -1
                   ? "text-[#F85606] border-[#F85606]"
-                  : "border-gray-400 text-gray-400"
+                  : "border-gray-700 text-gray-700"
               }`}
             >
               {dataItem.label}

@@ -1,5 +1,6 @@
 "use client";
 
+import Button3 from "@/components/Buttons/Button3";
 import ShutterUpButton from "@/components/Buttons/ShutterUpButton";
 import ComponentLevelLoader from "@/components/Loader/componentlevel";
 import SearchForOrder from "@/components/SearchBar/SearchForOrder";
@@ -123,8 +124,8 @@ export default function AdminView() {
     <section>
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div
-          className="w-full flex flex-wrap items-center bg-[#f85606] justify-center gap-4 mx-auto py-3
-             mt-8 rounded-lg"
+          className="w-full flex flex-wrap items-center justify-center gap-4 mx-auto py-3
+             mt-8 rounded-lg bg-[#0d9488] bg-[linear-gradient(to_bottom,#0d9488,#95a7a5,#f85606)]"
         >
           <button onClick={() => handleButtonClick("AllOrders")}>
           <p
@@ -251,12 +252,12 @@ export default function AdminView() {
                             </div>
 
                             <div className="flex gap-5">
-                              <ShutterUpButton
+                              <Button3
                                 onClick={() => handleUpdateOrderStatus(item)}
                                 disabled={!item.isProcessing}
                                 className="disabled:opacity-50 disabled:hover:before:h-0 disabled:hover:text-white
                               mt-5 mr-5 inline-block text-white px-5 py-1 
-                              text-xs font-medium uppercase tracking-wide before:bg-white "
+                              text-xs font-medium uppercase tracking-wide  "
                               >
                                 {componentLevelLoader &&
                                 componentLevelLoader.loading &&
@@ -272,7 +273,7 @@ export default function AdminView() {
                                 ) : (
                                   "Update Order Status"
                                 )}
-                              </ShutterUpButton>
+                              </Button3>
                               <button
                                 className="disabled:text-green-700 disabled:font-bold mt-5 mr-5 cursor-text
                                 inline-block text-red-700 px-5 py-1 text-base font-medium uppercase tracking-wide"
@@ -464,12 +465,12 @@ export default function AdminView() {
                               </div>
 
                               <div className="flex gap-5">
-                                <ShutterUpButton
+                                <Button3
                                   onClick={() => handleUpdateOrderStatus(item)}
                                   disabled={!item.isProcessing}
                                   className="disabled:opacity-50 disabled:hover:before:h-0 disabled:hover:text-white
-                     mt-5 mr-5 inline-block text-white px-5 py-1 
-                     text-xs font-medium uppercase tracking-wide before:bg-white "
+                                  mt-5 mr-5 inline-block text-white px-5 py-1 
+                                  text-xs font-medium uppercase tracking-wide "
                                 >
                                   {componentLevelLoader &&
                                   componentLevelLoader.loading &&
@@ -485,10 +486,10 @@ export default function AdminView() {
                                   ) : (
                                     "Update Order Status"
                                   )}
-                                </ShutterUpButton>
+                                </Button3>
                                 <button
                                   className="disabled:text-green-700 disabled:font-bold mt-5 mr-5 cursor-text
-                       inline-block text-red-700 px-5 py-1 text-base font-medium uppercase tracking-wide"
+                                   inline-block text-red-700 px-5 py-1 text-base font-medium uppercase tracking-wide"
                                   disabled={!item.isProcessing}
                                 >
                                   {item.isProcessing
@@ -677,12 +678,12 @@ export default function AdminView() {
                               </div>
 
                               <div className="flex gap-5">
-                                <ShutterUpButton
+                                <Button3
                                   onClick={() => handleUpdateOrderStatus(item)}
                                   disabled={!item.isProcessing}
                                   className="disabled:opacity-50 disabled:hover:before:h-0 disabled:hover:text-white
-                          mt-5 mr-5 inline-block text-white px-5 py-1 
-                          text-xs font-medium uppercase tracking-wide before:bg-white "
+                                  mt-5 mr-5 inline-block text-white px-5 py-1 
+                                  text-xs font-medium uppercase tracking-wide "
                                 >
                                   {componentLevelLoader &&
                                   componentLevelLoader.loading &&
@@ -698,10 +699,10 @@ export default function AdminView() {
                                   ) : (
                                     "Update Order Status"
                                   )}
-                                </ShutterUpButton>
+                                </Button3>
                                 <button
                                   className="disabled:text-green-700 disabled:font-bold mt-5 mr-5 cursor-text
-                            inline-block text-red-700 px-5 py-1 text-base font-medium uppercase tracking-wide"
+                                   inline-block text-red-700 px-5 py-1 text-base font-medium uppercase tracking-wide"
                                   disabled={!item.isProcessing}
                                 >
                                   {item.isProcessing
@@ -802,7 +803,7 @@ export default function AdminView() {
         )}
 
         {activeButton === "SearchOrders" && (
-          <div className="w-full" id="Search Orders">
+          <div className="w-full h-[670px]" id="Search Orders">
             <div className="px-4 py-4">
               <div className="flow-root">
                 <div>
@@ -890,12 +891,12 @@ export default function AdminView() {
                             </div>
 
                             <div className="flex gap-5">
-                              <ShutterUpButton
+                              <Button3
                                 onClick={() => handleUpdateOrderStatus(item)}
                                 disabled={!item.isProcessing}
                                 className="disabled:opacity-50 disabled:hover:before:h-0 disabled:hover:text-white
-                          mt-5 mr-5 inline-block text-white px-5 py-1 
-                          text-xs font-medium uppercase tracking-wide before:bg-white "
+                                 mt-5 mr-5 inline-block text-white px-5 py-1 
+                                 text-xs font-medium uppercase tracking-wide"
                               >
                                 {componentLevelLoader &&
                                 componentLevelLoader.loading &&
@@ -911,10 +912,10 @@ export default function AdminView() {
                                 ) : (
                                   "Update Order Status"
                                 )}
-                              </ShutterUpButton>
+                              </Button3>
                               <button
                                 className="disabled:text-green-700 disabled:font-bold mt-5 mr-5 cursor-text
-                            inline-block text-red-700 px-5 py-1 text-base font-medium uppercase tracking-wide"
+                                inline-block text-red-700 px-5 py-1 text-base font-medium uppercase tracking-wide"
                                 disabled={!item.isProcessing}
                               >
                                 {item.isProcessing

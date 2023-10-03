@@ -26,7 +26,7 @@ const Star = ({ stars, reviews, onStarClick, averageRating }) => {
   });
 
   return (
-    <div className="pt-2">
+    <div className="">
       <div className="flex gap-[0.2rem] items-center justify-start">
         {ratingStar}
         {/* <p className="m-0 ml-1 text-xs text-gray-600">({averageRating})</p>

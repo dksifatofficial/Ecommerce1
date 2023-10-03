@@ -44,11 +44,13 @@ const ProductTile = ({ item }) => {
           </p>
         </div>
       )}
-      <div className="my-2 flex w-full px-3 flex-col items-start justify-between">
-        <h3 className="mt-2 text-gray-800 text-sm font-semibold line-clamp-2">
-          {item.name}
-        </h3>
-        <div className="mt-2 w-full flex justify-between">
+      <div className="mt-2 flex w-full px-3 flex-col items-start justify-between">
+        <div className="h-[40px] overflow-hidden">
+          <h3 className="text-gray-800 text-sm font-semibold line-clamp-2">
+            {item.name}
+          </h3>
+        </div>
+        <div className="w-full flex justify-between">
           <div className="grid">
             <div className="w-full">
               {item.onSale === "yes" ? (

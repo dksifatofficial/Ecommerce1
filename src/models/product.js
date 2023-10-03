@@ -16,6 +16,10 @@ const ProductSchema = new mongoose.Schema(
     quantity: Number,
     itemCode: String,
     colors: Array,
+    details: String,
+    material: String,
+    brand: String,
+    whatsInTheBox: String,
     starRatings: [
       {
         revUser: {

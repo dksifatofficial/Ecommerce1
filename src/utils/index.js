@@ -201,6 +201,37 @@ export const adminAddProductformControls = [
   },
 ];
 
+export const ProductSpecificationsForm = [
+  {
+    id: "details",
+    type: "text",
+    placeholder: "Enter product details",
+    label: "Product Details List",
+    componentType: "input",
+  },
+  {
+    id: "material",
+    type: "text",
+    placeholder: "Enter product material's",
+    label: "Material",
+    componentType: "input",
+  },
+  {
+    id: "brand",
+    type: "text",
+    placeholder: "Enter brand name",
+    label: "Brand",
+    componentType: "input",
+  },
+  {
+    id: "whatsInTheBox",
+    type: "text",
+    placeholder: "What's In The Box?",
+    label: "Whats In The Box",
+    componentType: "input",
+  },
+]
+
 // export const reviewsForm = [
 //   {
 //     id: "revUser",
@@ -252,6 +283,8 @@ export const AvailableSizes = [
   },
 ];
 
+// colors
+
 export const ColorsWhite = [
   {
     id: "white",
@@ -288,6 +321,8 @@ export const ColorsPink = [
     label: "Pink",
   },
 ];
+
+// End colors
 
 export const CategoryTags = [
   {

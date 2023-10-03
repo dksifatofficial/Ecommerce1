@@ -119,7 +119,7 @@ function SearchForOrder({
         {showResults && (
           <div
             className={`absolute mt-1 w-full p-2 bg-white shadow-lg rounded 
-           max-h-[1000px] overflow-y-auto ${styles.style4}`}
+           max-h-[600px] overflow-y-auto ${styles.style4}`}
           >
             {results && results.length
               ? results

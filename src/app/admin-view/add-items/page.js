@@ -18,6 +18,7 @@ import {
   ColorsRed,
   ColorsWhite,
   ColorsYellow,
+  ProductSpecificationsForm,
   adminAddProductformControls,
   firebaseConfig,
   firebaseStroageURL,
@@ -80,6 +81,10 @@ const initialFormData = {
   itemCode: "",
   starRatings: [],
   colors: [],
+  details: "",
+  material: "",
+  brand: "",
+  whatsInTheBox: "",
 };
 
 export default function AdminAddNewProduct() {
@@ -268,8 +273,10 @@ export default function AdminAddNewProduct() {
 
   return (
     <div className="w-full px-12 py-12 mr-0 mb-0 ml-0 relative">
-      <div className="flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl relative
-       bg-[linear-gradient(to_bottom_right,#0d9488,#95a7a5,#f85606)]">
+      <div
+        className="flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl relative
+       bg-[linear-gradient(to_bottom_right,#0d9488,#95a7a5,#f85606)]"
+      >
         <div className="w-full mt-6 mr-0 mb-0 ml-0 space-y-8">
           {/* Product Images */}
           <div className="space-y-8 border p-8 rounded-xl bg-white">
@@ -427,6 +434,28 @@ export default function AdminAddNewProduct() {
                   }}
                 />
               ) : null
+            )}
+          </div>
+
+          {/* ProductSpecificationsForm */}
+          <div className="space-y-8 border p-8 rounded-xl bg-white">
+            <p className="pb-2 text-lg font-semibold">
+              Specifications of Product <span className="text-red-600">*</span>
+            </p>
+            {ProductSpecificationsForm.map((controlItem) =>
+                // eslint-disable-next-line react/jsx-key
+                <InputComponent
+                  type={controlItem.type}
+                  placeholder={controlItem.placeholder}
+                  label={controlItem.label}
+                  value={formData[controlItem.id]}
+                  onChange={(event) => {
+                    setFormData({
+                      ...formData,
+                      [controlItem.id]: event.target.value,
+                    });
+                  }}
+                />
             )}
           </div>
 

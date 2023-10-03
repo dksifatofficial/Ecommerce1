@@ -1,12 +1,14 @@
 "use client";
 
-import InputComponent from "@/components/FormElements/InputComponent";
+import Button3 from "@/components/Buttons/Button3";
+import LogInInput from "@/components/FormElements/LogInInput";
 import ComponentLevelLoader from "@/components/Loader/componentlevel";
 import Notification from "@/components/Notification";
 import { GlobalContext } from "@/context";
 import { login } from "@/services/login";
 import { loginFormControls } from "@/utils";
 import Cookies from "js-cookie";
+import Link from "next/link";
 // import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
@@ -45,15 +47,15 @@ export default function Login() {
       : false;
   }
 
-//  function GoogleLogIn() {
-//     if (status === "authenticated") {
-//       setIsAuthUser(true);
-//     }
-//   }
-//   useEffect(() => {
-//     GoogleLogIn();
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-//   }, []);
+  //  function GoogleLogIn() {
+  //     if (status === "authenticated") {
+  //       setIsAuthUser(true);
+  //     }
+  //   }
+  //   useEffect(() => {
+  //     GoogleLogIn();
+  //     // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   }, []);
 
   async function handleLogin() {
     setComponentLevelLoader({ loading: true, id: "" });
@@ -84,32 +86,26 @@ export default function Login() {
 
   useEffect(() => {
     if (isAuthUser) router.push("/");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthUser]);
 
   return (
-    <div className="bg-white relative">
-      <div className="flex flex-col items-center justify-between pt-0 pr-10 pb-0 pl-10 mt-8 mr-auto xl:px-5 lg:flex-row">
-        <div className="flex flex-col justify-center items-center w-full pr-10 pl-10 lg:flex-row">
-          <div className="w-full mt-10 mr-0 mb-0 ml-0 relative max-w-2xl lg:mt-0 lg:w-5/12">
-
-            {/* <button
-            className="mb-8 bg-white flex items-center gap-4 shadow-lg overflow-hidden rounded-lg pl-3"
-            onClick={() => signIn('google')}
-            >
-              <Image src="/google.png" alt="" height={30} width={30} /> 
-              <span className=" bg-blue-500 text-white px-4 py-3">Sign in with Google</span>
-            </button> */}
-
-            <div className="flex flex-col items-center justify-start pt-10 pr-10 pb-10 pl-10 bg-white shadow-2xl rounded-xl relative z-10">
-              <p className="w-full text-4xl font-medium text-center font-serif">
-                Login
+    <div className="relative bg-gray-100 pb-12 flex justify-center items-center w-full flex-row">
+          <div className="mr-0 mb-0 ml-0 relative max-w-2xl mt-0 w-5/12">
+            <div className="flex flex-row justify-between mt-12 mb-12 items-center">
+              <h4 className="text-lg text-gray-600 font-semibold">
+                Welcome to Daraz! Please login.
+              </h4>
+              <p className="text-sm text-gray-400">
+                New member? <Link className=" text-teal-500 hover:underline" href="/register">Register</Link> here.
               </p>
+            </div>
+            <div className="flex flex-col items-center justify-start pt-10 pr-10 pb-10 pl-10 bg-white shadow-2xl rounded-xl relative z-10">
               <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
                 {loginFormControls.map((controlItem) =>
                   controlItem.componentType === "input" ? (
                     // eslint-disable-next-line react/jsx-key
-                    <InputComponent
+                    <LogInInput
                       type={controlItem.type}
                       placeholder={controlItem.placeholder}
                       label={controlItem.label}
@@ -123,10 +119,9 @@ export default function Login() {
                     />
                   ) : null
                 )}
-                <button
-                  className="disabled:opacity-50 inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg 
-                     text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide
-                     "
+                <Button3
+                  className="disabled:opacity-50 inline-flex w-full items-center justify-center px-6 py-4 text-lg 
+                     text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide"
                   disabled={!isValidForm()}
                   onClick={handleLogin}
                 >
@@ -141,24 +136,19 @@ export default function Login() {
                   ) : (
                     "Login"
                   )}
-                </button>
-                <div className="flex flex-col gap-2">
-                  <p>New to website ?</p>
-                  <button
-                    className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg 
-                     text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide
-                     "
-                    onClick={() => router.push("/register")}
-                  >
-                    Register
-                  </button>
-                </div>
+                </Button3>
               </div>
             </div>
           </div>
-        </div>
-      </div>
       <Notification />
     </div>
   );
 }
+
+// {/* <button
+// className="mb-8 bg-white flex items-center gap-4 shadow-lg overflow-hidden rounded-lg pl-3"
+// onClick={() => signIn('google')}
+// >
+//   <Image src="/google.png" alt="" height={30} width={30} />
+//   <span className=" bg-blue-500 text-white px-4 py-3">Sign in with Google</span>
+// </button> */}
