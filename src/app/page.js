@@ -106,17 +106,18 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-slate-100">
 
-      <div className="w-full relative flex px-4 flex-col xl:flex-row justify-center gap-2 mt-4 lg:gap-4 lg:mt-4 xl:gap-6 xl:mt-6">
-        <div className="hidden xl:block">
+      <div className="w-full relative flex flex-col justify-center lg:flex-row gap-2 
+           mt-4 lg:gap-4 lg:mt-4 xl:gap-6 xl:mt-6 px-4">
+        <div className="hidden lg:block">
           <MenuBar />
         </div>
 
-        <div className="">
+        <div className="flex justify-center">
           <ImageSlider images={images} />
         </div>
       </div>
 
-      <div className="hidden xl:block">
+      <div className="hidden lg:block  border border-red-500">
         <BestExperience />
       </div>
 
