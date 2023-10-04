@@ -12,7 +12,7 @@ const BestExperience = () => {
     <div className="w-full py-6">
       <Link
         className=" bg-[#f8570610] hover:bg-[#f857062a] rounded-lg py-2 px-4
-        flex flex-wrap gap-x-6"
+        flex flex-wrap justify-center gap-x-6"
         href="/get-the-best-shopping-experience"
       >
         <div className="flex flex-row">
@@ -23,9 +23,11 @@ const BestExperience = () => {
             height="100"
             width="100"
           />
-          <p className="text-gray-700 text-sm tracking-tighter ">Safe Payments</p>
-          <p className="ml-4 text-gray-300">|</p>
+          <p className="text-gray-700 text-sm tracking-tighter">
+            Safe Payments
+          </p>
         </div>
+        <p className="ml-1 text-gray-300">|</p>
         <div className="flex flex-row">
           <Image
             className="h-4 w-4 xl:h-6 xl:w-6 mr-1"
@@ -34,9 +36,11 @@ const BestExperience = () => {
             height="100"
             width="100"
           />
-          <p className="text-gray-700 text-sm tracking-tighter">Nationwide Delivery</p>
-          <p className="ml-4 text-gray-300">|</p>
+          <p className="text-gray-700 text-sm tracking-tighter">
+            Nationwide Delivery
+          </p>
         </div>
+        <p className="ml-1 text-gray-300">|</p>
         <div className="flex flex-row">
           <Image
             className="h-4 w-4 xl:h-6 xl:w-6 mr-1"
@@ -45,9 +49,11 @@ const BestExperience = () => {
             height="100"
             width="100"
           />
-          <p className="text-gray-700 text-sm tracking-tighter">Free & Easy Returns</p>
-          <p className="ml-4 text-gray-300">|</p>
+          <p className="text-gray-700 text-sm tracking-tighter">
+            Free & Easy Returns
+          </p>
         </div>
+        <p className="ml-1 text-gray-300">|</p>
         <div className="flex flex-row">
           <Image
             className="h-4 w-4 xl:h-6 xl:w-6 mr-1"
@@ -56,9 +62,11 @@ const BestExperience = () => {
             height="100"
             width="100"
           />
-          <p className="text-gray-700 text-sm tracking-tighter">Best Price Guaranteed</p>
-          <p className="ml-4 text-gray-300">|</p>
+          <p className="text-gray-700 text-sm tracking-tighter">
+            Best Price Guaranteed
+          </p>
         </div>
+        <p className="ml-1 text-gray-300">|</p>
         <div className="flex flex-row">
           <Image
             className="h-4 w-4 xl:h-6 xl:w-6 mr-1"
@@ -67,9 +75,11 @@ const BestExperience = () => {
             height="100"
             width="100"
           />
-          <p className="text-gray-700 text-sm tracking-tighter">100% Authentic Products</p>
-          <p className="ml-4 text-gray-300">|</p>
+          <p className="text-gray-700 text-sm tracking-tighter">
+            100% Authentic Products
+          </p>
         </div>
+        <p className="ml-1 text-gray-300">|</p>
         <div className="flex flex-row">
           <Image
             className="h-4 w-4 xl:h-6 xl:w-6 mr-1"
@@ -78,7 +88,9 @@ const BestExperience = () => {
             height="100"
             width="100"
           />
-          <p className="text-gray-700 text-sm tracking-tighter">Daraz Verified</p>
+          <p className="text-gray-700 text-sm tracking-tighter">
+            Daraz Verified
+          </p>
         </div>
       </Link>
     </div>

@@ -11,16 +11,14 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`w-full ${inter.className}`}>
         {/* <NextAuthProviders> */}
         <HelmetProvider>
           <GlobalState>
-            <Navbar />
-            <main className="flex flex-col mt-[64px]">
+            <main className="flex flex-col mt-[64px] w-full">
               <Helmet>
                 <title>Online Shopping in Bangladesh: Order Now from</title>
                 <meta
@@ -28,9 +26,10 @@ export default function RootLayout({ children }) {
                   content="Most common methods for designing websites that work well on desktop is responsive and adaptive design"
                 />
               </Helmet>
+              <Navbar />
               {children}
+              <Footer />
             </main>
-            <Footer />
           </GlobalState>
         </HelmetProvider>
         {/* </NextAuthProviders> */}

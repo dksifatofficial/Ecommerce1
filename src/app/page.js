@@ -103,7 +103,7 @@ export default function Home() {
   console.log(products);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between bg-slate-100">
+    <div className="flex min-h-screen flex-col items-center justify-between bg-slate-100">
       <div
         className="w-full relative flex flex-col justify-center lg:flex-row gap-2 
            mt-4 lg:gap-4 lg:mt-4 xl:gap-6 xl:mt-6 px-4"
@@ -117,11 +117,11 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="hidden lg:block">
+      <div className="hidden lg:block w-full pl-16 pr-16">
         <BestExperience />
       </div>
 
-      <section className="flex min-h-screen flex-col items-center justify-between px-4">
+      <section className="flex min-h-screen flex-col items-center justify-between pl-16 pr-16">
         {/* Category1 Section */}
         <div className="w-full bg-white rounded-lg">
           <Category1 />
@@ -143,7 +143,7 @@ export default function Home() {
               <div className="xl:max-w-md w-full pl-6 mx-auto text-center z-10 lg:text-left">
                 <div>
                   <motion.h2
-                    className="text-5xl pb-4 font-bold text-transparent bg-clip-text inline-block
+                    className="text-5xl font-bold text-transparent bg-clip-text inline-block
                     bg-[linear-gradient(to_bottom_right,#0d9488,#f85606)]"
                     initial={{ x: -50, opacity: 0 }}
                     whileInView={{ x: 0, opacity: 1 }}
@@ -155,7 +155,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="lg:col-span-2 px-2 py-4">
+            <div className="lg:col-span-2 px-2 pb-4">
               <ul className="flex flex-wrap justify-center gap-4 xl:gap-2 xl:grid xl:grid-cols-4">
                 {products && products.length
                   ? products
@@ -177,87 +177,17 @@ export default function Home() {
         </div>
 
         {/* CategoryFull Section */}
-        <div className="mt-4">
+        <div className="mt-12 w-full">
           <CategoryFull />
         </div>
-        
-        {/* category by person Section */}
-
-        {/* <div className="max-w-screen-xl py-8 mx-auto sm:px-6 sm:py-12 ">
-          <div className="text-center">
-            <h2 className="text-xl uppercase font-bold text-gray-600">
-              category by person
-            </h2>
-          </div>
-          <ul className="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-3">
-            <li>
-              <div className="relative block group"> */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        {/* <img
-                  src="https://images.unsplash.com/photo-1618898909019-010e4e234c55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-                  className="object-cover w-full aspect-square"
-                  alt=""
-                />
-                <div className="absolute inset-0 flex flex-col items-start justify-end p-6">
-                  <h3 className="text-xl font-medium text-white">KIDS</h3>
-                  <ShutterUpButton
-                    onClick={() => router.push("/product/listing/kids")}
-                    className="px-5 py-3 mt-1.5 text-xs inline-block font-medium uppercase tracking-wide text-white before:bg-white"
-                  >
-                    Shop Now
-                  </ShutterUpButton>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div className="relative block group"> */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        {/* <img
-                  src="https://images.unsplash.com/photo-1624623278313-a930126a11c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-                  className="object-cover w-full aspect-square"
-                  alt=""
-                />
-                <div className="absolute inset-0 flex flex-col items-start justify-end p-6">
-                  <h3 className="text-xl font-medium text-white">WOMEN</h3>
-                  <ShutterUpButton
-                    onClick={() => router.push("/product/listing/women")}
-                    className="mt-1.5 inline-block px-5 py-3 text-xs font-medium uppercase tracking-wide text-white before:bg-white"
-                  >
-                    Shop Now
-                  </ShutterUpButton>
-                </div>
-              </div>
-            </li>
-            <li className="lg:col-span-2 lg:col-start-2 lg:row-span-2 lg:row-start-1">
-              <div className="relative block group"> */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        {/* <img
-                  src="https://images.unsplash.com/photo-1593795899768-947c4929449d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80"
-                  className="object-cover w-full aspect-square"
-                  alt=""
-                />
-                <div className="absolute inset-0 flex flex-col items-start justify-end p-6">
-                  <h3 className="text-xl font-medium text-white">MEN</h3>
-                  <ShutterUpButton
-                    onClick={() => router.push("/product/listing/men")}
-                    className="mt-1.5 inline-block px-5 py-3 text-xs font-medium uppercase tracking-wide text-white before:bg-white"
-                  >
-                    Shop Now
-                  </ShutterUpButton>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div> */}
 
         {/* Just For You Section */}
-
-        <div className="mt-6">
+        <div className="mt-6 w-full">
           <h2 className="px-3 w-full font-semibold text-gray-600 bg-white rounded-lg text-center py-6 text-3xl">
             Just For You
           </h2>
-          <div className="lg:col-span-2 mt-4">
-            <ul className="grid grid-cols-6 gap-4">
+          <div className="lg:col-span-2 mt-4 ">
+            <ul className="flex flex-wrap gap-4 justify-center">
               {products && products.length
                 ? products
                     .filter((item) => item.category !== "premium")
@@ -284,6 +214,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
