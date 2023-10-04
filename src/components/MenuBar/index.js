@@ -22,6 +22,7 @@ import classes from "./classes.module.css";
 export default function MenuBar() {
   const router = useRouter();
 
+  
   return (
     <div className="relative clear-both mx-auto my-0">
       <nav>

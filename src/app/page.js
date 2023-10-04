@@ -105,48 +105,15 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-slate-100">
-      <div className="w-full relative flex flex-row justify-center gap-6 mt-6">
-        {/* <Image
-          className="absolute w-[100%] top-[-100px] hidden md:block"
-          src={
-            "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcover%2Fcover2.jpg?alt=media&token=99c2ec90-908e-4381-91f0-842ee0d7893c"
-          }
-          alt="cover"
-          height="800"
-          width="1600"
-        /> */}
+
+      <div className="w-full relative flex flex-row justify-center gap-2 mt-4 lg:gap-4 lg:mt-4 xl:gap-6 xl:mt-6">
         <div className="">
           <MenuBar />
         </div>
 
-        {/* image slider section */}
         <div className="">
           <ImageSlider images={images} />
         </div>
-        {/* end image slider section */}
-
-        {/* <div className=" absolute top-20 right-12 w-[600px]">
-          <div className="mr-auto place-self-center lg:col-span-7">
-            <h1
-              className="max-w-2xl mb-8 text-[#e70146b2] text-4xl font-extrabold tracking-wide
-            md:text-5xl xl:text-6xl text-center"
-            >
-              Best Fashion Collection
-            </h1>
-            <p className="max-w-2xl text-center mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam.
-            </p>
-            <div className="w-full relative flex justify-center">
-              <ShutterUpButton
-                className=" before:bg-[#90cbdc] hover:text-white py-1 px-5 rounded-lg"
-                onClick={() => router.push("/product/listing/all-products")}
-              >
-                <p className="text-xl font-bold">Explore Shop Collection</p>
-              </ShutterUpButton>
-            </div>
-          </div>
-        </div> */}
       </div>
 
       <div>

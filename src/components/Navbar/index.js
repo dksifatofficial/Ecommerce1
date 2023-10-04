@@ -3,17 +3,19 @@
 import { GlobalContext } from "@/context";
 import Logo from "@/picture/logo.png";
 import { getAllAdminProducts } from "@/services/product";
-import { adminNavOptions, navOptions } from "@/utils";
+import { adminNavOptions } from "@/utils";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Fragment, useContext, useEffect, useState } from "react";
 import {
+  IoIosAdd,
   IoIosArrowDown,
   IoIosBriefcase,
   IoIosCart,
   IoIosContact,
+  IoIosDocument,
   IoIosHeart,
   IoIosLogOut,
   IoIosStar,
@@ -25,6 +27,16 @@ import Search from "../SearchBar/Search";
 import styles from "./styles.module.css";
 
 function NavItems({ isModalView = false, isAdminView, router }) {
+  const {
+    user,
+    isAuthUser,
+    setIsAuthUser,
+    setUser,
+    currentUpdatedProduct,
+    setCurrentUpdatedProduct,
+    showCartModal,
+    setShowCartModal,
+  } = useContext(GlobalContext);
   return (
     <div
       className={`items-center justify-between w-full ${
@@ -33,27 +45,34 @@ function NavItems({ isModalView = false, isAdminView, router }) {
       id="nav-items"
     >
       <ul className="flex flex-row font-medium rounded-lg">
-        {isAdminView
-          ? adminNavOptions.map((item) => (
-              <li
-                className="rounded-lg text-sm text-[#3cca98] font-semibold px-3 py-1 m-0 
+        {isAdminView ? (
+          adminNavOptions.map((item) => (
+            <li
+              className="rounded-lg text-sm text-[#3cca98] font-semibold px-3 py-1 m-0 
                   hover:text-[#f8f3f3da] cursor-pointer"
-                key={item.id}
-                onClick={() => router.push(item.path)}
+              key={item.id}
+              onClick={() => router.push(item.path)}
+            >
+              {item.label}
+            </li>
+          ))
+        ) : !isAdminView && user?.role === "primium" ? (
+          <Fragment>
+            <button
+              className="p-0 m-0"
+              onClick={() =>
+                router.push("/premium-service/premium-item/listing/all-items")
+              }
+            >
+              <p
+                className="rounded-lg text-white text-sm font-semibold px-3 py-1 m-0 
+                  hover:text-[#f8f3f3da]"
               >
-                {item.label}
-              </li>
-            ))
-          : navOptions.map((item) => (
-              <li
-                className="cursor-pointer block py-2 pl-3 pr-4 text-[#3cca98] rounded md:p-0
-                 hover:text-[#268d69]"
-                key={item.id}
-                onClick={() => router.push(item.path)}
-              >
-                {item.label}
-              </li>
-            ))}
+                Premium
+              </p>
+            </button>
+          </Fragment>
+        ) : null}
       </ul>
     </div>
   );
@@ -150,114 +169,153 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-[#f85606] fixed w-full z-20 top-0 left-0">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-3 relative">
-          {/* logo */}
-          <div
-            className="flex items-center cursor-pointer"
-            onClick={() => router.push("/")}
-          >
-            {/* <i className="text-2xl text-[#3cca98]">
+        <div className="flex flex-wrap w-full items-center justify-between mx-auto py-3 relative">
+          <div className="flex flex-wrap items-center w-[50%]">
+            {/* logo */}
+            <div
+              className="flex items-center cursor-pointer absolute left-1 lg:left-2"
+              onClick={() => router.push("/")}
+            >
+              {/* <i className="text-2xl text-[#3cca98]">
               <IoIosHome />
             </i> */}
-            <Image
-              className=" ml-[-2px] w-[100px] h-auto"
-              src={Logo}
-              // src={
-              //   "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2FLogo%2FDecorWhims.png?alt=media&token=cbd68fea-1c6c-484e-a523-600bfe9d0c71"
-              // }
-              alt="decorwhims_logo"
-              height="400"
-              width="800"
-            />
-          </div>
-
-          {/* Hidden Categories menu */}
-          {showCategories ? (
-            <div
-              className={`absolute left-[100px] flex items-center cursor-pointer flex-row mr-1 
-            text-white hover:text-[#f8f3f3da] rounded-lg ${styles.dropdown}`}
-            >
-              <p className="text-sm font-semibold pl-3 pr-1 py-1 m-0 ">
-                Categories
-              </p>
-              <i className={`text-lg pr-2 ${styles.dropbtn}`}>
-                <IoIosArrowDown />
-              </i>
-              <div className={styles.dropdownContent}>
-                <MenuBar />
-              </div>
+              <Image
+                className="lg:ml-[-2px] ml-0 w-[100px] h-auto"
+                src={Logo}
+                // src={
+                //   "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2FLogo%2FDecorWhims.png?alt=media&token=cbd68fea-1c6c-484e-a523-600bfe9d0c71"
+                // }
+                alt="decorwhims_logo"
+                height="400"
+                width="800"
+              />
             </div>
-          ) : null}
 
-          {/* Search Box */}
-          <div className="absolute left-[220px] ">
-            <Search
-              allProducts={allProducts}
-              results={results}
-              value={selectedProduct ? selectedProduct.name : ""}
-              renderItem={(item) => (
-                <div className="flex flex-row align-middle">
-                  <Image
-                    className="h-8 w-8"
-                    src={item.imageUrl[0]}
-                    alt="img"
-                    height="100"
-                    width="100"
-                  />
-                  <p className="ml-2 text-xs flex self-center">{item.name}</p>
+            {/* Hidden Categories menu */}
+            {showCategories ? (
+              <div
+                className={`absolute left-[90px] lg:left-[80px] xl:left-[100px] flex items-center cursor-pointer flex-row mr-1 
+            text-white hover:text-[#f8f3f3da] rounded-lg ${styles.dropdown}`}
+              >
+                <p className="text-sm font-semibold pl-3 pr-1 py-1 m-0 ">
+                  Categories
+                </p>
+                <i className={`text-lg pr-2 ${styles.dropbtn}`}>
+                  <IoIosArrowDown />
+                </i>
+                <div className={styles.dropdownContent}>
+                  <MenuBar />
                 </div>
-              )}
-              onChange={(e, filteredResults) => {
-                setResults(filteredResults);
-                handleChange(e); // You may need to pass other arguments if necessary
-              }}
-              // onChange={handleChange}
-              onSelect={(item) => setSelectedProduct(item)}
-              router={router}
-            />
+              </div>
+            ) : null}
+
+            {/* Search Box */}
+            <div className="absolute left-[200px] lg:left-[200px] xl:left-[220px] ">
+              <Search
+                allProducts={allProducts}
+                results={results}
+                value={selectedProduct ? selectedProduct.name : ""}
+                renderItem={(item) => (
+                  <div className="flex flex-row align-middle">
+                    <Image
+                      className="h-8 w-8"
+                      src={item.imageUrl[0]}
+                      alt="img"
+                      height="100"
+                      width="100"
+                    />
+                    <p className="ml-2 text-xs flex self-center">{item.name}</p>
+                  </div>
+                )}
+                onChange={(e, filteredResults) => {
+                  setResults(filteredResults);
+                  handleChange(e); // You may need to pass other arguments if necessary
+                }}
+                // onChange={handleChange}
+                onSelect={(item) => setSelectedProduct(item)}
+                router={router}
+              />
+            </div>
           </div>
 
           {/* Admin Product Control */}
-
-          {/* Button */}
-          <div className="flex md:order-2 gap-0">
+          {/* Buttons */}
+          <div className="flex flex-row items-center justify-center w-[50%]">
             {user?.role === "admin" ? (
               isAdminView ? (
-                adminNavOptions.map((item) => (
-                  <button
-                    className="p-0 m-0"
-                    key={item.id}
-                    onClick={() => router.push(item.path)}
+                <div
+                  className={`flex items-center cursor-pointer relative flex-row mr-1 py-1 rounded-lg 
+                ${styles.dropdown}`}
+                >
+                  <div className="flex flex-col ml-2 text-white">
+                    <p className="text-sm font-semibold pl-0 lg:pl-3 pr-1 py-1 m-0">
+                      Options
+                    </p>
+                  </div>
+                  <i
+                    className={`text-lg text-white
+                   ${styles.dropbtn}`}
                   >
-                    <p
-                    className="rounded-lg text-sm text-white font-semibold px-3 py-1 m-0 
-                    hover:text-[#f8f3f3da]"
-                  >
-                    {item.label}
-                  </p> 
-                  </button>
-                ))
+                    <IoIosArrowDown />
+                  </i>
+                  <div className={styles.dropdownContent}>
+                    <div className="bg-[#f9f9f9] rounded-[10px] py-2 px-4 shadow-[0px_8px_16px_0px_rgba(0,0,0,0.2)]">
+                      <Link
+                        className=" flex flex-row float-none text-xs text-[#35316d] font-semibold no-underline
+                          text-left px-1 py-1 rounded-[10px] align-middle items-center hover:text-[#f3b064]"
+                        href="/admin-view/all-items"
+                      >
+                        <i className="flex align-middle items-center pr-2 text-xl lg:text-2xl">
+                          <IoIosDocument />
+                        </i>
+                        <p>Manage Products</p>
+                      </Link>
+                      <Link
+                        className=" flex flex-row float-none text-xs text-[#35316d] font-semibold no-underline
+                          text-left px-1 py-1 rounded-[10px] align-middle items-center hover:text-[#f3b064]"
+                        href="/admin-view/add-items"
+                      >
+                        <i className="flex align-middle items-center pr-2 text-xl lg:text-2xl">
+                          <IoIosAdd />
+                        </i>
+                        <p>Add Product</p>
+                      </Link>
+                      <Link
+                        className=" flex flex-row float-none text-xs text-[#35316d] font-semibold no-underline
+                          text-left px-1 py-1 rounded-[10px] align-middle items-center hover:text-[#f3b064]"
+                        href="/premium-service/premium-item/listing/all-items"
+                      >
+                        <i className="flex align-middle items-center pr-2 text-xl lg:text-2xl">
+                          <IoIosStar />
+                        </i>
+                        <p className="">Premium Products</p>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               ) : null
             ) : null}
 
             {user?.role === "admin" ? (
-              <Fragment>
-                <button
-                  className="p-0 m-0"
-                  onClick={() =>
-                    router.push(
-                      "/premium-service/premium-item/listing/all-items"
-                    )
-                  }
-                >
-                  <p
-                    className="rounded-lg text-sm text-white font-semibold px-3 py-1 m-0 
-                    hover:text-[#f8f3f3da]"
+              !isAdminView ? (
+                <Fragment>
+                  <button
+                    className="p-0 m-0"
+                    onClick={() =>
+                      router.push(
+                        "/premium-service/premium-item/listing/all-items"
+                      )
+                    }
                   >
-                    Premium
-                  </p>
-                </button>
-              </Fragment>
+                    <p
+                      className="rounded-lg text-sm text-white font-semibold px-0 lg:px-3 py-1 m-0 
+                    hover:text-[#f8f3f3da]"
+                    >
+                      Premium
+                    </p>
+                  </button>
+                </Fragment>
+              ) : null
             ) : null}
 
             {!isAdminView && user?.role === "primium" ? (
@@ -285,7 +343,7 @@ const Navbar = () => {
               isAdminView ? (
                 <button className="p-0 m-0" onClick={() => router.push("/")}>
                   <p className="rounded-lg text-sm font-semibold px-3 py-1 m-0 text-white hover:text-[#f8f3f3da]">
-                    Client View
+                    Admin
                   </p>
                 </button>
               ) : (
@@ -294,7 +352,7 @@ const Navbar = () => {
                   onClick={() => router.push("/admin-view")}
                 >
                   <p className="rounded-lg text-sm font-semibold px-3 py-1 m-0 text-white hover:text-[#f8f3f3da]">
-                    Admin View
+                    Customer
                   </p>
                 </button>
               )
@@ -303,7 +361,7 @@ const Navbar = () => {
             {/* Login  or Account */}
             {isAuthUser ? (
               <div
-                className={`flex items-center cursor-pointer relative flex-row mr-1 hover:bg-[#3d3c3c1e]
+                className={`flex items-center cursor-pointer relative flex-row mr-1 xl:mr-4 hover:bg-[#3d3c3c1e]
                 px-4 py-1 rounded-lg ${styles.dropdown}`}
               >
                 <i
@@ -317,7 +375,7 @@ const Navbar = () => {
                   <p className="text-xs">Orders & Account</p>
                 </div>
                 <div className={styles.dropdownContent}>
-                  <div className="bg-[#f9f9f9] rounded-[10px] py-2 px-4 shadow-[0px_8px_16px_0px_rgba(0,0,0,0.2)]">
+                  <div className="bg-[#f9f9f9] w-[200px] rounded-[10px] py-2 px-4 shadow-[0px_8px_16px_0px_rgba(0,0,0,0.2)]">
                     <button
                       className=" flex flex-row float-none text-xs text-[#35316d] font-semibold no-underline
                           text-left px-1 py-1 rounded-[10px] align-middle items-center hover:text-[#f3b064]"
@@ -388,7 +446,7 @@ const Navbar = () => {
               >
                 <i
                   className="text-2xl text-white hover:bg-[#3d3c3c1e]
-                px-4 py-2 rounded-lg mr-8"
+                px-4 py-2 rounded-lg mr-4 xl:mr-8"
                 >
                   <IoIosCart />
                 </i>
