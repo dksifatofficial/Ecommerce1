@@ -65,7 +65,7 @@ const ImageSlider = ({ images }) => {
 
   return (
     <div
-      className="w-full lg:w-[700px] xl:w-[900px] h-[190px] lg:h-[250px] xl:h-[320px] relative overflow-hidden rounded-lg"
+      className="w-full lg:w-[700px] xl:w-[900px] h-[320px] lg:h-[260px] xl:h-[320px] relative overflow-hidden rounded-lg"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -75,7 +75,7 @@ const ImageSlider = ({ images }) => {
       >
         {[...images, images[0]].map((image, index) => (
           <Link
-            className="relative h-[320px] flex-[0_0_100%] w-full flex justify-center items-center transition-transform 
+            className="relative h-[320px] lg:h-[260px] xl:h-[320px] flex-[0_0_100%] w-full flex justify-center items-center transition-transform 
             duration-[1s] ease-[ease] overflow-hidden"
             key={index}
             href={image.link}

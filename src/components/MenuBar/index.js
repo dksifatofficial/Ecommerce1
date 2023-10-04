@@ -27,7 +27,7 @@ export default function MenuBar() {
     <div className="relative clear-both mx-auto my-0">
       <nav>
         <ul
-          className={`hidden lg:block w-[250px] m-0 px-0 py-4 rounded-lg bg-white list-none ${classes.mcdMenu}`}
+          className={`w-[250px] m-0 px-0 py-4 rounded-lg bg-white list-none ${classes.mcdMenu}`}
         >
           <li onClick={() => router.push("/product/listing/mart")}>
             <div className=" relative flex flex-row">
