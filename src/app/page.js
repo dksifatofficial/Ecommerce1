@@ -106,7 +106,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-slate-100">
 
-      <div className="w-full relative flex flex-row justify-center gap-2 mt-4 lg:gap-4 lg:mt-4 xl:gap-6 xl:mt-6">
+      <div className="w-full relative flex flex-col xl:flex-row justify-center gap-2 mt-4 lg:gap-4 lg:mt-4 xl:gap-6 xl:mt-6">
         <div className="">
           <MenuBar />
         </div>

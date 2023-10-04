@@ -11,7 +11,8 @@ const BestExperience = () => {
   return (
     <div className="w-full py-6">
       <Link
-        className=" bg-[#f8570610] hover:bg-[#f857062a] rounded-lg py-2 px-4 flex flex-wrap gap-x-4"
+        className=" bg-[#f8570610] hover:bg-[#f857062a] rounded-lg py-2 px-4
+        flex flex-wrap gap-x-6"
         href="/get-the-best-shopping-experience"
       >
         <div className="flex flex-row">
