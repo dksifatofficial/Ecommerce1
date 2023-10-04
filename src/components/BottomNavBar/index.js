@@ -71,6 +71,7 @@ const BottomNavBar = () => {
               </i>
               <p className=" text-xs">Cart</p>
             </Link>
+            
             <div className="flex flex-col items-center w-[55px] justify-center cursor-pointer text-[#f85606]">
               <i className="text-2xl">
                 <IoMdPerson className="" />

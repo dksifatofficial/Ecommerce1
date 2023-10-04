@@ -1,0 +1,12 @@
+.dropdownContent {
+  @apply hidden absolute bg-transparent rounded-[10px] min-w-[220px] 
+   z-[1] pt-6 left-[-30px] top-[28px];
+}
+/* .dropdownContent a {
+  @apply float-none text-xs text-[#35316d] font-semibold no-underline block 
+    text-left px-1 py-1 rounded-[10px]
+    hover:text-[#f3b064];
+} */
+.dropdown:hover .dropdownContent {
+  @apply block;
+}
