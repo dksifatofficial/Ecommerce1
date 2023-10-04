@@ -3,7 +3,7 @@
 import { GlobalContext } from "@/context";
 import Logo from "@/picture/logo.png";
 import { getAllAdminProducts } from "@/services/product";
-import { adminNavOptions } from "@/utils";
+// import { adminNavOptions } from "@/utils";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
@@ -79,7 +79,7 @@ import styles from "./styles.module.css";
 // }
 
 const Navbar = () => {
-  const { showNavModal, setShowNavModal } = useContext(GlobalContext);
+  // const { showNavModal, setShowNavModal } = useContext(GlobalContext);
   const [allProducts, setAllProducts] = useState([]);
   const [showCategories, setShowCategories] = useState(false);
 
@@ -465,7 +465,7 @@ const Navbar = () => {
             ) : null}
 
             {/* Menu for small device */}
-            <button
+            {/* <button
               data-collapse-toggle="navbar-sticky"
               type="button"
               className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden 
@@ -489,7 +489,7 @@ const Navbar = () => {
                   clip-rule="evenodd"
                 ></path>
               </svg>
-            </button>
+            </button> */}
           </div>
           {/* <div>
             <NavItems router={router} isAdminView={isAdminView} />
