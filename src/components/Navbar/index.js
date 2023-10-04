@@ -48,7 +48,7 @@ import styles from "./styles.module.css";
 //         {isAdminView ? (
 //           adminNavOptions.map((item) => (
 //             <li
-//               className="rounded-lg text-sm text-[#3cca98] font-semibold px-3 py-1 m-0 
+//               className="rounded-lg text-sm text-[#3cca98] font-semibold px-3 py-1 m-0
 //                   hover:text-[#f8f3f3da] cursor-pointer"
 //               key={item.id}
 //               onClick={() => router.push(item.path)}
@@ -65,7 +65,7 @@ import styles from "./styles.module.css";
 //               }
 //             >
 //               <p
-//                 className="rounded-lg text-white text-sm font-semibold px-3 py-1 m-0 
+//                 className="rounded-lg text-white text-sm font-semibold px-3 py-1 m-0
 //                   hover:text-[#f8f3f3da]"
 //               >
 //                 Premium
@@ -431,7 +431,10 @@ const Navbar = () => {
               </div>
             ) : (
               <button className="p-0 m-0" onClick={() => router.push("/login")}>
-                <p className="rounded-lg text-sm font-semibold px-3 py-1 m-0 text-white hover:text-[#f8f3f3da]">
+                <p
+                  className="rounded-lg hidden lg:block text-sm font-semibold px-3 py-1 m-0 
+                   text-white hover:text-[#f8f3f3da]"
+                >
                   Login
                 </p>
               </button>
@@ -452,10 +455,10 @@ const Navbar = () => {
               </div>
             ) : null}
 
-            {/* Logout  or Sign Up */}
+            {/* Sign Up or Null */}
             {!isAuthUser ? (
               <button
-                className="p-0 m-0"
+                className="p-0 m-0 hidden lg:block"
                 onClick={() => router.push("/register")}
               >
                 <p className="rounded-lg text-sm font-semibold px-3 py-1 m-0 text-white hover:text-[#f8f3f3da]">

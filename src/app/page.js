@@ -104,7 +104,6 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-between bg-slate-100">
-
       {/* Header Section */}
       <div
         className="w-full relative flex flex-col justify-center lg:flex-row gap-2 

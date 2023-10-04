@@ -1,6 +1,6 @@
 .dropdownContent {
   @apply hidden absolute bg-transparent rounded-[10px] min-w-[220px] 
-   z-[1] pt-6 left-[-30px] top-[28px];
+   z-[1] pb-4 left-[-30px] bottom-[40px];
 }
 /* .dropdownContent a {
   @apply float-none text-xs text-[#35316d] font-semibold no-underline block 
