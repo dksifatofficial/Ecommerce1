@@ -20,63 +20,63 @@ import {
   IoIosLogOut,
   IoIosStar,
 } from "react-icons/io";
-import CartModal from "../CartModal";
-import CommonModal from "../CommonModal";
+// import CartModal from "../CartModal";
+// import CommonModal from "../CommonModal";
 import MenuBar from "../MenuBar";
 import Search from "../SearchBar/Search";
 import styles from "./styles.module.css";
 
-function NavItems({ isModalView = false, isAdminView, router }) {
-  const {
-    user,
-    isAuthUser,
-    setIsAuthUser,
-    setUser,
-    currentUpdatedProduct,
-    setCurrentUpdatedProduct,
-    showCartModal,
-    setShowCartModal,
-  } = useContext(GlobalContext);
-  return (
-    <div
-      className={`items-center justify-between w-full ${
-        isModalView ? "" : "hidden"
-      }`}
-      id="nav-items"
-    >
-      <ul className="flex flex-row font-medium rounded-lg">
-        {isAdminView ? (
-          adminNavOptions.map((item) => (
-            <li
-              className="rounded-lg text-sm text-[#3cca98] font-semibold px-3 py-1 m-0 
-                  hover:text-[#f8f3f3da] cursor-pointer"
-              key={item.id}
-              onClick={() => router.push(item.path)}
-            >
-              {item.label}
-            </li>
-          ))
-        ) : !isAdminView && user?.role === "primium" ? (
-          <Fragment>
-            <button
-              className="p-0 m-0"
-              onClick={() =>
-                router.push("/premium-service/premium-item/listing/all-items")
-              }
-            >
-              <p
-                className="rounded-lg text-white text-sm font-semibold px-3 py-1 m-0 
-                  hover:text-[#f8f3f3da]"
-              >
-                Premium
-              </p>
-            </button>
-          </Fragment>
-        ) : null}
-      </ul>
-    </div>
-  );
-}
+// function NavItems({ isModalView = false, isAdminView, router }) {
+//   const {
+//     user,
+//     isAuthUser,
+//     setIsAuthUser,
+//     setUser,
+//     currentUpdatedProduct,
+//     setCurrentUpdatedProduct,
+//     showCartModal,
+//     setShowCartModal,
+//   } = useContext(GlobalContext);
+//   return (
+//     <div
+//       className={`items-center justify-between w-full ${
+//         isModalView ? "" : "hidden"
+//       }`}
+//       id="nav-items"
+//     >
+//       <ul className="flex flex-row font-medium rounded-lg">
+//         {isAdminView ? (
+//           adminNavOptions.map((item) => (
+//             <li
+//               className="rounded-lg text-sm text-[#3cca98] font-semibold px-3 py-1 m-0 
+//                   hover:text-[#f8f3f3da] cursor-pointer"
+//               key={item.id}
+//               onClick={() => router.push(item.path)}
+//             >
+//               {item.label}
+//             </li>
+//           ))
+//         ) : !isAdminView && user?.role === "primium" ? (
+//           <Fragment>
+//             <button
+//               className="p-0 m-0"
+//               onClick={() =>
+//                 router.push("/premium-service/premium-item/listing/all-items")
+//               }
+//             >
+//               <p
+//                 className="rounded-lg text-white text-sm font-semibold px-3 py-1 m-0 
+//                   hover:text-[#f8f3f3da]"
+//               >
+//                 Premium
+//               </p>
+//             </button>
+//           </Fragment>
+//         ) : null}
+//       </ul>
+//     </div>
+//   );
+// }
 
 const Navbar = () => {
   const { showNavModal, setShowNavModal } = useContext(GlobalContext);
@@ -491,12 +491,12 @@ const Navbar = () => {
               </svg>
             </button>
           </div>
-          <div className="hidden">
+          {/* <div>
             <NavItems router={router} isAdminView={isAdminView} />
-          </div>
+          </div> */}
         </div>
       </nav>
-      <CommonModal
+      {/* <CommonModal
         showModalTitle={false}
         show={showNavModal}
         mainContent={
@@ -507,8 +507,8 @@ const Navbar = () => {
           />
         }
         setShow={setShowNavModal}
-      />
-      {showCartModal && <CartModal />}
+      /> */}
+      {/* {showCartModal && <CartModal />} */}
     </>
   );
 };

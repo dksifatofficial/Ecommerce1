@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
         {/* <NextAuthProviders> */}
         <HelmetProvider>
           <GlobalState>
-            <main className="flex flex-col mt-[64px] w-full">
+            <main className="flex flex-col pt-[64px] pb-[55px] lg:pb-0 w-full bg-slate-100">
               <Helmet>
                 <title>Online Shopping in Bangladesh: Order Now from</title>
                 <meta
