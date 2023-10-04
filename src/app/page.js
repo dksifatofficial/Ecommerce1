@@ -1,7 +1,6 @@
 "use client";
 
 import BestExperience from "@/components/BestExperience";
-import Button3 from "@/components/Buttons/Button3";
 import Category1 from "@/components/Category/Category1";
 import CategoryFull from "@/components/Category/CategoryFull";
 import ProductTile from "@/components/CommonListing/ProductTile";
@@ -105,9 +104,10 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between bg-slate-100">
-
-      <div className="w-full relative flex flex-col justify-center lg:flex-row gap-2 
-           mt-4 lg:gap-4 lg:mt-4 xl:gap-6 xl:mt-6 px-4">
+      <div
+        className="w-full relative flex flex-col justify-center lg:flex-row gap-2 
+           mt-4 lg:gap-4 lg:mt-4 xl:gap-6 xl:mt-6 px-4"
+      >
         <div className="hidden lg:block">
           <MenuBar />
         </div>
@@ -117,19 +117,21 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="hidden lg:block  border border-red-500">
+      <div className="hidden lg:block">
         <BestExperience />
       </div>
 
-      <section className="mt-4 flex min-h-screen flex-col items-center justify-between px-4 lg:px-12 xl:px-24">
+      <section className="flex min-h-screen flex-col items-center justify-between px-4">
         {/* Category1 Section */}
-        <Category1 />
+        <div className="w-full bg-white rounded-lg">
+          <Category1 />
+        </div>
 
-        {/* Summer Sale Collection Section */}
-        <div className="max-w-screen-xl py-8 mx-auto sm:py-12 ">
-          <div className="grid grid-cols-1 gap-2 lg:grid-cols-3 lg:items-stretch">
-            <div className="relative grid p-6 place-content-center sm:p-8">
-              <div className="absolute h-full overflow-hidden">
+        {/* Collection Section */}
+        <div className="xl:max-w-screen-xl w-full mx-auto mt-6">
+          <div className=" bg-slate-200 overflow-hidden rounded-lg grid grid-cols-1 gap-2 xl:grid-cols-3 lg:items-stretch">
+            <div className="relative grid w-full py-4 xl:place-content-center">
+              <div className="absolute hidden xl:block h-full overflow-hidden">
                 <Image
                   className="h-full object-cover opacity-50"
                   src="https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fwinter.png-1696167224788-077hha4q12?alt=media&token=e8058295-79e5-4dc0-a263-91cbae9a9f97"
@@ -138,7 +140,7 @@ export default function Home() {
                   width="600"
                 />
               </div>
-              <div className="max-w-md mx-auto text-center z-10 lg:text-left">
+              <div className="xl:max-w-md w-full pl-6 mx-auto text-center z-10 lg:text-left">
                 <div>
                   <motion.h2
                     className="text-5xl pb-4 font-bold text-transparent bg-clip-text inline-block
@@ -150,22 +152,11 @@ export default function Home() {
                     Winter Sale Collection
                   </motion.h2>
                 </div>
-                <motion.div
-                  initial={{ x: -70, opacity: 0 }}
-                  whileInView={{ x: 0, opacity: 1 }}
-                  transition={{ duration: 0.8 }}
-                >
-                  <Button3
-                    onClick={() => router.push("/product/listing/all-products")}
-                    className=""
-                  >
-                    Shop ALL
-                  </Button3>
-                </motion.div>
               </div>
             </div>
-            <div className="lg:col-span-2">
-              <ul className="grid grid-cols-4 gap-2">
+
+            <div className="lg:col-span-2 px-2 py-4">
+              <ul className="flex flex-wrap justify-center gap-4 xl:gap-2 xl:grid xl:grid-cols-4">
                 {products && products.length
                   ? products
                       .filter((item) => item.category === "all")
@@ -186,8 +177,10 @@ export default function Home() {
         </div>
 
         {/* CategoryFull Section */}
-        <CategoryFull />
-
+        <div className="mt-4">
+          <CategoryFull />
+        </div>
+        
         {/* category by person Section */}
 
         {/* <div className="max-w-screen-xl py-8 mx-auto sm:px-6 sm:py-12 ">
@@ -259,11 +252,11 @@ export default function Home() {
 
         {/* Just For You Section */}
 
-        <div>
-          <h2 className="px-3 w-full font-semibold text-gray-600 text-center py-6 text-3xl">
+        <div className="mt-6">
+          <h2 className="px-3 w-full font-semibold text-gray-600 bg-white rounded-lg text-center py-6 text-3xl">
             Just For You
           </h2>
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 mt-4">
             <ul className="grid grid-cols-6 gap-4">
               {products && products.length
                 ? products
@@ -284,7 +277,9 @@ export default function Home() {
           </div>
           <div className="w-full relative flex justify-center my-8">
             <Link href="/product/listing/all-products">
-              <p className="text-lg font-bold text-gray-600 hover:text-gray-400">See More...</p>
+              <p className="text-lg font-bold text-gray-600 hover:text-gray-400">
+                See More...
+              </p>
             </Link>
           </div>
         </div>

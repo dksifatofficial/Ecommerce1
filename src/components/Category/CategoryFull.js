@@ -8,12 +8,12 @@ const CategoryFull = () => {
   const router = useRouter();
 
   return (
-    <div className="w-full mt-4 flex justify-center items-center mx-12">
+    <div className="w-full my-4 flex justify-center items-center  ">
       <div className="pt-2 flex flex-wrap items-center">
-        <h2 className="px-3 w-full font-semibold text-gray-600 text-center py-6 text-xl">
+        <h2 className="px-3 w-full font-semibold text-gray-600 rounded-lg text-center bg-white py-6 text-xl">
           Categories
         </h2>
-        <ul className="flex flex-wrap justify-center items-center gap-0">
+        <ul className="flex pl-2 pr-2 pt-2 pb-2 flex-wrap justify-center items-center gap-2 bg-slate-100">
           {caterogyFull.map((list, index) => {
             return (
               <li
@@ -30,7 +30,7 @@ const CategoryFull = () => {
                   height="400"
                   width="400"
                 />
-                {list.title}
+                <p className="px-1">{list.title}</p>
               </li>
             );
           })}
