@@ -17,13 +17,13 @@ const BestExperience = () => {
       >
         <div className="flex flex-row">
           <Image
-            className="h-6 w-6 mr-1"
+            className="h-4 w-4 xl:h-6 xl:w-6 mr-1"
             src={img1}
             alt=""
             height="100"
             width="100"
           />
-          <p className="text-gray-700 tracking-tighter">Safe Payments</p>
+          <p className="text-gray-700 tracking-tighter text-xs xl:text-sm">Safe Payments</p>
           <p className="ml-4 text-gray-300">|</p>
         </div>
         <div className="flex flex-row">
