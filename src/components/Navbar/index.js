@@ -168,19 +168,16 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-[#f85606] fixed w-full z-20 top-0 left-0">
-        <div className="flex flex-wrap w-full items-center justify-between mx-auto py-3 relative">
-          <div className="flex flex-wrap items-center w-[50%]">
+      <nav className="bg-transparent lg:bg-[#f85606] fixed w-full z-20 top-0 left-0">
+        <div className="flex flex-wrap w-full items-center justify-center lg:justify-between mx-auto py-3 relative">
+          <div className="flex flex-wrap items-center w-full lg:w-[50%]">
             {/* logo */}
             <div
               className="flex items-center cursor-pointer absolute left-1 lg:left-2"
               onClick={() => router.push("/")}
             >
-              {/* <i className="text-2xl text-[#3cca98]">
-              <IoIosHome />
-            </i> */}
               <Image
-                className="lg:ml-[-2px] ml-0 w-[100px] h-auto"
+                className="lg:ml-[-2px] ml-0 w-[100px] h-auto hidden lg:block"
                 src={Logo}
                 // src={
                 //   "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2FLogo%2FDecorWhims.png?alt=media&token=cbd68fea-1c6c-484e-a523-600bfe9d0c71"
@@ -194,7 +191,7 @@ const Navbar = () => {
             {/* Hidden Categories menu */}
             {showCategories ? (
               <div
-                className={`absolute left-[90px] lg:left-[80px] xl:left-[100px] flex items-center cursor-pointer flex-row mr-1 
+                className={`absolute hidden left-[50px] lg:left-[100px] lg:flex items-center cursor-pointer flex-row mr-1 
             text-white hover:text-[#f8f3f3da] rounded-lg ${styles.dropdown}`}
               >
                 <p className="text-sm font-semibold pl-3 pr-1 py-1 m-0 ">
@@ -210,7 +207,7 @@ const Navbar = () => {
             ) : null}
 
             {/* Search Box */}
-            <div className="absolute left-[200px] lg:left-[200px] xl:left-[220px] ">
+            <div className="w-full lg:w-[450px] lg:absolute block lg:left-[200px] xl:left-[220px]">
               <Search
                 allProducts={allProducts}
                 results={results}
@@ -240,7 +237,7 @@ const Navbar = () => {
 
           {/* Admin Product Control */}
           {/* Buttons */}
-          <div className="flex flex-row items-center justify-center w-[50%]">
+          <div className="flex flex-row items-center justify-center lg:w-[50%]">
             {user?.role === "admin" ? (
               isAdminView ? (
                 <div
@@ -300,7 +297,7 @@ const Navbar = () => {
               !isAdminView ? (
                 <Fragment>
                   <button
-                    className="p-0 m-0"
+                    className="p-0 m-0 hidden lg:block"
                     onClick={() =>
                       router.push(
                         "/premium-service/premium-item/listing/all-items"
@@ -318,7 +315,7 @@ const Navbar = () => {
               ) : null
             ) : null}
 
-            {!isAdminView && user?.role === "primium" ? (
+            {!isAdminView && user?.role === "premium" ? (
               <Fragment>
                 <button
                   className="p-0 m-0"
@@ -339,6 +336,7 @@ const Navbar = () => {
             ) : null}
 
             {/* Admin View or Client View */}
+            <div className="hidden lg:block">
             {user?.role === "admin" ? (
               isAdminView ? (
                 <button className="p-0 m-0" onClick={() => router.push("/")}>
@@ -357,12 +355,13 @@ const Navbar = () => {
                 </button>
               )
             ) : null}
+            </div>
 
             {/* Login  or Account */}
             {isAuthUser ? (
               <div
-                className={`flex items-center cursor-pointer relative flex-row mr-1 xl:mr-4 hover:bg-[#3d3c3c1e]
-                px-4 py-1 rounded-lg ${styles.dropdown}`}
+                className={`lg:flex items-center cursor-pointer relative flex-row mr-1 xl:mr-4 hover:bg-[#3d3c3c1e]
+                px-4 py-1 rounded-lg hidden ${styles.dropdown}`}
               >
                 <i
                   className={`text-2xl text-white rounded-[100%] ring-2 hover:ring-2 ring-white
@@ -441,7 +440,7 @@ const Navbar = () => {
             {/* Cart */}
             {!isAdminView && isAuthUser ? (
               <div
-                className="flex items-center cursor-pointer"
+                className="lg:flex items-center hidden cursor-pointer"
                 onClick={() => setShowCartModal(true)}
               >
                 <i

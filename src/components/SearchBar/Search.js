@@ -99,19 +99,19 @@ function Search({
   console.log(defaultValue);
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center w-full lg:w-[450px]">
       <div
         tabIndex={1}
         onBlur={resetSearchComplete}
         onKeyDown={handleKeyDown}
-        className="relative"
+        className="relative w-full px-20 lg:px-0 lg:w-[450px]"
       >
         <input
           value={defaultValue}
           onChange={handleChange}
           type="text"
-          className="w-[250px] md:w-[250px] lg:w-[250px] xl:w-[450px] px-5 py-0 text-sm h-8 rounded-lg focus:border-gray-700 
-           outline-none transition"
+          className="w-full lg:w-[450px] px-5 py-0 text-sm h-12 lg:h-8 rounded-lg focus:border-gray-700 
+           outline-none transition bg-transparent lg:bg-white border lg:border-none"
           placeholder="Search in Daraz..."
         />
 

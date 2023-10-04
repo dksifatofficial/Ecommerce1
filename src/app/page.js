@@ -104,6 +104,8 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-between bg-slate-100">
+
+      {/* Header Section */}
       <div
         className="w-full relative flex flex-col justify-center lg:flex-row gap-2 
            mt-4 lg:gap-4 lg:mt-4 xl:gap-6 xl:mt-6 px-4"
@@ -117,10 +119,12 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Best Experience Section */}
       <div className="hidden lg:block w-full pl-16 pr-16">
         <BestExperience />
       </div>
 
+      {/* Main Section */}
       <section className="flex min-h-screen flex-col items-center justify-between pl-16 pr-16">
         {/* Category1 Section */}
         <div className="w-full bg-white rounded-lg">

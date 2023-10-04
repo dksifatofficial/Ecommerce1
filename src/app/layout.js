@@ -1,5 +1,6 @@
 "use client";
 
+import BottomNavBar from "@/components/BottomNavBar";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar";
 import GlobalState from "@/context";
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
               </Helmet>
               <Navbar />
               {children}
+              <BottomNavBar />
               <Footer />
             </main>
           </GlobalState>
