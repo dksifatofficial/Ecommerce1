@@ -124,7 +124,7 @@ export default function Home() {
       </div>
 
       {/* Main Section */}
-      <section className="flex min-h-screen flex-col items-center justify-between pl-16 pr-16">
+      <section className="flex min-h-screen mt-6 lg:mt-0 flex-col items-center justify-between pl-16 pr-16">
         {/* Category1 Section */}
         <div className="w-full bg-white rounded-lg">
           <Category1 />

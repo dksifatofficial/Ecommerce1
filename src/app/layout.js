@@ -15,7 +15,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`w-full ${inter.className}`}>
+      <body className={`max-w-[100vw] overflow-x-hidden bg-slate-100 ${inter.className}`}>
         {/* <NextAuthProviders> */}
         <HelmetProvider>
           <GlobalState>
