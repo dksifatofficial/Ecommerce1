@@ -23,62 +23,62 @@ const BestExperience = () => {
             height="100"
             width="100"
           />
-          <p className="text-gray-700 tracking-tighter text-xs xl:text-sm">Safe Payments</p>
+          <p className="text-gray-700 text-sm tracking-tighter ">Safe Payments</p>
           <p className="ml-4 text-gray-300">|</p>
         </div>
         <div className="flex flex-row">
           <Image
-            className="h-6 w-6 mr-1"
+            className="h-4 w-4 xl:h-6 xl:w-6 mr-1"
             src={img2}
             alt=""
             height="100"
             width="100"
           />
-          <p className="text-gray-700 tracking-tighter">Nationwide Delivery</p>
+          <p className="text-gray-700 text-sm tracking-tighter">Nationwide Delivery</p>
           <p className="ml-4 text-gray-300">|</p>
         </div>
         <div className="flex flex-row">
           <Image
-            className="h-6 w-6 mr-1"
+            className="h-4 w-4 xl:h-6 xl:w-6 mr-1"
             src={img3}
             alt=""
             height="100"
             width="100"
           />
-          <p className="text-gray-700 tracking-tighter">Free & Easy Returns</p>
+          <p className="text-gray-700 text-sm tracking-tighter">Free & Easy Returns</p>
           <p className="ml-4 text-gray-300">|</p>
         </div>
         <div className="flex flex-row">
           <Image
-            className="h-6 w-6 mr-1"
+            className="h-4 w-4 xl:h-6 xl:w-6 mr-1"
             src={img4}
             alt=""
             height="100"
             width="100"
           />
-          <p className="text-gray-700 tracking-tighter">Best Price Guaranteed</p>
+          <p className="text-gray-700 text-sm tracking-tighter">Best Price Guaranteed</p>
           <p className="ml-4 text-gray-300">|</p>
         </div>
         <div className="flex flex-row">
           <Image
-            className="h-6 w-6 mr-1"
+            className="h-4 w-4 xl:h-6 xl:w-6 mr-1"
             src={img5}
             alt=""
             height="100"
             width="100"
           />
-          <p className="text-gray-700 tracking-tighter">100% Authentic Products</p>
+          <p className="text-gray-700 text-sm tracking-tighter">100% Authentic Products</p>
           <p className="ml-4 text-gray-300">|</p>
         </div>
         <div className="flex flex-row">
           <Image
-            className="h-6 w-6 mr-1"
+            className="h-4 w-4 xl:h-6 xl:w-6 mr-1"
             src={img6}
             alt=""
             height="100"
             width="100"
           />
-          <p className="text-gray-700 tracking-tighter">Daraz Verified</p>
+          <p className="text-gray-700 text-sm tracking-tighter">Daraz Verified</p>
         </div>
       </Link>
     </div>

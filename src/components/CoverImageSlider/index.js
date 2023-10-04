@@ -65,7 +65,7 @@ const ImageSlider = ({ images }) => {
 
   return (
     <div
-      className="w-full lg:w-[700px] xl:w-[900px] h-[240px] lg:h-[280px] xl:h-[320px] relative overflow-hidden rounded-lg"
+      className="w-full lg:w-[700px] xl:w-[900px] h-[190px] lg:h-[250px] xl:h-[320px] relative overflow-hidden rounded-lg"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
