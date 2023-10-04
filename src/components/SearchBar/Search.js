@@ -104,7 +104,7 @@ function Search({
         tabIndex={1}
         onBlur={resetSearchComplete}
         onKeyDown={handleKeyDown}
-        className="relative w-full px-20 lg:px-0 lg:w-[450px]"
+        className="relative w-full px-4 lg:px-0 lg:w-[450px]"
       >
         <input
           value={defaultValue}

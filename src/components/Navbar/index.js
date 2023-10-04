@@ -337,24 +337,24 @@ const Navbar = () => {
 
             {/* Admin View or Client View */}
             <div className="hidden lg:block">
-            {user?.role === "admin" ? (
-              isAdminView ? (
-                <button className="p-0 m-0" onClick={() => router.push("/")}>
-                  <p className="rounded-lg text-sm font-semibold px-3 py-1 m-0 text-white hover:text-[#f8f3f3da]">
-                    Admin
-                  </p>
-                </button>
-              ) : (
-                <button
-                  className="p-0 m-0"
-                  onClick={() => router.push("/admin-view")}
-                >
-                  <p className="rounded-lg text-sm font-semibold px-3 py-1 m-0 text-white hover:text-[#f8f3f3da]">
-                    Customer
-                  </p>
-                </button>
-              )
-            ) : null}
+              {user?.role === "admin" ? (
+                isAdminView ? (
+                  <button className="p-0 m-0" onClick={() => router.push("/")}>
+                    <p className="rounded-lg text-sm font-semibold px-3 py-1 m-0 text-white hover:text-[#f8f3f3da]">
+                      Admin
+                    </p>
+                  </button>
+                ) : (
+                  <button
+                    className="p-0 m-0"
+                    onClick={() => router.push("/admin-view")}
+                  >
+                    <p className="rounded-lg text-sm font-semibold px-3 py-1 m-0 text-white hover:text-[#f8f3f3da]">
+                      Customer
+                    </p>
+                  </button>
+                )
+              ) : null}
             </div>
 
             {/* Login  or Account */}
@@ -491,7 +491,9 @@ const Navbar = () => {
               </svg>
             </button>
           </div>
-          <NavItems router={router} isAdminView={isAdminView} />
+          <div className="hidden">
+            <NavItems router={router} isAdminView={isAdminView} />
+          </div>
         </div>
       </nav>
       <CommonModal

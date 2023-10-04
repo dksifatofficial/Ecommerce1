@@ -16,12 +16,12 @@ const BottomNavBar = () => {
     <>
       <nav className="bg-white fixed w-full z-20 bottom-0 left-0 block lg:hidden">
         <div className="flex flex-wrap w-full items-center justify-between mx-auto">
-          <div className="flex flex-row justify-around py-2 px-12 w-full items-center border">
+          <div className="flex flex-row justify-around py-2 px-4 w-full items-center border">
             <Link
               className="flex flex-col items-center w-[55px] justify-center cursor-pointer text-[#f85606]"
               href="/"
             >
-              <i className="text-4xl">
+              <i className="text-2xl">
                 <IoIosHome className="" />
               </i>
               <p className=" text-xs text-center">Home</p>
@@ -30,7 +30,7 @@ const BottomNavBar = () => {
               className="flex flex-col items-center w-[55px] justify-center cursor-pointer text-[#f85606]"
               href="/categories"
             >
-              <i className="text-4xl">
+              <i className="text-2xl">
                 <AiFillAppstore className="" />
               </i>
               <p className=" text-xs text-center">Categories</p>
@@ -42,7 +42,7 @@ const BottomNavBar = () => {
                   className="flex flex-col items-center w-[55px] justify-center cursor-pointer text-[#f85606]"
                   href="/premium-service/premium-item/listing/all-items"
                 >
-                  <i className="text-4xl">
+                  <i className="text-2xl">
                     <MdWorkspacePremium className="" />
                   </i>
                   <p className=" text-xs">Premium</p>
@@ -55,7 +55,7 @@ const BottomNavBar = () => {
                 className="flex flex-col items-center w-[55px] justify-center cursor-pointer text-[#f85606]"
                 href="/premium-service/premium-item/listing/all-items"
               >
-                <i className="text-4xl">
+                <i className="text-2xl">
                   <MdWorkspacePremium className="" />
                 </i>
                 <p className=" text-xs">Premium</p>
@@ -66,13 +66,13 @@ const BottomNavBar = () => {
               className="flex flex-col items-center w-[55px] justify-center cursor-pointer text-[#f85606]"
               href="/cart"
             >
-              <i className="text-4xl">
+              <i className="text-2xl">
                 <IoMdCart className="" />
               </i>
               <p className=" text-xs">Cart</p>
             </Link>
             <div className="flex flex-col items-center w-[55px] justify-center cursor-pointer text-[#f85606]">
-              <i className="text-4xl">
+              <i className="text-2xl">
                 <IoMdPerson className="" />
               </i>
               <p className=" text-xs text-center">Account</p>
@@ -84,7 +84,7 @@ const BottomNavBar = () => {
                   className="flex flex-col items-center w-[55px] justify-center cursor-pointer text-[#f85606]"
                   href="/"
                 >
-                  <i className="text-4xl">
+                  <i className="text-2xl">
                     <GiCardExchange className="" />
                   </i>
                   <p className="text-xs text-center">Customer</p>
@@ -94,7 +94,7 @@ const BottomNavBar = () => {
                   className="flex flex-col items-center w-[55px] justify-center cursor-pointer text-[#f85606]"
                   href="/admin-view"
                 >
-                  <i className="text-4xl">
+                  <i className="text-2xl">
                     <GiCardExchange className="" />
                   </i>
                   <p className=" text-xs text-center">Admin</p>
