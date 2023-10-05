@@ -1,6 +1,6 @@
 export const login = async (formData) => {
   try {
-    const response = await fetch("https://raiment-gallery-ecommerce.vercel.app/api/login", {
+    const response = await fetch("https://ecommerce.aminulkibria.com/api/login", {
       method: "POST",
       headers: {
         "content-type": "application/json",
