@@ -88,6 +88,7 @@ export default function GlobalState({ children }) {
   useEffect(() => {
     if (
       pathName !== "/register" &&
+      !pathName.includes("categories") &&
       !pathName.includes("product") &&
       pathName !== "/" &&
       user &&

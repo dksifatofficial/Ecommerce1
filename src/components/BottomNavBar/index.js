@@ -49,6 +49,7 @@ const BottomNavBar = () => {
               </i>
               <p className=" text-xs text-center">Home</p>
             </Link>
+
             <Link
               className="flex flex-col items-center w-[55px] justify-center cursor-pointer text-[#f85606]"
               href="/categories"
