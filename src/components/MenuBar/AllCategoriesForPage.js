@@ -27,13 +27,13 @@ const AllCategories = () => {
   };
 
   return (
-    <div className="max-w-[100vw] mt-6 mb-6 ml-6 mr-6">
+    <div className="max-w-[100vw] mt-2 mb-2 ml-2 mr-2">
       <div className="w-full flex flex-row gap-2">
         <nav className="w-[40%] flex flex-col gap-2">
           <button
             onClick={() => handleButtonClick("Mart")}
-            className={`py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left ${
-              activeButton === "Mart" ? "text-[#e67e22]" : "text-gray-900"
+            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
+              activeButton === "Mart" ? "text-[#e67e22]" : " text-gray-500"
             }`}
           >
             <i className="text-lg">
@@ -43,10 +43,10 @@ const AllCategories = () => {
           </button>
           <button
             onClick={() => handleButtonClick("BeautyGlamour")}
-            className={`py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left ${
+            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
               activeButton === "BeautyGlamour"
                 ? "text-[#e67e22]"
-                : "text-gray-900"
+                : " text-gray-500"
             }`}
           >
             <i className="text-lg">
@@ -56,10 +56,10 @@ const AllCategories = () => {
           </button>
           <button
             onClick={() => handleButtonClick("HomeMakeover")}
-            className={`py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left ${
+            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
               activeButton === "HomeMakeover"
                 ? "text-[#e67e22]"
-                : "text-gray-900"
+                : " text-gray-500"
             }`}
           >
             <i className="text-lg">
@@ -69,8 +69,8 @@ const AllCategories = () => {
           </button>
           <button
             onClick={() => handleButtonClick("Fashion")}
-            className={`py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left ${
-              activeButton === "Fashion" ? "text-[#e67e22]" : "text-gray-900"
+            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
+              activeButton === "Fashion" ? "text-[#e67e22]" : " text-gray-500"
             }`}
           >
             <i className="text-lg">
@@ -80,10 +80,10 @@ const AllCategories = () => {
           </button>
           <button
             onClick={() => handleButtonClick("GenderCategories")}
-            className={`py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left ${
+            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
               activeButton === "GenderCategories"
                 ? "text-[#e67e22]"
-                : "text-gray-900"
+                : " text-gray-500"
             }`}
           >
             <i className="text-lg">
@@ -93,10 +93,10 @@ const AllCategories = () => {
           </button>
           <button
             onClick={() => handleButtonClick("BestPriceGuaranteed")}
-            className={`py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left ${
+            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
               activeButton === "BestPriceGuaranteed"
                 ? "text-[#e67e22]"
-                : "text-gray-900"
+                : " text-gray-500"
             }`}
           >
             <i className="text-lg">
@@ -106,10 +106,10 @@ const AllCategories = () => {
           </button>
           <button
             onClick={() => handleButtonClick("FreeDelivery")}
-            className={`py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left ${
+            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
               activeButton === "FreeDelivery"
                 ? "text-[#e67e22]"
-                : "text-gray-900"
+                : " text-gray-500"
             }`}
           >
             <i className="text-lg">
@@ -119,10 +119,10 @@ const AllCategories = () => {
           </button>
           <button
             onClick={() => handleButtonClick("BudgetDeals")}
-            className={`py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left ${
+            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
               activeButton === "BudgetDeals"
                 ? "text-[#e67e22]"
-                : "text-gray-900"
+                : " text-gray-500"
             }`}
           >
             <i className="text-lg">
@@ -132,10 +132,10 @@ const AllCategories = () => {
           </button>
           <button
             onClick={() => handleButtonClick("EverydayLowPrice")}
-            className={`py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left ${
+            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
               activeButton === "EverydayLowPrice"
                 ? "text-[#e67e22]"
-                : "text-gray-900"
+                : " text-gray-500"
             }`}
           >
             <i className="text-lg">
@@ -153,7 +153,7 @@ const AllCategories = () => {
                 {menuBarMart.map((list, index) => {
                   return (
                     <li
-                      className="py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left"
+                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
@@ -171,7 +171,7 @@ const AllCategories = () => {
                 {menuBarFashionOptions.map((list, index) => {
                   return (
                     <li
-                      className="py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left"
+                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
@@ -189,7 +189,7 @@ const AllCategories = () => {
                 {menuBarHomeMakeOver.map((list, index) => {
                   return (
                     <li
-                      className="py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left"
+                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
@@ -207,7 +207,7 @@ const AllCategories = () => {
                 {menuBarFashionOptions.map((list, index) => {
                   return (
                     <li
-                      className="py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left"
+                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
@@ -225,7 +225,7 @@ const AllCategories = () => {
                 {menuBarGenderOptions.map((list, index) => {
                   return (
                     <li
-                      className="py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left"
+                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
@@ -243,7 +243,7 @@ const AllCategories = () => {
                 {menuBarMart.map((list, index) => {
                   return (
                     <li
-                      className="py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left"
+                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
@@ -261,7 +261,7 @@ const AllCategories = () => {
                 {menuBarHomeMakeOver.map((list, index) => {
                   return (
                     <li
-                      className="py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left"
+                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
@@ -279,7 +279,7 @@ const AllCategories = () => {
                 {menuBarFashionOptions.map((list, index) => {
                   return (
                     <li
-                      className="py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left"
+                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
@@ -297,7 +297,7 @@ const AllCategories = () => {
                 {menuBarMart.map((list, index) => {
                   return (
                     <li
-                      className="py-3 px-3 flex flex-row gap-3 items-center bg-white text-sm font-medium text-left"
+                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
