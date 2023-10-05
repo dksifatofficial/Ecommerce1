@@ -126,7 +126,7 @@ export default function Home() {
       {/* Main Section */}
       <section className="flex min-h-screen mt-6 lg:mt-0 flex-col items-center justify-between pl-4 pr-4 lg:pl-16 lg:pr-16">
         {/* Category1 Section */}
-        <div className="hidden lg:block w-full bg-white rounded-lg">
+        <div className="w-full bg-transparent lg:bg-white rounded-lg">
           <Category1 />
         </div>
 
@@ -189,7 +189,7 @@ export default function Home() {
           <h2 className="px-3 w-full font-semibold text-gray-600 bg-white rounded-lg text-center py-6 text-3xl">
             Just For You
           </h2>
-          <div className="lg:col-span-2 mt-4 ">
+          <div className="lg:col-span-2 mt-4 w-full">
             <ul className="flex flex-wrap gap-4 justify-center">
               {products && products.length
                 ? products
