@@ -32,7 +32,7 @@ const AllCategories = () => {
         <nav className="w-[40%] flex flex-col gap-2">
           <button
             onClick={() => handleButtonClick("Mart")}
-            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
+            className={`py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
               activeButton === "Mart" ? "text-[#e67e22]" : " text-gray-500"
             }`}
           >
@@ -43,7 +43,7 @@ const AllCategories = () => {
           </button>
           <button
             onClick={() => handleButtonClick("BeautyGlamour")}
-            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
+            className={`py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
               activeButton === "BeautyGlamour"
                 ? "text-[#e67e22]"
                 : " text-gray-500"
@@ -56,7 +56,7 @@ const AllCategories = () => {
           </button>
           <button
             onClick={() => handleButtonClick("HomeMakeover")}
-            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
+            className={`py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
               activeButton === "HomeMakeover"
                 ? "text-[#e67e22]"
                 : " text-gray-500"
@@ -69,7 +69,7 @@ const AllCategories = () => {
           </button>
           <button
             onClick={() => handleButtonClick("Fashion")}
-            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
+            className={`py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
               activeButton === "Fashion" ? "text-[#e67e22]" : " text-gray-500"
             }`}
           >
@@ -80,7 +80,7 @@ const AllCategories = () => {
           </button>
           <button
             onClick={() => handleButtonClick("GenderCategories")}
-            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
+            className={`py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
               activeButton === "GenderCategories"
                 ? "text-[#e67e22]"
                 : " text-gray-500"
@@ -93,7 +93,7 @@ const AllCategories = () => {
           </button>
           <button
             onClick={() => handleButtonClick("BestPriceGuaranteed")}
-            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
+            className={`py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
               activeButton === "BestPriceGuaranteed"
                 ? "text-[#e67e22]"
                 : " text-gray-500"
@@ -106,7 +106,7 @@ const AllCategories = () => {
           </button>
           <button
             onClick={() => handleButtonClick("FreeDelivery")}
-            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
+            className={`py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
               activeButton === "FreeDelivery"
                 ? "text-[#e67e22]"
                 : " text-gray-500"
@@ -119,7 +119,7 @@ const AllCategories = () => {
           </button>
           <button
             onClick={() => handleButtonClick("BudgetDeals")}
-            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
+            className={`py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
               activeButton === "BudgetDeals"
                 ? "text-[#e67e22]"
                 : " text-gray-500"
@@ -132,7 +132,7 @@ const AllCategories = () => {
           </button>
           <button
             onClick={() => handleButtonClick("EverydayLowPrice")}
-            className={`py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
+            className={`py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left ${
               activeButton === "EverydayLowPrice"
                 ? "text-[#e67e22]"
                 : " text-gray-500"
@@ -153,7 +153,8 @@ const AllCategories = () => {
                 {menuBarMart.map((list, index) => {
                   return (
                     <li
-                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
+                      className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
+                       text-left text-gray-700"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
@@ -171,7 +172,8 @@ const AllCategories = () => {
                 {menuBarFashionOptions.map((list, index) => {
                   return (
                     <li
-                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
+                      className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
+                        text-left text-gray-700"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
@@ -189,7 +191,8 @@ const AllCategories = () => {
                 {menuBarHomeMakeOver.map((list, index) => {
                   return (
                     <li
-                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
+                      className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
+                        text-left text-gray-700"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
@@ -207,7 +210,8 @@ const AllCategories = () => {
                 {menuBarFashionOptions.map((list, index) => {
                   return (
                     <li
-                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
+                      className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
+                        text-left text-gray-700"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
@@ -225,7 +229,8 @@ const AllCategories = () => {
                 {menuBarGenderOptions.map((list, index) => {
                   return (
                     <li
-                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
+                      className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
+                        text-left text-gray-700"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
@@ -243,7 +248,8 @@ const AllCategories = () => {
                 {menuBarMart.map((list, index) => {
                   return (
                     <li
-                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
+                      className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
+                        text-left text-gray-700"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
@@ -261,7 +267,8 @@ const AllCategories = () => {
                 {menuBarHomeMakeOver.map((list, index) => {
                   return (
                     <li
-                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
+                      className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
+                        text-left text-gray-700"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
@@ -279,7 +286,8 @@ const AllCategories = () => {
                 {menuBarFashionOptions.map((list, index) => {
                   return (
                     <li
-                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
+                      className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
+                        text-left text-gray-700"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >
@@ -297,7 +305,8 @@ const AllCategories = () => {
                 {menuBarMart.map((list, index) => {
                   return (
                     <li
-                      className="py-2 px-3 flex flex-row gap-2 items-center bg-white text-xs font-medium text-left"
+                      className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
+                        text-left text-gray-700"
                       onClick={() => handleButtonClick(list.path)}
                       key={index}
                     >

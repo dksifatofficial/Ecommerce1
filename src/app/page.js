@@ -119,19 +119,19 @@ export default function Home() {
       </div>
 
       {/* Best Experience Section */}
-      <div className="hidden lg:block w-full pl-16 pr-16">
+      <div className="hidden lg:block w-full pl-4 pr-4 lg:pl-16 lg:pr-16">
         <BestExperience />
       </div>
 
       {/* Main Section */}
-      <section className="flex min-h-screen mt-6 lg:mt-0 flex-col items-center justify-between pl-16 pr-16">
+      <section className="flex min-h-screen mt-6 lg:mt-0 flex-col items-center justify-between pl-4 pr-4 lg:pl-16 lg:pr-16">
         {/* Category1 Section */}
-        <div className="w-full bg-white rounded-lg">
+        <div className="hidden lg:block w-full bg-white rounded-lg">
           <Category1 />
         </div>
 
         {/* Collection Section */}
-        <div className="xl:max-w-screen-xl w-full mx-auto mt-6">
+        <div className="hidden lg:block xl:max-w-screen-xl w-full mx-auto mt-6">
           <div className=" bg-slate-200 overflow-hidden rounded-lg grid grid-cols-1 gap-2 xl:grid-cols-3 lg:items-stretch">
             <div className="relative grid w-full py-4 xl:place-content-center">
               <div className="absolute hidden xl:block h-full overflow-hidden">
@@ -180,7 +180,7 @@ export default function Home() {
         </div>
 
         {/* CategoryFull Section */}
-        <div className="mt-12 w-full">
+        <div className="hidden lg:block mt-12 w-full">
           <CategoryFull />
         </div>
 
