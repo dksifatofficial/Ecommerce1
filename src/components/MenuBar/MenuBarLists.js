@@ -54,10 +54,6 @@ export const menuBarFashionOptions = [
 
 export const menuBarHomeMakeOver = [
   {
-    title: "Hand Washes and Sanitizers",
-    path: "/product/listing/handWashesandSanitizers",
-  },
-  {
     title: "Cloths & Towels",
     path: "/product/listing/clothsTowels",
   },
@@ -84,6 +80,10 @@ export const menuBarHomeMakeOver = [
   {
     title: "Body Soaps & Shower Gels",
     path: "/product/listing/bodySoapsShowerGels",
+  },
+  {
+    title: "Hand Washes and Sanitizers",
+    path: "/product/listing/handWashesandSanitizers",
   },
 ];
 

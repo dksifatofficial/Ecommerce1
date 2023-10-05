@@ -45,7 +45,6 @@ export default function MenuBar() {
               className="absolute h-[320px] w-[290px] opacity-0 invisible transition-all 
                  duration-300 ease-linear z-[1000] top-0 px-0 py-2 left-[300px] 
                  bg-white rounded-lg"
-              //invisible
             >
               {menuBarMart.map((list, index) => {
                 return (
