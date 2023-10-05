@@ -186,7 +186,7 @@ export default function Home() {
 
         {/* Just For You Section */}
         <div className="mt-6 w-full">
-          <h2 className="px-3 w-full font-semibold text-gray-600 bg-white rounded-lg text-center py-6 text-3xl">
+          <h2 className="px-3 w-full font-semibold text-gray-600 bg-transparent lg:bg-white rounded-lg text-center py-6 text-3xl">
             Just For You
           </h2>
           <div className="lg:col-span-2 mt-4 w-full">
