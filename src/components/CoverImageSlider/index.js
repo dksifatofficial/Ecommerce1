@@ -65,18 +65,18 @@ const ImageSlider = ({ images }) => {
 
   return (
     <div
-      className="w-full lg:w-[850px] h-[320px] lg:h-[320px] relative overflow-hidden rounded-lg"
+      className="w-full lg:w-[850px] h-[150px] md:h-[220px] lg:h-[320px] relative overflow-hidden rounded-lg"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <div
-        className="flex items-center w-full h-full relative transition-transform duration-[1s] ease-[ease]"
+        className="flex items-center w-full h-full transition-transform duration-[1s] ease-[ease]"
         style={sliderStyles}
       >
         {[...images, images[0]].map((image, index) => (
           <Link
-            className="relative h-[320px] flex-[0_0_100%] w-full flex justify-center items-center transition-transform 
-            duration-[1s] ease-[ease] overflow-hidden"
+            className="h-[150px] md:h-[220px] lg:h-[320px] flex-[0_0_100%] w-full flex justify-center
+            items-center transition-transform duration-[1s] ease-[ease] overflow-hidden"
             key={index}
             href={image.link}
           >
@@ -127,8 +127,8 @@ const ImageSlider = ({ images }) => {
         ))}
       </div>
       <div
-        className="flex justify-between w-full px-5 py-0 absolute top-0 transform 
-      opacity-1 hover:opacity-[1] transition-opacity duration-300 ease-in-out h-[320px]"
+        className="flex justify-between w-full px-5 py-0 absolute top-0 transform transition-opacity
+      opacity-1 hover:opacity-[1] duration-300 ease-in-out h-[150px] md:h-[220px] lg:h-[320px]"
       >
         <button
           className="text-white text-2xl cursor-pointer px-1 py-3 bg-[#969595a2]
@@ -162,10 +162,3 @@ const ImageSlider = ({ images }) => {
 };
 
 export default ImageSlider;
-
-// https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcc1.jpg-1694800235238-3y1ye4f9it?alt=media&token=4760c043-e97d-40da-a89c-5978d9bb1ef4
-// https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcc2.jpg-1694800271890-yepu392ygp?alt=media&token=6a4edcac-13af-40c6-b732-034cab8bc21b
-// https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcc3.jpg-1694800299474-1b1em2qp2b?alt=media&token=8f942274-6781-4a86-87d6-ee06adaa4a66
-// https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcc4.jpg-1694800330850-lfapplltyc?alt=media&token=2e0eb356-9163-45be-a9cd-2471d06cc079
-// https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Fcc5.jpg-1694800356107-91bseavbag?alt=media&token=c1595050-90ef-4d7a-996e-5ed10f4db577
-//

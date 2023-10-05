@@ -50,7 +50,7 @@ const ProductTile = ({ item }) => {
             {item.name}
           </h3>
         </div>
-        <div className="w-full flex justify-between">
+        <div className="w-full flex flex-col lg:flex-row lg:justify-between">
           <div className="grid">
             <div className="w-full">
               {item.onSale === "yes" ? (
@@ -78,7 +78,7 @@ const ProductTile = ({ item }) => {
             </div>
           </div>
           {/* star rating */}
-          <div className=" flex flex-col items-end justify-end pb-[2px]">
+          <div className="flex flex-col items-start lg:items-end justify-start lg:justify-end mt-1 lg:mt-0 pb-[2px]">
             <div className="flex items-center gap-x-1 flex-col">
               <Star
                 stars={averageRating}
@@ -86,10 +86,10 @@ const ProductTile = ({ item }) => {
                 averageRating={averageRating}
               />
               <div className=" flex flex-row">
-                <p className="m-0 ml-1 text-xs text-gray-600">
+                <p className="m-0 lg:ml-1 text-xs text-gray-600">
                   ({averageRating > 0 ? averageRating : 0})
                 </p>
-                <p className="m-0 ml-1 text-xs text-gray-600">
+                <p className="m-0 lg:ml-1 text-xs text-gray-600">
                   {item.starRatings.length} reviews
                 </p>
               </div>

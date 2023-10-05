@@ -190,7 +190,7 @@ export default function Home() {
             Just For You
           </h2>
           <div className="lg:col-span-2 mt-4 w-full">
-            <ul className="flex flex-wrap gap-4 justify-center">
+            <ul className="flex flex-wrap gap-2 lg:gap-4 justify-center">
               {products && products.length
                 ? products
                     .filter((item) => item.category !== "premium")
@@ -199,7 +199,7 @@ export default function Home() {
                     .map((item) => (
                       <li
                         className="relative flex flex-col overflow-hidden bg-white
-                        cursor-pointer w-[190px] hover:shadow-[0_4px_5px_0.5px_rgba(0,0,0,0.2)]"
+                        cursor-pointer w-[160px] hover:shadow-[0_4px_5px_0.5px_rgba(0,0,0,0.2)]"
                         key={item._id}
                       >
                         <ProductTile item={item} />
