@@ -15,11 +15,11 @@ const Star = ({ stars, reviews, onStarClick, averageRating }) => {
         style={{ cursor: 'pointer' }} // Change cursor style to indicate interactivity
       >
         {stars > rating ? (
-          <FaStar className="text-xs text-orange-600" />
+          <FaStar className="text-[10px] text-orange-600" />
         ) : stars > rating - 0.4 ? (
-          <FaStarHalfAlt className="text-xs text-orange-600" />
+          <FaStarHalfAlt className="text-[10px] text-orange-600" />
         ) : (
-          <AiOutlineStar className="text-xs text-orange-600" />
+          <AiOutlineStar className="text-[10px] text-orange-600" />
         )}
       </span>
     );

@@ -46,7 +46,7 @@ const ProductTile = ({ item }) => {
       )}
       <div className="mt-2 flex w-full px-3 flex-col items-start justify-between">
         <div className="h-[40px] overflow-hidden">
-          <h3 className="text-gray-800 text-sm font-semibold line-clamp-2">
+          <h3 className="text-gray-800 text-xs font-semibold line-clamp-2">
             {item.name}
           </h3>
         </div>
@@ -86,10 +86,10 @@ const ProductTile = ({ item }) => {
                 averageRating={averageRating}
               />
               <div className=" flex flex-row">
-                <p className="m-0 lg:ml-1 text-xs text-gray-600">
+                <p className="m-0 lg:ml-1 text-[10px] text-gray-600">
                   ({averageRating > 0 ? averageRating : 0})
                 </p>
-                <p className="m-0 lg:ml-1 text-xs text-gray-600">
+                <p className="m-0 lg:ml-1 text-[10px] text-gray-600">
                   {item.starRatings.length} reviews
                 </p>
               </div>

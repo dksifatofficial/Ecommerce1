@@ -222,31 +222,32 @@ export default function CommonDetails({ item }) {
   const averageRating = calculateAverageRating();
 
   return (
-    <div className="w-full bg-[#eff0f5]">
+    <div className="w-full">
       <Helmet>
         <title>{item ? item.name : ""}</title>
         <meta name="description" content="" />
       </Helmet>
       {item && item.category !== "premium" ? (
         <section className="mx-auto max-w-screen-xl ">
-          <div className="container mx-auto py-12">
+          <div className="container mx-auto py-3 md:py-6 lg:py-12 px-2 sm:px-0">
             {/* Main section */}
-            <div className="flex flex-wrap rounded-lg mb-4 bg-white">
+            <div className="flex flex-col sm:flex-row flex-wrap mb-4 overflow-hidden">
               {/* picture section */}
-              <div className="col-span-3 py-5 w-[30%] row-end-1">
-                <div className="flex flex-col w-full items-start px-5">
-                  <div className="order-1 pb-4 border-b w-full flex justify-center">
-                    <div className="max-w-xl h-[350px] w-full overflow-hidden rounded-lg">
+              <div className="col-span-3 bg-white rounded-lg sm:rounded-tr-none py-5 w-full sm:w-[30%] row-end-1
+              flex justify-center sm:rounded-tb-none">
+                <div className="flex flex-row sm:flex-col w-full justify-center items-start px-5 gap-4 sm:gap-0">
+                  <div className="order-2 sm:order-1 pb-4 border-b w-full flex justify-center">
+                    <div className="max-w-full h-[350px] flex justify-center w-full overflow-hidden rounded-lg">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={selectedImage}
-                        className="h-full w-full max-w-full object-cover"
+                        className="h-full max-w-full object-cover rounded-lg"
                         alt="Product Image"
                       />
                     </div>
                   </div>
-                  <div className="mt-2 w-full order-2 flex-shrink-0">
-                    <div className="flex flex-wrap justify-center">
+                  <div className="mt-0 sm:mt-2 sm:w-full order-1 sm:order-2 flex-shrink-0">
+                    <div className="flex flex-col sm:flex-wrap justify-center">
                       {item && item.imageUrl && item.imageUrl.length ? (
                         <button
                           type="button"
@@ -325,7 +326,7 @@ export default function CommonDetails({ item }) {
 
               {/* product section */}
               {/* header section */}
-              <div className="w-[45%] pr-5 py-5">
+              <div className="w-full sm:w-[45%] pl-4 sm:pl-0 pr-4 sm:pr-5 mt-2 sm:mt-0 py-5 sm:rounded-none rounded-lg bg-white">
                 <div className="border-b pb-6">
                   <h1 className="text-xl font-semibold text-gray-600">
                     {item && item.name}
@@ -349,11 +350,7 @@ export default function CommonDetails({ item }) {
                     </p>
                   </div>
                   <p className="text-xs text-gray-500">
-                    Brand:{" "}
-                    <span className="text-teal-500">
-                      {item.brand}
-                    </span>{" "}
-                    |{" "}
+                    Brand: <span className="text-teal-500">{item.brand}</span> |{" "}
                     <Link className="text-teal-500 hover:underline" href="/">
                       More from No Brand
                     </Link>
@@ -362,7 +359,7 @@ export default function CommonDetails({ item }) {
 
                 {/* Price section */}
                 <div
-                  className="flex flex-col items-center justify-between space-y-4 botder-t border-b py-4
+                  className="flex flex-col justify-start space-y-4 botder-t border-b py-4
                    sm:flex-row sm:space-y-0"
                 >
                   <div className="flex flex-col">
@@ -473,13 +470,14 @@ export default function CommonDetails({ item }) {
               </div>
 
               {/* delivery/warenty section */}
-              <div className="w-[25%] bg-slate-50 flex flex-col">
-                <div className="flex flex-col">
-                  <div className="px-5 py-4 border-b">
+              <div className="w-full sm:w-[25%] px-4 sm:px-0 mt-4 sm:mt-0 bg-slate-50 flex flex-col rounded-lg
+               sm:rounded-tl-none sm:rounded-tb-none">
+                <div className="flex flex-col px-2 sm:px-5">
+                  <div className="py-4 border-b">
                     <p className="text-xs text-gray-500">Delivery info:</p>
                   </div>
 
-                  <div className="flex flex-row py-4 px-5 justify-between">
+                  <div className="flex flex-row py-4 justify-between">
                     <div className="flex flex-col">
                       <p className="text-base font-semibold text-gray-800">
                         Standard Delivery
@@ -494,19 +492,19 @@ export default function CommonDetails({ item }) {
                     </div>
                   </div>
 
-                  <div className="border-b px-5 py-4">
+                  <div className="border-b py-4">
                     <p className="text-gray-800 text-base">
                       Cash on Delivery Available
                     </p>
                   </div>
                 </div>
 
-                <div className="flex flex-col">
-                  <div className="px-5 py-4 border-b">
+                <div className="flex flex-col px-2 sm:px-5">
+                  <div className="py-4 border-b">
                     <p className="text-xs text-gray-500">Service info:</p>
                   </div>
 
-                  <div className="flex flex-row py-4 px-5 justify-between">
+                  <div className="flex flex-row py-4 justify-between">
                     <div className="flex flex-col">
                       <p className="text-base text-gray-800">7 Day Return</p>
                       <p className="text-xs text-gray-500">
@@ -521,19 +519,19 @@ export default function CommonDetails({ item }) {
                     </div>
                   </div>
 
-                  <div className="border-b px-5 py-4">
+                  <div className="border-b py-4">
                     <p className="text-gray-800 text-base">
                       Warranty not available
                     </p>
                   </div>
                 </div>
 
-                <div className="flex flex-col">
-                  <div className="px-5 py-4 border-b">
+                <div className="flex flex-col px-2 sm:px-5">
+                  <div className="py-4 border-b">
                     <p className="text-xs text-gray-500">Sold by:</p>
                   </div>
 
-                  <div className="flex flex-row py-4 px-5 justify-between">
+                  <div className="flex flex-row py-4 justify-between">
                     <div className="flex flex-col">
                       <p className="text-base text-gray-800">Store Name</p>
                       <p className="text-xs text-gray-500">
@@ -547,7 +545,7 @@ export default function CommonDetails({ item }) {
             {/* End main section */}
 
             {/* Product More details & Review section */}
-            <div className="bg-white rounded-lg mt-8 py-8 px-12">
+            <div className="bg-white rounded-lg mt-8 py-8 px-4 sm:px-6 md:px-12">
               <div className="py-4 px-4">
                 <p className=" text-xl font-semibold text-gray-700">
                   Product Description & Reviews:
@@ -582,35 +580,44 @@ export default function CommonDetails({ item }) {
 
               {/* Description div */}
               {activeButton === "Description" && (
-                <div className="px-4">
+                <div className="px-0 md:px-4">
                   <div className="py-4">
-                    <p className=" bg-slate-100 px-4 py-2 text-base font-semibold text-gray-700">
+                    <p className=" bg-slate-100 px-4 py-2 text-xs md:text-base font-semibold text-gray-700">
                       Product details of {item && item.name}:
                     </p>
                   </div>
 
-                  <div className="px-4">{item && item.description}</div>
+                  <div className="px-4 text-xs md:text-base">
+                    {item && item.description}
+                  </div>
 
                   <div className="py-4">
-                    <p className=" bg-slate-100 px-4 py-2 text-base font-semibold text-gray-700">
+                    <p className=" bg-slate-100 px-4 py-2 text-xs md:text-base font-semibold text-gray-700">
                       Specifications of {item && item.name}:
                     </p>
                   </div>
 
-                  <div className="pb-4 px-4">{item && item.details}</div>
+                  <div className="pb-4 px-4 text-xs md:text-base">
+                    {item && item.details}
+                  </div>
 
                   <div className="py-4 px-4">
-                    <p className="text-gray-500">
-                      Material: <span className="text-gray-700">{item && item.material}</span>
+                    <p className="text-gray-500 text-sm">
+                      Material:{" "}
+                      <span className="text-gray-700 text-xs md:text-sm">
+                        {item && item.material}
+                      </span>
                     </p>
                   </div>
 
                   <div className="py-4 px-4">
-                    <p className="text-gray-500">
-                      What&apos;s in the box: <span className="text-gray-700">{item && item.whatsInTheBox}</span>
+                    <p className="text-gray-500 text-sm">
+                      What&apos;s in the box:{" "}
+                      <span className="text-gray-700 text-xs md:text-sm">
+                        {item && item.whatsInTheBox}
+                      </span>
                     </p>
                   </div>
-
                 </div>
               )}
 

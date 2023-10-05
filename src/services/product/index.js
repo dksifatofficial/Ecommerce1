@@ -23,7 +23,7 @@ export const addNewProduct = async (formData) => {
 
 export const getAllAdminProducts = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/admin/all-products", {
+    const res = await fetch("https://ecommerce.aminulkibria.com/api/admin/all-products", {
       method: "GET",
       cache: "no-store",
     });
@@ -38,7 +38,7 @@ export const getAllAdminProducts = async () => {
 
 // export const getAllPremiumProduct = async () => {
 //   try {
-//     const res = await fetch("http://localhost:3000/api/premium/all-products", {
+//     const res = await fetch("https://ecommerce.aminulkibria.com/api/premium/all-products", {
 //       method: "GET",
 //       cache: "no-store",
 //     });
@@ -134,7 +134,7 @@ export const deleteAProduct = async (id) => {
 export const productByCategory = async (id) => {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/admin/product-by-category?id=${id}`,
+      `https://ecommerce.aminulkibria.com/api/admin/product-by-category?id=${id}`,
       {
         method: "GET",
         cache: "no-store",
@@ -152,7 +152,7 @@ export const productByCategory = async (id) => {
 export const productByTags = async (id) => {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/admin/product-by-tags?id=${id}`,
+      `https://ecommerce.aminulkibria.com/api/admin/product-by-tags?id=${id}`,
       {
         method: "GET",
         cache: "no-store",
@@ -170,7 +170,7 @@ export const productByTags = async (id) => {
 export const productByLowPrice = async (id) => {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/admin/product-by-low-price?id=${id}`,
+      `https://ecommerce.aminulkibria.com/api/admin/product-by-low-price?id=${id}`,
       {
         method: "GET",
         cache: "no-store",
@@ -188,7 +188,7 @@ export const productByLowPrice = async (id) => {
 export const productById = async (id) => {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/admin/product-by-id?id=${id}`,
+      `https://ecommerce.aminulkibria.com/api/admin/product-by-id?id=${id}`,
       {
         method: "GET",
         cache: "no-store",
@@ -205,7 +205,7 @@ export const productById = async (id) => {
 
 export const getProductById = async (productId) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/products/${productId}`, {
+    const res = await fetch(`https://ecommerce.aminulkibria.com/api/products/${productId}`, {
       method: "GET",
       cache: "no-store",
     });
@@ -220,7 +220,7 @@ export const getProductById = async (productId) => {
 
 export const rateProduct = async ({ productId, userId, rating }) => {
   try {
-    const response = await fetch("http://localhost:3000/api/rateProduct", {
+    const response = await fetch("https://ecommerce.aminulkibria.com/api/rateProduct", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -199,7 +199,7 @@ export default function Home() {
                     .map((item) => (
                       <li
                         className="relative flex flex-col overflow-hidden bg-white
-                        cursor-pointer w-[160px] hover:shadow-[0_4px_5px_0.5px_rgba(0,0,0,0.2)]"
+                        cursor-pointer w-[160px] md:w-[190px] hover:shadow-[0_4px_5px_0.5px_rgba(0,0,0,0.2)]"
                         key={item._id}
                       >
                         <ProductTile item={item} />

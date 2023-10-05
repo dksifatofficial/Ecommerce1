@@ -91,7 +91,7 @@ export default function Login() {
 
   return (
     <div className="relative bg-gray-100 pb-12 flex justify-center items-center w-full flex-row">
-          <div className="mr-0 mb-0 ml-0 relative max-w-2xl mt-0 w-5/12">
+          <div className="mr-0 mb-0 ml-0 relative max-w-2xl mt-0 w-[90%] sm:w-[80%] md:w-[60%] lg:w-5/12">
             <div className="flex flex-row justify-between mt-12 mb-12 items-center">
               <h4 className="text-lg text-gray-600 font-semibold">
                 Welcome to Daraz! Please login.
