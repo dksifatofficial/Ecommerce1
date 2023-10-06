@@ -314,11 +314,11 @@ export default function AdminView() {
         <AdminViewMenu />
         <div
           className="w-full flex flex-wrap items-center justify-center gap-2 lg:gap-4 mx-auto py-1 md:py-3
-            mt-1 md:mt-4 rounded-lg bg-[#0d9488] bg-[linear-gradient(to_bottom,#0d9488,#95a7a5,#f85606)]"
+            mt-1 md:mt-4 bg-[#0d9488] bg-[linear-gradient(to_bottom,#0d9488,#95a7a5,#f85606)]"
         >
           <button onClick={() => handleButtonClick("AllOrders")}>
             <p
-              className={`rounded-lg text-sm font-semibold px-0 md:px-3 py-0 md:py-1 m-0 hover:text-[#f8f3f3da]
+              className={`rounded-lg text-xs md:text-sm font-semibold px-0 md:px-3 py-0 md:py-1 m-0 hover:text-[#f8f3f3da]
               ${
                 activeButton === "AllOrders"
                   ? "bg-transparent text-gray-200 md:text-white md:bg-[#2e2e2d21]"
@@ -330,7 +330,7 @@ export default function AdminView() {
           </button>
           <button onClick={() => handleButtonClick("FinishedOrders")}>
             <p
-              className={`rounded-lg text-sm font-semibold px-0 md:px-3 py-0 md:py-1 m-0 hover:text-[#f8f3f3da]
+              className={`rounded-lg text-xs md:text-sm font-semibold px-0 md:px-3 py-0 md:py-1 m-0 hover:text-[#f8f3f3da]
               ${
                 activeButton === "FinishedOrders"
                   ? "bg-transparent text-gray-200 md:text-white md:bg-[#2e2e2d21]"
@@ -342,7 +342,7 @@ export default function AdminView() {
           </button>
           <button onClick={() => handleButtonClick("UnfinishedOrders")}>
             <p
-              className={`rounded-lg text-sm font-semibold px-0 md:px-3 py-0 md:py-1 m-0 hover:text-[#f8f3f3da]
+              className={`rounded-lg text-xs md:text-sm font-semibold px-0 md:px-3 py-0 md:py-1 m-0 hover:text-[#f8f3f3da]
               ${
                 activeButton === "UnfinishedOrders"
                   ? "bg-transparent text-gray-200 md:text-white md:bg-[#2e2e2d21]"
@@ -354,7 +354,7 @@ export default function AdminView() {
           </button>
           <button onClick={() => handleButtonClick("SearchOrders")}>
             <p
-              className={`rounded-lg text-sm font-semibold px-0 md:px-3 py-0 md:py-1 m-0 hover:text-[#f8f3f3da]
+              className={`rounded-lg text-xs md:text-sm font-semibold px-0 md:px-3 py-0 md:py-1 m-0 hover:text-[#f8f3f3da]
               ${
                 activeButton === "SearchOrders"
                   ? "bg-transparent text-gray-200 md:text-white md:bg-[#2e2e2d21]"
