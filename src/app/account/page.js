@@ -1,6 +1,6 @@
 "use client";
 
-import ShutterUpButton from "@/components/Buttons/ShutterUpButton";
+import Button3 from "@/components/Buttons/Button3";
 import InputComponent from "@/components/FormElements/InputComponent";
 import ComponentLevelLoader from "@/components/Loader/componentlevel";
 import Notification from "@/components/Notification";
@@ -129,34 +129,36 @@ export default function Account() {
 
   return (
     <section>
-      <div className="mx-auto bg-gray-100 px-4 sm:px-6 lg:px-8">
-        <div className="bg-white shadow">
-          <div className="p-6 sm:p-12">
-            <div className="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
-              {/* we have render random user image here */}
-            </div>
-            <div className="flex flex-col flex-1">
-              <p className="text-sm font-semibold text-center md:text-left">
+      <div className="mx-auto px-0 md:px-6 lg:px-8 border">
+        <div className="">
+          <div className="px-4 md:px-6 lg:px-12 py-2 md:py-4 lg:py-8">
+            {/* <div className="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
+              //we have render random user image here
+            </div> */}
+            <div className="flex flex-col justify-start flex-1 bg-white shadow p-4 rounded-lg text-gray-500">
+              <p className="text-sm text-left">
                 Full name:<span className="ml-[43px]">{user?.name}</span>
               </p>
-              <p className="text-sm font-semibold text-center md:text-left">
+              <p className="text-sm text-left">
                 Email Address:<span className="ml-[10px]">{user?.email}</span>
               </p>
-              <p className="text-sm font-semibold text-center md:text-left">
+              <p className="text-sm text-left">
                 Mobile No:
                 <span className="ml-[38px]">
                   {addresses && addresses.length ? addresses[0].mobile : null}
                 </span>
               </p>
               {user?.role === "admin" ? (
-                <p className="text-sm font-semibold text-center md:text-left">
+                <p className="text-sm text-left">
                   Role:<span className="ml-[77px]">{user?.role}</span>
                 </p>
               ) : null}
             </div>
-            
+
             <div className="mt-6">
-              <h1 className="font-bold text-lg">Your Addresses :</h1>
+              <h1 className="font-bold text-lg text-gray-700">
+                Your Addresses :
+              </h1>
               {pageLevelLoader ? (
                 <PulseLoader
                   color={"#000000"}
@@ -168,40 +170,45 @@ export default function Account() {
                 <div className="mt-4 flex flex-col gap-4">
                   {addresses && addresses.length ? (
                     addresses.map((item) => (
-                      <div className="border p-6" key={item._id}>
+                      <div
+                        className="text-sm md:text-base flex flex-col justify-start bg-white shadow p-4 rounded-lg text-gray-500"
+                        key={item._id}
+                      >
                         <p>Name : {item.fullName}</p>
                         <p>Address : {item.address}</p>
                         <p>City : {item.city}</p>
                         <p>Country : {item.country}</p>
                         <p>PostalCode : {item.postalCode}</p>
                         <p>Mobile : {item.mobile}</p>
-                        <ShutterUpButton
-                          onClick={() => handleUpdateAddress(item)}
-                          className="mt-5 mr-5 inline-block text-white px-5 py-1 text-xs font-medium uppercase tracking-wide
-                          hover:before:bg-[#f85606] hover:text-white"
-                        >
-                          Update
-                        </ShutterUpButton>
-                        <ShutterUpButton
-                          onClick={() => handleDelete(item._id)}
-                          className="mt-5  inline-block text-white px-5 py-1 text-xs font-medium uppercase tracking-wide 
-                          hover:before:bg-red-600 hover:text-white"
-                        >
-                          {componentLevelLoader &&
-                          componentLevelLoader.loading &&
-                          componentLevelLoader.id === item._id ? (
-                            <ComponentLevelLoader
-                              text={"Deleting"}
-                              color={"#ffffff"}
-                              loading={
-                                componentLevelLoader &&
-                                componentLevelLoader.loading
-                              }
-                            />
-                          ) : (
-                            "Delete"
-                          )}
-                        </ShutterUpButton>
+                        <div className="mt-5 flex flex-row justify-start gap-2 md:gap-3 lg:gap-4">
+                          <Button3
+                            onClick={() => handleUpdateAddress(item)}
+                            className="inline-block text-white px-5 py-0 md:py-1 text-xs font-medium uppercase
+                           hover:text-white"
+                          >
+                            Update
+                          </Button3>
+                          <Button3
+                            onClick={() => handleDelete(item._id)}
+                            className="inline-block text-white px-5 py-0 md:py-1 text-xs font-medium uppercase
+                           hover:text-white"
+                          >
+                            {componentLevelLoader &&
+                            componentLevelLoader.loading &&
+                            componentLevelLoader.id === item._id ? (
+                              <ComponentLevelLoader
+                                text={"Deleting"}
+                                color={"#ffffff"}
+                                loading={
+                                  componentLevelLoader &&
+                                  componentLevelLoader.loading
+                                }
+                              />
+                            ) : (
+                              "Delete"
+                            )}
+                          </Button3>
+                        </div>
                       </div>
                     ))
                   ) : (
@@ -211,12 +218,12 @@ export default function Account() {
               )}
             </div>
             <div className="mt-4">
-              <ShutterUpButton
+              <Button3
                 onClick={() => setShowAddressForm(!showAddressForm)}
-                className="mt-5  inline-block text-white px-5 py-1 text-xs font-medium uppercase tracking-wide hover:before:bg-white"
+                className="mt-5 inline-block text-white px-5 py-1 text-xs font-medium uppercase tracking-wide"
               >
                 {showAddressForm ? "Hide Address Form" : "Add New Address"}
-              </ShutterUpButton>
+              </Button3>
             </div>
             {showAddressForm ? (
               <div className="flex flex-col mt-5 justify-center pt-4 items-center">

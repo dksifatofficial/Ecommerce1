@@ -7,7 +7,6 @@ import SearchForOrder from "@/components/SearchBar/SearchForOrder";
 import { GlobalContext } from "@/context";
 import { getAllOrdersForAllUsers, updateStatusOfOrder } from "@/services/order";
 import { getAllAdminProducts } from "@/services/product";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { PulseLoader } from "react-spinners";
@@ -45,7 +44,12 @@ export default function AdminView() {
               <h4 className="font-bold text-sm md:text-base lg:text-lg flex-1">
                 Order ID: {item._id}
               </h4>
-              <p className="text-xs md:text-sm">{item.createdAt}</p>
+              <p className="text-xs md:text-sm">
+                {item && item.createdAt && item.createdAt.split("T")[0]} |{" "}
+                {item &&
+                  item.createdAt &&
+                  item.createdAt.split("T")[1].split(".")[0]}
+              </p>
             </div>
             <div className="grid gap-2">
               {item.orderItems.map((orderItem, index) => (
