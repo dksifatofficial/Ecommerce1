@@ -90,56 +90,58 @@ export default function Login() {
   }, [isAuthUser]);
 
   return (
-    <div className="relative bg-gray-100 pb-12 flex justify-center items-center w-full flex-row">
-          <div className="mr-0 mb-0 ml-0 relative max-w-2xl mt-0 w-[90%] sm:w-[80%] md:w-[60%] lg:w-5/12">
-            <div className="flex flex-row justify-between mt-12 mb-12 items-center">
-              <h4 className="text-lg text-gray-600 font-semibold">
-                Welcome to Daraz! Please login.
-              </h4>
-              <p className="text-sm text-gray-400">
-                New member? <Link className=" text-teal-500 hover:underline" href="/register">Register</Link> here.
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-start pt-10 pr-10 pb-10 pl-10 bg-white shadow-2xl rounded-xl relative z-10">
-              <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
-                {loginFormControls.map((controlItem) =>
-                  controlItem.componentType === "input" ? (
-                    // eslint-disable-next-line react/jsx-key
-                    <LogInInput
-                      type={controlItem.type}
-                      placeholder={controlItem.placeholder}
-                      label={controlItem.label}
-                      value={formData[controlItem.id]}
-                      onChange={(event) => {
-                        setFormData({
-                          ...formData,
-                          [controlItem.id]: event.target.value,
-                        });
-                      }}
-                    />
-                  ) : null
-                )}
-                <Button3
-                  className="disabled:opacity-50 inline-flex w-full items-center justify-center px-6 py-4 text-lg 
+    <div className="relative bg-gray-100 pb-4 md:pb-6 lg:pb-12 flex justify-center items-center w-full flex-row">
+      <div className="mr-0 mb-0 ml-0 relative max-w-2xl mt-0 w-[90%] sm:w-[80%] md:w-[60%] lg:w-5/12">
+        <div className="flex flex-row justify-between mt-4 md:mt-6 lg:mt-12 mb-4 md:mb-6 lg:mb-12 items-center">
+          <h4 className="text-xs md:text-base lg:text-lg text-gray-600 font-semibold">
+            Welcome to Daraz! Please login.
+          </h4>
+          <p className="text-[10px] md:text-sm text-gray-400">
+            New member?{" "}
+            <Link className="text-[10px] md:text-sm text-teal-500 hover:underline" href="/register">
+              Register
+            </Link>{" "}
+            here.
+          </p>
+        </div>
+        <div className="flex flex-col items-center justify-start pt-10 pr-10 pb-10 pl-10 bg-white shadow-2xl rounded-xl relative z-10">
+          <div className="w-full mt-6 mr-0 mb-0 ml-0 relative space-y-8">
+            {loginFormControls.map((controlItem) =>
+              controlItem.componentType === "input" ? (
+                // eslint-disable-next-line react/jsx-key
+                <LogInInput
+                  type={controlItem.type}
+                  placeholder={controlItem.placeholder}
+                  label={controlItem.label}
+                  value={formData[controlItem.id]}
+                  onChange={(event) => {
+                    setFormData({
+                      ...formData,
+                      [controlItem.id]: event.target.value,
+                    });
+                  }}
+                />
+              ) : null
+            )}
+            <Button3
+              className="disabled:opacity-50 inline-flex w-full items-center justify-center px-6 py-2 text-lg 
                      text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide"
-                  disabled={!isValidForm()}
-                  onClick={handleLogin}
-                >
-                  {componentLevelLoader && componentLevelLoader.loading ? (
-                    <ComponentLevelLoader
-                      text={"Logging In"}
-                      color={"#ffffff"}
-                      loading={
-                        componentLevelLoader && componentLevelLoader.loading
-                      }
-                    />
-                  ) : (
-                    "Login"
-                  )}
-                </Button3>
-              </div>
-            </div>
+              disabled={!isValidForm()}
+              onClick={handleLogin}
+            >
+              {componentLevelLoader && componentLevelLoader.loading ? (
+                <ComponentLevelLoader
+                  text={"Logging In"}
+                  color={"#ffffff"}
+                  loading={componentLevelLoader && componentLevelLoader.loading}
+                />
+              ) : (
+                "Login"
+              )}
+            </Button3>
           </div>
+        </div>
+      </div>
       <Notification />
     </div>
   );

@@ -1,20 +1,20 @@
 export default function ColorTileComponent({ data, selected = [], onClick, className }) {
     return data && data.length ? (
-      <div className="mt-3 flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         {data.map((dataItem) => (
           <label
             onClick={() => onClick(dataItem)}
-            className={`cursor-pointer w-[100px] border-2 flex flex-wrap justify-center rounded-lg ${
-              selected &&
+            className={`cursor-pointer ring-2 flex flex-wrap justify-center text-xs lg:text-sm overflow-hidden
+            ${selected &&
               selected.length &&
               selected.map((item) => item.id).indexOf(dataItem.id) !== -1
-                ? "border-green-600"
-                : ""
+                ? "ring-green-500"
+                : "ring-slate-200"
             } ${className}`}
             key={dataItem.id}
           >
             <span
-              className={`rounded-lg text-black px-6 font-bold ${
+              className={`text-xs px-4 lg:text-sm text-black font-bold ${
                 selected &&
                 selected.length &&
                 selected.map((item) => item.id).indexOf(dataItem.id) !== -1

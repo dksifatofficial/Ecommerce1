@@ -124,7 +124,7 @@ export const adminAddProductformControls = [
     type: "text",
     placeholder: "Enter description",
     label: "Description",
-    componentType: "input",
+    componentType: "textarea",
   },
   {
     id: "category",
@@ -207,7 +207,7 @@ export const ProductSpecificationsForm = [
     type: "text",
     placeholder: "Enter product details",
     label: "Product Details List",
-    componentType: "input",
+    componentType: "textarea",
   },
   {
     id: "material",

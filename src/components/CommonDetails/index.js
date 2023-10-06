@@ -486,7 +486,7 @@ export default function CommonDetails({ item }) {
                     </div>
                     <div>
                       <p className="font-semibold text-gray-800">
-                        <span className="text-2xl font-bold">৳</span>
+                        <span className="text-lg font-bold">৳</span>
                         {item && item.deliveryInfo}
                       </p>
                     </div>
@@ -587,8 +587,11 @@ export default function CommonDetails({ item }) {
                     </p>
                   </div>
 
-                  <div className="px-4 text-xs md:text-base">
-                    {item && item.description}
+                  <div className="px-4">
+                    <p className="text-xs md:text-base whitespace-pre-line">
+                      {item && item.description}
+                    </p>
+                    
                   </div>
 
                   <div className="py-4">
@@ -597,8 +600,10 @@ export default function CommonDetails({ item }) {
                     </p>
                   </div>
 
-                  <div className="pb-4 px-4 text-xs md:text-base">
+                  <div className="pb-4 px-4">
+                    <p className="text-xs md:text-base whitespace-pre-line">
                     {item && item.details}
+                    </p>
                   </div>
 
                   <div className="py-4 px-4">

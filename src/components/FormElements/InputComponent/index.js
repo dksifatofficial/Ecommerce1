@@ -9,7 +9,7 @@ const InputComponent = ({ label, placeholder, type, value, onChange }) => {
       </p>
       <input
         className="border placeholder-gray-400 focus:outline-none focus:border-black
-        w-full pt-4 pr-4 pb-4 pl-4 mr-0 mt-0 ml-0 text-base block bg-white border-gray-300 rounded-md"
+        w-full pt-4 pr-4 pb-4 pl-4 mr-0 mt-0 ml-0 text-sm block bg-white border-gray-300 rounded-md"
         placeholder={placeholder}
         type={type || "text"}
         value={value}
