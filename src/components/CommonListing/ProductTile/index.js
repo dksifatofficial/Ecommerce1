@@ -17,7 +17,7 @@ const ProductTile = ({ item }) => {
   const averageRating = calculateAverageRating();
 
   return (
-    <div onClick={() => router.push(`/product/${item._id}`)}>
+    <div className="" onClick={() => router.push(`/product/${item._id}`)}>
       <div className="overflow-hideen aspect-w-1 aspect-h-1 h-52">
         <Image
           className="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"
@@ -46,7 +46,7 @@ const ProductTile = ({ item }) => {
       )}
       <div className="mt-2 flex w-full px-3 flex-col items-start justify-between">
         <div className="h-[40px] overflow-hidden">
-          <h3 className="text-gray-800 text-xs font-semibold line-clamp-2">
+          <h3 className="text-gray-600 text-xs font-semibold line-clamp-2">
             {item.name}
           </h3>
         </div>
@@ -66,26 +66,26 @@ const ProductTile = ({ item }) => {
             </div>
             <div className="w-full flex">
               <p
-                className={`mr-1 text-sm font-semibold text-gray-400 ${
+                className={`mr-1 text-xs md:text-sm font-semibold text-gray-400 ${
                   item.onSale === "yes" ? "line-through" : ""
                 }`}
               >
                 {item.price}
               </p>
               {item.onSale === "yes" ? (
-                <p className="text-sm text-gray-700 font-semibold">{`-${item.priceDrop}%`}</p>
+                <p className="text-xs md:text-sm text-gray-700 font-semibold">{`-${item.priceDrop}%`}</p>
               ) : null}
             </div>
           </div>
           {/* star rating */}
-          <div className="flex flex-col items-start lg:items-end justify-start lg:justify-end mt-1 lg:mt-0 pb-[2px]">
-            <div className="flex items-center gap-x-1 flex-col">
+          <div className="flex flex-col items-start lg:items-end justify-start lg:justify-end mt-1 lg:mt-0 pb-1">
+            <div className="flex items-center gap-x-1 flex-row lg:flex-col">
               <Star
                 stars={averageRating}
                 reviews={item.starRatings.length}
                 averageRating={averageRating}
               />
-              <div className=" flex flex-row">
+              <div className="flex flex-row">
                 <p className="m-0 lg:ml-1 text-[10px] text-gray-600">
                   ({averageRating > 0 ? averageRating : 0})
                 </p>

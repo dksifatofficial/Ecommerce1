@@ -1,6 +1,5 @@
 import Cookies from "js-cookie";
 
-
 export const addToCart = async (formData) => {
   try {
     const res = await fetch("/api/cart/add-to-cart", {
@@ -22,12 +21,15 @@ export const addToCart = async (formData) => {
 
 export const getAllCartItems = async (id) => {
   try {
-    const res = await fetch(`https://ecommerce.aminulkibria.com/api/cart/all-cart-items?id=${id}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${Cookies.get("token")}`,
-      },
-    });
+    const res = await fetch(
+      `https://ecommerce.aminulkibria.com/api/cart/all-cart-items?id=${id}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      }
+    );
 
     const data = await res.json();
 

@@ -124,7 +124,8 @@ export default function Home() {
       </div>
 
       {/* Main Section */}
-      <section className="flex min-h-screen mt-6 lg:mt-0 flex-col items-center justify-between pl-4 pr-4 lg:pl-16 lg:pr-16">
+      <section className="flex min-h-screen mt-6 lg:mt-0 flex-col items-center justify-between 
+        px-0 md:px-4 lg:px-16">
         {/* Category1 Section */}
         <div className="w-full bg-transparent lg:bg-white rounded-lg">
           <Category1 />
@@ -186,11 +187,12 @@ export default function Home() {
 
         {/* Just For You Section */}
         <div className="mt-6 w-full">
-          <h2 className="px-3 w-full font-semibold text-gray-600 bg-transparent lg:bg-white rounded-lg text-center py-6 text-3xl">
+          <h2 className="px-3 w-full font-semibold text-gray-600 bg-transparent lg:bg-white rounded-lg 
+           text-center py-2 md:py-6 text-lg md:text-3xl">
             Just For You
           </h2>
           <div className="lg:col-span-2 mt-4 w-full">
-            <ul className="flex flex-wrap gap-2 lg:gap-4 justify-center">
+            <ul className="flex flex-wrap gap-1 md:gap-2 lg:gap-4 justify-center">
               {products && products.length
                 ? products
                     .filter((item) => item.category !== "premium")
@@ -198,8 +200,8 @@ export default function Home() {
                     .splice(0, 24)
                     .map((item) => (
                       <li
-                        className="relative flex flex-col overflow-hidden bg-white
-                        cursor-pointer w-[160px] md:w-[190px] hover:shadow-[0_4px_5px_0.5px_rgba(0,0,0,0.2)]"
+                        className="relative flex flex-col overflow-hidden bg-white rounded-lg
+                        cursor-pointer w-[190px] hover:shadow-[0_4px_5px_0.5px_rgba(0,0,0,0.2)]"
                         key={item._id}
                       >
                         <ProductTile item={item} />
@@ -208,9 +210,9 @@ export default function Home() {
                 : null}
             </ul>
           </div>
-          <div className="w-full relative flex justify-center my-8">
+          <div className="w-full relative flex justify-center my-3 lg-my8-">
             <Link href="/product/listing/all-products">
-              <p className="text-lg font-bold text-gray-600 hover:text-gray-400">
+              <p className="text-xs md:text-sm lg:text-lg font-bold text-gray-600 hover:text-gray-400">
                 See More...
               </p>
             </Link>

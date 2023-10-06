@@ -1,9 +1,7 @@
 import AuthUser from "@/middleware/AuthUser";
 import { NextResponse } from "next/server";
 
-const stripe = require('stripe')(
-  process.env.NEXT_PUBLIC_STRIPE
-);
+const stripe = require("stripe")(process.env.NEXT_PUBLIC_STRIPE);
 
 export const dynamic = "force-dynamic";
 
@@ -17,8 +15,10 @@ export async function POST(req) {
         payment_method_types: ["card"],
         line_items: res,
         mode: "payment",
-        success_url: "https://ecommerce.aminulkibria.com/checkout" + "?status=success",
-        cancel_url: "https://ecommerce.aminulkibria.com/checkout" + "?status=cancel",
+        success_url:
+          "https://ecommerce.aminulkibria.com/checkout" + "?status=success",
+        cancel_url:
+          "https://ecommerce.aminulkibria.com/checkout" + "?status=cancel",
       });
 
       return NextResponse.json({

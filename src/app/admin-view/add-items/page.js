@@ -1,5 +1,6 @@
 "use client";
 
+import AdminViewMenu from "@/components/AdminMenu/AdminViewMenu";
 import Button3 from "@/components/Buttons/Button3";
 import ColorTileComponent from "@/components/FormElements/ColorTileComponent";
 import InputComponent from "@/components/FormElements/InputComponent";
@@ -273,6 +274,7 @@ export default function AdminAddNewProduct() {
 
   return (
     <div className="w-full px-12 py-12 mr-0 mb-0 ml-0 relative">
+      <AdminViewMenu />
       <div
         className="flex flex-col items-start justify-start p-10 bg-white shadow-2xl rounded-xl relative
        bg-[linear-gradient(to_bottom_right,#0d9488,#95a7a5,#f85606)]"

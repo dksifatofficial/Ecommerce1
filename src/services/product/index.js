@@ -23,10 +23,13 @@ export const addNewProduct = async (formData) => {
 
 export const getAllAdminProducts = async () => {
   try {
-    const res = await fetch("https://ecommerce.aminulkibria.com/api/admin/all-products", {
-      method: "GET",
-      cache: "no-store",
-    });
+    const res = await fetch(
+      "https://ecommerce.aminulkibria.com/api/admin/all-products",
+      {
+        method: "GET",
+        cache: "no-store",
+      }
+    );
 
     const data = await res.json();
 
@@ -205,10 +208,13 @@ export const productById = async (id) => {
 
 export const getProductById = async (productId) => {
   try {
-    const res = await fetch(`https://ecommerce.aminulkibria.com/api/products/${productId}`, {
-      method: "GET",
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `https://ecommerce.aminulkibria.com/api/products/${productId}`,
+      {
+        method: "GET",
+        cache: "no-store",
+      }
+    );
 
     const data = await res.json();
 
@@ -220,13 +226,16 @@ export const getProductById = async (productId) => {
 
 export const rateProduct = async ({ productId, userId, rating }) => {
   try {
-    const response = await fetch("https://ecommerce.aminulkibria.com/api/rateProduct", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ productId, userId, rating }),
-    });
+    const response = await fetch(
+      "https://ecommerce.aminulkibria.com/api/rateProduct",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productId, userId, rating }),
+      }
+    );
 
     const data = await response.json();
 

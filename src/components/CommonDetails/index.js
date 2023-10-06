@@ -449,7 +449,7 @@ export default function CommonDetails({ item }) {
                     <Button3
                       type="button"
                       onClick={() => handleAddToCart(item)}
-                      className="px-20 py-2 border-none uppercase"
+                      className="px-20 py-2 border-none uppercase text-xs md:text-sm"
                     >
                       {/* absolute left-[100%] translate-x-[-100%] top-0 */}
                       {componentLevelLoader && componentLevelLoader.loading ? (
@@ -482,7 +482,7 @@ export default function CommonDetails({ item }) {
                       <p className="text-base font-semibold text-gray-800">
                         Standard Delivery
                       </p>
-                      <p className="text-xs text-gray-500">3 - 7 day(0)</p>
+                      <p className="text-xs text-gray-500">3 - 7 day</p>
                     </div>
                     <div>
                       <p className="font-semibold text-gray-800">

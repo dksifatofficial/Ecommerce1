@@ -20,7 +20,7 @@ import {
   IoIosLogOut,
   IoIosStar,
 } from "react-icons/io";
-// import CartModal from "../CartModal";
+import CartModal from "../CartModal";
 // import CommonModal from "../CommonModal";
 import MenuBar from "../MenuBar";
 import Search from "../SearchBar/Search";
@@ -237,7 +237,7 @@ const Navbar = () => {
 
           {/* Admin Product Control */}
           {/* Buttons */}
-          <div className="flex flex-row items-center justify-center lg:w-[50%]">
+          <div className=" hidden md:flex flex-row items-center justify-center lg:w-[50%]">
             {user?.role === "admin" ? (
               isAdminView ? (
                 <div
@@ -511,7 +511,7 @@ const Navbar = () => {
         }
         setShow={setShowNavModal}
       /> */}
-      {/* {showCartModal && <CartModal />} */}
+      {showCartModal && <CartModal />}
     </>
   );
 };
