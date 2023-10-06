@@ -69,7 +69,7 @@ const AdminViewMenu = () => {
                   : "text-white"
               }`}
           >
-            Premium Product
+            Premium
           </p>
         </Link>
       </div>
