@@ -78,11 +78,11 @@ const MyWishlist = () => {
     });
 
     if (res.success) {
-      toast.success(res.message, {
+      toast.success("Product is added to cart !", {
         position: toast.POSITION.TOP_RIGHT,
       });
     } else {
-      toast.error(res.message, {
+      toast.error("Something went wrong ! Please try again later", {
         position: toast.POSITION.TOP_RIGHT,
       });
     }

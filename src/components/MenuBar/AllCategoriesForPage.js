@@ -154,8 +154,8 @@ const AllCategories = () => {
                   return (
                     <li
                       className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
-                       text-left text-gray-700"
-                      onClick={() => handleButtonClick(list.path)}
+                       text-left text-gray-700 cursor-pointer"
+                      onClick={() => router.push(list.path)}
                       key={index}
                     >
                       <p>{list.title}</p>
@@ -173,8 +173,8 @@ const AllCategories = () => {
                   return (
                     <li
                       className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
-                        text-left text-gray-700"
-                      onClick={() => handleButtonClick(list.path)}
+                        text-left text-gray-700 cursor-pointer"
+                        onClick={() => router.push(list.path)}
                       key={index}
                     >
                       <p>{list.title}</p>
@@ -192,8 +192,8 @@ const AllCategories = () => {
                   return (
                     <li
                       className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
-                        text-left text-gray-700"
-                      onClick={() => handleButtonClick(list.path)}
+                        text-left text-gray-700 cursor-pointer"
+                        onClick={() => router.push(list.path)}
                       key={index}
                     >
                       <p>{list.title}</p>
@@ -211,8 +211,8 @@ const AllCategories = () => {
                   return (
                     <li
                       className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
-                        text-left text-gray-700"
-                      onClick={() => handleButtonClick(list.path)}
+                        text-left text-gray-700 cursor-pointer"
+                        onClick={() => router.push(list.path)}
                       key={index}
                     >
                       <p>{list.title}</p>
@@ -230,8 +230,8 @@ const AllCategories = () => {
                   return (
                     <li
                       className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
-                        text-left text-gray-700"
-                      onClick={() => handleButtonClick(list.path)}
+                        text-left text-gray-700 cursor-pointer"
+                        onClick={() => router.push(list.path)}
                       key={index}
                     >
                       <p>{list.title}</p>
@@ -249,8 +249,8 @@ const AllCategories = () => {
                   return (
                     <li
                       className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
-                        text-left text-gray-700"
-                      onClick={() => handleButtonClick(list.path)}
+                        text-left text-gray-700 cursor-pointer"
+                        onClick={() => router.push(list.path)}
                       key={index}
                     >
                       <p>{list.title}</p>
@@ -268,8 +268,8 @@ const AllCategories = () => {
                   return (
                     <li
                       className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
-                        text-left text-gray-700"
-                      onClick={() => handleButtonClick(list.path)}
+                        text-left text-gray-700 cursor-pointer"
+                        onClick={() => router.push(list.path)}
                       key={index}
                     >
                       <p>{list.title}</p>
@@ -287,8 +287,8 @@ const AllCategories = () => {
                   return (
                     <li
                       className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
-                        text-left text-gray-700"
-                      onClick={() => handleButtonClick(list.path)}
+                        text-left text-gray-700 cursor-pointer"
+                        onClick={() => router.push(list.path)}
                       key={index}
                     >
                       <p>{list.title}</p>
@@ -306,8 +306,8 @@ const AllCategories = () => {
                   return (
                     <li
                       className="py-2 px-2 flex flex-row gap-2 items-center bg-white text-xs font-medium
-                        text-left text-gray-700"
-                      onClick={() => handleButtonClick(list.path)}
+                        text-left text-gray-700 cursor-pointer"
+                        onClick={() => router.push(list.path)}
                       key={index}
                     >
                       <p>{list.title}</p>
