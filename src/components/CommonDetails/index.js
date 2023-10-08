@@ -4,9 +4,15 @@ import Error404 from "@/app/error-404/page";
 import { GlobalContext } from "@/context";
 import { addToCart } from "@/services/cart";
 import { productById, updateStarRatings } from "@/services/product";
+import {
+  addToWishlist,
+  deleteFromWishlist,
+  getAllWishlistItems,
+} from "@/services/wishlist";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { toast } from "react-toastify";
 import Button3 from "../Buttons/Button3";
 import InputComponent from "../FormElements/InputComponent";
@@ -28,6 +34,8 @@ export default function CommonDetails({ item }) {
     setShowCartModal,
     currentUpdatedProduct,
     setCurrentUpdatedProduct,
+    wishlistItems,
+    setWishlistItems,
   } = useContext(GlobalContext);
 
   const [cnzQuantity, setCnzQuantity] = useState(1);
@@ -38,6 +46,7 @@ export default function CommonDetails({ item }) {
   const [currentRevUser, setCurrentRevUser] = useState(user?._id);
   const [selectedImage, setSelectedImage] = useState(item.imageUrl[0]);
   const [activeButton, setActiveButton] = useState("Description");
+  const [isInWishlist, setIsInWishlist] = useState();
 
   const handleButtonClick = (buttonId) => {
     setActiveButton(buttonId);
@@ -77,6 +86,119 @@ export default function CommonDetails({ item }) {
       setNewQuantity(cnzQuantity - 1);
     }
   };
+
+  // Add To Wishlist
+  async function handleAddToWishlist(getItem) {
+    const res = await addToWishlist({
+      productID: getItem._id,
+      userID: user._id,
+    });
+
+    if (res.success) {
+      toast.success(res.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error(res.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+    console.log(res);
+  }
+
+  // Extract All Wishlist
+  async function extractAllWishlistItems() {
+    const res = await getAllWishlistItems(user?._id);
+
+    if (res.success) {
+      const updatedData =
+        res.data && res.data.length
+          ? res.data.map((item) => ({
+              ...item,
+              productID: {
+                ...item.productID,
+              },
+            }))
+          : [];
+      setWishlistItems(updatedData);
+      // localStorage.setItem("wishlistItems", JSON.stringify(updatedData));
+    }
+    console.log(res);
+  }
+
+  //Delete To Wishlist
+  async function handleDeleteWishlistItem(getItem) {
+    const indexToDelete = wishlistItems.findIndex(
+      (wish) => wish.userID === user._id && wish.productID === getItem._id
+    );
+
+    if (indexToDelete) {
+      const deletedItem = wishlistItems.splice(indexToDelete, 1)[0];
+      const res = await deleteFromWishlist(deletedItem._id);
+
+      if (res.success) {
+        toast.success(res.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      } else {
+        wishlistItems.splice(indexToDelete, 0, deletedItem);
+        toast.error(res.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+      setWishlistItems([...wishlistItems]);
+    } else {
+      toast.error("Item not found in wishlist", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  }
+
+  const CurrentItem = item?._id;
+  const CurrenUser = user?._id;
+
+  async function checkIsInWishlist() {
+    // Check if the item is in the wishlistItems array
+    const index = await wishlistItems.findIndex(
+      (wish) => wish.userID === CurrenUser && wish.productID === CurrentItem
+    );
+    setIsInWishlist(index === true); // Set the state to true if the item is in the wishlist
+  }
+
+  // async function checkIsInWishlist() {
+  //   // Check if the item is in the wishlistItems array
+  //   const isInWishlist = await wishlistItems.findIndex(
+  //     (wish) => wish.userID === user._id && wish.productID === getItem._id
+  //   );
+  //   setIsInWishlist(isInWishlist);
+  // }
+
+  useEffect(() => {
+    if (user !== null) {
+      extractAllWishlistItems();
+      checkIsInWishlist();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
+  console.log("wishlistItems:", wishlistItems);
+
+  // Effect to check the initial state when the component loads
+  // useEffect(() => {
+  //   if (user !== null) {
+  //     extractAllWishlistItems();
+  //     checkIsInWishlist();
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [user]);
+
+  // try {
+  //   const parsedData = JSON.parse();
+  //   // Handle parsed data here
+  // } catch (error) {
+  //   console.error("JSON parsing error:", error);
+  //   // Handle the error, e.g., by displaying an error message to the user
+  // }
 
   // Add To Cart
   async function handleAddToCart(getItem) {
@@ -209,8 +331,6 @@ export default function CommonDetails({ item }) {
     }
   }
 
-  console.log(formData, "sifu");
-
   const calculateAverageRating = () => {
     let sum = 0;
     for (const rating of item.starRatings) {
@@ -233,8 +353,10 @@ export default function CommonDetails({ item }) {
             {/* Main section */}
             <div className="flex flex-col sm:flex-row flex-wrap mb-4 overflow-hidden">
               {/* picture section */}
-              <div className="col-span-3 bg-white rounded-lg sm:rounded-tr-none py-5 w-full sm:w-[30%] row-end-1
-              flex justify-center sm:rounded-tb-none">
+              <div
+                className="col-span-3 bg-white rounded-lg sm:rounded-tr-none py-5 w-full sm:w-[30%] row-end-1
+              flex justify-center sm:rounded-tb-none"
+              >
                 <div className="flex flex-row sm:flex-col w-full justify-center items-start px-5 gap-4 sm:gap-0">
                   <div className="order-2 sm:order-1 pb-4 border-b w-full flex justify-center">
                     <div className="max-w-full h-[350px] flex justify-center w-full overflow-hidden rounded-lg">
@@ -247,7 +369,7 @@ export default function CommonDetails({ item }) {
                     </div>
                   </div>
                   <div className="mt-0 sm:mt-2 sm:w-full order-1 sm:order-2 flex-shrink-0">
-                    <div className="flex flex-col sm:flex-wrap justify-center">
+                    <div className="flex flex-col md:flex-row sm:flex-wrap justify-center">
                       {item && item.imageUrl && item.imageUrl.length ? (
                         <button
                           type="button"
@@ -335,26 +457,54 @@ export default function CommonDetails({ item }) {
                     Item code: #{item.itemCode}
                   </p>
                   {/*star rating */}
-                  <div className="py-1 flex gap-[0.2rem] items-center justify-start">
-                    <Star
-                      stars={averageRating}
-                      reviews={item.starRatings.length}
-                      averageRating={averageRating}
-                      // onStarClick={handleStarClick}
-                    />
-                    <p className="m-0 ml-1 text-xs text-gray-600">
-                      ({averageRating})
-                    </p>
-                    <p className="m-0 ml-1 text-xs text-gray-600">
-                      {item.starRatings.length} reviews
-                    </p>
+                  <div className="py-1 flex flex-row justify-between">
+                    <div>
+                      <div className="flex gap-[0.2rem] items-center justify-start">
+                        <Star
+                          stars={averageRating}
+                          reviews={item.starRatings.length}
+                          averageRating={averageRating}
+                          // onStarClick={handleStarClick}
+                        />
+                        <p className="m-0 ml-1 text-xs text-gray-600">
+                          ({averageRating})
+                        </p>
+                        <p className="m-0 ml-1 text-xs text-gray-600">
+                          {item.starRatings.length} reviews
+                        </p>
+                      </div>
+                      <p className="text-xs text-gray-500">
+                        Brand:{" "}
+                        <span className="text-teal-500">{item.brand}</span> |{" "}
+                        <Link
+                          className="text-teal-500 hover:underline"
+                          href="/"
+                        >
+                          More from No Brand
+                        </Link>
+                      </p>
+                    </div>
+
+                    {/* Wishlist Button*/}
+                    <div>
+                      <button
+                        onClick={() => handleAddToWishlist(item)}
+                        className="text-red-500 text-lg md:text-xl"
+                      >
+                        <AiOutlineHeart />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteWishlistItem(item)}
+                        className="text-red-500 text-lg md:text-xl"
+                      >
+                        <AiFillHeart />
+                      </button>
+
+                      {/* {isInWishlist ? (   
+                    //  ) : (
+                      )} */}
+                    </div>
                   </div>
-                  <p className="text-xs text-gray-500">
-                    Brand: <span className="text-teal-500">{item.brand}</span> |{" "}
-                    <Link className="text-teal-500 hover:underline" href="/">
-                      More from No Brand
-                    </Link>
-                  </p>
                 </div>
 
                 {/* Price section */}
@@ -470,8 +620,10 @@ export default function CommonDetails({ item }) {
               </div>
 
               {/* delivery/warenty section */}
-              <div className="w-full sm:w-[25%] px-4 sm:px-0 mt-4 sm:mt-0 bg-slate-50 flex flex-col rounded-lg
-               sm:rounded-tl-none sm:rounded-tb-none">
+              <div
+                className="w-full sm:w-[25%] px-4 sm:px-0 mt-4 sm:mt-0 bg-slate-50 flex flex-col rounded-lg
+               sm:rounded-tl-none sm:rounded-tb-none"
+              >
                 <div className="flex flex-col px-2 sm:px-5">
                   <div className="py-4 border-b">
                     <p className="text-xs text-gray-500">Delivery info:</p>
@@ -591,7 +743,6 @@ export default function CommonDetails({ item }) {
                     <p className="text-xs md:text-base whitespace-pre-line">
                       {item && item.description}
                     </p>
-                    
                   </div>
 
                   <div className="py-4">
@@ -602,7 +753,7 @@ export default function CommonDetails({ item }) {
 
                   <div className="pb-4 px-4">
                     <p className="text-xs md:text-base whitespace-pre-line">
-                    {item && item.details}
+                      {item && item.details}
                     </p>
                   </div>
 

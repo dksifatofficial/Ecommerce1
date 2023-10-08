@@ -50,6 +50,7 @@ export default function GlobalState({ children }) {
   const [currentUpdatedReview, setCurrentUpdatedReview] = useState(null);
   const [showCartModal, setShowCartModal] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [wishlistItems, setWishlistItems] = useState([]);
   const [addresses, setAddresses] = useState([]);
   const [addressFormData, setAddressFormData] = useState({
     fullName: "",
@@ -78,6 +79,21 @@ export default function GlobalState({ children }) {
       const getCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
       setUser(userData);
       setCartItems(getCartItems);
+    } else {
+      setIsAuthUser(false);
+      setUser({}); //unauthenticated user
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [Cookies]);
+
+   //Wishlist
+  useEffect(() => {
+    if (Cookies.get("token") !== undefined) {
+      setIsAuthUser(true);
+      const userData = JSON.parse(localStorage.getItem("user")) || {};
+      const getWishlistItems = JSON.parse(localStorage.getItem("wishlistItems")) || [];
+      setUser(userData);
+      setWishlistItems(getWishlistItems);
     } else {
       setIsAuthUser(false);
       setUser({}); //unauthenticated user
@@ -157,6 +173,8 @@ export default function GlobalState({ children }) {
         setAllOrdersForAllUsers,
         currentUpdatedReview,
         setCurrentUpdatedReview,
+        wishlistItems,
+        setWishlistItems
       }}
     >
       {children}

@@ -341,7 +341,7 @@ const Navbar = () => {
                 isAdminView ? (
                   <button className="p-0 m-0" onClick={() => router.push("/")}>
                     <p className="rounded-lg text-sm font-semibold px-3 py-1 m-0 text-white hover:text-[#f8f3f3da]">
-                      Admin
+                      Customer
                     </p>
                   </button>
                 ) : (
@@ -350,7 +350,7 @@ const Navbar = () => {
                     onClick={() => router.push("/admin-view")}
                   >
                     <p className="rounded-lg text-sm font-semibold px-3 py-1 m-0 text-white hover:text-[#f8f3f3da]">
-                      Customer
+                      Admin
                     </p>
                   </button>
                 )
@@ -398,7 +398,7 @@ const Navbar = () => {
                     <Link
                       className=" flex flex-row float-none text-xs text-[#35316d] font-semibold no-underline
                           text-left px-1 py-1 rounded-[10px] align-middle items-center hover:text-[#f3b064]"
-                      href="/"
+                      href="/account/wishlist"
                     >
                       <i className="flex align-middle items-center pr-2 text-2xl">
                         <IoIosHeart />
@@ -408,7 +408,7 @@ const Navbar = () => {
                     <Link
                       className=" flex flex-row float-none text-xs text-[#35316d] font-semibold no-underline
                           text-left px-1 py-1 rounded-[10px] align-middle items-center hover:text-[#f3b064]"
-                      href="/"
+                      href="/account/reviews"
                     >
                       <i className="flex align-middle items-center pr-2 text-2xl">
                         <IoIosStar />

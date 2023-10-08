@@ -1,16 +1,12 @@
 import connectToDB from "@/database";
 import AuthUser from "@/middleware/AuthUser";
-import Cart from "@/models/cart";
+import Wishlist from "@/models/wishlist";
 import Joi from "joi";
 import { NextResponse } from "next/server";
 
-const AddToCart = Joi.object({
+const AddToWishlist = Joi.object({
   userID: Joi.string().required(),
   productID: Joi.string().required(),
-  productQuantity: Joi.number().required(),
-  productCode: Joi.string(),
-  requiredSize: Joi.array(),
-  requiredColor: Joi.array(),
 });
 
 export const dynamic = "force-dynamic";
@@ -22,9 +18,9 @@ export async function POST(req) {
 
     if (isAuthUser) {
       const data = await req.json();
-      const {productID , userID, productQuantity, productCode, requiredSize, requiredColor} = data;
+      const {productID , userID} = data;
 
-      const { error } = AddToCart.validate({ userID, productID, productQuantity, productCode, requiredSize, requiredColor });
+      const { error } = AddToWishlist.validate({ userID, productID });
 
       if (error) {
         return NextResponse.json({
@@ -33,37 +29,37 @@ export async function POST(req) {
         });
       }
 
-      console.log(productID, userID, productQuantity, productCode, requiredSize, requiredColor);
+      console.log(productID, userID);
 
-      const isCurrentCartItemAlreadyExists = await Cart.find({
+      const isCurrentWishlistItemAlreadyExists = await Wishlist.find({
         productID: productID,
         userID: userID,
       });
 
-      console.log(isCurrentCartItemAlreadyExists);
+      console.log(isCurrentWishlistItemAlreadyExists);
       
 
-      if (isCurrentCartItemAlreadyExists?.length > 0) {
+      if (isCurrentWishlistItemAlreadyExists?.length > 0) {
         return NextResponse.json({
           success: false,
           message:
-            "Product is already added in cart! Please add different product",
+            "Product is already added in Wishlist! Please add different product",
         });
       }
 
-      const saveProductToCart = await Cart.create(data);
+      const saveProductToWishlist = await Wishlist.create(data);
 
-      console.log(saveProductToCart);
+      console.log(saveProductToWishlist);
 
-      if (saveProductToCart) {
+      if (saveProductToWishlist) {
         return NextResponse.json({
           success: true,
-          message: "Product is added to cart !",
+          message: "Product is added to Wishlist !",
         });
       } else {
         return NextResponse.json({
           success: false,
-          message: "failed to add the product to cart ! Please try again.",
+          message: "failed to add the product to Wishlist ! Please try again.",
         });
       }
     } else {

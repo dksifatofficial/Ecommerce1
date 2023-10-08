@@ -102,6 +102,15 @@ export default function Home() {
 
   console.log(products);
 
+  // try {
+  //   const parsedData = JSON.parse(response);
+  //   // Handle parsed data here
+  // } catch (error) {
+  //   console.error("JSON parsing error:", error);
+  //   // Handle the error, e.g., by displaying an error message to the user
+  // }
+  
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-between bg-slate-100">
       {/* Header Section */}

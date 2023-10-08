@@ -17,17 +17,14 @@ const CartSchema = new mongoose.Schema(
     },
     productCode: {
       type: String,
-      required: true,
       ref: 'Item Code'
     },
     requiredSize: {
       type: Array,
-      required: true,
       ref: 'Required Size'
     },
     requiredColor: {
       type: Array,
-      required: true,
       ref: 'Required Color'
     }
   },

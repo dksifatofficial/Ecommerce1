@@ -130,7 +130,7 @@ const BottomNavBar = () => {
                     <Link
                       className=" flex flex-row float-none text-xs text-[#35316d] font-semibold no-underline
                           text-left px-1 py-1 rounded-[10px] align-middle items-center hover:text-[#f3b064]"
-                      href="/"
+                      href="/account/wishlist"
                     >
                       <i className="flex align-middle items-center pr-2 text-2xl">
                         <IoIosHeart />
@@ -139,8 +139,8 @@ const BottomNavBar = () => {
                     </Link>
                     <Link
                       className=" flex flex-row float-none text-xs text-[#35316d] font-semibold no-underline
-                          text-left px-1 py-1 rounded-[10px] align-middle items-center hover:text-[#f3b064]"
-                      href="/"
+                      text-left px-1 py-1 rounded-[10px] align-middle items-center hover:text-[#f3b064]"
+                      href="/account/reviews"
                     >
                       <i className="flex align-middle items-center pr-2 text-2xl">
                         <IoIosStar />
