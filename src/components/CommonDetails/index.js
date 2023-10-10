@@ -487,22 +487,21 @@ export default function CommonDetails({ item }) {
 
                     {/* Wishlist Button*/}
                     <div>
-                      <button
-                        onClick={() => handleAddToWishlist(item)}
-                        className="text-red-500 text-lg md:text-xl"
-                      >
-                        <AiOutlineHeart />
-                      </button>
-                      <button
-                        onClick={() => handleDeleteWishlistItem(item)}
-                        className="text-red-500 text-lg md:text-xl"
-                      >
-                        <AiFillHeart />
-                      </button>
-
-                      {/* {isInWishlist ? (   
-                    //  ) : (
-                      )} */}
+                      {isInWishlist ? (
+                        <button
+                          onClick={() => handleDeleteWishlistItem(item)}
+                          className="text-red-500 text-lg md:text-xl"
+                        >
+                          <AiFillHeart />
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleAddToWishlist(item)}
+                          className="text-red-500 text-lg md:text-xl"
+                        >
+                          <AiOutlineHeart />
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>

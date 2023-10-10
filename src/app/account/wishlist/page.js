@@ -9,6 +9,7 @@ import { useContext, useEffect } from "react";
 import { ImBin } from "react-icons/im";
 import { MdAddShoppingCart } from "react-icons/md";
 import { toast } from "react-toastify";
+import Notification from "@/components/Notification";
 
 const MyWishlist = () => {
   const { user, wishlistItems, setWishlistItems } = useContext(GlobalContext);
@@ -179,6 +180,7 @@ const MyWishlist = () => {
               ))
             : null}
         </ul>
+        <Notification />
       </div>
     </>
   );

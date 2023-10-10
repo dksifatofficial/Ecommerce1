@@ -9,9 +9,14 @@ const CategoryFull = () => {
 
   return (
     <div className=" mb-4 flex flex-col justify-center items-center">
-      <h2 className="px-3 w-full font-semibold text-gray-600 bg-white rounded-lg text-center py-6 text-xl">
-        Categories
-      </h2>
+      <div className="w-full flex justify-center">
+        <h2
+          className="px-3 font-semibold rounded-lg text-center py-6 text-xl
+          text-transparent bg-clip-text inline-block bg-[linear-gradient(to_right,#f85606,#0d9488)]"
+        >
+          Categories
+        </h2>
+      </div>
       <div className="flex flex-wrap items-center">
         <ul className="flex pl-2 pr-2 pt-2 pb-2 flex-wrap justify-center items-center gap-2 bg-slate-100">
           {caterogyFull.map((list, index) => {

@@ -1,11 +1,37 @@
 "use client";
 
+import Notification from "@/components/Notification";
 import Star from "@/components/Star";
+import { GlobalContext } from "@/context";
+import { addToWishlist } from "@/services/wishlist";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 const ProductTile = ({ item }) => {
+  const { user } = useContext(GlobalContext);
   const router = useRouter();
+
+  // Add To Wishlist
+  async function handleAddToWishlist(getItem) {
+    const res = await addToWishlist({
+      productID: getItem._id,
+      userID: user._id,
+    });
+
+    if (res.success) {
+      toast.success(res.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error(res.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+    console.log(res);
+  }
 
   const calculateAverageRating = () => {
     let sum = 0;
@@ -17,16 +43,23 @@ const ProductTile = ({ item }) => {
   const averageRating = calculateAverageRating();
 
   return (
-    <div className="" onClick={() => router.push(`/product/${item._id}`)}>
-      <div className="overflow-hideen aspect-w-1 aspect-h-1 h-52">
+    <div className="">
+      <div className="relative overflow-hideen aspect-w-1 aspect-h-1 h-52">
         <Image
           className="h-full w-full object-cover transition-all duration-300 group-hover:scale-125"
+          onClick={() => router.push(`/product/${item._id}`)}
           src={item.imageUrl[0]}
           alt="product Image"
           width="400"
           height="400"
         />
       </div>
+      <button
+        onClick={() => handleAddToWishlist(item)}
+        className="absolute top-0 right-0 m-2 text-md md:text-lg text-gray-400"
+      >
+        <AiFillHeart />
+      </button>
       {item.onSale === "yes" ? (
         <div className="absolute top-0 m-2 rounded-full bg-[#3cca98]">
           <div className="rounded-full p-0 text-[12px] font-bold uppercase tracking-wide text-white sm:py-0 sm:px-3">
@@ -44,7 +77,10 @@ const ProductTile = ({ item }) => {
           </p>
         </div>
       )}
-      <div className="mt-2 flex w-full px-3 flex-col items-start justify-between">
+      <div
+        className="mt-2 flex w-full px-3 flex-col items-start justify-between"
+        onClick={() => router.push(`/product/${item._id}`)}
+      >
         <div className="h-[40px] overflow-hidden">
           <h3 className="text-gray-600 text-xs font-semibold line-clamp-2">
             {item.name}
@@ -97,6 +133,7 @@ const ProductTile = ({ item }) => {
           </div>
         </div>
       </div>
+      <Notification />
     </div>
   );
 };

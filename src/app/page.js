@@ -53,7 +53,7 @@ const images = [
   },
   {
     src: "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Faa%20(4).jpg-1696059839872-neslzdjqhn?alt=media&token=fdf72bee-f2d2-46f5-8af9-322dd8638cbd",
-    alt: "Image 2",
+    alt: "Image 6",
     header: "Image 2 Header",
     description: "Description for Image 2",
     link: "/product/listing/jersey",
@@ -61,23 +61,9 @@ const images = [
 
   {
     src: "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Faa%20(3).jpg-1696059842160-m8hsxwxtdf?alt=media&token=5e2bf78f-25fd-4ece-87fe-3738dca5d7e4",
-    alt: "Image 3",
+    alt: "Image 7",
     header: "Image 3 Header",
     description: "Description for Image 3",
-    link: "/product/listing/jersey",
-  },
-  {
-    src: "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Faa%20(2).jpg-1696059844777-pmyb8z9s0h?alt=media&token=bc7982e2-54bf-4b2a-86cc-7d9898914e69",
-    alt: "Image 4",
-    header: "Image 4 Header",
-    description: "Description for Image 4",
-    link: "/product/listing/jersey",
-  },
-  {
-    src: "https://firebasestorage.googleapis.com/v0/b/next-js-ecommerce-2023-5d8d1.appspot.com/o/ecommerce%2Faa%20(1).jpg-1696059847267-qn3egey83r?alt=media&token=4baf19b3-b54b-4e66-8f33-cb6ce87289d8",
-    alt: "Image 5",
-    header: "Image 5 Header",
-    description: "Description for Image 5",
     link: "/product/listing/jersey",
   },
 ];
@@ -87,12 +73,43 @@ export default function Home() {
 
   const [products, setProducts] = useState([]);
   const router = useRouter();
+  const [productsToLoad, setProductsToLoad] = useState(12);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleLoadMore = () => {
+    setProductsToLoad((prev) => prev + 4);
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const target = entries[0];
+      if (target.isIntersecting) {
+        handleLoadMore();
+      }
+    });
+
+    // You need to reference the element at the bottom of your product list.
+    // You can use a ref for this purpose.
+    const loadMoreElement = document.getElementById("loadMoreElement");
+
+    if (loadMoreElement) {
+      observer.observe(loadMoreElement);
+    }
+
+    return () => {
+      if (loadMoreElement) {
+        observer.unobserve(loadMoreElement);
+      }
+    };
+  }, []);
 
   async function getListOfProducts() {
+    setIsLoading(true);
     const res = await getAllAdminProducts();
 
     if (res) {
       setProducts(res.data);
+      setIsLoading(false);
     }
   }
 
@@ -109,7 +126,6 @@ export default function Home() {
   //   console.error("JSON parsing error:", error);
   //   // Handle the error, e.g., by displaying an error message to the user
   // }
-  
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-between bg-slate-100">
@@ -133,8 +149,10 @@ export default function Home() {
       </div>
 
       {/* Main Section */}
-      <section className="flex min-h-screen mt-6 lg:mt-0 flex-col items-center justify-between 
-        px-0 md:px-4 lg:px-16">
+      <section
+        className="flex min-h-screen mt-6 lg:mt-0 flex-col items-center justify-between 
+        px-0 md:px-4 lg:px-16"
+      >
         {/* Category1 Section */}
         <div className="w-full bg-transparent lg:bg-white rounded-lg">
           <Category1 />
@@ -196,17 +214,21 @@ export default function Home() {
 
         {/* Just For You Section */}
         <div className="mt-6 w-full">
-          <h2 className="px-3 w-full font-semibold text-gray-600 bg-transparent lg:bg-white rounded-lg 
-           text-center py-2 md:py-6 text-lg md:text-3xl">
-            Just For You
-          </h2>
+          <div className="w-full flex justify-center">
+            <h2
+              className="px-3 font-semibold lg:bg-white rounded-lg text-transparent bg-clip-text inline-block
+           text-center py-2 md:py-6 text-lg md:text-3xl bg-[linear-gradient(to_right,#0d9488,#f85606)]"
+            >
+              Just For You
+            </h2>
+          </div>
           <div className="lg:col-span-2 mt-4 w-full">
             <ul className="flex flex-wrap gap-1 md:gap-2 lg:gap-4 justify-center">
               {products && products.length
                 ? products
                     .filter((item) => item.category !== "premium")
                     .reverse()
-                    .splice(0, 24)
+                    .slice(0, productsToLoad)
                     .map((item) => (
                       <li
                         className="relative flex flex-col overflow-hidden bg-white rounded-lg
@@ -218,6 +240,37 @@ export default function Home() {
                     ))
                 : null}
             </ul>
+            <div id="loadMoreElement"></div>
+            {isLoading && (
+              <p className="w-full text-center text-xs md:text-sm lg:text-lg font-bold text-gray-400">
+                Loading...
+              </p>
+            )}
+            {/* {isLoading && <p>Loading...</p>} */}
+
+            {/* <InfiniteScroll
+                className="flex flex-wrap gap-1 md:gap-2 lg:gap-4 justify-center"
+                dataLength={products.length}
+                next={() => setPage(page)}
+                hasMore={true} // Set to false when you have loaded all products
+                // loader={<h4>Loading...</h4>}
+              >
+                {products && products.length
+                  ? products
+                      .filter((item) => item.category !== "premium")
+                      .reverse()
+                      // .splice(0, 24)
+                      .map((item) => (
+                        <div
+                          className="relative flex flex-col overflow-hidden bg-white rounded-lg
+                        cursor-pointer w-[190px] hover:shadow-[0_4px_5px_0.5px_rgba(0,0,0,0.2)]"
+                          key={item._id}
+                        >
+                          <ProductTile item={item} />
+                        </div>
+                      ))
+                  : null}
+              </InfiniteScroll> */}
           </div>
           <div className="w-full relative flex justify-center my-3 lg-my8-">
             <Link href="/product/listing/all-products">

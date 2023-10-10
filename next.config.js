@@ -7,7 +7,7 @@ module.exports = {
       "images.unsplash.com",
       "images.unsplash.com",
       "firebasestorage.googleapis.com",
-      "mongodb+srv://dksifat:123456782023@cluster0.j5selhy.mongodb.net"
+      "mongodb+srv://dksifat:123456782023@cluster0.j5selhy.mongodb.net",
     ],
   },
 };
