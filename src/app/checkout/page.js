@@ -70,8 +70,8 @@ export default function Checkout() {
             qty: item.productQuantity,
             product: item.productID,
             itemCode: item.productCode,
-            reqSizes: item.requiredSize.map((size)=> size.label),
-            reqColor: item.requiredColor.map((color)=> color.label),
+            reqSizes: item.requiredSize.map((size) => size.label),
+            reqColor: item.requiredColor.map((color) => color.label),
           })),
           paymentMethod: "Stripe",
           totalPrice: cartItems.reduce(
@@ -105,10 +105,6 @@ export default function Checkout() {
     createFinalOrder();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.get("status"), cartItems]);
-
-  
-
-
 
   function handleSelectedAddress(getAddress) {
     if (getAddress._id === selectedAddress) {
@@ -242,7 +238,7 @@ export default function Checkout() {
                       <ul className="text-sm text-gray-600 flex flex-row gap-2">
                         {item &&
                           item.productID &&
-                          item.requiredColor.map((color) =>(
+                          item.requiredColor.map((color) => (
                             // eslint-disable-next-line react/jsx-key
                             <li className="">{color.label}</li>
                           ))}
@@ -253,7 +249,7 @@ export default function Checkout() {
                       <ul className="text-sm text-gray-600 flex flex-row gap-2">
                         {item &&
                           item.productID &&
-                          item.requiredSize.map((size) =>(
+                          item.requiredSize.map((size) => (
                             // eslint-disable-next-line react/jsx-key
                             <li className="">{size.label}</li>
                           ))}
@@ -328,8 +324,7 @@ export default function Checkout() {
                 $
                 {cartItems && cartItems.length
                   ? cartItems.reduce(
-                      (total, item) =>
-                        (item.productID.price + total).toFixed(2),
+                      (total, item) => item.productID.price + total,
                       0
                     )
                   : "0"}
@@ -346,11 +341,9 @@ export default function Checkout() {
                 {cartItems && cartItems.length
                   ? cartItems.reduce(
                       (total, item) =>
-                        (
-                          (item && item.productID && item.productID.price) *
-                            item.productQuantity +
-                          total
-                        ).toFixed(2),
+                        (item && item.productID && item.productID.price) *
+                          item.productQuantity +
+                        total,
                       0
                     )
                   : "0"}

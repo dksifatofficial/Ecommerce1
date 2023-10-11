@@ -1,5 +1,6 @@
 "use client";
 
+import Notification from "@/components/Notification";
 import { GlobalContext } from "@/context";
 import { addToCart } from "@/services/cart";
 import { deleteFromWishlist, getAllWishlistItems } from "@/services/wishlist";
@@ -9,7 +10,6 @@ import { useContext, useEffect } from "react";
 import { ImBin } from "react-icons/im";
 import { MdAddShoppingCart } from "react-icons/md";
 import { toast } from "react-toastify";
-import Notification from "@/components/Notification";
 
 const MyWishlist = () => {
   const { user, wishlistItems, setWishlistItems } = useContext(GlobalContext);
@@ -102,19 +102,21 @@ const MyWishlist = () => {
         </h4>
         <ul className="flex flex-col bg-white p-4 md:p-6 lg:p-8 gap-4">
           {wishlistItems && wishlistItems.length
-            ? wishlistItems.map((item) => (
-                // eslint-disable-next-line react/jsx-key
-                <li className="flex flex-row justify-start gap-4 border-t border-b pt-4 pb-4">
+            ? wishlistItems.map((item, index) => (
+                <li
+                  key={index}
+                  className="flex flex-row justify-start gap-4 border-t border-b pt-4 pb-4"
+                >
                   <div className="w-full flex flex-col md:flex-row justify-start md:justify-between gap-x-7 gap-y-4">
                     <div className="flex flex-row gap-4 w-full md:w-[50%]">
                       <div
-                        className="h-20 w-24 md:w-20 overflow-hidden bg-white cursor-pointer"
+                        className="h-20 w-20 overflow-hidden bg-white cursor-pointer"
                         onClick={() =>
                           router.push(`/product/${item.productID._id}`)
                         }
                       >
                         <Image
-                          className="object-cover"
+                          className="object-cover h-20 w-20"
                           src={item.productID.imageUrl[0]}
                           alt="product Image"
                           width="400"

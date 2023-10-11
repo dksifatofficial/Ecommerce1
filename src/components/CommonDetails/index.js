@@ -120,10 +120,10 @@ export default function CommonDetails({ item }) {
               },
             }))
           : [];
-      setWishlistItems(updatedData);
+          setWishlistItems(updatedData);
       // localStorage.setItem("wishlistItems", JSON.stringify(updatedData));
     }
-    console.log(res);
+    console.log("ok", res);
   }
 
   //Delete To Wishlist
@@ -157,48 +157,45 @@ export default function CommonDetails({ item }) {
   const CurrentItem = item?._id;
   const CurrenUser = user?._id;
 
-  async function checkIsInWishlist() {
-    // Check if the item is in the wishlistItems array
-    const index = await wishlistItems.findIndex(
-      (wish) => wish.userID === CurrenUser && wish.productID === CurrentItem
-    );
-    setIsInWishlist(index === true); // Set the state to true if the item is in the wishlist
-  }
+  useEffect(() => {
+    if (user !== null) {
+      // Make sure wishlistItems is properly initialized
+      if (!wishlistItems) return;
+
+      const productInWishlist = wishlistItems.find(
+        (wish) => wish.productID?._id === item._id
+      );
+      setIsInWishlist(!!productInWishlist);
+    }
+  }, [user, item, wishlistItems]);
+
+  console.log("isInWishlist:", isInWishlist)
 
   // async function checkIsInWishlist() {
-  //   // Check if the item is in the wishlistItems array
-  //   const isInWishlist = await wishlistItems.findIndex(
-  //     (wish) => wish.userID === user._id && wish.productID === getItem._id
+  //   const haveWish = wishlistItems.findIndex(
+  //     (wish) => wish.userID === user._id && wish.productID === CurrentItem
   //   );
-  //   setIsInWishlist(isInWishlist);
+  //   setIsInWishlist(haveWish);
+
+  //   console.log("findWish", haveWish);
   // }
 
   useEffect(() => {
     if (user !== null) {
+      // checkIsInWishlist();
       extractAllWishlistItems();
-      checkIsInWishlist();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  console.log("wishlistItems:", wishlistItems);
-
-  // Effect to check the initial state when the component loads
   // useEffect(() => {
-  //   if (user !== null) {
-  //     extractAllWishlistItems();
+  //   if (item !== null) {
   //     checkIsInWishlist();
   //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [user]);
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [item]);
 
-  // try {
-  //   const parsedData = JSON.parse();
-  //   // Handle parsed data here
-  // } catch (error) {
-  //   console.error("JSON parsing error:", error);
-  //   // Handle the error, e.g., by displaying an error message to the user
-  // }
+  console.log("wishlistItems:", wishlistItems);
 
   // Add To Cart
   async function handleAddToCart(getItem) {
@@ -487,7 +484,31 @@ export default function CommonDetails({ item }) {
 
                     {/* Wishlist Button*/}
                     <div>
+                      {/* {wishlistItems && wishlistItems.length
+                        ? wishlistItems
+                            .filter(
+                              (wish) => wish.productID._id === CurrentItem
+                            )
+                            .map((wish) => (
+                              // eslint-disable-next-line react/jsx-key
+                              <button
+                                onClick={() => handleDeleteWishlistItem(item)}
+                                className="text-red-500 text-lg md:text-xl"
+                              >
+                                <AiFillHeart />
+                              </button>
+                            ))
+                        : null}
+
+                      <button
+                        onClick={() => handleAddToWishlist(item)}
+                        className="text-red-500 text-lg md:text-xl"
+                      >
+                        <AiOutlineHeart />
+                      </button> */}
+
                       {isInWishlist ? (
+                        // If the product is in the wishlist, show the "Remove from Wishlist" button
                         <button
                           onClick={() => handleDeleteWishlistItem(item)}
                           className="text-red-500 text-lg md:text-xl"
@@ -495,6 +516,7 @@ export default function CommonDetails({ item }) {
                           <AiFillHeart />
                         </button>
                       ) : (
+                        // If the product is not in the wishlist, show the "Add to Wishlist" button
                         <button
                           onClick={() => handleAddToWishlist(item)}
                           className="text-red-500 text-lg md:text-xl"
@@ -502,6 +524,19 @@ export default function CommonDetails({ item }) {
                           <AiOutlineHeart />
                         </button>
                       )}
+
+                      {/* <button
+                          onClick={() => handleAddToWishlist(item)}
+                          className="text-red-500 text-lg md:text-xl"
+                        >
+                          <AiOutlineHeart />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteWishlistItem(itema)}
+                          className="text-red-500 text-lg md:text-xl"
+                        >
+                          <AiFillHeart />
+                        </button> */}
                     </div>
                   </div>
                 </div>
