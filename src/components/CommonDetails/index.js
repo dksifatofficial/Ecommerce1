@@ -98,6 +98,7 @@ export default function CommonDetails({ item }) {
       toast.success(res.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
+      setIsInWishlist(true);
     } else {
       toast.error(res.message, {
         position: toast.POSITION.TOP_RIGHT,
@@ -123,23 +124,29 @@ export default function CommonDetails({ item }) {
           setWishlistItems(updatedData);
       // localStorage.setItem("wishlistItems", JSON.stringify(updatedData));
     }
-    console.log("ok", res);
+    console.log(res);
   }
 
   //Delete To Wishlist
   async function handleDeleteWishlistItem(getItem) {
     const indexToDelete = wishlistItems.findIndex(
-      (wish) => wish.userID === user._id && wish.productID === getItem._id
+      (wish) => wish.userID === user._id && wish.productID._id === item._id
     );
 
-    if (indexToDelete) {
-      const deletedItem = wishlistItems.splice(indexToDelete, 1)[0];
+    if (indexToDelete !== -1) {
+      const deletedItem = wishlistItems[indexToDelete]; //wishlistItems.splice(indexToDelete, 1)[0];
       const res = await deleteFromWishlist(deletedItem._id);
 
       if (res.success) {
         toast.success(res.message, {
           position: toast.POSITION.TOP_RIGHT,
         });
+        // Remove the item from the wishlist
+      wishlistItems.splice(indexToDelete, 1);
+      setWishlistItems([...wishlistItems]);
+      
+      // Update isInWishlist
+      setIsInWishlist(false);
       } else {
         wishlistItems.splice(indexToDelete, 0, deletedItem);
         toast.error(res.message, {
@@ -154,9 +161,7 @@ export default function CommonDetails({ item }) {
     }
   }
 
-  const CurrentItem = item?._id;
-  const CurrenUser = user?._id;
-
+  // isInWishlist and setIsInWishlist
   useEffect(() => {
     if (user !== null) {
       // Make sure wishlistItems is properly initialized
@@ -169,33 +174,14 @@ export default function CommonDetails({ item }) {
     }
   }, [user, item, wishlistItems]);
 
-  console.log("isInWishlist:", isInWishlist)
-
-  // async function checkIsInWishlist() {
-  //   const haveWish = wishlistItems.findIndex(
-  //     (wish) => wish.userID === user._id && wish.productID === CurrentItem
-  //   );
-  //   setIsInWishlist(haveWish);
-
-  //   console.log("findWish", haveWish);
-  // }
-
+    // For Extract All Wishlist
   useEffect(() => {
     if (user !== null) {
-      // checkIsInWishlist();
       extractAllWishlistItems();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  // useEffect(() => {
-  //   if (item !== null) {
-  //     checkIsInWishlist();
-  //   }
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [item]);
-
-  console.log("wishlistItems:", wishlistItems);
 
   // Add To Cart
   async function handleAddToCart(getItem) {
@@ -484,29 +470,6 @@ export default function CommonDetails({ item }) {
 
                     {/* Wishlist Button*/}
                     <div>
-                      {/* {wishlistItems && wishlistItems.length
-                        ? wishlistItems
-                            .filter(
-                              (wish) => wish.productID._id === CurrentItem
-                            )
-                            .map((wish) => (
-                              // eslint-disable-next-line react/jsx-key
-                              <button
-                                onClick={() => handleDeleteWishlistItem(item)}
-                                className="text-red-500 text-lg md:text-xl"
-                              >
-                                <AiFillHeart />
-                              </button>
-                            ))
-                        : null}
-
-                      <button
-                        onClick={() => handleAddToWishlist(item)}
-                        className="text-red-500 text-lg md:text-xl"
-                      >
-                        <AiOutlineHeart />
-                      </button> */}
-
                       {isInWishlist ? (
                         // If the product is in the wishlist, show the "Remove from Wishlist" button
                         <button
@@ -524,19 +487,6 @@ export default function CommonDetails({ item }) {
                           <AiOutlineHeart />
                         </button>
                       )}
-
-                      {/* <button
-                          onClick={() => handleAddToWishlist(item)}
-                          className="text-red-500 text-lg md:text-xl"
-                        >
-                          <AiOutlineHeart />
-                        </button>
-                        <button
-                          onClick={() => handleDeleteWishlistItem(itema)}
-                          className="text-red-500 text-lg md:text-xl"
-                        >
-                          <AiFillHeart />
-                        </button> */}
                     </div>
                   </div>
                 </div>

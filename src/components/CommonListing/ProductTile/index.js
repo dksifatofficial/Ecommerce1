@@ -1,17 +1,17 @@
 "use client";
 
-import Notification from "@/components/Notification";
 import Star from "@/components/Star";
 import { GlobalContext } from "@/context";
-import { addToWishlist } from "@/services/wishlist";
+import { addToWishlist, getAllWishlistItems } from "@/services/wishlist";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { toast } from "react-toastify";
 
 const ProductTile = ({ item }) => {
-  const { user } = useContext(GlobalContext);
+  const { user, wishlistItems, setWishlistItems } = useContext(GlobalContext);
+  const [isInWishlist, setIsInWishlist] = useState();
   const router = useRouter();
 
   // Add To Wishlist
@@ -25,6 +25,7 @@ const ProductTile = ({ item }) => {
       toast.success(res.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
+      setIsInWishlist(true);
     } else {
       toast.error(res.message, {
         position: toast.POSITION.TOP_RIGHT,
@@ -32,6 +33,81 @@ const ProductTile = ({ item }) => {
     }
     console.log(res);
   }
+
+  // Extract All Wishlist
+  async function extractAllWishlistItems() {
+    const res = await getAllWishlistItems(user?._id);
+
+    if (res.success) {
+      const updatedData =
+        res.data && res.data.length
+          ? res.data.map((item) => ({
+              ...item,
+              productID: {
+                ...item.productID,
+              },
+            }))
+          : [];
+      setWishlistItems(updatedData);
+      // localStorage.setItem("wishlistItems", JSON.stringify(updatedData));
+    }
+    console.log(res);
+  }
+
+  //Delete To Wishlist
+  async function handleDeleteWishlistItem(getItem) {
+    const indexToDelete = wishlistItems.findIndex(
+      (wish) => wish.userID === user._id && wish.productID._id === item._id
+    );
+
+    if (indexToDelete !== -1) {
+      const deletedItem = wishlistItems[indexToDelete]; //wishlistItems.splice(indexToDelete, 1)[0];
+      const res = await deleteFromWishlist(deletedItem._id);
+
+      if (res.success) {
+        toast.success(res.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        // Remove the item from the wishlist
+        wishlistItems.splice(indexToDelete, 1);
+        setWishlistItems([...wishlistItems]);
+
+        // Update isInWishlist
+        setIsInWishlist(false);
+      } else {
+        wishlistItems.splice(indexToDelete, 0, deletedItem);
+        toast.error(res.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+      setWishlistItems([...wishlistItems]);
+    } else {
+      toast.error("Item not found in wishlist", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  }
+
+  // isInWishlist and setIsInWishlist
+  useEffect(() => {
+    if (user !== null) {
+      // Make sure wishlistItems is properly initialized
+      if (!wishlistItems) return;
+
+      const productInWishlist = wishlistItems.find(
+        (wish) => wish.productID?._id === item._id
+      );
+      setIsInWishlist(!!productInWishlist);
+    }
+  }, [user, item, wishlistItems]);
+
+  // For Extract All Wishlist
+  useEffect(() => {
+    if (user !== null) {
+      extractAllWishlistItems();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   const calculateAverageRating = () => {
     let sum = 0;
@@ -54,12 +130,25 @@ const ProductTile = ({ item }) => {
           height="400"
         />
       </div>
-      <button
-        onClick={() => handleAddToWishlist(item)}
-        className="absolute top-0 right-0 m-2 text-md md:text-lg text-gray-400"
-      >
-        <AiFillHeart />
-      </button>
+      <div className="absolute top-0 right-0 m-2">
+        {isInWishlist ? (
+          // If the product is in the wishlist, show the "Remove from Wishlist" button
+          <button
+            onClick={() => handleDeleteWishlistItem(item)}
+            className="text-red-500 text-lg md:text-xl"
+          >
+            <AiFillHeart />
+          </button>
+        ) : (
+          // If the product is not in the wishlist, show the "Add to Wishlist" button
+          <button
+            onClick={() => handleAddToWishlist(item)}
+            className="text-red-500 text-lg md:text-xl"
+          >
+            <AiOutlineHeart />
+          </button>
+        )}
+      </div>
       {item.onSale === "yes" ? (
         <div className="absolute top-0 m-2 rounded-full bg-[#3cca98]">
           <div className="rounded-full p-0 text-[12px] font-bold uppercase tracking-wide text-white sm:py-0 sm:px-3">
@@ -133,7 +222,6 @@ const ProductTile = ({ item }) => {
           </div>
         </div>
       </div>
-      <Notification />
     </div>
   );
 };
