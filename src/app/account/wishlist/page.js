@@ -83,7 +83,7 @@ const MyWishlist = () => {
         position: toast.POSITION.TOP_RIGHT,
       });
     } else {
-      toast.error("Something went wrong ! Please try again later", {
+      toast.error("Product is already in cart", {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
