@@ -275,7 +275,7 @@ export default function Home() {
           <div className="w-full relative flex justify-center my-3 lg-my8-">
             <Link href="/product/listing/all-products">
               <p className="text-xs md:text-sm lg:text-lg font-bold text-gray-600 hover:text-gray-400">
-                See More...
+                See More....
               </p>
             </Link>
           </div>

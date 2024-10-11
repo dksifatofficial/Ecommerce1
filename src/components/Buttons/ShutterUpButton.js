@@ -7,7 +7,7 @@ function ShutterUpButton({ children, className, onClick, disabled }) {
         before:absolute before:w-full before:h-0
         before:transition-[height] before:duration-[0.2s] before:ease-linear 
         before:z-[-1] before:left-0 before:top-0 
-      hover:text-[#3cca98] hover:font-bold hover:before:h-full ${className}`}
+        hover:text-[#3cca98] hover:font-bold hover:before:h-full ${className}`}
       disabled={disabled}
       onClick={onClick}
       >

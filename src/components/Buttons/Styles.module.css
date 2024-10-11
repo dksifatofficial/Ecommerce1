@@ -28,8 +28,8 @@
   top: 50%;
   transform: translate(-50%, -50%);
 } */
-/* .jjj {
-  gap: 0.2rem;
-  align-items: center;
-  justify-content: flex-start;
-} */
+.jjj {
+  background: linear-gradient(315deg, #cacaca, #f0f0f0);
+  box-shadow: -20px -20px 60px #bebebe, 20px 20px 60px #ffffff;
+  border-radius: 50px;
+}

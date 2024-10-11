@@ -17,7 +17,7 @@
 //             const userExists = await User.findOne({ email });
 
 //             if (!userExists) {
-//               const res = await fetch("https://ecommerce.aminulkibria.com/api/user", {
+//               const res = await fetch("https://raiment-gallery-ecommerce.vercel.app/api/user", {
 //                 method: "POST",
 //                 headers: {
 //                   "Content-Type": "application/json",

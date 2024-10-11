@@ -22,7 +22,7 @@ export const addToWishlist = async (formData) => {
 export const getAllWishlistItems = async (id) => {
   try {
     const res = await fetch(
-      `https://ecommerce.aminulkibria.com/api/wishlist/all-wishlist-items?id=${id}`,
+      `https://raiment-gallery-ecommerce.vercel.app/api/wishlist/all-wishlist-items?id=${id}`,
       {
         method: "GET",
         headers: {

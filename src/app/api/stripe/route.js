@@ -16,9 +16,11 @@ export async function POST(req) {
         line_items: res,
         mode: "payment",
         success_url:
-          "https://ecommerce.aminulkibria.com/checkout" + "?status=success",
+          "https://raiment-gallery-ecommerce.vercel.app/checkout" +
+          "?status=success",
         cancel_url:
-          "https://ecommerce.aminulkibria.com/checkout" + "?status=cancel",
+          "https://raiment-gallery-ecommerce.vercel.app/checkout" +
+          "?status=cancel",
       });
 
       return NextResponse.json({
